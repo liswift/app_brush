@@ -1,4 +1,4 @@
-﻿package com.eazy.lksy.web.utils;
+package com.eazy.lksy.web.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

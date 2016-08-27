@@ -29,7 +29,7 @@
 <header class="Hui-header cl"> <a class="Hui-logo l" title="H-ui.admin v2.3" href="${ctx }/resources/skin/">酒店管理系统</a> <a class="Hui-logo-m l" href="${ctx }/resources/skin/" title="H-ui.admin"></a> <span class="Hui-subtitle l">V2.3</span>
 	<ul class="Hui-userbar">
 		<li>超级管理员</li>
-		<li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">${UserUtil.getCurrentUser().getName() } <i class="Hui-iconfont">&#xe6d5;</i></a>
+		<li class="dropDown dropDown_hover"><a href="#" class="dropDown_A" <i class="Hui-iconfont">&#xe6d5;</i></a>
 			<ul class="dropDown-menu radius box-shadow">
 				<li><a href="javascript:;" onclick="forget('修改密码','${ctx }/sys/forget','1','500','400')" href="">修改密码</a></li>
 				<li><a href="${ctx }/sys/logout">切换账户</a></li>
