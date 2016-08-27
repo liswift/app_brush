@@ -24,7 +24,7 @@
 </head>
 <body>
 <div class="pd-20" style="padding-top:20px;">
-  <p class="f-20 text-success">欢迎使用酒店管理系统 <span class="f-14">v2.3</span></p>
+  <p class="f-20 text-success">欢迎使用后台管理系统 <span class="f-14">v2.3</span></p>
   <p>登录次数：${count }&nbsp;&nbsp; 当前在线人数：<span id="count"></span> </p>
   <p>上次登录IP：${ip }&nbsp; &nbsp; 上次登录时间：${last_time }</p>
   <table class="table table-border table-bordered table-bg">

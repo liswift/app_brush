@@ -21,12 +21,12 @@
 <link href="${ctx }/resources/skin/default/skin.css" rel="stylesheet" type="text/css" id="skin" />
 <link href="${ctx }/resources/css/style.css" rel="stylesheet" type="text/css" />
 
-<title>酒店管理系统 v2.3</title>
+<title>后台管理系统 v2.3</title>
 <meta name="keywords" content="H-ui.admin v2.3,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description" content="H-ui.admin v2.3，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
 <body>
-<header class="Hui-header cl"> <a class="Hui-logo l" title="H-ui.admin v2.3" href="${ctx }/resources/skin/">酒店管理系统</a> <a class="Hui-logo-m l" href="${ctx }/resources/skin/" title="H-ui.admin"></a> <span class="Hui-subtitle l">V2.3</span>
+<header class="Hui-header cl"> <a class="Hui-logo l" title="H-ui.admin v2.3" href="${ctx }/resources/skin/">后台管理系统</a> <a class="Hui-logo-m l" href="${ctx }/resources/skin/" title="H-ui.admin"></a> <span class="Hui-subtitle l">V2.3</span>
 	<ul class="Hui-userbar">
 		<li>超级管理员</li>
 		<li class="dropDown dropDown_hover"><a href="#" class="dropDown_A" <i class="Hui-iconfont">&#xe6d5;</i></a>
