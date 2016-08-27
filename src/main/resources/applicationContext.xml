@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:cache="http://www.springframework.org/schema/cache"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-    	http://www.springframework.org/schema/context/spring-context.xsd
-    	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
-    	http://www.springframework.org/schema/cache
-    	http://www.springframework.org/schema/cache/spring-cache.xsd ">
+    	http://www.springframework.org/schema/context/spring-context.xsd">
 	<description>数据源连接管理</description>
 
-	<context:component-scan base-package="com.eazy.lksy.web"></context:component-scan>
+	<context:component-scan base-package="com.eazy.brush"></context:component-scan>
 
  	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
         <property name="locations">  
@@ -105,15 +100,15 @@
         <constructor-arg index="4" value="test1234567" />
          -->
     </bean>
-    <bean id="redisManager" class="com.eazy.lksy.web.shiro.RedisManager">
+    <bean id="redisManager" class="com.eazy.brush.component.shiro.RedisManager">
         <property name="jedisPool" ref="jedisPool"/>
     </bean>
     
 	<!--缓存管理
-    <bean id="cache" class="com.eazy.lksy.web.shiro.cache.WTCache">
+    <bean id="cache" class="com.eazy.brushh.web.shiro.cache.WTCache">
         <property name="redisManager" ref="redisManager"/>
     </bean>
-    <bean id="cacheManager" class="com.eazy.lksy.web.shiro.cache.WTCacheManager">
+    <bean id="cacheManager" class="com.eazy.brushh.web.shiro.cache.WTCacheManager">
         <property name="cache" ref="cache"/>
     </bean>
     -->

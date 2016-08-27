@@ -22,7 +22,7 @@
 	    </filter> 过滤器只打印错误日志 -->
 	</appender>
 
-	<logger name="com.eazy.lksy" level="DEBUG">
+	<logger name="com.eazy.brush" level="DEBUG">
 		<appender-ref ref="console" />
 	</logger>
 	

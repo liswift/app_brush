@@ -13,7 +13,7 @@
 	<description>spring-mvc 基本配置</description>
 
 	<!-- 扫描com.eazy下面的所有注解 -->
-	<context:component-scan base-package="com.eazy.lksy.web.controller" />
+	<context:component-scan base-package="com.eazy.brush.controller" />
 	
 	<!--  -->
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
@@ -57,7 +57,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/sys/index" />
-			<bean id="logInterceptor" class="com.eazy.lksy.web.interceptor.LogInterceptor" />
+			<bean id="logInterceptor" class="com.eazy.brush.core.interceptor.LogInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>

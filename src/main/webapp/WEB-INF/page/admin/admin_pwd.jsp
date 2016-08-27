@@ -79,7 +79,7 @@ $(function(){
 		increaseArea: '20%'
 	});
 	
-	$("#form-admin-add").Validform({
+	$("#form-web-add").Validform({
 		tiptype:2,
 		callback:function(form){
 			form[0].submit();
