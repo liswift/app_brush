@@ -54,7 +54,7 @@ public class LoginFilter implements Filter {
                 && !url.contains("/resources/js/")
                 && !url.contains("/resources/images/")) {
 
-            if (!url.equals("/")) {
+            if (!url.equals("/") && !url.contains("api")) {
                 if (filterURL.get(url) == null) {
                     if (UserUtil.getCurrentUser() == null) {
                         res.sendRedirect("/index.jsp");
