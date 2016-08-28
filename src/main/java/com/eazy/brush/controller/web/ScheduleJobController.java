@@ -25,18 +25,12 @@ public class ScheduleJobController extends BaseController {
 	@Autowired
 	private ScheduleJobService scheduleJobService;
 	
-	/**
-	 * 获取定时任务列表
-	 */
 	@RequestMapping("list")
 	public ModelAndView getAllJobs(Model model){
 		List<ScheduleJob> scheduleJobs = scheduleJobService.getAllScheduleJob();
 		return new ModelAndView("sys/schedule_list","data",scheduleJobs);
 	}
 	
-	/** 
-	 * 添加定时任务
-	 */
 	@RequestMapping(value = "addSchedule", method = RequestMethod.POST)
 	public String addSchedule(ScheduleJob scheduleJob) {
 		scheduleJob.setStatus("1");
@@ -44,9 +38,6 @@ public class ScheduleJobController extends BaseController {
 		return "redirect:/schedule/list";
 	}
 	
-	/**
-	 * 暂停任务
-	 */
 	@RequestMapping(value= "/stop" , method = RequestMethod.GET)
 	public String stop()  {
 		String name = getPara("name");
@@ -55,9 +46,6 @@ public class ScheduleJobController extends BaseController {
 		return "redirect:/schedule/list";
 	}
 	
-	/**
-	 * 恢复
-	 */
 	@RequestMapping("/resume")
 	public String resume() {
 		String name = getPara("name");
@@ -66,9 +54,6 @@ public class ScheduleJobController extends BaseController {
 		return "redirect:/schedule/list";
 	}
 	
-	/**
-	 * 删除任务
-	 */
 	@RequestMapping("/delete")
 	public String delete() {
 		String name = getPara("name");
@@ -78,9 +63,6 @@ public class ScheduleJobController extends BaseController {
 	}
 
 	
-	/**
-	 * 立即运行一次
-	 */
 	@RequestMapping("/startNow")
 	public String stratNow() {
 		String name = getPara("name");
@@ -89,13 +71,8 @@ public class ScheduleJobController extends BaseController {
 		return "redirect:/schedule/list";
 	}
 	
-	/**
-	 * 跳转到添加定时任务页面
-	 */
 	@RequestMapping(value = "toAddSchedule", method = RequestMethod.GET)
 	public ModelAndView toAddSchedule() {
 		return new ModelAndView("sys/schedule_add");
 	}
-	
-
 }

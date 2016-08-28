@@ -1,7 +1,10 @@
 package com.eazy.brush.controller.api;
 
 import com.eazy.brush.controller.common.BaseController;
+import com.eazy.brush.model.TaskUnit;
 import com.google.common.collect.Maps;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,11 +19,18 @@ import java.util.Map;
 @RequestMapping("/api/task")
 public class TaskController extends BaseController {
 
+    static Logger logger = LoggerFactory.getLogger(TaskController.class);
+
     @RequestMapping("/get")
     public void get() {
-        Map<String, String> map = Maps.newHashMap();
-        map.put("serial", "2323232");
-        map.put("brand", "3232232");
-        renderJson(map);
+        TaskUnit taskUnit = new TaskUnit();
+        renderJson(taskUnit);
+    }
+
+    @RequestMapping("callback")
+    public void callback() {
+        Map<String, String> map = getFormPage();
+        String queueKey = map.get("queueKey");
+        String queueIndex = map.get("queueIndex");
     }
 }
