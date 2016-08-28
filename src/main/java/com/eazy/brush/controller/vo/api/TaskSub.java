@@ -11,7 +11,7 @@ import lombok.Data;
  * create time:2016/8/28 10:44
  */
 @Data
-public class TaskUnit {
+public class TaskSub {
     private int id;
     private String appName;
     private String apkUrl;

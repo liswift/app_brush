@@ -1,8 +1,7 @@
 package com.eazy.brush.controller.api;
 
 import com.eazy.brush.controller.common.BaseController;
-import com.eazy.brush.model.TaskUnit;
-import com.google.common.collect.Maps;
+import com.eazy.brush.model.TaskSub;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -23,8 +22,8 @@ public class TaskController extends BaseController {
 
     @RequestMapping("/get")
     public void get() {
-        TaskUnit taskUnit = new TaskUnit();
-        renderJson(taskUnit);
+        TaskSub taskSub = new TaskSub();
+        renderJson(taskSub);
     }
 
     @RequestMapping("callback")

@@ -8,7 +8,7 @@ import lombok.Data;
  * create time:2016/8/28 10:44
  */
 @Data
-public class TaskUnit {
+public class TaskSub {
     private int id;
     private int taskId;              //任务id
     private int actionId;            //动作组id
