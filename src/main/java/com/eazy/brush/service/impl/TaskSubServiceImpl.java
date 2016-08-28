@@ -63,12 +63,12 @@ public class TaskSubServiceImpl implements TaskSubService {
 
     @Override
     public void insertTaskSub(TaskSub taskSub) {
-
+        taskSubMapper.insertTaskSub(taskSub);
     }
 
     @Override
     public void insertTaskBatch(List<TaskSub> taskSubList) {
-
+        taskSubMapper.insertTaskSubBatch(taskSubList);
     }
 
     /**
