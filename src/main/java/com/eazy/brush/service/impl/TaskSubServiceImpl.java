@@ -1,10 +1,13 @@
 package com.eazy.brush.service.impl;
 
 import com.eazy.brush.core.utils.Constants;
+import com.eazy.brush.core.utils.DateTimeUitl;
+import com.eazy.brush.dao.mapper.TaskSubMapper;
 import com.eazy.brush.model.*;
 import com.eazy.brush.service.TaskSubService;
 import com.google.common.collect.Lists;
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +23,9 @@ public class TaskSubServiceImpl implements TaskSubService {
 
     private Random random = new Random();
 
+    @Autowired
+    private TaskSubMapper taskSubMapper;
+
     @Override
     public void makeTaskSub(Task task) {
 
@@ -30,23 +36,39 @@ public class TaskSubServiceImpl implements TaskSubService {
         int retainDay = task.getRetainDay();//留存天数
         int upDown = random.nextInt(task.getIncrUpDown());
         upDown = random.nextInt(1) == 0 ? upDown : -upDown;
-        int taskNum = task.getIncrDay() + upDown;
+        int dayNum = task.getIncrDay() + upDown;
 
         for (int i = 0; i < retainDay; i++) {
 
-            int retainNum = calcRetainNum(task.getRetainPercent(), i, taskNum);
+            int retainNum = calcRetainNum(task.getRetainPercent(), i, dayNum);
 
-            if(0 == task.getRunSpeed()){
-                buildTaskSubs(task, actionList, deviceInfos, netInfos, retainNum);
-            }else {
-                taskNum = calcTaskNum(task, retainNum);
-                DateTime startTime = getStartTime(task, i);
-                while (startTime.isBefore(DateTime.now().withHourOfDay(task.getRunEndTime()))) {
-                    buildTaskSubs(task, actionList, deviceInfos, netInfos, taskNum);
-                    startTime.plusMinutes(Constants.TASK_SUB_PER_MINITE);
-                }
+            int perNum = 0, times = 0;
+
+            if (0 == task.getRunSpeed()) {//立即投放
+                times = retainNum / Constants.TASK_BATCH_UP; //需要分多少批次执行
+                perNum = times > 0 ? Constants.TASK_BATCH_UP : retainNum;
+            } else {    //函数投放
+                times = (task.getRunEndTime() - task.getRunStartTime()) * 60 / Constants.TASK_SUB_PER_MINITE;
+                perNum = retainNum / times;
+            }
+
+            DateTime startTime = DateTimeUitl.getStartTime(task.getRunStartTime(), i);
+            while (times-- >= 0) {
+                int perTime = Integer.parseInt(startTime.toString("yyyyMMddHHmm"));
+                buildTaskSubs(task, perTime, actionList, deviceInfos, netInfos, perNum);
+                startTime.plusMinutes(Constants.TASK_SUB_PER_MINITE);
             }
         }
+    }
+
+    @Override
+    public void insertTaskSub(TaskSub taskSub) {
+
+    }
+
+    @Override
+    public void insertTaskBatch(List<TaskSub> taskSubList) {
+
     }
 
     /**
@@ -58,18 +80,23 @@ public class TaskSubServiceImpl implements TaskSubService {
      * @param netInfos
      * @param taskNum
      */
-    private void buildTaskSubs(Task task, List<Action> actionList, List<DeviceInfo> deviceInfos, List<NetInfo> netInfos, int taskNum) {
+    private void buildTaskSubs(Task task, int perTime,
+                               List<Action> actionList,
+                               List<DeviceInfo> deviceInfos,
+                               List<NetInfo> netInfos, int taskNum) {
+
         List<TaskSub> taskSubs = Lists.newArrayList();
         for (int num = 0; num < taskNum; num++) {
             TaskSub taskSub = new TaskSub();
             taskSub.setTaskId(task.getId());
+            taskSub.setPerTime(perTime);
             taskSub.setActionId(actionList.get(random.nextInt(actionList.size())).getId());
             taskSub.setDeviceInfoId(deviceInfos.get(random.nextInt(deviceInfos.size())).getId());
             taskSub.setNetInfoId(netInfos.get(random.nextInt(netInfos.size())).getId());
             taskSub.setRunTime(task.getRunTime());
             taskSubs.add(taskSub);
         }
-        //todo 持久化taskSubs
+        insertTaskBatch(taskSubs);
     }
 
     /**
@@ -89,17 +116,6 @@ public class TaskSubServiceImpl implements TaskSubService {
         return taskNum;
     }
 
-    /**
-     * 计算函数投放
-     *
-     * @param task
-     * @return
-     */
-    private int calcTaskNum(Task task, int retainNum) {
-        int pers = (task.getRunEndTime() - task.getRunStartTime()) * 60 / Constants.TASK_SUB_PER_MINITE;
-        return retainNum / pers;
-    }
-
     private List<NetInfo> getNetInfos() {
         //todo 获取网络集合
         return Lists.newArrayList();
@@ -115,19 +131,4 @@ public class TaskSubServiceImpl implements TaskSubService {
         return Lists.newArrayList();
     }
 
-    private DateTime getStartTime(Task task, int dayIndex) {
-        DateTime startTime = DateTime.now().plusDays(dayIndex).
-                withHourOfDay(task.getRunStartTime())
-                .withMinuteOfHour(0);
-
-        if (dayIndex == 0) { //当天
-            int minute = (DateTime.now().getMinuteOfHour() / Constants.TASK_SUB_PER_MINITE + 1)
-                    * Constants.TASK_SUB_PER_MINITE;
-            startTime = DateTime.now().withMinuteOfHour(minute);
-            if (minute == 60) {
-                startTime = DateTime.now().withMinuteOfHour(0).plusHours(1);
-            }
-        }
-        return startTime;
-    }
 }

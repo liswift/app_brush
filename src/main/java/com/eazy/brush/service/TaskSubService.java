@@ -1,6 +1,9 @@
 package com.eazy.brush.service;
 
 import com.eazy.brush.model.Task;
+import com.eazy.brush.model.TaskSub;
+
+import java.util.List;
 
 /**
  * 元任务相关服务
@@ -15,4 +18,8 @@ public interface TaskSubService {
      * @param task
      */
     void makeTaskSub(Task task);
+
+    void insertTaskSub(TaskSub taskSub);
+
+    void insertTaskBatch(List<TaskSub> taskSubList);
 }

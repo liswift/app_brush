@@ -11,6 +11,7 @@ import lombok.Data;
 public class TaskSub {
     private int id;
     private int taskId;              //任务id
+    private int perTime;             //时间粒度
     private int actionId;            //动作组id
     private int deviceInfoId;        //设备信息
     private int netInfoId;           //网络信息

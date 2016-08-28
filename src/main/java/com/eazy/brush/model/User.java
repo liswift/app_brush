@@ -18,6 +18,10 @@ public class User implements Serializable {
     private String email;
     private String desc;
 
+    public User() {
+
+    }
+
     public User(String name, String password, String email) {
         super();
         this.name = name;

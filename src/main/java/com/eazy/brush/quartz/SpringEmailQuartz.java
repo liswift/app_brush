@@ -71,7 +71,7 @@ public class SpringEmailQuartz implements Job {
         mailBean.setData(map);  
         
         try {
-        	ApplicationContextUtils context1 = new ApplicationContextUtils("spring-email.xml");
+        	ApplicationContextUtils context1 = new ApplicationContextUtils("spring/spring-email.xml");
         	Email email = (Email) context1.getBean("email");
 			email.send(mailBean);
 		} catch (MessagingException e) {

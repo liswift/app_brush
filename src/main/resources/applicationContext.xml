@@ -1,119 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xmlns:context="http://www.springframework.org/schema/context"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
     	http://www.springframework.org/schema/context/spring-context.xsd">
-	<description>数据源连接管理</description>
+    <description>数据源连接管理</description>
 
-	<context:component-scan base-package="com.eazy.brush"></context:component-scan>
+    <context:component-scan base-package="com.eazy.brush"/>
 
- 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
-        <property name="locations">  
-            <list>  
-                <value>classpath:email.properties</value>  
-                <value>classpath:db.properties</value>  
-            </list>  
-        </property>  
-    </bean>  
-    
-	<bean id="dataSource" init-method="init" class="com.alibaba.druid.pool.DruidDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="${db.driver}" />
-		<property name="url" value="${db.url}" />
-		<property name="username" value="${db.username}" />
-		<property name="password" value="${db.password}" />
-		<!-- 初始化连接大小 -->
-		<property name="initialSize" value="${initialSize}"></property>
-		<!-- 连接池最大数量 -->
-		<property name="maxActive" value="${maxActive}"></property>
-		<!-- 连接池最大空闲 -->
-		<property name="maxIdle" value="${maxIdle}"></property>
-		<!-- 连接池最小空闲 -->
-		<property name="minIdle" value="${minIdle}"></property>
-		<!-- 获取连接最大等待时间 -->
-		<property name="maxWait" value="${maxWait}"></property>
-	</bean>
-
-	<!-- 定义事务管理 -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"></property>
-	</bean>
-
-
-	<!-- 配置Jdbc模板-->
-	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	 
-
-	<!-- 声明任务工厂 -->
-	<bean id="scheduler" autowire="no"
-		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="applicationContextSchedulerContextKey" value="applicationContextKey" />
-		<property name="quartzProperties">
-			<props>
-				<prop key="org.quartz.scheduler.instanceName">CRMscheduler</prop>
-				<prop key="org.quartz.scheduler.instanceId">AUTO</prop>
-				<!-- 线程池配置 -->
-				<prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>
-				<prop key="org.quartz.threadPool.threadCount">20</prop>
-				<prop key="org.quartz.threadPool.threadPriority">5</prop>
-				<prop key="org.quartz.jobStore.misfireThreshold">120000</prop>
-				<!-- JobStore 配置 -->
-				<prop key="org.quartz.jobStore.class">org.quartz.impl.jdbcjobstore.JobStoreTX</prop>
-				<!-- 集群配置 -->
-				<prop key="org.quartz.jobStore.isClustered">true</prop>
-				<prop key="org.quartz.jobStore.clusterCheckinInterval">15000</prop>
-				<prop key="org.quartz.jobStore.maxMisfiresToHandleAtATime">1</prop>
-				<!-- 数据表设置 -->
-				<prop key="org.quartz.jobStore.tablePrefix">qrtz_</prop>
-				<prop key="org.quartz.jobStore.dataSource">qzDS</prop>
-			</props>
-		</property>
-	</bean>
-	
-	 <!--配置jedis-->
-    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <property name="testOnReturn" value="false"/>
-        <property name="maxIdle" value="15"/>
-        <property name="maxTotal" value="20" />
-        <property name="maxWaitMillis" value="1000"/>
-        <property name="minIdle" value="10" />
-        <property name="lifo" value="false"/>
-        <property name="softMinEvictableIdleTimeMillis" value="10"/>
-        <property name="testOnBorrow" value="true"/>
-        <property name="testWhileIdle" value="false"/>
-        <property name="timeBetweenEvictionRunsMillis" value="300000"/>
-        <property name="blockWhenExhausted" value="true"/>
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:email.properties</value>
+                <value>classpath:db.properties</value>
+            </list>
+        </property>
     </bean>
-    <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
-        <constructor-arg index="0" ref="jedisPoolConfig" />
-        <constructor-arg index="1" value="${jedis.host}" />
-        <constructor-arg index="2" value="6379" />
-        <constructor-arg index="3" value="3000" />
-        <!-- 
-        <constructor-arg index="4" value="test1234567" />
-         -->
+
+    <bean id="scheduler" autowire="no"
+          class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="applicationContextSchedulerContextKey" value="applicationContextKey"/>
+        <property name="quartzProperties">
+            <props>
+                <prop key="org.quartz.scheduler.instanceName">CRMscheduler</prop>
+                <prop key="org.quartz.scheduler.instanceId">AUTO</prop>
+                <prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>
+                <prop key="org.quartz.threadPool.threadCount">20</prop>
+                <prop key="org.quartz.threadPool.threadPriority">5</prop>
+                <prop key="org.quartz.jobStore.misfireThreshold">120000</prop>
+                <prop key="org.quartz.jobStore.class">org.quartz.impl.jdbcjobstore.JobStoreTX</prop>
+                <prop key="org.quartz.jobStore.isClustered">true</prop>
+                <prop key="org.quartz.jobStore.clusterCheckinInterval">15000</prop>
+                <prop key="org.quartz.jobStore.maxMisfiresToHandleAtATime">1</prop>
+                <prop key="org.quartz.jobStore.tablePrefix">qrtz_</prop>
+                <prop key="org.quartz.jobStore.dataSource">qzDS</prop>
+            </props>
+        </property>
     </bean>
-    <bean id="redisManager" class="com.eazy.brush.component.shiro.RedisManager">
-        <property name="jedisPool" ref="jedisPool"/>
-    </bean>
-    
-	<!--缓存管理
-    <bean id="cache" class="com.eazy.brushh.web.shiro.cache.WTCache">
-        <property name="redisManager" ref="redisManager"/>
-    </bean>
-    <bean id="cacheManager" class="com.eazy.brushh.web.shiro.cache.WTCacheManager">
-        <property name="cache" ref="cache"/>
-    </bean>
-    -->
-	<import resource="spring-shiro.xml" />
-	<import resource="spring-activemq.xml" />
-	<import resource="spring-email.xml" />
-    
+
+    <import resource="spring/spring-mybatis.xml"/>
+    <import resource="spring/spring-redis.xml"/>
+    <import resource="spring/spring-shiro.xml"/>
+    <import resource="spring/spring-activemq.xml"/>
+    <import resource="spring/spring-email.xml"/>
+
 </beans>
