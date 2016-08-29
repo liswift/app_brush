@@ -20,13 +20,13 @@ public class TaskSubProvider {
         StringBuilder sb = new StringBuilder();
         sb.append("INSERT INTO task_sub ");
         sb.append("(" + TaskSubMapper.INSERT_FEILDS + ") ");
-        sb.append("VALUES " + TaskSubMapper.INSERT_VALUES);
+        sb.append("VALUES ");
 
         MessageFormat mf = new MessageFormat("" +
                 "(" +
-                "#'{'list[{0}].taskId},#'{'list[{0}].perTime}," +
-                "#'{'list[{0}].actionId},#'{'list[{0}].deviceInfoId}," +
-                "#'{'list[{0}].netInfoId},#'{'list[{0}].runTime}" +
+                "#'{'taskSubs[{0}].taskId},#'{'taskSubs[{0}].perTime}," +
+                "#'{'taskSubs[{0}].actionId},#'{'taskSubs[{0}].deviceInfoId}," +
+                "#'{'taskSubs[{0}].netInfoId},#'{'taskSubs[{0}].runTime}" +
                 ")");
 
         for (int i = 0; i < taskSubs.size(); i++) {
