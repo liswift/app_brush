@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50539
 File Encoding         : 65001
 
-Date: 2016-08-28 10:20:49
+Date: 2016-08-29 23:47:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -52,26 +52,17 @@ CREATE TABLE `action_sub` (
 DROP TABLE IF EXISTS `device_info`;
 CREATE TABLE `device_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `serial` varchar(32) NOT NULL COMMENT 'build.serial',
   `version_release` varchar(32) NOT NULL COMMENT '手机系统版本',
   `brand` varchar(64) DEFAULT NULL COMMENT '品牌',
   `board` varchar(32) DEFAULT NULL COMMENT '具体手机型号',
-  `version_incremental` int(11) DEFAULT NULL COMMENT '7位随机数',
-  `build_id` varchar(32) DEFAULT NULL,
-  `secure_id` varchar(32) DEFAULT NULL,
   `width` int(11) DEFAULT NULL,
-  `hight` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_USER_ROL_REFERENCE_ROLE` (`version_release`) USING BTREE,
-  KEY `FK_USER_ROL_REFERENCE_USERS` (`serial`) USING BTREE
+  `height` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of device_info
 -- ----------------------------
-INSERT INTO `device_info` VALUES ('41', '10', '13', null, null, null, null, null, null, null);
-INSERT INTO `device_info` VALUES ('42', '9', '5', null, null, null, null, null, null, null);
-INSERT INTO `device_info` VALUES ('43', '11', '1', null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `dict`
@@ -114,7 +105,7 @@ CREATE TABLE `log` (
   `DESCRIPTION` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `REQUEST_PARAM` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4651 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4658 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of log
@@ -1936,6 +1927,13 @@ INSERT INTO `log` VALUES ('4647', null, '2016-08-27 15:56:30', null, 'Windows 8.
 INSERT INTO `log` VALUES ('4648', null, '2016-08-27 16:54:42', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 INSERT INTO `log` VALUES ('4649', null, '2016-08-27 17:04:28', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 INSERT INTO `log` VALUES ('4650', null, '2016-08-27 17:08:33', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4651', null, '2016-08-28 19:33:01', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4652', null, '2016-08-28 19:36:08', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4653', null, '2016-08-28 19:36:46', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4654', null, '2016-08-28 19:40:14', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4655', null, '2016-08-28 19:44:03', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4656', null, '2016-08-28 21:29:16', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4657', null, '2016-08-28 21:34:32', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `login_log`
@@ -2494,17 +2492,12 @@ CREATE TABLE `net_info` (
   `phone_type` int(11) DEFAULT NULL COMMENT '手机通话类型',
   `host` varchar(32) DEFAULT NULL COMMENT '代理主机地址',
   `port` int(11) unsigned DEFAULT NULL COMMENT '端口',
-  PRIMARY KEY (`id`),
-  KEY `FK_USER_ROL_REFERENCE_ROLE` (`tel_android_id`) USING BTREE,
-  KEY `FK_USER_ROL_REFERENCE_USERS` (`mac`) USING BTREE
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of net_info
 -- ----------------------------
-INSERT INTO `net_info` VALUES ('41', '10', '13', null, null, null, null, null, null, null, null, null);
-INSERT INTO `net_info` VALUES ('42', '9', '5', null, null, null, null, null, null, null, null, null);
-INSERT INTO `net_info` VALUES ('43', '11', '1', null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `permission`
@@ -2673,9 +2666,9 @@ CREATE TABLE `qrtz_job_details` (
 -- ----------------------------
 -- Records of qrtz_job_details
 -- ----------------------------
-INSERT INTO `qrtz_job_details` VALUES ('scheduler', 'email', 'group4', null, 'com.eazy.brush.quartz.EmailQuartz', '0', '1', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000B7363686564756C654A6F6273720023636F6D2E65617A792E6C6B73792E7765622E6D6F64656C2E5363686564756C654A6F6200000000000000010200064C0009636C6173734E616D657400124C6A6176612F6C616E672F537472696E673B4C000E63726F6E45787072657373696F6E71007E00094C000B6465736372697074696F6E71007E00094C000567726F757071007E00094C00046E616D6571007E00094C000673746174757371007E00097870740024636F6D2E65617A792E6C6B73792E7765622E71756172747A2E456D61696C51756172747A74000C302030203233202A202A203F7074000667726F757034740005656D61696C740001317800);
-INSERT INTO `qrtz_job_details` VALUES ('scheduler', 'email 邮件自动发送', 'group3', null, 'com.eazy.brush.quartz.EmailQuartz', '0', '1', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000B7363686564756C654A6F6273720023636F6D2E65617A792E6C6B73792E7765622E6D6F64656C2E5363686564756C654A6F6200000000000000010200064C0009636C6173734E616D657400124C6A6176612F6C616E672F537472696E673B4C000E63726F6E45787072657373696F6E71007E00094C000B6465736372697074696F6E71007E00094C000567726F757071007E00094C00046E616D6571007E00094C000673746174757371007E00097870740024636F6D2E65617A792E6C6B73792E7765622E71756172747A2E456D61696C51756172747A74000C302030203233202A202A203F7074000667726F757033740018656D61696C20E982AEE4BBB6E887AAE58AA8E58F91E98081740001317800);
-INSERT INTO `qrtz_job_details` VALUES ('scheduler', 'redis', 'group2', null, 'com.eazy.brush.quartz.RedisQuartz', '0', '0', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000B7363686564756C654A6F6273720023636F6D2E65617A792E6C6B73792E7765622E6D6F64656C2E5363686564756C654A6F6200000000000000010200064C0009636C6173734E616D657400124C6A6176612F6C616E672F537472696E673B4C000E63726F6E45787072657373696F6E71007E00094C000B6465736372697074696F6E71007E00094C000567726F757071007E00094C00046E616D6571007E00094C000673746174757371007E00097870740024636F6D2E65617A792E6C6B73792E7765622E71756172747A2E526564697351756172747A74000C302030203233202A202A203F7074000667726F7570327400057265646973740001317800);
+INSERT INTO `qrtz_job_details` VALUES ('scheduler', 'email', 'group4', null, 'com.eazy.brush.quartz.EmailQuartz', '0', '1', '0', '0', null);
+INSERT INTO `qrtz_job_details` VALUES ('scheduler', 'email 邮件自动发送', 'group3', null, 'com.eazy.brush.quartz.EmailQuartz', '0', '1', '0', '0', null);
+INSERT INTO `qrtz_job_details` VALUES ('scheduler', 'redis', 'group2', null, 'com.eazy.brush.quartz.RedisQuartz', '0', '0', '0', '0', null);
 
 -- ----------------------------
 -- Table structure for `qrtz_locks`
@@ -2722,7 +2715,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler', 'Lenovo-PC1472347908638', '1472350836635', '15000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler', 'Lenovo-PC1472390918590', '1472395395957', '15000');
 
 -- ----------------------------
 -- Table structure for `qrtz_simple_triggers`
@@ -2796,9 +2789,9 @@ CREATE TABLE `qrtz_triggers` (
 -- ----------------------------
 -- Records of qrtz_triggers
 -- ----------------------------
-INSERT INTO `qrtz_triggers` VALUES ('scheduler', 'email', 'group4', 'email', 'group4', null, '1472310000000', '1472223600000', '5', 'WAITING', 'CRON', '1463670977000', '0', null, '0', '');
-INSERT INTO `qrtz_triggers` VALUES ('scheduler', 'email 邮件自动发送', 'group3', 'email 邮件自动发送', 'group3', null, '1472310000000', '1472223600000', '5', 'WAITING', 'CRON', '1463670873000', '0', null, '0', '');
-INSERT INTO `qrtz_triggers` VALUES ('scheduler', 'redis', 'group2', 'redis', 'group2', null, '1472310000000', '1472223600000', '5', 'WAITING', 'CRON', '1463192784000', '0', null, '0', '');
+INSERT INTO `qrtz_triggers` VALUES ('scheduler', 'email', 'group4', 'email', 'group4', null, '1472396400000', '1472392600255', '5', 'WAITING', 'CRON', '1463670977000', '0', null, '0', '');
+INSERT INTO `qrtz_triggers` VALUES ('scheduler', 'email 邮件自动发送', 'group3', 'email 邮件自动发送', 'group3', null, '1472396400000', '1472392600426', '5', 'WAITING', 'CRON', '1463670873000', '0', null, '0', '');
+INSERT INTO `qrtz_triggers` VALUES ('scheduler', 'redis', 'group2', 'redis', 'group2', null, '1472396400000', '1472392600368', '5', 'WAITING', 'CRON', '1463192784000', '0', null, '0', '');
 
 -- ----------------------------
 -- Table structure for `role`
@@ -2920,6 +2913,7 @@ CREATE TABLE `task` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `app_name` varchar(64) NOT NULL COMMENT '应用名称',
   `app_version` varchar(32) NOT NULL COMMENT '应用版本',
+  `apk_url` varchar(64) DEFAULT NULL,
   `remark_name` varchar(64) NOT NULL COMMENT '备注名称',
   `incr_day` int(11) NOT NULL DEFAULT '0' COMMENT '每日新增用户数',
   `incr_up_down` int(11) NOT NULL DEFAULT '0' COMMENT '上下波动范围',
@@ -2928,13 +2922,15 @@ CREATE TABLE `task` (
   `run_start_time` int(11) NOT NULL COMMENT '投放开始时间',
   `run_end_time` int(11) NOT NULL COMMENT '投放结束时间',
   `run_speed` int(11) NOT NULL DEFAULT '0' COMMENT '投放速度',
-  `retain` int(11) DEFAULT NULL COMMENT '留存率',
+  `retain_day` int(11) NOT NULL DEFAULT '0' COMMENT '留存天数',
+  `retain_percent` int(11) DEFAULT NULL COMMENT '留存率',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of task
 -- ----------------------------
+INSERT INTO `task` VALUES ('9', 'com.baidu.map', '2.3', null, '百度地图', '1000', '100', '1', '10', '8', '23', '0', '0', '30');
 
 -- ----------------------------
 -- Table structure for `task_action`
@@ -2952,9 +2948,26 @@ CREATE TABLE `task_action` (
 -- ----------------------------
 -- Records of task_action
 -- ----------------------------
-INSERT INTO `task_action` VALUES ('41', '10', '13');
-INSERT INTO `task_action` VALUES ('42', '9', '5');
-INSERT INTO `task_action` VALUES ('43', '11', '1');
+
+-- ----------------------------
+-- Table structure for `task_sub`
+-- ----------------------------
+DROP TABLE IF EXISTS `task_sub`;
+CREATE TABLE `task_sub` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `task_id` int(11) NOT NULL COMMENT '任务id',
+  `per_time` int(11) DEFAULT '0' COMMENT '所在粒度',
+  `action_id` int(11) unsigned NOT NULL COMMENT '动作组id',
+  `device_info_id` int(11) NOT NULL COMMENT '设备信息',
+  `net_info_id` int(11) NOT NULL COMMENT '网络信息',
+  `run_time` int(11) NOT NULL COMMENT '任务执行时间',
+  `callback_time` int(11) NOT NULL COMMENT '任务执行完回调时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of task_sub
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `user`

@@ -1,8 +1,8 @@
 package com.eazy.brush.controller.vo.api;
 
-import com.eazy.brush.model.Action;
-import com.eazy.brush.model.DeviceInfo;
-import com.eazy.brush.model.NetInfo;
+import com.eazy.brush.dao.entity.Action;
+import com.eazy.brush.dao.entity.DeviceInfo;
+import com.eazy.brush.dao.entity.NetInfo;
 import lombok.Data;
 
 /**
