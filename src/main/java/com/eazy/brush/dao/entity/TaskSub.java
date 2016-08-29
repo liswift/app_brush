@@ -1,4 +1,4 @@
-package com.eazy.brush.model;
+package com.eazy.brush.dao.entity;
 
 import lombok.Data;
 

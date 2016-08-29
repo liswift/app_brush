@@ -1,7 +1,7 @@
 package com.eazy.brush.dao.provider;
 
 import com.eazy.brush.dao.mapper.TaskSubMapper;
-import com.eazy.brush.model.TaskSub;
+import com.eazy.brush.dao.entity.TaskSub;
 
 import java.text.MessageFormat;
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.eazy.brush.service;
 
-import com.eazy.brush.model.Task;
-import com.eazy.brush.model.TaskSub;
+import com.eazy.brush.dao.entity.Task;
+import com.eazy.brush.dao.entity.TaskSub;
 
 import java.util.List;
 

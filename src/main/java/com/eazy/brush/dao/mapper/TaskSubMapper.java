@@ -1,7 +1,7 @@
 package com.eazy.brush.dao.mapper;
 
 import com.eazy.brush.dao.provider.TaskSubProvider;
-import com.eazy.brush.model.TaskSub;
+import com.eazy.brush.dao.entity.TaskSub;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Param;
