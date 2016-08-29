@@ -19,8 +19,8 @@
     </bean>
     <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
         <constructor-arg index="0" ref="jedisPoolConfig"/>
-        <constructor-arg index="1" value="${jedis.host}"/>
-        <constructor-arg index="2" value="6379"/>
+        <constructor-arg index="1" value="${jedis.host}" type="java.lang.String"/>
+        <constructor-arg index="2" value="6379" type="int"/>
         <constructor-arg index="3" value="3000"/>
     </bean>
     <bean id="redisManager" class="com.eazy.brush.component.shiro.RedisManager">
