@@ -68,7 +68,7 @@
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>/sys/index</welcome-file>
 	</welcome-file-list>
 
 	<!-- druid 监控 -->
