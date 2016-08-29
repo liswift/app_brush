@@ -4,9 +4,13 @@ import com.eazy.brush.core.utils.Constants;
 import com.eazy.brush.core.utils.DateTimeUitl;
 import com.eazy.brush.dao.entity.*;
 import com.eazy.brush.dao.mapper.TaskSubMapper;
+import com.eazy.brush.service.DeviceInfoService;
+import com.eazy.brush.service.NetInfoService;
+import com.eazy.brush.service.TaskActionService;
 import com.eazy.brush.service.TaskSubService;
 import com.google.common.collect.Lists;
 import org.joda.time.DateTime;
+import org.omg.CORBA.INTERNAL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +18,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * 原任务相关服务
+ * 元任务相关服务
  * author : liufeng
  * create time:2016/8/28 13:02
  */
@@ -26,12 +30,21 @@ public class TaskSubServiceImpl implements TaskSubService {
     @Autowired
     private TaskSubMapper taskSubMapper;
 
+    @Autowired
+    private TaskActionService taskActionService;
+
+    @Autowired
+    private DeviceInfoService deviceInfoService;
+
+    @Autowired
+    private NetInfoService netInfoService;
+
     @Override
     public void makeTaskSub(Task task) {
 
-        List<Action> actionList = getActions(task.getId());
-        List<DeviceInfo> deviceInfos = getDeviceInfos();
-        List<NetInfo> netInfos = getNetInfos();
+        List<Action> actionList = taskActionService.getActionsByTaskId(task.getId());
+        List<DeviceInfo> deviceInfos = deviceInfoService.getList(0, Integer.MAX_VALUE);
+        List<NetInfo> netInfos = netInfoService.getList(0, Integer.MAX_VALUE);
 
         int retainDay = task.getRetainDay();//留存天数
         int upDown = random.nextInt(task.getIncrUpDown());
@@ -115,20 +128,4 @@ public class TaskSubServiceImpl implements TaskSubService {
         taskNum = Double.valueOf(percent * taskNum).intValue();
         return taskNum;
     }
-
-    private List<NetInfo> getNetInfos() {
-        //todo 获取网络集合
-        return Lists.newArrayList();
-    }
-
-    private List<DeviceInfo> getDeviceInfos() {
-        //todo 获取设备集合
-        return Lists.newArrayList();
-    }
-
-    private List<Action> getActions(int taskId) {
-        //todo 根据taskId 获取动作集合
-        return Lists.newArrayList();
-    }
-
 }
