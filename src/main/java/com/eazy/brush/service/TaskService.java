@@ -9,4 +9,8 @@ import com.eazy.brush.dao.entity.Task;
 public interface TaskService {
 
     Task getById(int id);
+
+    Task getByState(long callbackTime);
+
+    void changeState(int id, long callbackTime);
 }

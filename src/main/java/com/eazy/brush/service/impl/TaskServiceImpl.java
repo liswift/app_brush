@@ -1,6 +1,7 @@
 package com.eazy.brush.service.impl;
 
 import com.eazy.brush.dao.entity.Task;
+import com.eazy.brush.dao.mapper.TaskMapper;
 import com.eazy.brush.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,20 @@ import org.springframework.stereotype.Service;
 public class TaskServiceImpl implements TaskService {
 
     @Autowired
-//    TaskMapper taskMapper;
+    TaskMapper taskMapper;
 
     @Override
     public Task getById(int id) {
-        return null;
+        return taskMapper.getById(id);
+    }
+
+    @Override
+    public Task getByState(long callbackTime) {
+        return taskMapper.getByState(callbackTime);
+    }
+
+    @Override
+    public void changeState(int id, long callbackTime) {
+        taskMapper.changeState(id, callbackTime);
     }
 }
