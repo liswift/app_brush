@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50539
 File Encoding         : 65001
 
-Date: 2016-08-31 23:27:42
+Date: 2016-09-01 00:26:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -126,7 +126,7 @@ CREATE TABLE `log` (
   `DESCRIPTION` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `REQUEST_PARAM` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4658 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4661 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of log
@@ -1955,6 +1955,9 @@ INSERT INTO `log` VALUES ('4654', null, '2016-08-28 19:40:14', null, 'Windows 8.
 INSERT INTO `log` VALUES ('4655', null, '2016-08-28 19:44:03', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 INSERT INTO `log` VALUES ('4656', null, '2016-08-28 21:29:16', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 INSERT INTO `log` VALUES ('4657', null, '2016-08-28 21:34:32', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4658', null, '2016-08-31 23:43:23', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4659', null, '2016-08-31 23:44:39', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4660', null, '2016-08-31 23:45:25', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `login_log`
@@ -2472,31 +2475,6 @@ INSERT INTO `login_log` VALUES ('679', 'admin', '221.194.176.16', '2016-05-25 18
 INSERT INTO `login_log` VALUES ('680', 'super', '221.194.176.16', '2016-05-25 18:02:34', 'CN|北京|北京|None|UNICOM|0|0', '北京市', '北京市', '131', '北京市', '116.40387397', '39.91488908');
 
 -- ----------------------------
--- Table structure for `mail`
--- ----------------------------
-DROP TABLE IF EXISTS `mail`;
-CREATE TABLE `mail` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `status` char(2) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
--- Records of mail
--- ----------------------------
-INSERT INTO `mail` VALUES ('1', '190298207@qq.com', '0');
-INSERT INTO `mail` VALUES ('7', '247184480@qq.com', '1');
-INSERT INTO `mail` VALUES ('8', '111111@qq.com', '1');
-INSERT INTO `mail` VALUES ('9', '512742341@qq.com', '1');
-INSERT INTO `mail` VALUES ('10', '444126322@qq.com', '1');
-INSERT INTO `mail` VALUES ('11', '12@1.com', '1');
-INSERT INTO `mail` VALUES ('12', '905384774@qq.com', '1');
-INSERT INTO `mail` VALUES ('13', '837768700@qq.com', '1');
-INSERT INTO `mail` VALUES ('14', '312181725@qq.com', '1');
-INSERT INTO `mail` VALUES ('15', 'asdf@as.com', '1');
-
--- ----------------------------
 -- Table structure for `net_info`
 -- ----------------------------
 DROP TABLE IF EXISTS `net_info`;
@@ -2543,7 +2521,6 @@ INSERT INTO `permission` VALUES ('12', '1', '权限管理', 'F', '5', '/function
 INSERT INTO `permission` VALUES ('14', '15', '数据源监控', 'F', '6', '/druid', '', 'icon-hamburg-database', '', '');
 INSERT INTO `permission` VALUES ('15', null, '系统监控', 'F', '5', '', '', '&#xe62e;', '', '');
 INSERT INTO `permission` VALUES ('20', '15', '日志记录管理', 'F', '7', '/log/list', '', 'icon-hamburg-archives', '', '');
-INSERT INTO `permission` VALUES ('37', '15', '定时任务管理', 'F', null, '/schedule/list', '', 'icon-hamburg-full-time', null, '定时任务管理，支持集群');
 INSERT INTO `permission` VALUES ('39', '1', '菜单管理', 'F', '4', '/permission/list', '', 'icon-hamburg-old-versions', null, '');
 INSERT INTO `permission` VALUES ('45', '39', '修改', 'O', null, '', 'sys:perm:update', null, null, '菜单管理');
 INSERT INTO `permission` VALUES ('58', '39', '添加', 'O', null, '', 'sys:perm:add', null, null, '菜单管理');
@@ -2553,7 +2530,6 @@ INSERT INTO `permission` VALUES ('62', '40', '删除', 'O', null, '', 'sys:dict:
 INSERT INTO `permission` VALUES ('63', '40', '修改', 'O', null, '', 'sys:dict:update', null, null, '字典管理');
 INSERT INTO `permission` VALUES ('69', '40', '查看', 'O', null, '', 'sys:dict:view', null, null, '字典管理');
 INSERT INTO `permission` VALUES ('70', '39', '查看', 'O', null, '', 'sys:perm:menu:view', null, null, '菜单管理');
-INSERT INTO `permission` VALUES ('92', '15', '邮件发送管理', null, null, '/email/list', null, null, null, '发送邮件信息');
 INSERT INTO `permission` VALUES ('97', '3', '删除用户', null, null, null, 'sys:user:delete', null, null, '删除用户');
 INSERT INTO `permission` VALUES ('98', '3', '设置角色', null, null, null, 'sys:user:toRole', null, null, '设置角色');
 INSERT INTO `permission` VALUES ('99', '2', '修改', null, null, null, 'sys:role:update', null, null, '');
@@ -2582,230 +2558,6 @@ INSERT INTO `permission` VALUES ('131', '127', '推广记录', null, null, '', n
 INSERT INTO `permission` VALUES ('132', '124', '任务记录', null, null, '', null, null, null, '任务记录');
 INSERT INTO `permission` VALUES ('133', null, '资源管理', null, null, '', null, '&#xe61a;', null, '资源管理');
 INSERT INTO `permission` VALUES ('134', '133', '主机列表', null, null, '', null, null, null, '主机列表');
-
--- ----------------------------
--- Table structure for `qrtz_blob_triggers`
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_blob_triggers`;
-CREATE TABLE `qrtz_blob_triggers` (
-  `SCHED_NAME` varchar(120) COLLATE utf8_bin NOT NULL,
-  `TRIGGER_NAME` varchar(200) COLLATE utf8_bin NOT NULL,
-  `TRIGGER_GROUP` varchar(200) COLLATE utf8_bin NOT NULL,
-  `BLOB_DATA` blob,
-  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
--- Records of qrtz_blob_triggers
--- ----------------------------
-
--- ----------------------------
--- Table structure for `qrtz_calendars`
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_calendars`;
-CREATE TABLE `qrtz_calendars` (
-  `SCHED_NAME` varchar(120) COLLATE utf8_bin NOT NULL,
-  `CALENDAR_NAME` varchar(200) COLLATE utf8_bin NOT NULL,
-  `CALENDAR` blob NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`,`CALENDAR_NAME`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
--- Records of qrtz_calendars
--- ----------------------------
-
--- ----------------------------
--- Table structure for `qrtz_cron_triggers`
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_cron_triggers`;
-CREATE TABLE `qrtz_cron_triggers` (
-  `SCHED_NAME` varchar(120) COLLATE utf8_bin NOT NULL,
-  `TRIGGER_NAME` varchar(200) COLLATE utf8_bin NOT NULL,
-  `TRIGGER_GROUP` varchar(200) COLLATE utf8_bin NOT NULL,
-  `CRON_EXPRESSION` varchar(200) COLLATE utf8_bin NOT NULL,
-  `TIME_ZONE_ID` varchar(80) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
--- Records of qrtz_cron_triggers
--- ----------------------------
-INSERT INTO `qrtz_cron_triggers` VALUES ('scheduler', 'email', 'group4', '0 0 23 * * ?', 'Asia/Shanghai');
-INSERT INTO `qrtz_cron_triggers` VALUES ('scheduler', 'email 邮件自动发送', 'group3', '0 0 23 * * ?', 'Asia/Shanghai');
-INSERT INTO `qrtz_cron_triggers` VALUES ('scheduler', 'redis', 'group2', '0 0 23 * * ?', 'Asia/Shanghai');
-
--- ----------------------------
--- Table structure for `qrtz_fired_triggers`
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_fired_triggers`;
-CREATE TABLE `qrtz_fired_triggers` (
-  `SCHED_NAME` varchar(120) COLLATE utf8_bin NOT NULL,
-  `ENTRY_ID` varchar(95) COLLATE utf8_bin NOT NULL,
-  `TRIGGER_NAME` varchar(200) COLLATE utf8_bin NOT NULL,
-  `TRIGGER_GROUP` varchar(200) COLLATE utf8_bin NOT NULL,
-  `INSTANCE_NAME` varchar(200) COLLATE utf8_bin NOT NULL,
-  `FIRED_TIME` bigint(13) NOT NULL,
-  `SCHED_TIME` bigint(13) NOT NULL,
-  `PRIORITY` int(11) NOT NULL,
-  `STATE` varchar(16) COLLATE utf8_bin NOT NULL,
-  `JOB_NAME` varchar(200) COLLATE utf8_bin DEFAULT NULL,
-  `JOB_GROUP` varchar(200) COLLATE utf8_bin DEFAULT NULL,
-  `IS_NONCONCURRENT` varchar(1) COLLATE utf8_bin DEFAULT NULL,
-  `REQUESTS_RECOVERY` varchar(1) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`SCHED_NAME`,`ENTRY_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
--- Records of qrtz_fired_triggers
--- ----------------------------
-
--- ----------------------------
--- Table structure for `qrtz_job_details`
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_job_details`;
-CREATE TABLE `qrtz_job_details` (
-  `SCHED_NAME` varchar(120) COLLATE utf8_bin NOT NULL,
-  `JOB_NAME` varchar(200) COLLATE utf8_bin NOT NULL,
-  `JOB_GROUP` varchar(200) COLLATE utf8_bin NOT NULL,
-  `DESCRIPTION` varchar(250) COLLATE utf8_bin DEFAULT NULL,
-  `JOB_CLASS_NAME` varchar(250) COLLATE utf8_bin NOT NULL,
-  `IS_DURABLE` varchar(1) COLLATE utf8_bin NOT NULL,
-  `IS_NONCONCURRENT` varchar(1) COLLATE utf8_bin NOT NULL,
-  `IS_UPDATE_DATA` varchar(1) COLLATE utf8_bin NOT NULL,
-  `REQUESTS_RECOVERY` varchar(1) COLLATE utf8_bin NOT NULL,
-  `JOB_DATA` blob,
-  PRIMARY KEY (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
--- Records of qrtz_job_details
--- ----------------------------
-INSERT INTO `qrtz_job_details` VALUES ('scheduler', 'email', 'group4', null, 'com.eazy.brush.quartz.EmailQuartz', '0', '1', '0', '0', null);
-INSERT INTO `qrtz_job_details` VALUES ('scheduler', 'email 邮件自动发送', 'group3', null, 'com.eazy.brush.quartz.EmailQuartz', '0', '1', '0', '0', null);
-INSERT INTO `qrtz_job_details` VALUES ('scheduler', 'redis', 'group2', null, 'com.eazy.brush.quartz.RedisQuartz', '0', '0', '0', '0', null);
-
--- ----------------------------
--- Table structure for `qrtz_locks`
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_locks`;
-CREATE TABLE `qrtz_locks` (
-  `SCHED_NAME` varchar(120) COLLATE utf8_bin NOT NULL,
-  `LOCK_NAME` varchar(40) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`,`LOCK_NAME`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
--- Records of qrtz_locks
--- ----------------------------
-INSERT INTO `qrtz_locks` VALUES ('scheduler', 'STATE_ACCESS');
-INSERT INTO `qrtz_locks` VALUES ('scheduler', 'TRIGGER_ACCESS');
-
--- ----------------------------
--- Table structure for `qrtz_paused_trigger_grps`
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_paused_trigger_grps`;
-CREATE TABLE `qrtz_paused_trigger_grps` (
-  `SCHED_NAME` varchar(120) COLLATE utf8_bin NOT NULL,
-  `TRIGGER_GROUP` varchar(200) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_GROUP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
--- Records of qrtz_paused_trigger_grps
--- ----------------------------
-
--- ----------------------------
--- Table structure for `qrtz_scheduler_state`
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_scheduler_state`;
-CREATE TABLE `qrtz_scheduler_state` (
-  `SCHED_NAME` varchar(120) COLLATE utf8_bin NOT NULL,
-  `INSTANCE_NAME` varchar(200) COLLATE utf8_bin NOT NULL,
-  `LAST_CHECKIN_TIME` bigint(13) NOT NULL,
-  `CHECKIN_INTERVAL` bigint(13) NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`,`INSTANCE_NAME`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
--- Records of qrtz_scheduler_state
--- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler', 'Lenovo-PC1472489163397', '1472489194959', '15000');
-
--- ----------------------------
--- Table structure for `qrtz_simple_triggers`
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_simple_triggers`;
-CREATE TABLE `qrtz_simple_triggers` (
-  `SCHED_NAME` varchar(120) COLLATE utf8_bin NOT NULL,
-  `TRIGGER_NAME` varchar(200) COLLATE utf8_bin NOT NULL,
-  `TRIGGER_GROUP` varchar(200) COLLATE utf8_bin NOT NULL,
-  `REPEAT_COUNT` bigint(7) NOT NULL,
-  `REPEAT_INTERVAL` bigint(12) NOT NULL,
-  `TIMES_TRIGGERED` bigint(10) NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
--- Records of qrtz_simple_triggers
--- ----------------------------
-
--- ----------------------------
--- Table structure for `qrtz_simprop_triggers`
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_simprop_triggers`;
-CREATE TABLE `qrtz_simprop_triggers` (
-  `SCHED_NAME` varchar(120) COLLATE utf8_bin NOT NULL,
-  `TRIGGER_NAME` varchar(200) COLLATE utf8_bin NOT NULL,
-  `TRIGGER_GROUP` varchar(200) COLLATE utf8_bin NOT NULL,
-  `STR_PROP_1` varchar(512) COLLATE utf8_bin DEFAULT NULL,
-  `STR_PROP_2` varchar(512) COLLATE utf8_bin DEFAULT NULL,
-  `STR_PROP_3` varchar(512) COLLATE utf8_bin DEFAULT NULL,
-  `INT_PROP_1` int(11) DEFAULT NULL,
-  `INT_PROP_2` int(11) DEFAULT NULL,
-  `LONG_PROP_1` bigint(20) DEFAULT NULL,
-  `LONG_PROP_2` bigint(20) DEFAULT NULL,
-  `DEC_PROP_1` decimal(13,4) DEFAULT NULL,
-  `DEC_PROP_2` decimal(13,4) DEFAULT NULL,
-  `BOOL_PROP_1` varchar(1) COLLATE utf8_bin DEFAULT NULL,
-  `BOOL_PROP_2` varchar(1) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
--- Records of qrtz_simprop_triggers
--- ----------------------------
-
--- ----------------------------
--- Table structure for `qrtz_triggers`
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_triggers`;
-CREATE TABLE `qrtz_triggers` (
-  `SCHED_NAME` varchar(120) COLLATE utf8_bin NOT NULL,
-  `TRIGGER_NAME` varchar(200) COLLATE utf8_bin NOT NULL,
-  `TRIGGER_GROUP` varchar(200) COLLATE utf8_bin NOT NULL,
-  `JOB_NAME` varchar(200) COLLATE utf8_bin NOT NULL,
-  `JOB_GROUP` varchar(200) COLLATE utf8_bin NOT NULL,
-  `DESCRIPTION` varchar(250) COLLATE utf8_bin DEFAULT NULL,
-  `NEXT_FIRE_TIME` bigint(13) DEFAULT NULL,
-  `PREV_FIRE_TIME` bigint(13) DEFAULT NULL,
-  `PRIORITY` int(11) DEFAULT NULL,
-  `TRIGGER_STATE` varchar(16) COLLATE utf8_bin NOT NULL,
-  `TRIGGER_TYPE` varchar(8) COLLATE utf8_bin NOT NULL,
-  `START_TIME` bigint(13) NOT NULL,
-  `END_TIME` bigint(13) DEFAULT NULL,
-  `CALENDAR_NAME` varchar(200) COLLATE utf8_bin DEFAULT NULL,
-  `MISFIRE_INSTR` smallint(2) DEFAULT NULL,
-  `JOB_DATA` blob,
-  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
-  KEY `SCHED_NAME` (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
--- Records of qrtz_triggers
--- ----------------------------
-INSERT INTO `qrtz_triggers` VALUES ('scheduler', 'email', 'group4', 'email', 'group4', null, '1472569200000', '1472488761334', '5', 'WAITING', 'CRON', '1463670977000', '0', null, '0', '');
-INSERT INTO `qrtz_triggers` VALUES ('scheduler', 'email 邮件自动发送', 'group3', 'email 邮件自动发送', 'group3', null, '1472569200000', '1472488761587', '5', 'WAITING', 'CRON', '1463670873000', '0', null, '0', '');
-INSERT INTO `qrtz_triggers` VALUES ('scheduler', 'redis', 'group2', 'redis', 'group2', null, '1472569200000', '1472488761516', '5', 'WAITING', 'CRON', '1463192784000', '0', null, '0', '');
 
 -- ----------------------------
 -- Table structure for `role`
@@ -2871,9 +2623,7 @@ INSERT INTO `role_permission` VALUES ('1289', '1', '39');
 INSERT INTO `role_permission` VALUES ('1290', '1', '15');
 INSERT INTO `role_permission` VALUES ('1291', '1', '14');
 INSERT INTO `role_permission` VALUES ('1292', '1', '20');
-INSERT INTO `role_permission` VALUES ('1293', '1', '37');
 INSERT INTO `role_permission` VALUES ('1294', '1', '111');
-INSERT INTO `role_permission` VALUES ('1295', '1', '92');
 INSERT INTO `role_permission` VALUES ('1461', '13', '124');
 INSERT INTO `role_permission` VALUES ('1462', '13', '125');
 INSERT INTO `role_permission` VALUES ('1463', '13', '132');
@@ -2910,13 +2660,11 @@ INSERT INTO `role_permission` VALUES ('1493', '13', '121');
 INSERT INTO `role_permission` VALUES ('1494', '13', '15');
 INSERT INTO `role_permission` VALUES ('1495', '13', '14');
 INSERT INTO `role_permission` VALUES ('1496', '13', '20');
-INSERT INTO `role_permission` VALUES ('1497', '13', '37');
 INSERT INTO `role_permission` VALUES ('1498', '13', '108');
 INSERT INTO `role_permission` VALUES ('1499', '13', '109');
 INSERT INTO `role_permission` VALUES ('1500', '13', '111');
 INSERT INTO `role_permission` VALUES ('1501', '13', '112');
 INSERT INTO `role_permission` VALUES ('1502', '13', '113');
-INSERT INTO `role_permission` VALUES ('1503', '13', '92');
 INSERT INTO `role_permission` VALUES ('1504', '13', '110');
 
 -- ----------------------------
@@ -2938,13 +2686,13 @@ CREATE TABLE `task` (
   `run_speed` int(11) NOT NULL DEFAULT '0' COMMENT '投放速度',
   `retain_day` int(11) NOT NULL DEFAULT '0' COMMENT '留存天数',
   `retain_percent` int(11) DEFAULT NULL COMMENT '留存率',
+  `callback_time` int(11) DEFAULT '0' COMMENT '任务被执行，回调时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of task
 -- ----------------------------
-INSERT INTO `task` VALUES ('9', 'com.baidu.map', '2.3', null, '百度地图', '1000', '100', '1', '10', '8', '23', '0', '0', '30');
 
 -- ----------------------------
 -- Table structure for `task_action`
