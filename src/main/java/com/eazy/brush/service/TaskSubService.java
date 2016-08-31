@@ -12,6 +12,9 @@ import java.util.List;
  */
 public interface TaskSubService {
 
+
+    List<TaskSub> getList(int pertime, int size);
+
     /**
      * 根据客户提交的任务单生成元任务
      *
@@ -22,4 +25,11 @@ public interface TaskSubService {
     void insertTaskSub(TaskSub taskSub);
 
     void insertTaskBatch(List<TaskSub> taskSubList);
+
+    /**
+     * 子任务完成回调
+     *
+     * @param id
+     */
+    void finishTaskSub(String id);
 }

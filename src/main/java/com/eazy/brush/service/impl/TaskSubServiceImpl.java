@@ -40,6 +40,11 @@ public class TaskSubServiceImpl implements TaskSubService {
     private NetInfoService netInfoService;
 
     @Override
+    public List<TaskSub> getList(int pertime, int size) {
+        return taskSubMapper.getList(pertime, size);
+    }
+
+    @Override
     public void makeTaskSub(Task task) {
 
         List<Action> actionList = taskActionService.getActionsByTaskId(task.getId());
@@ -82,6 +87,11 @@ public class TaskSubServiceImpl implements TaskSubService {
     @Override
     public void insertTaskBatch(List<TaskSub> taskSubList) {
         taskSubMapper.insertTaskSubBatch(taskSubList);
+    }
+
+    @Override
+    public void finishTaskSub(String id) {
+        taskSubMapper.finishTaskSub(System.currentTimeMillis());
     }
 
     /**

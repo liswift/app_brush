@@ -1,4 +1,4 @@
-package com.eazy.brush.controller.vo.web.view;
+package com.eazy.brush.controller.view;
 
 
 import java.util.Collection;

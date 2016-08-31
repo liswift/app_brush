@@ -2,10 +2,7 @@ package com.eazy.brush.dao.mapper;
 
 import com.eazy.brush.dao.provider.TaskSubProvider;
 import com.eazy.brush.dao.entity.TaskSub;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -21,11 +18,14 @@ public interface TaskSubMapper {
     String FEILDS = "id," + INSERT_FEILDS + ",callback_time";
 
     @Select("select " + FEILDS + " from task_sub where per_time=#{perTime} limit #{size} order by id asc")
-    List<TaskSub> getTaskSub(@Param("perTime") int perTime, @Param("size") int size);
+    List<TaskSub> getList(@Param("perTime") int perTime, @Param("size") int size);
 
     @Insert("insert into task_sub(" + INSERT_FEILDS + ") values " + INSERT_VALUES)
     void insertTaskSub(TaskSub taskSub);
 
     @InsertProvider(type = TaskSubProvider.class, method = "insertTaskSubBatch")
     void insertTaskSubBatch(@Param("taskSubs") List<TaskSub> taskSubs);
+
+    @Update("update task_sub set callback_time=#{callback_time}")
+    void finishTaskSub(@Param("callbackTime") long callbackTime);
 }

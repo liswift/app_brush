@@ -1,16 +1,16 @@
-package com.eazy.brush.controller.vo.web.view;
+package com.eazy.brush.controller.view.vo;
 
 /**
  * @author Vincent
  * @time 2015/8/27 13:32
  */
-public class ResultVO {
+public class ResultVo {
 
-    public ResultVO(boolean ok) {
+    public ResultVo(boolean ok) {
         this.ok = ok;
     }
 
-    public ResultVO() {
+    public ResultVo() {
     }
 
     private boolean ok;

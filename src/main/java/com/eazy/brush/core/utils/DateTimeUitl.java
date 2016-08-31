@@ -22,7 +22,7 @@ public class DateTimeUitl {
                 .withMinuteOfHour(0);
 
         if (dayIndex == 0) { //当天
-            startTime = getNowPerTime(DateTime.now());
+            startTime = getPerTime(DateTime.now());
         }
         return startTime;
     }
@@ -32,7 +32,7 @@ public class DateTimeUitl {
      *
      * @return
      */
-    public static DateTime getNowPerTime(DateTime dateTime) {
+    public static DateTime getPerTime(DateTime dateTime) {
         DateTime startTime;
         int minute = (dateTime.getMinuteOfHour() / Constants.TASK_SUB_PER_MINITE + 1)
                 * Constants.TASK_SUB_PER_MINITE;

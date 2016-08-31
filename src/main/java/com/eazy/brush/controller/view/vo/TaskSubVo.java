@@ -1,4 +1,4 @@
-package com.eazy.brush.controller.vo.api;
+package com.eazy.brush.controller.view.vo;
 
 import com.eazy.brush.dao.entity.Action;
 import com.eazy.brush.dao.entity.DeviceInfo;
@@ -11,7 +11,7 @@ import lombok.Data;
  * create time:2016/8/28 10:44
  */
 @Data
-public class TaskSub {
+public class TaskSubVo {
     private int id;
     private String appName;
     private String apkUrl;

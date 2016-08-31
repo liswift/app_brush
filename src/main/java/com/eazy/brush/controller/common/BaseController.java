@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.eazy.brush.controller.vo.ErrorType;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -24,7 +23,7 @@ import com.eazy.brush.core.utils.DateUtils;
 import com.eazy.brush.core.utils.JsonKsy;
 import com.eazy.brush.core.utils.StringEscapeEditor;
 import com.eazy.brush.core.utils.UserUtil;
-import com.eazy.brush.controller.vo.web.view.PageData;
+import com.eazy.brush.controller.view.PageData;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

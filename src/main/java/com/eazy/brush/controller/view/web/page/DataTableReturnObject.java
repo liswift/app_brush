@@ -1,4 +1,4 @@
-package com.eazy.brush.controller.vo.web.page;
+package com.eazy.brush.controller.view.web.page;
 
 /**
  * 代码来源 http://www.suchso.com/projecteactual/jquery-datatable-jsp-demo.html

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.eazy.brush.controller.common.BaseController;
 import com.eazy.brush.dao.common.ZQ;
-import com.eazy.brush.controller.vo.web.view.ResultVO;
+import com.eazy.brush.controller.view.vo.ResultVo;
 
 /**
  * 集成百度地图
@@ -30,7 +30,7 @@ public class BaiDuMapController extends BaseController {
 
 	@RequestMapping(value = "getLocations", method = RequestMethod.GET)
 	public void getLocations() {
-		ResultVO resultVO = new ResultVO(true);
+		ResultVo resultVO = new ResultVo(true);
 
 		List<Map<String, Double>> mapList = new ArrayList<>();
 		List<Map<String, Object>> result = ZQ.commonResult("select * from login_log");
