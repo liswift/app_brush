@@ -34,6 +34,9 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
     DeviceInfoService deviceInfoService;
 
     @Autowired
+    CardInfoService cardInfoService;
+
+    @Autowired
     NetInfoService netInfoService;
 
     @Override
@@ -44,6 +47,7 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
             Task task = taskService.getById(taskSub.getTaskId());
             Action action = actionService.getById(taskSub.getActionId());
             DeviceInfo deviceInfo = deviceInfoService.getById(taskSub.getDeviceInfoId());
+            CardInfo cardInfo = cardInfoService.getById(taskSub.getCardInfoId());
             NetInfo netInfo = netInfoService.getById(taskSub.getNetInfoId());
 
             ActionVo actionVo = new ActionVo();
@@ -57,6 +61,7 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
             taskSubVo.setApkUrl(taskSubVo.getApkUrl());
             taskSubVo.setActionVo(actionVo);
             taskSubVo.setDeviceInfo(deviceInfo);
+            taskSubVo.setCardInfo(cardInfo);
             taskSubVo.setNetInfo(netInfo);
 
             voList.add(taskSubVo);

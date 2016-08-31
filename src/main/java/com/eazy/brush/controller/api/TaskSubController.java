@@ -47,5 +47,6 @@ public class TaskSubController extends BaseController {
         Map<String, String> map = getFormPage();
         String ids = map.get("ids");
         taskSubService.changeTaskSubState(ids, System.currentTimeMillis());//回调
+        renderJson200();
     }
 }

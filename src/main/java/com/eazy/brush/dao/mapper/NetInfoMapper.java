@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface NetInfoMapper {
 
-    String FEILDS = "id,mac,tel_android_id,subscriber_id,operator,operator_name,line1_number,sim_serial_number,network_type,phone_type,host,port    ";
+    String FEILDS = "id,host,port,mac,type";
 
     @Select("select " + FEILDS + " from net_info limit #{offset},#{size}")
     List<NetInfo> getList(@Param("offset") int offset, @Param("size") int size);
