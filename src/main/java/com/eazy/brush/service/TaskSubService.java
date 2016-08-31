@@ -13,7 +13,14 @@ import java.util.List;
 public interface TaskSubService {
 
 
-    List<TaskSub> getList(int pertime, int size);
+    /**
+     * 获取未消费的任务集合
+     *
+     * @param pertime
+     * @param size
+     * @return
+     */
+    List<TaskSub> getUnConsumeList(int pertime, int size);
 
     /**
      * 根据客户提交的任务单生成元任务
@@ -27,9 +34,10 @@ public interface TaskSubService {
     void insertTaskBatch(List<TaskSub> taskSubList);
 
     /**
-     * 子任务完成回调
+     * 修改子任务运行状态
      *
-     * @param id
+     * @param ids
+     * @param callbackTime
      */
-    void finishTaskSub(String id);
+    void changeTaskSubState(String ids, long callbackTime);
 }

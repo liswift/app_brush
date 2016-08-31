@@ -12,4 +12,6 @@ import java.util.List;
 public interface NetInfoService {
 
     List<NetInfo> getList(int offset, int size);
+
+    NetInfo getById(int netInfoId);
 }

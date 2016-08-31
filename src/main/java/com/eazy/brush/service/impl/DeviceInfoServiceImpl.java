@@ -20,6 +20,11 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
     DeviceInfoMapper deviceInfoMapper;
 
     @Override
+    public DeviceInfo getById(int id) {
+        return deviceInfoMapper.getById(id);
+    }
+
+    @Override
     public List<DeviceInfo> getList(int offset, int size) {
         return deviceInfoMapper.getList(offset, size);
     }

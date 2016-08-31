@@ -22,4 +22,9 @@ public class NetInfoServiceImpl implements NetInfoService {
     public List<NetInfo> getList(int offset, int size) {
         return netInfoMapper.getList(offset, size);
     }
+
+    @Override
+    public NetInfo getById(int netInfoId) {
+        return netInfoMapper.getById(netInfoId);
+    }
 }

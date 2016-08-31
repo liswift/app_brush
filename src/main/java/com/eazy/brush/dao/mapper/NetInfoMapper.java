@@ -18,4 +18,7 @@ public interface NetInfoMapper {
 
     @Select("select " + FEILDS + " from net_info limit #{offset},#{size}")
     List<NetInfo> getList(@Param("offset") int offset, @Param("size") int size);
+
+    @Select("select " + FEILDS + " from net_info where id=#{id)")
+    NetInfo getById(@Param("id") int id);
 }

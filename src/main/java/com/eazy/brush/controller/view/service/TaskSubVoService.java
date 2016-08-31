@@ -6,7 +6,7 @@ import com.eazy.brush.dao.entity.TaskSub;
 import java.util.List;
 
 /**
- * ÈÎÎñÔªÆ´×°·şÎñ
+ * ä»»åŠ¡å…ƒæ‹¼è£…æœåŠ¡
  *
  * @author feng.liu
  * @date 2016/8/31 17:55
@@ -14,4 +14,6 @@ import java.util.List;
 public interface TaskSubVoService {
 
     List<TaskSubVo> buildVo(List<TaskSub> list);
+
+    String buildVoIds(List<TaskSub> taskSubs);
 }

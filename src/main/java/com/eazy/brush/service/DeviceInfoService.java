@@ -11,5 +11,7 @@ import java.util.List;
  */
 public interface DeviceInfoService {
 
+    DeviceInfo getById(int id);
+
     List<DeviceInfo> getList(int offset, int size);
 }

@@ -1,5 +1,7 @@
 package com.eazy.brush.service;
 
+import com.eazy.brush.dao.entity.Action;
+
 /**
  * 动作服务
  * author : liufeng
@@ -7,4 +9,5 @@ package com.eazy.brush.service;
  */
 public interface ActionService {
 
+    Action getById(int id);
 }

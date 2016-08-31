@@ -10,7 +10,6 @@ import com.eazy.brush.service.TaskActionService;
 import com.eazy.brush.service.TaskSubService;
 import com.google.common.collect.Lists;
 import org.joda.time.DateTime;
-import org.omg.CORBA.INTERNAL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +39,7 @@ public class TaskSubServiceImpl implements TaskSubService {
     private NetInfoService netInfoService;
 
     @Override
-    public List<TaskSub> getList(int pertime, int size) {
+    public List<TaskSub> getUnConsumeList(int pertime, int size) {
         return taskSubMapper.getList(pertime, size);
     }
 
@@ -90,8 +89,8 @@ public class TaskSubServiceImpl implements TaskSubService {
     }
 
     @Override
-    public void finishTaskSub(String id) {
-        taskSubMapper.finishTaskSub(System.currentTimeMillis());
+    public void changeTaskSubState(String ids, long callbackTime) {
+        taskSubMapper.changeTaskSubState(ids, callbackTime);
     }
 
     /**

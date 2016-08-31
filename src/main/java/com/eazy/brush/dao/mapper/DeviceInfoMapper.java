@@ -16,6 +16,9 @@ public interface DeviceInfoMapper {
 
     String FEILDS = "id,version_release,brand,board,width,height";
 
-    @Select("select " + FEILDS + " from device_info limie #{offset},#{size}")
+    @Select("select " + FEILDS + " from device_info limit #{offset},#{size}")
     List<DeviceInfo> getList(@Param("offset") int offset, @Param("size") int size);
+
+    @Select("select" + FEILDS + " from device_info where id=#{id}")
+    DeviceInfo getById(@Param("id") int id);
 }
