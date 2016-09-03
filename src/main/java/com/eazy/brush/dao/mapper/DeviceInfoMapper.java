@@ -21,7 +21,7 @@ public interface DeviceInfoMapper {
     @Select("select " + FEILDS + " from device_info limit #{offset},#{size}")
     List<DeviceInfo> getList(@Param("offset") int offset, @Param("size") int size);
 
-    @Select("select" + FEILDS + " from device_info where id=#{id}")
+    @Select("select " + FEILDS + " from device_info where id=#{id}")
     DeviceInfo getById(@Param("id") int id);
 
     @Insert("insert into device_info(" + INSERT_FEILDS + ") " +

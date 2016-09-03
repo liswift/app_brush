@@ -100,7 +100,7 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
             TaskSubVo taskSubVo = new TaskSubVo();
             taskSubVo.setId(taskSub.getId());
             taskSubVo.setAppName(task.getAppName());
-            taskSubVo.setApkUrl(taskSubVo.getApkUrl());
+            taskSubVo.setApkUrl(task.getApiUrl());
             taskSubVo.setActionVo(actionVo);
             taskSubVo.setDeviceInfo(deviceInfo);
             taskSubVo.setCardInfo(cardInfo);

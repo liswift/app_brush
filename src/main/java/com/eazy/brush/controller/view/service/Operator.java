@@ -83,7 +83,7 @@ public class Operator implements Award {
     public CardInfo getCardInfo() {
 
         Random random = new Random();
-        return new SingleNumberInfo(numberpr[random.nextInt(numberpr.length)], operatorNum[random.nextInt(operatorName.length())], networktypeg).getCardInfo();
+        return new SingleNumberInfo(numberpr[random.nextInt(numberpr.length)], operatorNum[random.nextInt(operatorNum.length)], networktypeg).getCardInfo();
     }
 
     @Override
@@ -111,7 +111,7 @@ public class Operator implements Award {
 
         //15位
         String getSubscriberid() {
-            return "460" + mOperatorNum + mLineNumber.substring(4, 7) + mLineNumber.substring(3, 4) + (System.currentTimeMillis() / 1000 + "").substring(5, 11);
+            return "460" + mOperatorNum + mLineNumber.substring(4, 7) + mLineNumber.substring(3, 4) + (System.currentTimeMillis() + "").substring(7, 13);
         }
 
         String getOperator() {

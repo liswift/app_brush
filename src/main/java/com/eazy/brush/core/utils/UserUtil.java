@@ -5,6 +5,8 @@ import org.apache.shiro.session.Session;
 
 import com.eazy.brush.model.User;
 
+import java.util.Random;
+
 public class UserUtil {
 	
 	

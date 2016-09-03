@@ -18,8 +18,8 @@ public interface TaskSubMapper {
     String FEILDS = "id," + INSERT_FEILDS + ",callback_time";
 
     @Select("select " + FEILDS + " from task_sub where per_time=#{perTime} " +
-            "and callback_time=0" +
-            "limit #{size} order by id asc")
+            " and callback_time=0" +
+            " order by id asc limit #{size}")
     List<TaskSub> getList(@Param("perTime") long perTime, @Param("size") int size);
 
     @Insert("insert into task_sub(" + INSERT_FEILDS + ") values " + INSERT_VALUES)
@@ -28,6 +28,6 @@ public interface TaskSubMapper {
     @InsertProvider(type = TaskSubProvider.class, method = "insertTaskSubBatch")
     void insertTaskSubBatch(@Param("taskSubs") List<TaskSub> taskSubs);
 
-    @Update("update task_sub set callback_time=#{callback_time} where id in (${ids})")
+    @Update("update task_sub set callback_time=#{callbackTime} where id in (#{ids})")
     void changeTaskSubState(@Param("ids") String ids, @Param("callbackTime") long callbackTime);
 }
