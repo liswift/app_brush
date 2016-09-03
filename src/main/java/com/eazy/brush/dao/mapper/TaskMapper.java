@@ -14,7 +14,7 @@ import java.util.List;
 public interface TaskMapper {
 
     String FEILDS = "id,app_name,app_version,apk_url,remark_name,incr_day,incr_up_down,run_time,run_up_down,run_start_time," +
-            "run_end_time,run_speed,retain_day,retain_percent,callback_time";
+            "run_end_time,run_speed,retain_day,retain_percent,callback_time,create_time";
 
     @Select("select " + FEILDS + " from task where id=#{id}")
     Task getById(@Param("id") int id);
@@ -24,4 +24,7 @@ public interface TaskMapper {
 
     @Update("update task set callback_time=#{callbackTime} where id=#{id}")
     void changeState(@Param("id") int id, @Param("callbackTime") long callbackTime);
+
+    @Update("update task set callback_time=#{callbackTime}")
+    void changeAllState(@Param("callbackTime") long callbackTime);
 }

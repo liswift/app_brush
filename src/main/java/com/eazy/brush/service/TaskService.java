@@ -13,4 +13,6 @@ public interface TaskService {
     Task getByState(long callbackTime);
 
     void changeState(int id, long callbackTime);
+
+    void changeAllState(long callbackTime);
 }

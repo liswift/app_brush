@@ -30,4 +30,9 @@ public class TaskServiceImpl implements TaskService {
     public void changeState(int id, long callbackTime) {
         taskMapper.changeState(id, callbackTime);
     }
+
+    @Override
+    public void changeAllState(long callbackTime) {
+        taskMapper.changeAllState(callbackTime);
+    }
 }

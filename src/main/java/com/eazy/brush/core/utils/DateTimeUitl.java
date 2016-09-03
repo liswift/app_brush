@@ -1,6 +1,8 @@
 package com.eazy.brush.core.utils;
 
 import org.joda.time.DateTime;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
 
 /**
  * DateTimeUtil
@@ -44,5 +46,16 @@ public class DateTimeUitl {
         return startTime;
     }
 
-
+    /**
+     * 获取给定的时间距离多少天
+     *
+     * @param start
+     * @param end
+     * @return
+     */
+    public static int getDayInter(DateTime start, DateTime end) {
+        Period p = new Period(start.withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0),
+                end.withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0), PeriodType.days());
+        return p.getDays();
+    }
 }

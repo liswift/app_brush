@@ -57,28 +57,33 @@ public class TaskSubServiceImpl implements TaskSubService {
         //Math.pow(27,1d/3) == 27 开 3 次方
         double percent = Math.pow(task.getRetainPercent() * 1.0 / 100, 1d / retainDay);
 
-        for (int i = 0; i <= retainDay; i++) {
+        DateTime createDateTime = new DateTime(task.getCreateTime());
+        int interDay = DateTimeUitl.getDayInter(createDateTime, DateTime.now());
+        int interHour = task.getRunEndTime() - createDateTime.getHourOfDay();
 
-            int retainNum = calcRetainNum(percent, i, dayNum);
-            int perNum = 0, times = 0;
+        //第一天需要跑的任务占比
+        double dayOnePercent = task.getRunSpeed() == 0 ?
+                1.0 : interHour / (task.getRunEndTime() - task.getRunStartTime());
 
-            if (0 == task.getRunSpeed()) {//立即投放
-                times = retainNum / Constants.TASK_BATCH_UP; //需要分多少批次执行
-                perNum = times > 0 ? Constants.TASK_BATCH_UP : retainNum;
-            } else {    //函数投放
-                times = (task.getRunEndTime() - task.getRunStartTime()) * 60 / Constants.TASK_SUB_PER_MINITE;
-                perNum = retainNum / times;
-            }
+        int dayTaskNum = calcDayTaskNum(percent, interDay, dayOnePercent, retainDay, dayNum);
+        int perNum = 0, times = 0;
 
-            DateTime startTime = DateTimeUitl.getStartTime(task.getRunStartTime(), i);
-
-            while (times-- >= 0) {
-                long perTime = Long.parseLong(startTime.toString("yyyyMMddHHmm"));
-                buildTaskSubs(task, perTime, actionList, deviceInfos, perNum);
-                startTime = startTime.plusMinutes(Constants.TASK_SUB_PER_MINITE);
-            }
-            log.info("### taskId:{},retainDay:{},taskNum:{} make finished! ###", task.getId(), i, retainNum);
+        if (0 == task.getRunSpeed()) {//立即投放
+            times = dayTaskNum / Constants.TASK_BATCH_UP; //需要分多少批次执行
+            perNum = times > 0 ? Constants.TASK_BATCH_UP : dayTaskNum;
+        } else {    //函数投放
+            times = (task.getRunEndTime() - task.getRunStartTime()) * 60 / Constants.TASK_SUB_PER_MINITE;
+            perNum = dayTaskNum / times;
         }
+
+        DateTime startTime = DateTimeUitl.getStartTime(task.getRunStartTime(), interDay);
+
+        while (times-- >= 0) {
+            long perTime = Long.parseLong(startTime.toString("yyyyMMddHHmm"));
+            buildTaskSubs(task, perTime, actionList, deviceInfos, perNum);
+            startTime = startTime.plusMinutes(Constants.TASK_SUB_PER_MINITE);
+        }
+        log.info("### taskId:{},interDay:{},taskNum:{} make finished! ###", task.getId(), interDay, dayTaskNum);
     }
 
     @Override
@@ -123,21 +128,21 @@ public class TaskSubServiceImpl implements TaskSubService {
     }
 
     /**
-     * 计算留存
+     * 计算
      *
-     * @param percent
-     * @param day
+     * @param percent       每日留存百分百比
+     * @param interDay      距离现在的天数
+     * @param dayOnePercent 第一天需要新增的任务数占比
+     * @param retainDay     留存天数
      * @param taskNum
      * @return
      */
-    private int calcRetainNum(double percent, int day, int taskNum) {
-        int retainNum = 0;
-        if (day - 1 >= 0) {
-            percent = Math.pow(percent, day - 1);
-            retainNum = (int) (percent * taskNum);
-        } else {
-            retainNum = taskNum;
+    private int calcDayTaskNum(double percent, int interDay, double dayOnePercent, int retainDay, int taskNum) {
+        int dayTaskNum = 0;
+        for (int i = 0; i < interDay && i < retainDay; i++) {
+            dayTaskNum += taskNum * Math.pow(percent, i);
         }
-        return retainNum;
+        dayTaskNum += taskNum * dayOnePercent * Math.pow(percent, interDay);
+        return dayTaskNum;
     }
 }

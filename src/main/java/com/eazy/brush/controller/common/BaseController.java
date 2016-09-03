@@ -1,6 +1,7 @@
 package com.eazy.brush.controller.common;
 
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.common.collect.Maps;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -108,7 +110,14 @@ public abstract class BaseController {
     }
 
     public void renderJson(Object data) {
-        ActionRequest.renderJson(JsonKsy.converMapToJson(data), getResponse());
+        if (data instanceof List
+                || data.getClass().isArray()) {
+            Map<String, Object> dataMap = Collections.emptyMap();
+            dataMap.put("data", data);
+            ActionRequest.renderJson(JsonKsy.converMapToJson(dataMap), getResponse());
+        } else {
+            ActionRequest.renderJson(JsonKsy.converMapToJson(data), getResponse());
+        }
     }
 
     public void renderWord(String fileName, String columnName, List<String[]> list1) {

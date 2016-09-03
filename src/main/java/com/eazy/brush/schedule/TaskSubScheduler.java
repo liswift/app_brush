@@ -23,6 +23,14 @@ public class TaskSubScheduler {
     @Autowired
     TaskSubService taskSubService;
 
+
+    @Scheduled(cron = "0 0 0  * * ? ")
+    public void resetTaskState() {
+        log.info("### start resetTaskState ###");
+        taskService.changeAllState(System.currentTimeMillis());
+        log.info("### end invokeMakeTaskSub ###");
+    }
+
     @Scheduled(cron = "0 0/1 *  * * ? ")
     public void invokeMakeTaskSub() {
 
