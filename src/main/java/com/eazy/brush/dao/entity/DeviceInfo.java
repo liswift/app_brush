@@ -19,4 +19,6 @@ public class DeviceInfo {
     private String secureId;
     private int width;
     private int hight;
+    private int api;
+    private int coverage;
 }

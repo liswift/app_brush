@@ -13,14 +13,14 @@ import java.util.List;
  */
 public interface TaskSubMapper {
 
-    String INSERT_FEILDS = "task_id,per_time,action_id,device_info_id,net_info_id,run_time";
-    String INSERT_VALUES = "#{taskId},#{perTime},#{actionId},#{deviceInfoId},#{netInfoId},#{runTime}";
+    String INSERT_FEILDS = "task_id,per_time,action_id,device_info_id,card_info_id,net_info_id,run_time";
+    String INSERT_VALUES = "#{taskId},#{perTime},#{actionId},#{deviceInfoId},#{cardInfoId},#{netInfoId},#{runTime}";
     String FEILDS = "id," + INSERT_FEILDS + ",callback_time";
 
     @Select("select " + FEILDS + " from task_sub where per_time=#{perTime} " +
             "and callback_time=0" +
             "limit #{size} order by id asc")
-    List<TaskSub> getList(@Param("perTime") int perTime, @Param("size") int size);
+    List<TaskSub> getList(@Param("perTime") long perTime, @Param("size") int size);
 
     @Insert("insert into task_sub(" + INSERT_FEILDS + ") values " + INSERT_VALUES)
     void insertTaskSub(TaskSub taskSub);

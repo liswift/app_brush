@@ -36,9 +36,10 @@ public class DateTimeUitl {
         DateTime startTime;
         int minute = (dateTime.getMinuteOfHour() / Constants.TASK_SUB_PER_MINITE + 1)
                 * Constants.TASK_SUB_PER_MINITE;
-        startTime = DateTime.now().withMinuteOfHour(minute);
         if (minute == 60) {
             startTime = DateTime.now().withMinuteOfHour(0).plusHours(1);
+        } else {
+            startTime = DateTime.now().withMinuteOfHour(minute);
         }
         return startTime;
     }

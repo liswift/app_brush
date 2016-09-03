@@ -9,6 +9,7 @@ import com.google.common.collect.Lists;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Random;
@@ -39,7 +40,7 @@ public class TaskSubServiceImpl implements TaskSubService {
     private NetInfoService netInfoService;
 
     @Override
-    public List<TaskSub> getUnConsumeList(int pertime, int size) {
+    public List<TaskSub> getUnConsumeList(long pertime, int size) {
         return taskSubMapper.getList(pertime, size);
     }
 
@@ -72,9 +73,9 @@ public class TaskSubServiceImpl implements TaskSubService {
 
             DateTime startTime = DateTimeUitl.getStartTime(task.getRunStartTime(), i);
             while (times-- >= 0) {
-                int perTime = Integer.parseInt(startTime.toString("yyyyMMddHHmm"));
+                long perTime = Long.parseLong(startTime.toString("yyyyMMddHHmm"));
                 buildTaskSubs(task, perTime, actionList, deviceInfos, cardInfos, netInfos, perNum);
-                startTime.plusMinutes(Constants.TASK_SUB_PER_MINITE);
+                startTime = startTime.plusMinutes(Constants.TASK_SUB_PER_MINITE);
             }
         }
     }
@@ -86,7 +87,9 @@ public class TaskSubServiceImpl implements TaskSubService {
 
     @Override
     public void insertTaskBatch(List<TaskSub> taskSubList) {
-        taskSubMapper.insertTaskSubBatch(taskSubList);
+        if(!CollectionUtils.isEmpty(taskSubList)){
+            taskSubMapper.insertTaskSubBatch(taskSubList);
+        }
     }
 
     @Override
@@ -104,7 +107,7 @@ public class TaskSubServiceImpl implements TaskSubService {
      * @param netInfos
      * @param taskNum
      */
-    private void buildTaskSubs(Task task, int perTime,
+    private void buildTaskSubs(Task task, long perTime,
                                List<Action> actionList,
                                List<DeviceInfo> deviceInfos,
                                List<CardInfo> cardInfos,

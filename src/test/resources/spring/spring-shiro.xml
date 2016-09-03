@@ -1,0 +1,70 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+            http://www.springframework.org/schema/context   
+            http://www.springframework.org/schema/context/spring-context-3.0.xsd  
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd  
+            http://www.springframework.org/schema/context   
+            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <description>Shiro安全配置</description>
+
+    <context:component-scan base-package="com.eazy.brush.component.shiro"/>
+    <context:component-scan base-package="com.eazy.brush.quartz"/>
+    <context:component-scan base-package="com.eazy.brush.core.email"/>
+    <context:component-scan base-package="com.eazy.brush.core.filter"/>
+
+    <mvc:annotation-driven/>
+
+    <bean id="shiroRealm" class="com.eazy.brush.component.shiro.ShiroRealm"/>
+
+    <!-- Shiro的主要业务层对象基于web的应用程序 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="shiroRealm"/>
+        <property name="sessionManager" ref="sessionManager"/>
+    </bean>
+
+    <!-- Shiro Filter -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/sys/login"/>
+        <property name="successUrl" value="/sys/login"/>
+        <property name="filterChainDefinitions">
+            <value>
+                /static/** = anon
+                /sys/login = authc
+                /sys/login/** = user
+                /rest/**=authcBasic
+            </value>
+        </property>
+    </bean>
+
+    <bean id="sessionManager" class="com.eazy.brush.component.shiro.WTSessionManager">
+        <property name="globalSessionTimeout" value="${session.outdate}"/>
+        <property name="deleteInvalidSessions" value="true"/>
+        <property name="sessionValidationSchedulerEnabled" value="true"/>
+        <property name="sessionDAO" ref="redisSessionSessionDao"/>
+        <property name="redisManager" ref="redisManager"/>
+    </bean>
+
+    <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+
+    <bean id="redisSessionSessionDao" class="com.eazy.brush.component.shiro.RedisSessionDao">
+        <property name="sessionIdGenerator" ref="sessionIdGenerator"/>
+        <property name="redisManager" ref="redisManager"/>
+        <property name="activeSessionsCacheName" value="shiro_activeSessionCache_"/>
+    </bean>
+
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor">
+        <property name="proxyTargetClass" value="true"/>
+    </bean>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+</beans>

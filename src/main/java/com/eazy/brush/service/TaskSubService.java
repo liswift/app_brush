@@ -20,7 +20,7 @@ public interface TaskSubService {
      * @param size
      * @return
      */
-    List<TaskSub> getUnConsumeList(int pertime, int size);
+    List<TaskSub> getUnConsumeList(long pertime, int size);
 
     /**
      * 根据客户提交的任务单生成元任务

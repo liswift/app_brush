@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface DeviceInfoMapper {
 
-    String FEILDS = "id,version_release,brand,board,width,height";
+    String FEILDS = "id,version_release,brand,board,width,height,api,coverage";
 
     @Select("select " + FEILDS + " from device_info limit #{offset},#{size}")
     List<DeviceInfo> getList(@Param("offset") int offset, @Param("size") int size);

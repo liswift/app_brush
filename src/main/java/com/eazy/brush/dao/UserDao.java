@@ -3,8 +3,8 @@ package com.eazy.brush.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.eazy.brush.dao.common.BaseDao;
@@ -38,7 +38,7 @@ public class UserDao extends BaseDao {
 	@SuppressWarnings("deprecation")
 	public User login(User user) {
 		String sql = "select * from user where name=? and password=?";
-		RowMapper<User> rm = ParameterizedBeanPropertyRowMapper.newInstance(User.class);
+		RowMapper<User> rm = BeanPropertyRowMapper.newInstance(User.class);
 		return  dao.queryForObject(sql, rm, new Object[] { user.getName(), user.getPassword() });
 	}
 	

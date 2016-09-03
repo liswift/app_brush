@@ -1,22 +1,14 @@
 package com.eazy.brush.dao.common;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
+import com.eazy.brush.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
-import org.springframework.jdbc.core.ArgumentPreparedStatementSetter;
-import org.springframework.jdbc.core.ColumnMapRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementSetter;
-import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.RowMapperResultSetExtractor;
-import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
+import org.springframework.jdbc.core.*;
 
-import com.eazy.brush.model.User;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("deprecation")
 public abstract class BaseDao {
@@ -35,7 +27,7 @@ public abstract class BaseDao {
 
 	public User findViewById(String id) {
 		String sql = "select * from user where name=? and password=?";
-		RowMapper<User> rm = ParameterizedBeanPropertyRowMapper.newInstance(User.class);
+		RowMapper<User> rm = BeanPropertyRowMapper.newInstance(User.class);
 		return dao.queryForObject(sql, rm, new Object[] { id });
 	}
 

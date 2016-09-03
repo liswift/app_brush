@@ -19,6 +19,6 @@ public interface ActionMapper {
     @Select("select " + FIELDS + " from action where id=#{id}")
     Action getById(@Param("id") int id);
 
-    @Select("select " + FIELDS + "from action where id in (${ids})")
+    @Select("select " + FIELDS + " from action where id in (#{ids})")
     List<Action> getListByIds(@Param("ids") String ids);
 }

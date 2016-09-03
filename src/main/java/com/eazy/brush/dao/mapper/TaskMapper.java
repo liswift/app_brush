@@ -21,6 +21,6 @@ public interface TaskMapper {
     @Select("select " + FEILDS + " from task where callback_time=0 order by id asc limit 1")
     Task getByState(@Param("callbackTime") long callbackTime);
 
-    @Update("update task set callbackTime=#{callbackTime} where id=#{id}")
+    @Update("update task set callback_time=#{callbackTime} where id=#{id}")
     void changeState(@Param("id") int id, @Param("callbackTime") long callbackTime);
 }

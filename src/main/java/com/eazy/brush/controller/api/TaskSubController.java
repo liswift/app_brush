@@ -35,7 +35,7 @@ public class TaskSubController extends BaseController {
     public void get() {
         String size = getPara("size", "1");
         DateTime perDateTime = DateTimeUitl.getPerTime(DateTime.now());
-        int perTime = Integer.parseInt(perDateTime.toString("yyyyMMddMMHHmm"));
+        long perTime = Long.parseLong(perDateTime.toString("yyyyMMddMMHHmm"));
         List<TaskSub> taskSubs = taskSubService.getUnConsumeList(perTime, Integer.parseInt(size));
         List<TaskSubVo> taskSubList = taskSubVoService.buildVo(taskSubs);
         taskSubService.changeTaskSubState(taskSubVoService.buildVoIds(taskSubs), 1);//任务已取走，未回调

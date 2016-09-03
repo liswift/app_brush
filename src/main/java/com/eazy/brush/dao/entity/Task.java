@@ -22,5 +22,5 @@ public class Task {
     private int runSpeed;           //投放速度
     private int retainDay;          //留存天数
     private int retainPercent;      //留存率
-    private int callbackTime;       //任务被执行回调时间
+    private long callbackTime;       //任务被执行回调时间
 }
