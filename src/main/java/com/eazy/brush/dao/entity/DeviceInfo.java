@@ -1,5 +1,6 @@
 package com.eazy.brush.dao.entity;
 
+import com.eazy.brush.core.lottery.Award;
 import lombok.Data;
 
 /**
@@ -8,7 +9,7 @@ import lombok.Data;
  * create time:2016/8/28 10:19
  */
 @Data
-public class DeviceInfo {
+public class DeviceInfo implements Award {
     private int id;
     private String serial;
     private String versionRelease;
@@ -18,7 +19,18 @@ public class DeviceInfo {
     private String buildId;
     private String secureId;
     private int width;
-    private int hight;
+    private int height;
     private int api;
-    private int coverage;
+    private double coverage;
+    private double screenSize;
+
+    @Override
+    public int getIndex() {
+        return id;
+    }
+
+    @Override
+    public double getRate() {
+        return coverage;
+    }
 }

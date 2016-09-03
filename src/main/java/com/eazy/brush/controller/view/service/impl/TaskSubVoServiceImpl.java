@@ -1,10 +1,13 @@
 package com.eazy.brush.controller.view.service.impl;
 
+import com.eazy.brush.controller.view.service.TaskSubVoService;
 import com.eazy.brush.controller.view.vo.ActionVo;
 import com.eazy.brush.controller.view.vo.TaskSubVo;
-import com.eazy.brush.controller.view.service.TaskSubVoService;
 import com.eazy.brush.dao.entity.*;
-import com.eazy.brush.service.*;
+import com.eazy.brush.service.ActionService;
+import com.eazy.brush.service.ActionSubService;
+import com.eazy.brush.service.DeviceInfoService;
+import com.eazy.brush.service.TaskService;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +36,6 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
     @Autowired
     DeviceInfoService deviceInfoService;
 
-    @Autowired
-    CardInfoService cardInfoService;
-
-    @Autowired
-    NetInfoService netInfoService;
-
     @Override
     public List<TaskSubVo> buildVo(List<TaskSub> list) {
         List<TaskSubVo> voList = Lists.newArrayList();
@@ -47,8 +44,8 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
             Task task = taskService.getById(taskSub.getTaskId());
             Action action = actionService.getById(taskSub.getActionId());
             DeviceInfo deviceInfo = deviceInfoService.getById(taskSub.getDeviceInfoId());
-            CardInfo cardInfo = cardInfoService.getById(taskSub.getCardInfoId());
-            NetInfo netInfo = netInfoService.getById(taskSub.getNetInfoId());
+            CardInfo cardInfo = null;
+            NetInfo netInfo = null;
 
             ActionVo actionVo = new ActionVo();
             actionVo.setId(taskSub.getActionId());

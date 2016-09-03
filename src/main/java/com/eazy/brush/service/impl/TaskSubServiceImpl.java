@@ -1,10 +1,13 @@
 package com.eazy.brush.service.impl;
 
+import com.eazy.brush.core.lottery.LotteryUtil;
 import com.eazy.brush.core.utils.Constants;
 import com.eazy.brush.core.utils.DateTimeUitl;
 import com.eazy.brush.dao.entity.*;
 import com.eazy.brush.dao.mapper.TaskSubMapper;
-import com.eazy.brush.service.*;
+import com.eazy.brush.service.DeviceInfoService;
+import com.eazy.brush.service.TaskActionService;
+import com.eazy.brush.service.TaskSubService;
 import com.google.common.collect.Lists;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +36,6 @@ public class TaskSubServiceImpl implements TaskSubService {
     @Autowired
     private DeviceInfoService deviceInfoService;
 
-    @Autowired
-    private CardInfoService cardInfoService;
-
-    @Autowired
-    private NetInfoService netInfoService;
-
     @Override
     public List<TaskSub> getUnConsumeList(long pertime, int size) {
         return taskSubMapper.getList(pertime, size);
@@ -49,18 +46,18 @@ public class TaskSubServiceImpl implements TaskSubService {
 
         List<Action> actionList = taskActionService.getActionsByTaskId(task.getId());
         List<DeviceInfo> deviceInfos = deviceInfoService.getList(0, Integer.MAX_VALUE);
-        List<CardInfo> cardInfos = cardInfoService.getList(0, Integer.MAX_VALUE);
-        List<NetInfo> netInfos = netInfoService.getList(0, Integer.MAX_VALUE);
 
         int retainDay = task.getRetainDay();//留存天数
         int upDown = random.nextInt(task.getIncrUpDown());
         upDown = random.nextInt(1) == 0 ? upDown : -upDown;
         int dayNum = task.getIncrDay() + upDown;
 
-        for (int i = 0; i < retainDay; i++) {
+        //Math.pow(27,1d/3) == 27 开 3 次方
+        double percent = Math.pow(task.getRetainPercent() * 1.0 / 100, 1d / retainDay);
 
-            int retainNum = calcRetainNum(task.getRetainPercent(), i, dayNum);
+        for (int i = 0; i <= retainDay; i++) {
 
+            int retainNum = calcRetainNum(percent, i, dayNum);
             int perNum = 0, times = 0;
 
             if (0 == task.getRunSpeed()) {//立即投放
@@ -72,9 +69,10 @@ public class TaskSubServiceImpl implements TaskSubService {
             }
 
             DateTime startTime = DateTimeUitl.getStartTime(task.getRunStartTime(), i);
+
             while (times-- >= 0) {
                 long perTime = Long.parseLong(startTime.toString("yyyyMMddHHmm"));
-                buildTaskSubs(task, perTime, actionList, deviceInfos, cardInfos, netInfos, perNum);
+                buildTaskSubs(task, perTime, actionList, deviceInfos, perNum);
                 startTime = startTime.plusMinutes(Constants.TASK_SUB_PER_MINITE);
             }
         }
@@ -87,7 +85,7 @@ public class TaskSubServiceImpl implements TaskSubService {
 
     @Override
     public void insertTaskBatch(List<TaskSub> taskSubList) {
-        if(!CollectionUtils.isEmpty(taskSubList)){
+        if (!CollectionUtils.isEmpty(taskSubList)) {
             taskSubMapper.insertTaskSubBatch(taskSubList);
         }
     }
@@ -103,15 +101,11 @@ public class TaskSubServiceImpl implements TaskSubService {
      * @param task
      * @param actionList
      * @param deviceInfos
-     * @param cardInfos
-     * @param netInfos
      * @param taskNum
      */
     private void buildTaskSubs(Task task, long perTime,
                                List<Action> actionList,
                                List<DeviceInfo> deviceInfos,
-                               List<CardInfo> cardInfos,
-                               List<NetInfo> netInfos,
                                int taskNum) {
 
         List<TaskSub> taskSubs = Lists.newArrayList();
@@ -120,9 +114,7 @@ public class TaskSubServiceImpl implements TaskSubService {
             taskSub.setTaskId(task.getId());
             taskSub.setPerTime(perTime);
             taskSub.setActionId(actionList.get(random.nextInt(actionList.size())).getId());
-            taskSub.setDeviceInfoId(deviceInfos.get(random.nextInt(deviceInfos.size())).getId());
-            taskSub.setCardInfoId(cardInfos.get(random.nextInt(cardInfos.size())).getId());
-            taskSub.setNetInfoId(netInfos.get(random.nextInt(netInfos.size())).getId());
+            taskSub.setDeviceInfoId(LotteryUtil.lottery(deviceInfos).getId());
             taskSub.setRunTime(task.getRunTime());
             taskSubs.add(taskSub);
         }
@@ -132,17 +124,19 @@ public class TaskSubServiceImpl implements TaskSubService {
     /**
      * 计算留存
      *
-     * @param retainPercent
+     * @param percent
      * @param day
      * @param taskNum
      * @return
      */
-    private int calcRetainNum(int retainPercent, int day, int taskNum) {
-        double percent = 1.0;
-        while (day-- > 1) {
-            percent *= retainPercent / 100;
+    private int calcRetainNum(double percent, int day, int taskNum) {
+        int retainNum = 0;
+        if (day - 1 >= 0) {
+            percent = Math.pow(percent, day - 1);
+            retainNum = (int) (percent * taskNum);
+        } else {
+            retainNum = taskNum;
         }
-        taskNum = Double.valueOf(percent * taskNum).intValue();
-        return taskNum;
+        return retainNum;
     }
 }

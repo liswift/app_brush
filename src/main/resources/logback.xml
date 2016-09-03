@@ -16,12 +16,12 @@
 		</encoder>
 	</appender>
 
-	<logger name="com.eazy.brush" level="DEBUG">
+	<logger name="com.eazy.brush" level="INFO">
 		<appender-ref ref="console" />
 	</logger>
 	
 	<!--log4jdbc -->
-	<logger name="jdbc.sqltiming" level="DEBUG"/>
+	<logger name="jdbc.sqltiming" level="INFO"/>
 
 	<root level="WARN">
 		<appender-ref ref="rollingFile" />
