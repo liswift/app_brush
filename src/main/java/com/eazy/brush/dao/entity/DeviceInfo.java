@@ -25,11 +25,6 @@ public class DeviceInfo implements Award {
     private double screenSize;
 
     @Override
-    public int getIndex() {
-        return id;
-    }
-
-    @Override
     public double getRate() {
         return coverage;
     }

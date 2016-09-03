@@ -13,8 +13,8 @@ import java.util.List;
  */
 public interface TaskSubMapper {
 
-    String INSERT_FEILDS = "task_id,per_time,action_id,device_info_id,card_info_id,net_info_id,run_time";
-    String INSERT_VALUES = "#{taskId},#{perTime},#{actionId},#{deviceInfoId},#{cardInfoId},#{netInfoId},#{runTime}";
+    String INSERT_FEILDS = "task_id,per_time,action_id,device_info_id,run_time";
+    String INSERT_VALUES = "#{taskId},#{perTime},#{actionId},#{deviceInfoId},#{runTime}";
     String FEILDS = "id," + INSERT_FEILDS + ",callback_time";
 
     @Select("select " + FEILDS + " from task_sub where per_time=#{perTime} " +

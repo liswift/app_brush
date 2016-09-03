@@ -9,6 +9,7 @@ import com.eazy.brush.service.DeviceInfoService;
 import com.eazy.brush.service.TaskActionService;
 import com.eazy.brush.service.TaskSubService;
 import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ import java.util.Random;
  * author : liufeng
  * create time:2016/8/28 13:02
  */
+@Slf4j
 @Service
 public class TaskSubServiceImpl implements TaskSubService {
 
@@ -75,6 +77,7 @@ public class TaskSubServiceImpl implements TaskSubService {
                 buildTaskSubs(task, perTime, actionList, deviceInfos, perNum);
                 startTime = startTime.plusMinutes(Constants.TASK_SUB_PER_MINITE);
             }
+            log.info("### taskId:{},retainDay:{},taskNum:{} make finished! ###", task.getId(), i, retainNum);
         }
     }
 
@@ -103,10 +106,8 @@ public class TaskSubServiceImpl implements TaskSubService {
      * @param deviceInfos
      * @param taskNum
      */
-    private void buildTaskSubs(Task task, long perTime,
-                               List<Action> actionList,
-                               List<DeviceInfo> deviceInfos,
-                               int taskNum) {
+    private void buildTaskSubs(Task task, long perTime, List<Action> actionList,
+                               List<DeviceInfo> deviceInfos, int taskNum) {
 
         List<TaskSub> taskSubs = Lists.newArrayList();
         for (int num = 0; num < taskNum; num++) {

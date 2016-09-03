@@ -25,8 +25,8 @@ public class TaskSubProvider {
         MessageFormat mf = new MessageFormat("" +
                 "(" +
                 "#'{'taskSubs[{0}].taskId'}',#'{'taskSubs[{0}].perTime'}'," +
-                "#'{'taskSubs[{0}].actionId'}',#'{'taskSubs[{0}].deviceInfoId'}',#'{'taskSubs[{0}].cardInfoId'}'," +
-                "#'{'taskSubs[{0}].netInfoId'}',#'{'taskSubs[{0}].runTime'}'" +
+                "#'{'taskSubs[{0}].actionId'}',#'{'taskSubs[{0}].deviceInfoId'}'," +
+                "#'{'taskSubs[{0}].runTime'}'" +
                 ")");
 
         for (int i = 0; i < taskSubs.size(); i++) {

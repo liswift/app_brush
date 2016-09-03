@@ -6,7 +6,5 @@ package com.eazy.brush.core.lottery;
  */
 public interface Award {
 
-    int getIndex();
-
     double getRate();
 }

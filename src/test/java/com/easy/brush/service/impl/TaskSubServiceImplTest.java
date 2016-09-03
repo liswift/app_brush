@@ -46,7 +46,7 @@ public class TaskSubServiceImplTest {
     }
 
     @Test
-    public void testInvokeMakeTaskSub(){
+    public void testInvokeMakeTaskSub() {
         invokeMakeTaskSub();
     }
 }
