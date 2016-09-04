@@ -1,5 +1,6 @@
 package com.eazy.brush.schedule;
 
+import com.eazy.brush.core.enums.TaskState;
 import com.eazy.brush.dao.entity.Task;
 import com.eazy.brush.service.TaskService;
 import com.eazy.brush.service.TaskSubService;
@@ -27,7 +28,7 @@ public class TaskSubScheduler {
     @Scheduled(cron = "0 0 0  * * ? ")
     public void resetTaskState() {
         log.info("### start resetTaskState ###");
-        taskService.changeAllState(System.currentTimeMillis());
+        taskService.changeAllState(TaskState.confirm_passed.getCode());
         log.info("### end invokeMakeTaskSub ###");
     }
 
@@ -43,7 +44,7 @@ public class TaskSubScheduler {
         if (null != task) {
             taskService.changeState(task.getId(), 1);
             taskSubService.makeTaskSub(task);
-            taskService.changeState(task.getId(), System.currentTimeMillis());
+            taskService.changeState(task.getId(), TaskState.running.getCode());
             log.info("### make tasksubs success！,task_id {} ###", task.getId());
         }
 

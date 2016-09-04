@@ -12,7 +12,9 @@ import java.util.Date;
 @Data
 public class Task {
     private int id;
+    private int userId;
     private String appName;         //应用名称
+    private String packageName;     //应用程序包名
     private String appVersion;      //应用版本
     private String apkUrl;          //下载地址
     private String remarkName;      //备注名称
@@ -26,6 +28,6 @@ public class Task {
     private int runSpeed;           //投放速度
     private int retainDay;          //留存天数
     private int retainPercent;      //留存率
-    private long callbackTime;      //任务被执行回调时间
+    private int state;      //任务被执行回调时间
     private Date createTime;
 }

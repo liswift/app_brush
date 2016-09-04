@@ -49,6 +49,11 @@ public abstract class BaseController {
         return result != null && !"".equals(result) ? result : defaultValue;
     }
 
+    public int getParaInt(String name, int defaultValue) {
+        String result = getRequest().getParameter(name);
+        return result != null && !"".equals(result) ? Integer.parseInt(result) : defaultValue;
+    }
+
     private PageData getPageData() {
         return new PageData(getRequest());
     }

@@ -1,5 +1,6 @@
 package com.easy.brush.service.impl;
 
+import com.eazy.brush.core.enums.TaskState;
 import com.eazy.brush.dao.entity.Task;
 import com.eazy.brush.service.TaskService;
 import com.eazy.brush.service.TaskSubService;
@@ -37,7 +38,7 @@ public class TaskSubServiceImplTest {
         if (null != task) {
             taskService.changeState(task.getId(), 1);
             taskSubService.makeTaskSub(task);
-            taskService.changeState(task.getId(), System.currentTimeMillis());
+            taskService.changeState(task.getId(), TaskState.running.getCode());
             log.info("### make tasksubs success！,task_id {} ###", task.getId());
         }
 

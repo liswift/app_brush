@@ -1,6 +1,9 @@
 package com.eazy.brush.service;
 
 import com.eazy.brush.dao.entity.Task;
+import org.joda.time.DateTime;
+
+import java.util.List;
 
 /**
  * @author feng.liu
@@ -10,9 +13,27 @@ public interface TaskService {
 
     Task getById(int id);
 
-    Task getByState(long callbackTime);
+    Task getByState(int state);
 
-    void changeState(int id, long callbackTime);
+    List<Task> getList(int userId, int offset, int size);
 
-    void changeAllState(long callbackTime);
+    void changeState(int id, int state);
+
+    void changeAllState(int state);
+
+    /**
+     * 计算 给定时间的子任务数
+     *
+     * @param task
+     * @return
+     */
+    int calcDayTaskNum(Task task, DateTime dateTime);
+
+    /**
+     * 根据userId计算子任务数
+     * @param userId
+     * @param dateTime
+     * @return
+     */
+    int calcDayTaskNumByUserId(int userId, DateTime dateTime);
 }

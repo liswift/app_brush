@@ -1,16 +1,19 @@
 package com.eazy.brush.controller.web;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.jms.JMSException;
-import javax.jms.MapMessage;
-import javax.jms.Message;
-import javax.jms.Session;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import com.eazy.brush.component.redis.Redis;
+import com.eazy.brush.controller.common.BaseController;
+import com.eazy.brush.controller.view.service.TaskVoService;
+import com.eazy.brush.controller.view.service.UserAccountVoService;
+import com.eazy.brush.controller.view.vo.TaskVo;
+import com.eazy.brush.controller.view.vo.UserAccountVo;
+import com.eazy.brush.core.enums.Role;
+import com.eazy.brush.core.utils.DataUtil;
+import com.eazy.brush.core.utils.MD5;
+import com.eazy.brush.core.utils.StrKit;
+import com.eazy.brush.model.User;
+import com.eazy.brush.service.LogService;
+import com.eazy.brush.service.PermissionService;
+import com.eazy.brush.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -27,15 +30,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.eazy.brush.controller.common.BaseController;
-import com.eazy.brush.model.User;
-import com.eazy.brush.component.redis.Redis;
-import com.eazy.brush.service.LogService;
-import com.eazy.brush.service.PermissionService;
-import com.eazy.brush.service.UserService;
-import com.eazy.brush.core.utils.DataUtil;
-import com.eazy.brush.core.utils.MD5;
-import com.eazy.brush.core.utils.StrKit;
+import javax.annotation.Resource;
+import javax.jms.JMSException;
+import javax.jms.MapMessage;
+import javax.jms.Message;
+import javax.jms.Session;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author jzx
@@ -49,11 +52,16 @@ public class LoginController extends BaseController {
     @Resource
     private JmsTemplate jmsTemplate;
     @Autowired
-    private LogService logService;
-    @Autowired
     private UserService userService;
     @Autowired
     private PermissionService permissionService;
+    @Autowired
+    private UserAccountVoService userAccountVoService;
+    @Autowired
+    private TaskVoService taskVoService;
+
+    @Autowired
+    private LogService logService;
 
     /**
      * 用户登录
@@ -140,28 +148,28 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public ModelAndView welcome() {
 
-        List<Map<String, Object>> data = null;
-
-        if (Redis.exists("welcome")) {
-            String load = Redis.get("welcome");
-            data = toGson(load);
-        } else {
-            data = logService.selectLog();
-            String load = toJson(data);
-            Redis.put("welcome", load);
+        Subject currentUser = SecurityUtils.getSubject();
+        if (currentUser.hasRole(Role.guest.name())) {
+            return getUserModelAndView();
         }
-        ModelAndView model = new ModelAndView("index/welcome");
-        model.addObject("data", data);
-        model.addObject("count", data.size());
+        return getAdminModelAndView();
+    }
 
-        model.addObject("ip", "");
-        model.addObject("last_time", "");
-        // 获取当前时间第一个登录用户
-        if (data != null) {
-            model.addObject("ip", data.get(0).get("IP"));
-            model.addObject("last_time", data.get(0).get("tim"));
-        }
+    /**
+     * 普通用户欢迎页
+     *
+     * @return
+     */
+    public ModelAndView getUserModelAndView() {
+        int curPage = getParaInt("curPage", 1);
+        int size = getParaInt("size", 20);
 
+        User user = getCurrentUser();
+        ModelAndView model = new ModelAndView("index/welcome_user");
+        UserAccountVo userAccountVo = userAccountVoService.getByUserId(user.getId());
+        List<TaskVo> taskVoses = taskVoService.getList(user.getId(), (curPage - 1) * size, size);
+        model.addObject("userAccountVo", userAccountVo);
+        model.addObject("tasks", taskVoses);
         return model;
     }
 
@@ -196,5 +204,30 @@ public class LoginController extends BaseController {
         return modelAndView;
     }
 
+    private ModelAndView getAdminModelAndView() {
 
+        List<Map<String, Object>> data = null;
+
+        if (Redis.exists("welcome")) {
+            String load = Redis.get("welcome");
+            data = toGson(load);
+        } else {
+            data = logService.selectLog();
+            String load = toJson(data);
+            Redis.put("welcome", load);
+        }
+        ModelAndView model = new ModelAndView("index/welcome_admin");
+        model.addObject("data", data);
+        model.addObject("count", data.size());
+
+        model.addObject("ip", "");
+        model.addObject("last_time", "");
+        // 获取当前时间第一个登录用户
+        if (data != null) {
+            model.addObject("ip", data.get(0).get("IP"));
+            model.addObject("last_time", data.get(0).get("tim"));
+        }
+
+        return model;
+    }
 }

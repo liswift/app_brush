@@ -479,6 +479,12 @@
                 <configuration>
                     <webApp>
                         <contextPath>/</contextPath>
+                        <sessionHandler implementation="org.eclipse.jetty.server.session.SessionHandler">
+                            <sessionManager implementation="org.eclipse.jetty.server.session.HashSessionManager">
+                                <storeDirectory>doc/jetty-sessions</storeDirectory>
+                                <idleSavePeriod>1</idleSavePeriod>
+                            </sessionManager>
+                        </sessionHandler>
                     </webApp>
                     <stopKey>exit</stopKey>
                     <stopPort>9090</stopPort>
