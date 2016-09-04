@@ -63,7 +63,7 @@ public class TaskSubServiceImpl implements TaskSubService {
 
         //第一天需要跑的任务占比
         double dayOnePercent = task.getRunSpeed() == 0 ?
-                1.0 : interHour / (task.getRunEndTime() - task.getRunStartTime());
+                1.0 : interHour * 1.0 / (task.getRunEndTime() - task.getRunStartTime());
 
         int dayTaskNum = calcDayTaskNum(percent, interDay, dayOnePercent, retainDay, dayNum, task.getDayLimit());
         int perNum = 0, times = 0;
