@@ -17,6 +17,7 @@ public class Task {
     private String apiUrl;          //下载地址
     private String remarkName;      //备注名称
     private int incrDay;            //每日新增用户数
+    private int dayLimit;           //每日任务上限
     private int incrUpDown;         //上下波动范围
     private int runTime;            //应用运行时长
     private int runUpDown;          //运行市场上下波动范围

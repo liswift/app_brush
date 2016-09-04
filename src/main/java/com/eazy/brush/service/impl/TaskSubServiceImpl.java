@@ -65,7 +65,7 @@ public class TaskSubServiceImpl implements TaskSubService {
         double dayOnePercent = task.getRunSpeed() == 0 ?
                 1.0 : interHour / (task.getRunEndTime() - task.getRunStartTime());
 
-        int dayTaskNum = calcDayTaskNum(percent, interDay, dayOnePercent, retainDay, dayNum);
+        int dayTaskNum = calcDayTaskNum(percent, interDay, dayOnePercent, retainDay, dayNum, task.getDayLimit());
         int perNum = 0, times = 0;
 
         if (0 == task.getRunSpeed()) {//立即投放
@@ -137,12 +137,15 @@ public class TaskSubServiceImpl implements TaskSubService {
      * @param taskNum
      * @return
      */
-    private int calcDayTaskNum(double percent, int interDay, double dayOnePercent, int retainDay, int taskNum) {
+    private int calcDayTaskNum(double percent, int interDay, double dayOnePercent, int retainDay, int taskNum, int dayLimit) {
         int dayTaskNum = 0;
         for (int i = 0; i < interDay && i < retainDay; i++) {
             dayTaskNum += taskNum * Math.pow(percent, i);
         }
         dayTaskNum += taskNum * dayOnePercent * Math.pow(percent, interDay);
+        if (dayTaskNum >= dayLimit) {
+            dayTaskNum = dayLimit;
+        }
         return dayTaskNum;
     }
 }
