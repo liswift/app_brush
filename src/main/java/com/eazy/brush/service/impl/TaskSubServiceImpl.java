@@ -10,7 +10,6 @@ import com.eazy.brush.dao.entity.TaskSub;
 import com.eazy.brush.dao.mapper.TaskSubMapper;
 import com.eazy.brush.service.DeviceInfoService;
 import com.eazy.brush.service.TaskActionService;
-import com.eazy.brush.service.TaskService;
 import com.eazy.brush.service.TaskSubService;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
@@ -42,9 +41,6 @@ public class TaskSubServiceImpl implements TaskSubService {
     @Autowired
     private DeviceInfoService deviceInfoService;
 
-    @Autowired
-    private TaskService taskService;
-
     @Override
     public List<TaskSub> getUnConsumeList(long pertime, int size) {
         return taskSubMapper.getList(pertime, size);
@@ -56,20 +52,18 @@ public class TaskSubServiceImpl implements TaskSubService {
         List<Action> actionList = taskActionService.getActionsByTaskId(task.getId());
         List<DeviceInfo> deviceInfos = deviceInfoService.getList(0, Integer.MAX_VALUE);
 
-        DateTime createDateTime = new DateTime(task.getCreateTime());
-        int interDay = DateTimeUitl.getDayInter(createDateTime, DateTime.now());
-
-        int dayTaskNum = taskService.calcDayTaskNum(task, DateTime.now());
         int perNum = 0, times = 0;
 
         if (0 == task.getRunSpeed()) {//立即投放
-            times = dayTaskNum / Constants.TASK_BATCH_UP; //需要分多少批次执行
-            perNum = times > 0 ? Constants.TASK_BATCH_UP : dayTaskNum;
+            times = task.getIncrDay() / Constants.TASK_BATCH_UP; //需要分多少批次执行
+            perNum = times > 0 ? Constants.TASK_BATCH_UP : task.getIncrDay();
         } else {    //函数投放
             times = (task.getRunEndTime() - task.getRunStartTime()) * 60 / Constants.TASK_SUB_PER_MINITE;
-            perNum = dayTaskNum / times;
+            perNum = task.getIncrDay() / times;
         }
 
+        DateTime createDateTime = new DateTime(task.getCreateTime());
+        int interDay = DateTimeUitl.getDayInter(createDateTime, DateTime.now());
         DateTime startTime = DateTimeUitl.getStartTime(task.getRunStartTime(), interDay);
 
         while (times-- >= 0) {
@@ -77,7 +71,7 @@ public class TaskSubServiceImpl implements TaskSubService {
             buildTaskSubs(task, perTime, actionList, deviceInfos, perNum);
             startTime = startTime.plusMinutes(Constants.TASK_SUB_PER_MINITE);
         }
-        log.info("### taskId:{},interDay:{},taskNum:{} make finished! ###", task.getId(), interDay, dayTaskNum);
+        log.info("### taskId:{},taskNum:{} make finished! ###", task.getId(), task.getIncrDay());
     }
 
     @Override
