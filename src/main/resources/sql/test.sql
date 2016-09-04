@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50539
 File Encoding         : 65001
 
-Date: 2016-09-03 21:55:24
+Date: 2016-09-04 09:03:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -3405,6 +3405,7 @@ CREATE TABLE `task` (
   `apk_url` varchar(64) DEFAULT NULL,
   `remark_name` varchar(64) NOT NULL COMMENT '备注名称',
   `incr_day` int(11) NOT NULL DEFAULT '0' COMMENT '每日新增用户数',
+  `day_limit` int(11) DEFAULT '100000',
   `incr_up_down` int(11) NOT NULL DEFAULT '0' COMMENT '上下波动范围',
   `run_time` int(11) NOT NULL DEFAULT '0' COMMENT '应用运行时长',
   `run_up_down` int(11) NOT NULL DEFAULT '0' COMMENT '运行市场上下波动范围',
@@ -3414,13 +3415,14 @@ CREATE TABLE `task` (
   `retain_day` int(11) NOT NULL DEFAULT '0' COMMENT '留存天数',
   `retain_percent` int(11) DEFAULT NULL COMMENT '留存率',
   `callback_time` bigint(20) unsigned DEFAULT '0' COMMENT '任务被执行，回调时间',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of task
 -- ----------------------------
-INSERT INTO `task` VALUES ('10', '百度地图', '2.3', 'www.baidu.com', '百度地图2.3', '10000', '10', '10', '2', '8', '20', '1', '60', '20', '0');
+INSERT INTO `task` VALUES ('10', '百度地图', '2.3', 'www.baidu.com', '百度地图2.3', '10000', '100000', '10', '10', '2', '8', '20', '1', '60', '20', '0', '2016-09-04 09:02:58');
 
 -- ----------------------------
 -- Table structure for `task_action`
@@ -3453,7 +3455,7 @@ CREATE TABLE `task_sub` (
   `run_time` int(11) NOT NULL COMMENT '任务执行时间',
   `callback_time` bigint(20) NOT NULL DEFAULT '0' COMMENT '任务执行完回调时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=803247 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1118169 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of task_sub
