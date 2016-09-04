@@ -112,7 +112,7 @@ public abstract class BaseController {
     public void renderJson(Object data) {
         if (data instanceof List
                 || data.getClass().isArray()) {
-            Map<String, Object> dataMap = Collections.emptyMap();
+            Map<String, Object> dataMap = Maps.newHashMap();
             dataMap.put("data", data);
             ActionRequest.renderJson(JsonKsy.converMapToJson(dataMap), getResponse());
         } else {
