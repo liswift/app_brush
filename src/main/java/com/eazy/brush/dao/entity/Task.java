@@ -14,7 +14,7 @@ public class Task {
     private int id;
     private String appName;         //应用名称
     private String appVersion;      //应用版本
-    private String apiUrl;          //下载地址
+    private String apkUrl;          //下载地址
     private String remarkName;      //备注名称
     private int incrDay;            //每日新增用户数
     private int dayLimit;           //每日任务上限
