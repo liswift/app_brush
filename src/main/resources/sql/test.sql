@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50539
 File Encoding         : 65001
 
-Date: 2016-09-04 09:03:08
+Date: 2016-09-04 19:06:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -50,6 +50,23 @@ CREATE TABLE `action_sub` (
 INSERT INTO `action_sub` VALUES ('1', 'action1', '10', 'name1');
 INSERT INTO `action_sub` VALUES ('2', 'actions2', '20', 'name2');
 INSERT INTO `action_sub` VALUES ('3', 'actions3', '10', 'name0');
+
+-- ----------------------------
+-- Table structure for `conf`
+-- ----------------------------
+DROP TABLE IF EXISTS `conf`;
+CREATE TABLE `conf` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `key` varchar(32) DEFAULT NULL,
+  `value` varchar(64) DEFAULT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of conf
+-- ----------------------------
+INSERT INTO `conf` VALUES ('1', 'task_cost_point', '2', '单个任务消耗的点数');
 
 -- ----------------------------
 -- Table structure for `device_info`
@@ -869,7 +886,7 @@ CREATE TABLE `log` (
   `DESCRIPTION` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `REQUEST_PARAM` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4662 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4697 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of log
@@ -2702,6 +2719,41 @@ INSERT INTO `log` VALUES ('4658', null, '2016-08-31 23:43:23', null, 'Windows 8.
 INSERT INTO `log` VALUES ('4659', null, '2016-08-31 23:44:39', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 INSERT INTO `log` VALUES ('4660', null, '2016-08-31 23:45:25', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 INSERT INTO `log` VALUES ('4661', null, '2016-09-03 21:15:45', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4662', null, '2016-09-04 09:58:25', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4663', null, '2016-09-04 09:59:11', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4664', null, '2016-09-04 15:11:12', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4665', null, '2016-09-04 15:11:52', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4666', null, '2016-09-04 15:12:43', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4667', null, '2016-09-04 15:13:38', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4668', null, '2016-09-04 15:21:43', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4669', null, '2016-09-04 15:22:00', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4670', null, '2016-09-04 15:22:02', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4671', null, '2016-09-04 15:22:04', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4672', null, '2016-09-04 15:22:28', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4673', null, '2016-09-04 15:28:56', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4674', null, '2016-09-04 15:34:33', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4675', null, '2016-09-04 15:34:59', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4676', null, '2016-09-04 15:35:02', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4677', null, '2016-09-04 16:05:11', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4678', null, '2016-09-04 18:03:42', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4679', null, '2016-09-04 18:12:40', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4680', null, '2016-09-04 18:14:34', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4681', null, '2016-09-04 18:15:26', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4682', null, '2016-09-04 18:19:35', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4683', null, '2016-09-04 18:20:09', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4684', null, '2016-09-04 18:23:51', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4685', null, '2016-09-04 18:30:40', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4686', null, '2016-09-04 18:31:00', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4687', null, '2016-09-04 18:31:09', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4688', null, '2016-09-04 18:31:13', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4689', null, '2016-09-04 18:31:28', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4690', null, '2016-09-04 18:32:42', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4691', null, '2016-09-04 18:33:29', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4692', null, '2016-09-04 18:33:56', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4693', null, '2016-09-04 18:39:01', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4694', null, '2016-09-04 18:44:29', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4695', null, '2016-09-04 19:00:43', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4696', null, '2016-09-04 19:01:10', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `login_log`
@@ -3400,9 +3452,11 @@ INSERT INTO `role_permission` VALUES ('1504', '13', '110');
 DROP TABLE IF EXISTS `task`;
 CREATE TABLE `task` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0',
   `app_name` varchar(64) NOT NULL COMMENT '应用名称',
+  `package_name` varchar(64) DEFAULT NULL COMMENT '应用程序包名',
   `app_version` varchar(32) NOT NULL COMMENT '应用版本',
-  `apk_url` varchar(64) DEFAULT NULL,
+  `apk_url` varchar(255) DEFAULT NULL,
   `remark_name` varchar(64) NOT NULL COMMENT '备注名称',
   `incr_day` int(11) NOT NULL DEFAULT '0' COMMENT '每日新增用户数',
   `day_limit` int(11) DEFAULT '100000',
@@ -3414,7 +3468,7 @@ CREATE TABLE `task` (
   `run_speed` int(11) NOT NULL DEFAULT '0' COMMENT '投放速度',
   `retain_day` int(11) NOT NULL DEFAULT '0' COMMENT '留存天数',
   `retain_percent` int(11) DEFAULT NULL COMMENT '留存率',
-  `callback_time` bigint(20) unsigned DEFAULT '0' COMMENT '任务被执行，回调时间',
+  `state` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '任务被执行，回调时间',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
@@ -3422,7 +3476,7 @@ CREATE TABLE `task` (
 -- ----------------------------
 -- Records of task
 -- ----------------------------
-INSERT INTO `task` VALUES ('10', '百度地图', '2.3', 'www.baidu.com', '百度地图2.3', '10000', '100000', '10', '10', '2', '8', '20', '1', '60', '20', '0', '2016-09-04 09:02:58');
+INSERT INTO `task` VALUES ('10', '9', '百度地图', 'com.baidu.www', '2.3', 'http://file.liqucn.com/upload/2014/shenghuo/com.ijkapp.tobethin_1.4.20150202_liqucn.com.apk', '百度地图2.3', '1000', '100000', '10', '10', '2', '8', '20', '1', '60', '20', '0', '2016-09-04 19:06:22');
 
 -- ----------------------------
 -- Table structure for `task_action`
@@ -3455,7 +3509,7 @@ CREATE TABLE `task_sub` (
   `run_time` int(11) NOT NULL COMMENT '任务执行时间',
   `callback_time` bigint(20) NOT NULL DEFAULT '0' COMMENT '任务执行完回调时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1118169 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1159487 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of task_sub
@@ -3491,6 +3545,23 @@ CREATE TABLE `user` (
 INSERT INTO `user` VALUES ('9', 'user1', 'e10adc3949ba59abbe56e057f20f883e', null, null, null, '', null, null, null, null, null, null, null, null, null);
 INSERT INTO `user` VALUES ('10', 'super', 'e10adc3949ba59abbe56e057f20f883e', null, null, null, '', null, null, null, null, null, null, null, null, null);
 INSERT INTO `user` VALUES ('11', 'admin', 'e10adc3949ba59abbe56e057f20f883e', null, null, null, '', null, null, null, null, null, null, null, null, null);
+
+-- ----------------------------
+-- Table structure for `user_account`
+-- ----------------------------
+DROP TABLE IF EXISTS `user_account`;
+CREATE TABLE `user_account` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `user_realname` varchar(16) DEFAULT NULL COMMENT '用户真实姓名',
+  `point_count` int(11) NOT NULL DEFAULT '0' COMMENT '点数',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_account
+-- ----------------------------
+INSERT INTO `user_account` VALUES ('4', '9', '刘锋', '300000');
 
 -- ----------------------------
 -- Table structure for `user_org`
