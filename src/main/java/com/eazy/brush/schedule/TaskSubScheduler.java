@@ -32,6 +32,9 @@ public class TaskSubScheduler {
         log.info("### end invokeMakeTaskSub ###");
     }
 
+    /**
+     * 生成每日新增task_sub
+     */
     @Scheduled(cron = "0 0/1 *  * * ? ")
     public void invokeMakeTaskSub() {
 
@@ -43,7 +46,7 @@ public class TaskSubScheduler {
 
         if (null != task) {
             taskService.changeState(task.getId(), 1);
-            taskSubService.makeTaskSub(task);
+            taskSubService.makeIncrDayTaskSub(task);
             taskService.changeState(task.getId(), TaskState.running.getCode());
             log.info("### make tasksubs success！,task_id {} ###", task.getId());
         }

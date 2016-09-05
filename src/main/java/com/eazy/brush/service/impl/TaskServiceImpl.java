@@ -46,17 +46,15 @@ public class TaskServiceImpl implements TaskService {
         taskMapper.changeAllState(state);
     }
 
-    /**
-     * 计算
-     *
-     * @param task 每日留存百分百比
-     * @return
-     */
+    @Override
+    public double calcRetainPercent(Task task) {
+        //Math.pow(27,1d/3) == 27 开 3 次方
+        return Math.pow(task.getRetainPercent() * 1.0 / 100, 1d / task.getRetainDay());
+    }
+
     @Override
     public int calcDayTaskNum(Task task, DateTime dateTime) {
 
-        //Math.pow(27,1d/3) == 27 开 3 次方
-        double percent = Math.pow(task.getRetainPercent() * 1.0 / 100, 1d / task.getRetainDay());
         DateTime createDateTime = new DateTime(task.getCreateTime());
         int interHour = task.getRunEndTime() - createDateTime.getHourOfDay();
 
@@ -66,10 +64,11 @@ public class TaskServiceImpl implements TaskService {
         int dayTaskNum = 0;
 
         int interDay = DateTimeUitl.getDayInter(createDateTime, dateTime);
+        double retainPercent = calcRetainPercent(task);
         for (int i = 0; i < interDay && i < task.getRetainDay(); i++) {
-            dayTaskNum += task.getIncrDay() * Math.pow(percent, i);
+            dayTaskNum += task.getIncrDay() * Math.pow(retainPercent, i);
         }
-        dayTaskNum += task.getIncrDay() * dayOnePercent * Math.pow(percent, interDay);
+        dayTaskNum += task.getIncrDay() * dayOnePercent * Math.pow(retainPercent, interDay);
         if (dayTaskNum >= task.getDayLimit()) {
             dayTaskNum = task.getDayLimit();
         }
@@ -87,4 +86,5 @@ public class TaskServiceImpl implements TaskService {
         }
         return sum;
     }
+
 }

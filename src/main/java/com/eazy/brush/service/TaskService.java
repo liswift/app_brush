@@ -31,9 +31,17 @@ public interface TaskService {
 
     /**
      * 根据userId计算子任务数
+     *
      * @param userId
      * @param dateTime
      * @return
      */
     int calcDayTaskNumByUserId(int userId, DateTime dateTime);
+
+    /**
+     * 计算任务留存百分比
+     * @param task
+     * @return
+     */
+    double calcRetainPercent(Task task);
 }

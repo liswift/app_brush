@@ -9,6 +9,7 @@ import lombok.Data;
  */
 @Data
 public class TaskSub {
+
     private int id;
     private int taskId;              //任务id
     private long perTime;             //时间粒度
@@ -16,4 +17,21 @@ public class TaskSub {
     private int deviceInfoId;        //设备信息
     private int runTime;             //任务执行时间
     private int callbackTime;        //任务执行完回调时间 0 未取走 1已取走未回调 time 回调
+    private int createDay;          //任务创建日期
+
+    //cardInfo 信息
+    private String telAndroidId;       //android_id 唯一
+    private String subscriberId;       //跟operator有关系，前5位时operator
+    private String operator;           //运营商标志码
+    private String operatorName;       //中国联通\\中国电信\\中国移动
+    private String line1Number;        //联通手机的手机号码
+    private String simSerialNumber;    //sim卡串号
+    private int networkType;        //手机卡网络类型
+    private String phoneType;             //手机通话类型
+
+    //netInfo 信息
+    private String host;               //代理主机地址
+    private int port;                  // 端口
+    private String mac;                //mac地址 唯一
+    private int type;                  //网络类型 0 手机网络 1 wifi
 }

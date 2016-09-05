@@ -47,6 +47,22 @@ public class DateTimeUitl {
     }
 
     /**
+     * 获取给定时间到起始小时相差的perTime数
+     *
+     * @param runStartHour
+     * @param dateTime
+     * @return
+     */
+    public static int perTimeNum(int runStartHour, DateTime dateTime) {
+        if (dateTime.getHourOfDay() < runStartHour) {
+            return 0;
+        }
+        DateTime start = dateTime.withHourOfDay(runStartHour).withMinuteOfHour(0).withSecondOfMinute(0);
+        DateTime end = getPerTime(dateTime);
+        return new Period(start, end,PeriodType.minutes()).getMinutes() / Constants.TASK_SUB_PER_MINITE;
+    }
+
+    /**
      * 获取给定的时间距离多少天
      *
      * @param start

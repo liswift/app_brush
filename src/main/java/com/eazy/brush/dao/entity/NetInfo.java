@@ -9,7 +9,6 @@ import lombok.Data;
  */
 @Data
 public class NetInfo {
-    private int id;
     private String host;               //代理主机地址
     private int port;                  // 端口
     private String mac;                //mac地址 唯一

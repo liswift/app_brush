@@ -23,11 +23,18 @@ public interface TaskSubService {
     List<TaskSub> getUnConsumeList(long pertime, int size);
 
     /**
-     * 根据客户提交的任务单生成元任务
+     * 生成每日新增TaskSub
      *
      * @param task
      */
-    void makeTaskSub(Task task);
+    void makeIncrDayTaskSub(Task task);
+
+    /**
+     * 生成每日留存TaskSub
+     *
+     * @param task
+     */
+    void makeRetainDayTaskSub(Task task);
 
     void insertTaskSub(TaskSub taskSub);
 

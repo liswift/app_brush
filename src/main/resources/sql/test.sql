@@ -3508,6 +3508,18 @@ CREATE TABLE `task_sub` (
   `device_info_id` int(11) NOT NULL COMMENT '设备信息',
   `run_time` int(11) NOT NULL COMMENT '任务执行时间',
   `callback_time` bigint(20) NOT NULL DEFAULT '0' COMMENT '任务执行完回调时间',
+  `tel_android_id` varchar(32) DEFAULT NULL COMMENT 'android_id 唯一',
+  `subscriber_id` varchar(32) DEFAULT NULL COMMENT '跟operator有关系，前5位时operator',
+  `operator` varchar(32) DEFAULT NULL COMMENT '运营商标志码',
+  `operator_name` varchar(16) DEFAULT NULL COMMENT '中国联通\\中国电信\\中国移动',
+  `line1_number` varchar(16) DEFAULT NULL COMMENT '联通手机的手机号码',
+  `simSerial_number` varchar(32) DEFAULT NULL COMMENT 'sim卡串号',
+  `network_type` int(11) NOT NULL COMMENT '手机卡网络类型',
+  `phone_type` varchar(32) DEFAULT NULL COMMENT '手机通话类型',
+  `host` varchar(16) DEFAULT NULL COMMENT '代理主机地址',
+  `port` int(11) NOT NULL COMMENT '端口',
+  `mac` varchar(32) DEFAULT NULL COMMENT 'mac地址 唯一',
+  `type` int(11) NOT NULL COMMENT '网络类型 0 手机网络 1 wifi',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1159487 DEFAULT CHARSET=utf8;
 

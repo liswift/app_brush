@@ -27,7 +27,7 @@ public class TaskSubServiceImplTest {
     @Autowired
     TaskService taskService;
 
-    public void invokeMakeTaskSub() {
+    public void invokeMakeIncrDayTaskSub() {
 
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
@@ -37,7 +37,7 @@ public class TaskSubServiceImplTest {
 
         if (null != task) {
             taskService.changeState(task.getId(), 1);
-            taskSubService.makeTaskSub(task);
+            taskSubService.makeIncrDayTaskSub(task);
             taskService.changeState(task.getId(), TaskState.running.getCode());
             log.info("### make tasksubs success！,task_id {} ###", task.getId());
         }
@@ -48,6 +48,6 @@ public class TaskSubServiceImplTest {
 
     @Test
     public void testInvokeMakeTaskSub() {
-        invokeMakeTaskSub();
+        invokeMakeIncrDayTaskSub();
     }
 }
