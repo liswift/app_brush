@@ -10,6 +10,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
+import java.util.List;
+
 /**
  * author : liufeng
  * create time:2016/8/31 23:47
@@ -33,7 +35,7 @@ public class TaskSubScheduler {
     }
 
     /**
-     * 生成每日新增task_sub
+     * 生成每日task_sub
      */
     @Scheduled(cron = "0 0/1 *  * * ? ")
     public void invokeMakeTaskSub() {
@@ -46,12 +48,33 @@ public class TaskSubScheduler {
 
         if (null != task) {
             taskService.changeState(task.getId(), 1);
+
+            log.info("### start makeIncrDayTaskSub ###");
             taskSubService.makeIncrDayTaskSub(task);
+            log.info("### end makeIncrDayTaskSub,cost {} s ###", stopWatch.getTotalTimeSeconds());
+
             taskService.changeState(task.getId(), TaskState.running.getCode());
             log.info("### make tasksubs success！,task_id {} ###", task.getId());
         }
 
         log.info("### end invokeMakeTaskSub,cost {} s ###", stopWatch.getTotalTimeSeconds());
+        stopWatch.stop();
+    }
+
+    @Scheduled(cron = "0 0 0  * * ? ")
+    public void makeRetainDayTaskSub() {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        log.info("### start makeRetainDayTaskSub ###");
+
+        List<Task> list = taskService.getListByState(TaskState.confirm_passed.getCode(), 0, Integer.MAX_VALUE);
+        for (Task task : list) {
+            log.info("### start makeRetainDayTaskSub ###");
+            taskSubService.makeRetainDayTaskSub(task);
+            log.info("### end makeRetainDayTaskSub,cost {} s ###", stopWatch.getTotalTimeSeconds());
+        }
+
+        log.info("### end makeRetainDayTaskSub,cost {} s ###", stopWatch.getTotalTimeSeconds());
         stopWatch.stop();
     }
 }

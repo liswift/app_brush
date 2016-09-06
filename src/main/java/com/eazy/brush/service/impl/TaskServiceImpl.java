@@ -1,5 +1,6 @@
 package com.eazy.brush.service.impl;
 
+import com.eazy.brush.core.enums.TaskSpeedType;
 import com.eazy.brush.core.utils.DateTimeUitl;
 import com.eazy.brush.dao.entity.Task;
 import com.eazy.brush.dao.mapper.TaskMapper;
@@ -53,13 +54,18 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public List<Task> getListByState(int state, int offset, int size) {
+        return taskMapper.getListByState(state, offset, size);
+    }
+
+    @Override
     public int calcDayTaskNum(Task task, DateTime dateTime) {
 
         DateTime createDateTime = new DateTime(task.getCreateTime());
         int interHour = task.getRunEndTime() - createDateTime.getHourOfDay();
 
         //第一天需要跑的任务占比
-        double dayOnePercent = task.getRunSpeed() == 0 ?
+        double dayOnePercent = task.getRunSpeed() == TaskSpeedType.make_immediate.getCode() ?
                 1.0 : interHour * 1.0 / (task.getRunEndTime() - task.getRunStartTime());
         int dayTaskNum = 0;
 
@@ -76,6 +82,15 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public int calcDayRetainNum(Task task, DateTime datetime) {
+        DateTime createDateTime = new DateTime(task.getCreateTime());
+        int interDay = DateTimeUitl.getDayInter(createDateTime, datetime);
+        double retainPercent = calcRetainPercent(task);
+        Double num = task.getIncrDay() * Math.pow(retainPercent, interDay);
+        return num.intValue();
+    }
+
+    @Override
     public int calcDayTaskNumByUserId(int userId, DateTime dateTime) {
         int sum = 0;
         List<Task> list = taskMapper.getByUserId(userId);
@@ -86,5 +101,4 @@ public class TaskServiceImpl implements TaskService {
         }
         return sum;
     }
-
 }

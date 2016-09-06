@@ -32,5 +32,8 @@ public interface TaskMapper {
     void changeAllState(@Param("state") int state);
 
     @Select("select " + FEILDS + " from task where user_id=#{userId}")
-    List<Task> getByUserId(int userId);
+    List<Task> getByUserId(@Param("userId") int userId);
+
+    @Select("select " + FEILDS + " from task where state=#{state} limit #{offset},#{size}")
+    List<Task> getListByState(@Param("state") int state, @Param("offset") int offset, @Param("size") int size);
 }

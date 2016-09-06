@@ -7,6 +7,7 @@ import com.eazy.brush.core.enums.TaskState;
 import com.eazy.brush.dao.entity.Task;
 import com.eazy.brush.service.ConfService;
 import com.eazy.brush.service.TaskService;
+import com.eazy.brush.service.TaskSubService;
 import com.google.common.collect.Lists;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class TaskVoServiceImpl implements TaskVoService {
     TaskService taskService;
 
     @Autowired
+    TaskSubService taskSubService;
+
+    @Autowired
     ConfService confService;
 
     @Override
@@ -32,6 +36,10 @@ public class TaskVoServiceImpl implements TaskVoService {
 
         List<TaskVo> taskVos = Lists.newArrayList();
         List<Task> tasks = taskService.getList(userId, offset, size);
+
+        int todayDay = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));
+        int yestoday = Integer.parseInt(DateTime.now().minusDays(1).toString("yyyyMMdd"));
+
         for (Task task : tasks) {
             TaskVo taskVo = new TaskVo();
             taskVo.setId(task.getId());
@@ -41,8 +49,8 @@ public class TaskVoServiceImpl implements TaskVoService {
 
             int k = confService.getNumberValueByKey(ConfKey.task_cost_point.name()).intValue();
             taskVo.setAmount(task.getIncrDay() * k);
-            taskVo.setTodayNum(taskService.calcDayTaskNum(task, DateTime.now()) * k);
-            taskVo.setYestodayNum(taskService.calcDayTaskNum(task, DateTime.now().minusDays(1)) * k);
+            taskVo.setTodayNum(taskSubService.count(task.getId(), todayDay) * k);
+            taskVo.setYestodayNum(taskSubService.count(task.getId(), yestoday) * k);
 
             TaskState taskState = TaskState.valueOf(task.getState());
             if (null != taskState) {

@@ -39,6 +39,12 @@ public interface TaskSubMapper {
 
     @Select("select " + FEILDS + " from task_sub where create_day=#{createDay} " +
             " and callback_time>0" +
-            " order by rand() limit #{offset},#{size}")
-    List<TaskSub> getRandList(@Param("createDay") int createDay, @Param("offset") int offset, @Param("size") int size);
+            " order by rand() limit #{size}")
+    List<TaskSub> getRandList(@Param("createDay") int createDay, @Param("size") int size);
+
+    @Delete("delete from task_sub where create_day=#{createDay} and callback_time>0")
+    int deleteUnRetain(@Param("createDay") int createDay);
+
+    @Update("update task_sub set callback_time=#{callbackTime},per_time=#{perTime}")
+    void makeRetain(TaskSub taskSub);
 }

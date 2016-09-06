@@ -4,6 +4,8 @@ import org.joda.time.DateTime;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
 
+import java.util.Random;
+
 /**
  * DateTimeUtil
  * author : liufeng
@@ -59,7 +61,7 @@ public class DateTimeUitl {
         }
         DateTime start = dateTime.withHourOfDay(runStartHour).withMinuteOfHour(0).withSecondOfMinute(0);
         DateTime end = getPerTime(dateTime);
-        return new Period(start, end,PeriodType.minutes()).getMinutes() / Constants.TASK_SUB_PER_MINITE;
+        return new Period(start, end, PeriodType.minutes()).getMinutes() / Constants.TASK_SUB_PER_MINITE;
     }
 
     /**
@@ -73,5 +75,19 @@ public class DateTimeUitl {
         Period p = new Period(start.withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0),
                 end.withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0), PeriodType.days());
         return p.getDays();
+    }
+
+    /**
+     * 获取给定时间内的随机粒度
+     *
+     * @param start
+     * @param end
+     * @return
+     */
+    public static long getRandomPerTime(DateTime start, DateTime end) {
+        Period period = new Period(start, end, PeriodType.minutes());
+        int times = period.getMinutes() / Constants.TASK_SUB_PER_MINITE;
+        start = start.plusMinutes(new Random().nextInt(times) * Constants.TASK_SUB_PER_MINITE);
+        return Integer.parseInt(getPerTime(start).toString("yyyyMMddmm"));
     }
 }

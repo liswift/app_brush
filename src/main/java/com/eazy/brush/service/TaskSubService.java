@@ -30,7 +30,7 @@ public interface TaskSubService {
     void makeIncrDayTaskSub(Task task);
 
     /**
-     * 生成每日留存TaskSub
+     * 生成每日留存TaskSub,删除过期子任务
      *
      * @param task
      */
@@ -50,10 +50,20 @@ public interface TaskSubService {
 
     /**
      * 随机获取 size 条 taskSub
+     *
      * @param createDay
-     * @param offset
      * @param size
      * @return
      */
-    List<TaskSub> getRandList(int createDay, int offset, int size);
+    List<TaskSub> getRandList(int createDay, int size);
+
+    /**
+     * 获取某个任务当天的子任务数量
+     *
+     * @param taskId    任务id
+     * @param createDay 日期
+     * @return
+     */
+    int count(int taskId, int createDay);
 }
+

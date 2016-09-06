@@ -2,6 +2,7 @@ package com.eazy.brush.service.impl;
 
 import com.eazy.brush.controller.view.service.Operator;
 import com.eazy.brush.controller.view.service.RandomMacAddress;
+import com.eazy.brush.core.enums.CountType;
 import com.eazy.brush.core.enums.TaskSpeedType;
 import com.eazy.brush.core.lottery.Award;
 import com.eazy.brush.core.lottery.LotteryUtil;
@@ -13,6 +14,8 @@ import com.eazy.brush.service.DeviceInfoService;
 import com.eazy.brush.service.TaskActionService;
 import com.eazy.brush.service.TaskService;
 import com.eazy.brush.service.TaskSubService;
+import com.eazy.brush.service.rank.CountService;
+import com.eazy.brush.service.rank.HcountService;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
@@ -21,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -43,6 +47,9 @@ public class TaskSubServiceImpl implements TaskSubService {
 
     @Autowired
     private DeviceInfoService deviceInfoService;
+
+    @Autowired
+    private HcountService hcountService;
 
     @Autowired
     private TaskService taskService;
@@ -111,12 +118,62 @@ public class TaskSubServiceImpl implements TaskSubService {
             startTime = startTime.plusMinutes(Constants.TASK_SUB_PER_MINITE);
         }
         log.info("### taskId:{},taskNum:{} make finished! ###", task.getId(), task.getIncrDay());
+
+        //计数
+        hcountService.incrBy(task.getId(), DateTime.now().toString("yyyyMMdd"), CountType.taskSubDayNum, task.getIncrDay());
     }
 
     @Override
     public void makeRetainDayTaskSub(Task task) {
-        double retainPercent = taskService.calcRetainPercent(task);
 
+        int inderDay = DateTimeUitl.getDayInter(new DateTime(task.getCreateTime()), DateTime.now());
+        int createDay = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));
+
+        DateTime curDateTime = DateTime.now();
+        int totalNum = 0;
+        for (int i = 0; i <= inderDay && i <= task.getRetainDay(); i++) {
+
+            curDateTime = curDateTime.plusDays(i);
+            int retainNum = taskService.calcDayRetainNum(task, curDateTime);
+            totalNum = totalNum + retainNum;
+
+            int count = 0, size = 100;
+            DateTime start = DateTime.now().withHourOfDay(task.getRunStartTime()).withMinuteOfHour(0).withSecondOfMinute(0);
+            DateTime end = DateTime.now().withHourOfDay(task.getRunEndTime()).withMinuteOfHour(0).withSecondOfMinute(0);
+
+            int rDay = Integer.parseInt(curDateTime.toString("yyyyMMdd"));
+            List<TaskSub> randList = taskSubMapper.getRandList(rDay, size);
+            while (!CollectionUtils.isEmpty(randList)) {
+                if (count > retainNum) {
+                    break;
+                }
+                makeRetain(randList, start, end);
+                count += size;
+                randList = taskSubMapper.getRandList(rDay, size);
+                log.info("### make TaskSub taskid {},day {},size {} ###", task.getId(), rDay, size);
+            }
+
+            //最后一次循环少运行的，补充
+            size = retainNum - (count - size);
+            randList = taskSubMapper.getRandList(rDay, size);
+            makeRetain(randList, start, end);
+            log.info("### make last TaskSub taskid {},day {},size {} ###", task.getId(), rDay, size);
+
+            //删除未被留存的taskSub
+            int num = taskSubMapper.deleteUnRetain(rDay);
+            log.info("### deleteUnRetain taskSub taskid {},day {},num {} ###", task.getId(), rDay, num);
+        }
+
+        //计数
+        hcountService.incrBy(task.getId(), createDay, CountType.taskSubDayNum, totalNum);
+    }
+
+    private void makeRetain(List<TaskSub> randList, DateTime start, DateTime end) {
+        for (TaskSub taskSub : randList) {
+            taskSub.setCallbackTime(0);
+            taskSub.setPerTime(DateTimeUitl.getRandomPerTime(start, end));
+            taskSubMapper.makeRetain(taskSub);
+        }
     }
 
     @Override
@@ -137,8 +194,13 @@ public class TaskSubServiceImpl implements TaskSubService {
     }
 
     @Override
-    public List<TaskSub> getRandList(int createDay, int offset, int size) {
-        return taskSubMapper.getRandList(createDay, offset, size);
+    public List<TaskSub> getRandList(int createDay, int size) {
+        return taskSubMapper.getRandList(createDay, size);
+    }
+
+    @Override
+    public int count(int taskId, int createDay) {
+        return 0;
     }
 
     /**
