@@ -136,6 +136,11 @@ public class TaskSubServiceImpl implements TaskSubService {
         taskSubMapper.changeTaskSubState(ids, callbackTime);
     }
 
+    @Override
+    public List<TaskSub> getRandList(int createDay, int offset, int size) {
+        return taskSubMapper.getRandList(createDay, offset, size);
+    }
+
     /**
      * 生成任务元
      *

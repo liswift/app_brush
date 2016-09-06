@@ -47,4 +47,13 @@ public interface TaskSubService {
      * @param callbackTime
      */
     void changeTaskSubState(String ids, long callbackTime);
+
+    /**
+     * 随机获取 size 条 taskSub
+     * @param createDay
+     * @param offset
+     * @param size
+     * @return
+     */
+    List<TaskSub> getRandList(int createDay, int offset, int size);
 }

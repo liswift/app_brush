@@ -36,4 +36,9 @@ public interface TaskSubMapper {
 
     @Update("update task_sub set callback_time=#{callbackTime} where id in (#{ids})")
     void changeTaskSubState(@Param("ids") String ids, @Param("callbackTime") long callbackTime);
+
+    @Select("select " + FEILDS + " from task_sub where create_day=#{createDay} " +
+            " and callback_time>0" +
+            " order by rand() limit #{offset},#{size}")
+    List<TaskSub> getRandList(@Param("createDay") int createDay, @Param("offset") int offset, @Param("size") int size);
 }
