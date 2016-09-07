@@ -13,7 +13,6 @@
         <property name="password" value="${db.password}"/>
         <property name="initialSize" value="${initialSize}"/>
         <property name="maxActive" value="${maxActive}"/>
-        <property name="maxIdle" value="${maxIdle}"/>
         <property name="minIdle" value="${minIdle}"/>
         <property name="maxWait" value="${maxWait}"/>
     </bean>
