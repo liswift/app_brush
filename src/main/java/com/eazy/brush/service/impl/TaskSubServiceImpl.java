@@ -103,7 +103,7 @@ public class TaskSubServiceImpl implements TaskSubService {
         }
 
         int i = times;
-        while (i-- >= 0) {
+        while (i-- > 0) {
             long perTime = Long.parseLong(startTime.toString("yyyyMMddHHmm"));
             if (perNum > 0) {
                 buildTaskSubs(task, perTime, actionList, deviceInfos, perNum);
@@ -129,9 +129,9 @@ public class TaskSubServiceImpl implements TaskSubService {
 
         DateTime curDateTime = DateTime.now();
         int totalNum = 0;
-        for (int i = 0; i <= inderDay && i <= task.getRetainDay(); i++) {
+        for (int i = 0; i < inderDay && i < task.getRetainDay(); i++) {
 
-            curDateTime = curDateTime.plusDays(i);
+            curDateTime = curDateTime.minusDays(i);
             int retainNum = taskService.calcDayRetainNum(task, curDateTime);
             totalNum = totalNum + retainNum;
 
@@ -142,20 +142,20 @@ public class TaskSubServiceImpl implements TaskSubService {
             int rDay = Integer.parseInt(curDateTime.toString("yyyyMMdd"));
             List<TaskSub> randList = taskSubMapper.getRandList(rDay, size);
             while (!CollectionUtils.isEmpty(randList)) {
-                if (count > retainNum) {
+                if (count + size >= retainNum) {
                     break;
                 }
                 makeRetain(randList, start, end);
                 count += size;
                 randList = taskSubMapper.getRandList(rDay, size);
-                log.info("### make TaskSub taskid {},day {},size {} ###", task.getId(), rDay, size);
+                log.info("### make TaskSub retain taskid {},day {},size {},count {} ###", task.getId(), rDay, size, count);
             }
 
             //最后一次循环少运行的，补充
             size = retainNum - (count - size);
             randList = taskSubMapper.getRandList(rDay, size);
             makeRetain(randList, start, end);
-            log.info("### make last TaskSub taskid {},day {},size {} ###", task.getId(), rDay, size);
+            log.info("### make last TaskSub retain taskid {},day {},size {} ###", task.getId(), rDay, size);
 
             //删除未被留存的taskSub
             int num = taskSubMapper.deleteUnRetain(rDay);

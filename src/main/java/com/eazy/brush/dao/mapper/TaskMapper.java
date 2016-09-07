@@ -37,4 +37,7 @@ public interface TaskMapper {
 
     @Select("select " + FEILDS + " from task where state=#{state} limit #{offset},#{size}")
     List<Task> getListByState(@Param("state") int state, @Param("offset") int offset, @Param("size") int size);
+
+    @Select("select " + FEILDS + " from task where state>#{state} limit #{offset},#{size}")
+    List<Task> getEnableList(@Param("state") int state, @Param("offset") int offset, @Param("size") int size);
 }

@@ -59,6 +59,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public List<Task> getEnableList(int state, int offset, int size) {
+        return taskMapper.getEnableList(state, offset, size);
+    }
+
+    @Override
     public int calcDayTaskNum(Task task, DateTime dateTime) {
 
         DateTime createDateTime = new DateTime(task.getCreateTime());

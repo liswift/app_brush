@@ -1,0 +1,58 @@
+{
+  "data": [
+    {
+      "actionVo": {
+        "actionSubs": [
+          {
+            "action": "action1",
+            "id": 1,
+            "name": "name1",
+            "runTime": 10
+          },
+          {
+            "action": "actions3",
+            "id": 3,
+            "name": "name0",
+            "runTime": 10
+          }
+        ],
+        "id": 10,
+        "name": "name2"
+      },
+      "apkUrl": "https://dl.wandoujia.com/files/jupiter/latest/wandoujia-web_inner_referral_homepage.apk",
+      "appName": "百度地图",
+      "cardInfo": {
+        "line1Number": "14506656666",
+        "networkType": 13,
+        "operator": "01",
+        "operatorName": "中国联通",
+        "phoneType": "2",
+        "simSerialNumber": "8906011451473254863",
+        "subscriberId": "460016650863296",
+        "telAndroidId": "d5fd8e58-368b-4a"
+      },
+      "deviceInfo": {
+        "api": 21,
+        "board": "GT-I9500",
+        "brand": "samsung",
+        "coverage": 0.4221,
+        "height": 1920,
+        "id": 1709,
+        "rate": 0.4221,
+        "screenSize": 5,
+        "versionRelease": "",
+        "width": 1080
+      },
+      "id": 1159935,
+      "netInfo": {
+        "host": "192.168.1.102",
+        "mac": "00:21:05:DD:A2:52",
+        "port": 8888,
+        "type": 0
+      },
+      "packageName": "com.wandoujia.phoenix2",
+      "runTime": 10,
+      "versionCode": 12
+    }
+  ]
+}

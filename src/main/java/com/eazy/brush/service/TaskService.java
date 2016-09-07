@@ -56,10 +56,19 @@ public interface TaskService {
 
     /**
      * 获取指定状态的任务集合
+     *
      * @param state
      * @param offset
      * @param size
      * @return
      */
-    List<Task> getListByState(int state,int offset,int size);
+    List<Task> getListByState(int state, int offset, int size);
+
+    /**
+     * @param state
+     * @param offset
+     * @param size
+     * @return
+     */
+    List<Task> getEnableList(int state, int offset, int size);
 }

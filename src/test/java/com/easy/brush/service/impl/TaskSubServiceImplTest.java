@@ -59,7 +59,7 @@ public class TaskSubServiceImplTest {
         stopWatch.start();
         log.info("### start makeRetainDayTaskSub ###");
 
-        List<Task> list = taskService.getListByState(TaskState.confirm_passed.getCode(), 0, Integer.MAX_VALUE);
+        List<Task> list = taskService.getEnableList(TaskState.stoped.getCode(), 0, Integer.MAX_VALUE);
         for (Task task : list) {
             log.info("### start makeRetainDayTaskSub ###");
             taskSubService.makeRetainDayTaskSub(task);

@@ -5,8 +5,11 @@ package com.eazy.brush.core.enums;
  * create time:2016/9/4 10:52
  */
 public enum TaskState {
-    confirm_ing("审核中", -1), confirm_passed("审核通过", 0), confirm_failed("审核失败", 1),
-    running("运行中", 2), stoped("已停止", 3);
+    confirm_ing("审核中", -1),
+    confirm_failed("审核失败", 0),
+    stoped("已停止", 1),
+    confirm_passed("审核通过", 2),
+    running("运行中", 3);
 
     private String name;
     private int code;
