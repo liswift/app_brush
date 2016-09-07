@@ -124,15 +124,17 @@ public class TaskSubServiceImpl implements TaskSubService {
     @Override
     public void makeRetainDayTaskSub(Task task) {
 
-        int inderDay = DateTimeUitl.getDayInter(new DateTime(task.getCreateTime()), DateTime.now());
+        DateTime curDateTime = new DateTime(task.getCreateTime());
+        int inderDay = DateTimeUitl.getDayInter(curDateTime, DateTime.now());
         int createDay = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));
 
-        DateTime curDateTime = DateTime.now();
         int totalNum = 0;
+
+        //从任务开始到今日
         for (int i = 0; i < inderDay && i < task.getRetainDay(); i++) {
 
-            curDateTime = curDateTime.minusDays(i);
-            int retainNum = taskService.calcDayRetainNum(task, curDateTime);
+            curDateTime = curDateTime.plus(i);
+            int retainNum = taskService.calcDayRetainNum(task, DateTime.now());
             totalNum = totalNum + retainNum;
 
             int count = 0, size = 100;
