@@ -21,7 +21,7 @@ public class NoRankServiceImpl implements NoRankService {
     @Autowired
     private CommonRedisCache redisCache;
 
-    // ¹¹½¨cacheKey
+    // æž„å»ºcacheKey
     private <S> String buildKey(NoRankType nrt, S subId) {
         return PersistRedisKey.NoRankSetByObjectKey.of(nrt.build(subId));
     }

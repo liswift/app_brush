@@ -52,6 +52,7 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
 
             TaskSubVo taskSubVo = new TaskSubVo();
             taskSubVo.setId(taskSub.getId());
+            taskSubVo.setRunTime(taskSub.getRunTime());
             taskSubVo.setAppName(task.getAppName());
             taskSubVo.setPackageName(task.getPackageName());
             taskSubVo.setApkUrl(task.getApkUrl());

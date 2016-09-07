@@ -64,7 +64,7 @@ public class CommonRedisCache {
 
 
     /**
-     * ËøÔÚ¸ø¶¨µÄµÈ´ıÊ±¼äÄÚ¿ÕÏĞ£¬Ôò»ñÈ¡Ëø³É¹¦ ·µ»Øtrue£¬ ·ñÔò·µ»Øfalse
+     * é”åœ¨ç»™å®šçš„ç­‰å¾…æ—¶é—´å†…ç©ºé—²ï¼Œåˆ™è·å–é”æˆåŠŸ è¿”å›trueï¼Œ å¦åˆ™è¿”å›false
      */
     public boolean tryLock(String key, String value, long timeout, long seconds) {
 
@@ -72,16 +72,16 @@ public class CommonRedisCache {
             long nano = System.nanoTime();
             do {
                 logger.debug("## try lock key: " + key);
-                Boolean lock = setNX(key, value);// »ñÈ¡Ëø
+                Boolean lock = setNX(key, value);// è·å–é”
                 if (lock == true) {
                     seconds = seconds > 0 ? seconds : DEFAULT_SINGLE_EXPIRE_TIME;
-                    expire(key, seconds);// ÉèÖÃ¹ıÆÚÊ±¼ä
+                    expire(key, seconds);// è®¾ç½®è¿‡æœŸæ—¶é—´
                     logger.debug("## get lock, key: " + key + " , expire in " + seconds + " seconds.");
                     return Boolean.TRUE;
-                } else { // ´æÔÚËø
+                } else { // å­˜åœ¨é”
                     if (logger.isDebugEnabled()) {
                         String desc = get(key);
-                        logger.debug("## key: " + key + " locked by another business£º" + desc);
+                        logger.debug("## key: " + key + " locked by another businessï¼š" + desc);
                     }
                 }
                 if (timeout == 0) {
@@ -304,7 +304,7 @@ public class CommonRedisCache {
 
     }
 
-    // ÅĞ¶ÏÄ³¸ö¼üÊÇ·ñ´æÔÚ
+    // åˆ¤æ–­æŸä¸ªé”®æ˜¯å¦å­˜åœ¨
     public boolean exists(final String key) {
         return (Boolean) redisTemplate.execute(new RedisCallback<Boolean>() {
             public Boolean doInRedis(RedisConnection connection)
@@ -324,7 +324,7 @@ public class CommonRedisCache {
         });
     }
 
-    // ÇåÀíËùÓĞ¼¯ºÏ¼ü
+    // æ¸…ç†æ‰€æœ‰é›†åˆé”®
     public long delete(final String... keys) {
         return (Long) redisTemplate.execute(new RedisCallback<Long>() {
             public Long doInRedis(RedisConnection connection)

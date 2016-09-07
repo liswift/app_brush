@@ -27,7 +27,7 @@ public class RankServiceImpl implements RankService {
     @Autowired
     private CommonRedisCache redisCache;
 
-    // 构建key
+    // 鏋勫缓key
     private <S> String buildKey(RankType rt, S subId) {
         return PersistRedisKey.RankListByObjectKey.of(rt.build(subId));
     }
@@ -75,7 +75,7 @@ public class RankServiceImpl implements RankService {
         return redisCache.zRevRangeWithScores(PersistRedisKey.RankListByObjectKey.of(rt.build(subId)), offset, limit);
     }
 
-    // 此处返回的列表是string类型，上层根据传入item类型自行转换
+    // 姝ゅ杩斿洖鐨勫垪琛ㄦ槸string绫诲瀷锛屼笂灞傛牴鎹紶鍏tem绫诲瀷鑷杞崲
     @Override
     public <S> ResultView<String, Double> getItemsByCursorDouble(Double cursor, int limit, RankType rt, S subId) {
         Set<RedisZSetCommands.Tuple> tuples = null;

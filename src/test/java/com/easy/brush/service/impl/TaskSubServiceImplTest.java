@@ -12,6 +12,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.StopWatch;
 
+import java.util.List;
+
 /**
  * author : liufeng
  * create time:2016/9/2 22:58
@@ -50,4 +52,22 @@ public class TaskSubServiceImplTest {
     public void testInvokeMakeTaskSub() {
         invokeMakeIncrDayTaskSub();
     }
+
+    @Test
+    public void testMakeRetainDayTaskSub() {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        log.info("### start makeRetainDayTaskSub ###");
+
+        List<Task> list = taskService.getListByState(TaskState.confirm_passed.getCode(), 0, Integer.MAX_VALUE);
+        for (Task task : list) {
+            log.info("### start makeRetainDayTaskSub ###");
+            taskSubService.makeRetainDayTaskSub(task);
+            log.info("### end makeRetainDayTaskSub,cost {} s ###", stopWatch.getTotalTimeSeconds());
+        }
+
+        log.info("### end makeRetainDayTaskSub,cost {} s ###", stopWatch.getTotalTimeSeconds());
+        stopWatch.stop();
+    }
+
 }

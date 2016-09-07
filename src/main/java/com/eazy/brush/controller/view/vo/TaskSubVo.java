@@ -15,6 +15,7 @@ public class TaskSubVo {
     private int id;
     private String appName;
     private String packageName;
+    private int runTime;
     private String apkUrl;
     private ActionVo actionVo;
     private DeviceInfo deviceInfo;

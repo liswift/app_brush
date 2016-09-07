@@ -2,7 +2,7 @@ package com.eazy.brush.core.enums;
 
 public enum CountType {
     Unknown(0, "Unknown"), //
-    taskSubDayNum(1, "taskSubDayNum"), //ÈÎÎñÃ¿ÈÕ×ÓÈÎÎñ×ÜÊıÁ¿
+    taskSubDayNum(1, "taskSubDayNum"), //ä»»åŠ¡æ¯æ—¥å­ä»»åŠ¡æ€»æ•°é‡
     ;
 
     private int value;
