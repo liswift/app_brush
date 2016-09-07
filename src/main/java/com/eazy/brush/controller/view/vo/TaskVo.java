@@ -12,6 +12,7 @@ public class TaskVo {
     private int id;
     private String appName;
     private String packageName;
+    private int versionCode;
     private String createTime;
     private int incrDay;
     private int amount;

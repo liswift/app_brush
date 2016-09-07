@@ -45,6 +45,9 @@ public interface TaskSubMapper {
     @Delete("delete from task_sub where create_day=#{createDay} and callback_time>0")
     int deleteUnRetain(@Param("createDay") int createDay);
 
+    @Delete("delete from task_sub where task_id=#{taskId} and create_day=#{createDay} limit #{size}")
+    int deleteRand(@Param("taskId") int taskId, @Param("createDay") int createDay, @Param("size") int size);
+
     @Update("update task_sub set callback_time=#{callbackTime},per_time=#{perTime}")
     void makeRetain(TaskSub taskSub);
 }

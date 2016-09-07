@@ -5,6 +5,7 @@ import com.eazy.brush.core.enums.CountType;
 import com.eazy.brush.core.enums.PersistRedisKey;
 import com.eazy.brush.service.rank.HcountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 /**
@@ -13,6 +14,7 @@ import org.springframework.util.StringUtils;
  * @author feng.liu
  * @date 2016/9/6 15:43
  */
+@Service
 public class HcountServiceImpl implements HcountService {
 
     @Autowired

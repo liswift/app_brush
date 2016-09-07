@@ -15,6 +15,7 @@ public class Task {
     private int userId;
     private String appName;         //应用名称
     private String packageName;     //应用程序包名
+    private int versionCode;        //versionCode
     private String appVersion;      //应用版本
     private String apkUrl;          //下载地址
     private String remarkName;      //备注名称

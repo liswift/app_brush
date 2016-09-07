@@ -14,7 +14,6 @@ import com.eazy.brush.service.DeviceInfoService;
 import com.eazy.brush.service.TaskActionService;
 import com.eazy.brush.service.TaskService;
 import com.eazy.brush.service.TaskSubService;
-import com.eazy.brush.service.rank.CountService;
 import com.eazy.brush.service.rank.HcountService;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +23,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -100,8 +98,6 @@ public class TaskSubServiceImpl implements TaskSubService {
         int interDay = DateTimeUitl.getDayInter(createDateTime, nowDateTime);
         DateTime startTime = DateTimeUitl.getStartTime(task.getRunStartTime(), interDay);
 
-        int moreNum = times * perNum;                                           //多运行的总任务数
-
         if (interDay == 0) {                                                    //如果是当天，从当前时间之后算起
             times = times - DateTimeUitl.perTimeNum(task.getRunStartTime(), nowDateTime);
         }
@@ -109,9 +105,6 @@ public class TaskSubServiceImpl implements TaskSubService {
         int i = times;
         while (i-- >= 0) {
             long perTime = Long.parseLong(startTime.toString("yyyyMMddHHmm"));
-            if (i == -1) {
-                perNum = perNum - (moreNum - task.getIncrDay());                //把多运行的几个减掉
-            }
             if (perNum > 0) {
                 buildTaskSubs(task, perTime, actionList, deviceInfos, perNum);
             }
@@ -119,8 +112,13 @@ public class TaskSubServiceImpl implements TaskSubService {
         }
         log.info("### taskId:{},taskNum:{} make finished! ###", task.getId(), task.getIncrDay());
 
+        int createDay = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));
+
+        //删除多生成的任务
+        taskSubMapper.deleteRand(task.getId(), createDay, times * perNum - task.getIncrDay());
+
         //计数
-        hcountService.incrBy(task.getId(), DateTime.now().toString("yyyyMMdd"), CountType.taskSubDayNum, task.getIncrDay());
+        hcountService.incrBy(task.getId(), createDay, CountType.taskSubDayNum, task.getIncrDay());
     }
 
     @Override
@@ -256,7 +254,7 @@ public class TaskSubServiceImpl implements TaskSubService {
     private void setNetInfo(TaskSub taskSub) {
         NetInfo netInfo = new NetInfo();
         netInfo.setMac(RandomMacAddress.getMacAddrWithFormat(":"));
-        netInfo.setHost("192.168.1.108");
+        netInfo.setHost("192.168.1.102");
         netInfo.setPort(8888);
         List<NetType<Integer>> netInfoTypes = Lists.newArrayList();
         netInfoTypes.add(new NetType<>(0, 56937));

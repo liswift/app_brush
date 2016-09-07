@@ -13,7 +13,8 @@ import java.util.List;
  */
 public interface TaskMapper {
 
-    String FEILDS = "id,user_id,app_name,package_name,app_version,apk_url,remark_name,incr_day,day_limit,incr_up_down,run_time,run_up_down,run_start_time," +
+    String FEILDS = "id,user_id,app_name,package_name,version_code,app_version,apk_url,remark_name,incr_day,day_limit," +
+            "incr_up_down,run_time,run_up_down,run_start_time," +
             "run_end_time,run_speed,retain_day,retain_percent,state,create_time";
 
     @Select("select " + FEILDS + " from task where id=#{id}")
