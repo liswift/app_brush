@@ -131,7 +131,7 @@ public class TaskSubServiceImpl implements TaskSubService {
 
         //从任务开始到今日
         for (int i = 0; i < inderDay && i < task.getRetainDay(); i++) {
-            curDateTime = curDateTime.plus(i);
+            curDateTime = curDateTime.plusDays(i);
             int retainNum = taskService.calcDayRetainNum(task, DateTime.now());
             totalNum = totalNum + retainNum;
 
