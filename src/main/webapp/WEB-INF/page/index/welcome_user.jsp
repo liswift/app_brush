@@ -35,7 +35,7 @@
     <div class="cl pd-5 bg-1 bk-gray">
         <span class="l">
             <a class="btn btn-primary radius" href="javascript:;"
-               onclick="admin_role_add('添加任务','${ctx}/role/toAddRole','800')">
+               onclick="layer_show('添加任务','${ctx}/task/toAdd','800')">
                 <i class="Hui-iconfont">&#xe600;</i> 添加任务</a> </span>
     </div>
     <table class="table table-border table-bordered table-bg">
@@ -77,7 +77,9 @@
     </table>
 </div>
 <script type="text/javascript" src="${ctx }/resources/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx }/resources/lib/layer/2.1/layer.js"></script>
 <script type="text/javascript" src="${ctx }/resources/js/H-ui.js"></script>
+<script type="text/javascript" src="${ctx }/resources/js/H-ui.admin.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         setInterval(getnums, 1000);
