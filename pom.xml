@@ -18,7 +18,6 @@
         <jdk.version>1.7</jdk.version>
         <!-- mybatis版本号 -->
         <mybatis.version>3.2.6</mybatis.version>
-        <activemqVersion>5.7.0</activemqVersion>
         <jetty.version>9.0.6.v20130930</jetty.version>
         <logback.classic.version>1.1.4</logback.classic.version>
         <spring.version>4.2.3.RELEASE</spring.version>
@@ -78,16 +77,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-core</artifactId>
-            <version>${activemqVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-spring</artifactId>
-            <version>${activemqVersion}</version>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
@@ -95,12 +84,13 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-jms</artifactId>
+            <artifactId>spring-core</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
+            <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
         </dependency>
 

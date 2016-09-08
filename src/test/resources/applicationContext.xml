@@ -22,7 +22,6 @@
     <import resource="spring/spring-mybatis.xml"/>
     <import resource="spring/spring-redis.xml"/>
     <import resource="spring/spring-shiro.xml"/>
-    <import resource="spring/spring-activemq.xml"/>
     <import resource="spring/spring-email.xml"/>
 
 </beans>

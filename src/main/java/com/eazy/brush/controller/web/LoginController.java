@@ -7,7 +7,6 @@ import com.eazy.brush.controller.view.service.UserAccountVoService;
 import com.eazy.brush.controller.view.vo.TaskVo;
 import com.eazy.brush.controller.view.vo.UserAccountVo;
 import com.eazy.brush.core.enums.Role;
-import com.eazy.brush.core.utils.DataUtil;
 import com.eazy.brush.core.utils.MD5;
 import com.eazy.brush.core.utils.StrKit;
 import com.eazy.brush.model.User;
@@ -20,8 +19,6 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,11 +27,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.annotation.Resource;
-import javax.jms.JMSException;
-import javax.jms.MapMessage;
-import javax.jms.Message;
-import javax.jms.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -49,8 +41,6 @@ import java.util.Map;
 @RequestMapping("/sys")
 public class LoginController extends BaseController {
 
-    @Resource
-    private JmsTemplate jmsTemplate;
     @Autowired
     private UserService userService;
     @Autowired
@@ -93,20 +83,6 @@ public class LoginController extends BaseController {
                     if (currentUser.isAuthenticated()) {
                         // 删除产生的废弃验证码
                         sessionCode.removeAttribute(map.get("code"));
-
-                        final String ip = DataUtil.getIpAddr(request);
-                        //发送日志
-                        jmsTemplate.send(new MessageCreator() {
-                            @Override
-                            public Message createMessage(Session session) throws JMSException {
-                                MapMessage message = session.createMapMessage();
-                                message.setString("type", "login");
-                                message.setString("account", getCurrentUser().getName());
-                                message.setString("ip", ip);
-                                message.setString("logintime", String.valueOf(System.currentTimeMillis()));
-                                return message;
-                            }
-                        });
                         return "redirect:index";
                     } else {
                         token.clear();
