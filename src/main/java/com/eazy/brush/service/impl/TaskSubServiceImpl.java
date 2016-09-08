@@ -127,12 +127,10 @@ public class TaskSubServiceImpl implements TaskSubService {
         DateTime curDateTime = new DateTime(task.getCreateTime());
         int inderDay = DateTimeUitl.getDayInter(curDateTime, DateTime.now());
         int createDay = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));
-
         int totalNum = 0;
 
         //从任务开始到今日
         for (int i = 0; i < inderDay && i < task.getRetainDay(); i++) {
-
             curDateTime = curDateTime.plus(i);
             int retainNum = taskService.calcDayRetainNum(task, DateTime.now());
             totalNum = totalNum + retainNum;
@@ -143,18 +141,21 @@ public class TaskSubServiceImpl implements TaskSubService {
 
             int rDay = Integer.parseInt(curDateTime.toString("yyyyMMdd"));
             List<TaskSub> randList = taskSubMapper.getRandList(rDay, size);
+
+            int times = retainNum / size;
+            int t = 0;
             while (!CollectionUtils.isEmpty(randList)) {
-                if (count + size >= retainNum) {
+                if (t > times - 2) {
                     break;
                 }
                 makeRetain(randList, start, end);
+                t++;
                 count += size;
                 randList = taskSubMapper.getRandList(rDay, size);
                 log.info("### make TaskSub retain taskid {},day {},size {},count {} ###", task.getId(), rDay, size, count);
             }
-
             //最后一次循环少运行的，补充
-            size = retainNum - (count - size);
+            size = retainNum - (t * size);
             randList = taskSubMapper.getRandList(rDay, size);
             makeRetain(randList, start, end);
             log.info("### make last TaskSub retain taskid {},day {},size {} ###", task.getId(), rDay, size);
@@ -163,7 +164,6 @@ public class TaskSubServiceImpl implements TaskSubService {
             int num = taskSubMapper.deleteUnRetain(rDay);
             log.info("### deleteUnRetain taskSub taskid {},day {},num {} ###", task.getId(), rDay, num);
         }
-
         //计数
         hcountService.incrBy(task.getId(), createDay, CountType.taskSubDayNum, totalNum);
     }

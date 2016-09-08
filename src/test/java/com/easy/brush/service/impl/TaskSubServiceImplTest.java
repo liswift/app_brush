@@ -35,12 +35,12 @@ public class TaskSubServiceImplTest {
         stopWatch.start();
         log.info("### start invokeMakeTaskSub ###");
 
-        Task task = taskService.getByState(0);
+        Task task = taskService.getByState(TaskState.confirm_passed.getCode());
 
         if (null != task) {
-            taskService.changeState(task.getId(), 1);
-            taskSubService.makeIncrDayTaskSub(task);
             taskService.changeState(task.getId(), TaskState.running.getCode());
+            taskSubService.makeIncrDayTaskSub(task);
+            taskService.changeState(task.getId(), TaskState.run_end.getCode());
             log.info("### make tasksubs success！,task_id {} ###", task.getId());
         }
 

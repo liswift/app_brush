@@ -9,7 +9,8 @@ public enum TaskState {
     confirm_failed("审核失败", 0),
     stoped("已停止", 1),
     confirm_passed("审核通过", 2),
-    running("运行中", 3);
+    running("运行中", 3),
+    run_end("运行完成", 4);
 
     private String name;
     private int code;
