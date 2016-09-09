@@ -2,6 +2,8 @@ package com.eazy.brush.core.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.output.*;
+import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 
@@ -25,7 +27,7 @@ public class FtpUtil {
      * @param username 用户名
      * @param password 密码
      */
-    private void connect(String path, String addr, int port, String username, String password) {
+    public void connect(String path, String addr, int port, String username, String password) {
         ftp = new FTPClient();
         int reply;
         try {
@@ -61,7 +63,7 @@ public class FtpUtil {
      * @param ftpFile ftp目录
      * @param dstFile 本地目录
      */
-    public void downLoad(String ftpFile, String dstFile) {
+    public File downLoad(String ftpFile, String dstFile) {
         File file = new File(dstFile);
         FileOutputStream fos = null;
         try {
@@ -73,6 +75,23 @@ public class FtpUtil {
         } finally {
             IOUtils.closeQuietly(fos);
         }
+        return file;
+    }
+
+    /**
+     * 下载ftp文件到OutputStream
+     *
+     * @param ftpFile ftp目录
+     */
+    public OutputStream downLoad(String ftpFile) {
+        OutputStream os = new ByteArrayOutputStream();
+        try {
+            ftp.retrieveFile(ftpFile, os);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("down ftp file error {}", e);
+        }
+        return os;
     }
 
     public static void main(String[] args) {
