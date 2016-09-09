@@ -22,4 +22,9 @@ public class TaskController extends BaseController {
     public ModelAndView toAddUser(HttpServletRequest request) {
         return new ModelAndView("task/task_add");
     }
+
+    @RequestMapping(value = "uploadApk", method = RequestMethod.GET)
+    public void uploadApk(HttpServletRequest request) {
+//        renderJson();
+    }
 }
