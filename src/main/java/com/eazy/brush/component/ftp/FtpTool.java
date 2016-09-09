@@ -1,12 +1,13 @@
-package com.eazy.brush.core.utils;
+package com.eazy.brush.component.ftp;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.output.*;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.io.*;
 
 /**
@@ -16,7 +17,8 @@ import java.io.*;
  * @date 2016/9/8 18:35
  */
 @Slf4j
-public class FtpUtil {
+@Component
+public class FtpTool {
 
     private FTPClient ftp;
 
@@ -27,6 +29,7 @@ public class FtpUtil {
      * @param username 用户名
      * @param password 密码
      */
+    @PostConstruct
     public void connect(String path, String addr, int port, String username, String password) {
         ftp = new FTPClient();
         int reply;
@@ -46,12 +49,12 @@ public class FtpUtil {
     }
 
     /**
-     * @param file    上传的文件
-     * @param ftpName 上传的文件
+     * @param inputStream 上传的流
+     * @param ftpName     上传的文件
      */
-    public void upload(File file, String ftpName) {
+    public void upload(InputStream inputStream, String ftpName) {
         try {
-            ftp.storeFile(ftpName, new FileInputStream(file));
+            ftp.storeFile(ftpName, inputStream);
         } catch (IOException e) {
             log.error("upload ftp error {}", e);
         }
@@ -94,12 +97,12 @@ public class FtpUtil {
         return os;
     }
 
-    public static void main(String[] args) {
-        FtpUtil t = new FtpUtil();
+    public static void main(String[] args) throws FileNotFoundException {
+        FtpTool t = new FtpTool();
 
         t.connect("", "115.28.7.101", 21, "lf", "liufeng65");
         File file = new File("F:\\a.log");
-        t.upload(file, "a.log");
+        t.upload(new FileInputStream(file), "a.log");
         t.downLoad("test.log", "F:\\test.log");
     }
 }

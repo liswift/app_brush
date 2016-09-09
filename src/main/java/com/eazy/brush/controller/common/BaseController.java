@@ -141,6 +141,10 @@ public abstract class BaseController {
         renderWEP(fileName, columnName, list1, 1);
     }
 
+    public void renderStream(){
+
+    }
+
     public void renderExcel(String fileName, String columnName, List<String[]> list1) {
         renderWEP(fileName, columnName, list1, 2);
     }
