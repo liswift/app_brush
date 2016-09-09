@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class TaskSub {
 
-    private int id;
+    private String id;
     private int taskId;              //任务id
     private long perTime;             //时间粒度
     private int actionId;            //动作组id

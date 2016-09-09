@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50539
+Source Server         : local
+Source Server Version : 50528
 Source Host           : localhost:3306
 Source Database       : test
 
 Target Server Type    : MYSQL
-Target Server Version : 50539
+Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2016-09-08 00:43:21
+Date: 2016-09-09 10:27:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -61,7 +61,7 @@ CREATE TABLE `conf` (
   `value` varchar(64) DEFAULT NULL,
   `desc` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of conf
@@ -886,7 +886,7 @@ CREATE TABLE `log` (
   `DESCRIPTION` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `REQUEST_PARAM` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4697 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4708 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of log
@@ -2754,6 +2754,17 @@ INSERT INTO `log` VALUES ('4693', null, '2016-09-04 18:39:01', null, 'Windows 8.
 INSERT INTO `log` VALUES ('4694', null, '2016-09-04 18:44:29', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 INSERT INTO `log` VALUES ('4695', null, '2016-09-04 19:00:43', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 INSERT INTO `log` VALUES ('4696', null, '2016-09-04 19:01:10', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4697', null, '2016-09-08 15:03:05', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4698', null, '2016-09-08 15:03:28', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4699', null, '2016-09-08 15:44:43', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4700', null, '2016-09-08 15:53:32', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4701', null, '2016-09-08 15:55:03', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4702', null, '2016-09-08 15:56:19', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4703', null, '2016-09-08 15:56:24', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4704', null, '2016-09-08 15:57:00', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4705', null, '2016-09-08 16:03:25', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4706', null, '2016-09-08 16:05:06', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4707', null, '2016-09-08 16:07:15', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `login_log`
@@ -3451,7 +3462,7 @@ INSERT INTO `role_permission` VALUES ('1504', '13', '110');
 -- ----------------------------
 DROP TABLE IF EXISTS `task`;
 CREATE TABLE `task` (
-  `id` int(9) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL DEFAULT '0',
   `app_name` varchar(64) NOT NULL COMMENT '应用名称',
   `package_name` varchar(64) DEFAULT NULL COMMENT '应用程序包名',
@@ -3472,12 +3483,12 @@ CREATE TABLE `task` (
   `state` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '任务被执行，回调时间',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of task
 -- ----------------------------
-INSERT INTO `task` VALUES ('10', '9', '百度地图', 'com.wandoujia.phoenix2', '12', '2.3', 'https://dl.wandoujia.com/files/jupiter/latest/wandoujia-web_inner_referral_homepage.apk', '百度地图2.3', '5900', '100000', '10', '10', '2', '8', '23', '1', '60', '20', '2', '2016-09-06 21:30:20');
+INSERT INTO `task` VALUES ('10', '9', '百度地图', 'com.wandoujia.phoenix2', '12', '2.3', 'https://dl.wandoujia.com/files/jupiter/latest/wandoujia-web_inner_referral_homepage.apk', '百度地图2.3', '9999', '100000', '10', '10', '2', '8', '23', '1', '60', '20', '2', '2016-09-06 21:30:20');
 
 -- ----------------------------
 -- Table structure for `task_action`
@@ -3502,7 +3513,7 @@ INSERT INTO `task_action` VALUES ('44', '10', '10');
 -- ----------------------------
 DROP TABLE IF EXISTS `task_sub`;
 CREATE TABLE `task_sub` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` varchar(36) NOT NULL,
   `task_id` int(11) NOT NULL COMMENT '任务id',
   `per_time` bigint(20) DEFAULT '0' COMMENT '所在粒度',
   `action_id` int(11) unsigned NOT NULL COMMENT '动作组id',
@@ -3523,7 +3534,7 @@ CREATE TABLE `task_sub` (
   `mac` varchar(32) DEFAULT NULL COMMENT 'mac地址 唯一',
   `type` int(11) NOT NULL COMMENT '网络类型 0 手机网络 1 wifi',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1186819 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of task_sub

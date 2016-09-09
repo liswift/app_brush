@@ -92,7 +92,7 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
 
     @Override
     public String buildVoIds(List<TaskSub> taskSubs) {
-        List<Integer> ids = Lists.newArrayList();
+        List<String> ids = Lists.newArrayList();
         for (TaskSub taskSub : taskSubs) {
             ids.add(taskSub.getId());
         }

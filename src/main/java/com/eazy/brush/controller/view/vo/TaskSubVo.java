@@ -12,7 +12,7 @@ import lombok.Data;
  */
 @Data
 public class TaskSubVo {
-    private int id;
+    private String id;
     private String appName;
     private String packageName;
     private int versionCode;

@@ -25,6 +25,7 @@ import org.springframework.util.CollectionUtils;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * 元任务相关服务
@@ -219,6 +220,7 @@ public class TaskSubServiceImpl implements TaskSubService {
         for (int num = 0; num < taskNum; num++) {
 
             TaskSub taskSub = new TaskSub();
+            taskSub.setId(UUID.randomUUID().toString());
             taskSub.setTaskId(task.getId());
             taskSub.setPerTime(perTime);
             taskSub.setActionId(actionList.get(random.nextInt(actionList.size())).getId());
