@@ -4,6 +4,7 @@ import com.eazy.brush.core.enums.TaskState;
 import com.eazy.brush.dao.entity.Task;
 import com.eazy.brush.service.TaskService;
 import com.eazy.brush.service.TaskSubService;
+import com.google.common.base.Stopwatch;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * author : liufeng
@@ -40,8 +42,7 @@ public class TaskSubScheduler {
     @Scheduled(cron = "0 0/1 *  * * ? ")
     public void invokeMakeTaskSub() {
 
-        StopWatch stopWatch = new StopWatch();
-        stopWatch.start();
+        Stopwatch stopwatch = Stopwatch.createStarted();
         log.info("### start invokeMakeTaskSub ###");
 
         Task task = taskService.getByState(TaskState.confirm_passed.getCode());
@@ -51,14 +52,14 @@ public class TaskSubScheduler {
 
             log.info("### start makeIncrDayTaskSub ###");
             taskSubService.makeIncrDayTaskSub(task);
-            log.info("### end makeIncrDayTaskSub,cost {} s ###", stopWatch.getTotalTimeSeconds());
+            log.info("### end makeIncrDayTaskSub,cost {} s ###", stopwatch.elapsed(TimeUnit.SECONDS));
 
             taskService.changeState(task.getId(), TaskState.run_end.getCode());
             log.info("### make tasksubs success！,task_id {} ###", task.getId());
         }
 
-        log.info("### end invokeMakeTaskSub,cost {} s ###", stopWatch.getTotalTimeSeconds());
-        stopWatch.stop();
+        log.info("### end invokeMakeTaskSub,cost {} s ###", stopwatch.elapsed(TimeUnit.SECONDS));
+        stopwatch.stop();
     }
 
     @Scheduled(cron = "0 0 0  * * ? ")
@@ -72,7 +73,7 @@ public class TaskSubScheduler {
 
     @Scheduled(cron = "0 0 0  * * ? ")
     public void makeRetainDayTaskSub() {
-        StopWatch stopWatch = new StopWatch();
+        Stopwatch stopWatch = Stopwatch.createStarted();
         stopWatch.start();
         log.info("### start makeRetainDayTaskSub ###");
 
@@ -80,10 +81,10 @@ public class TaskSubScheduler {
         for (Task task : list) {
             log.info("### start makeRetainDayTaskSub ###");
             taskSubService.makeRetainDayTaskSub(task);
-            log.info("### end makeRetainDayTaskSub,cost {} s ###", stopWatch.getTotalTimeSeconds());
+            log.info("### end makeRetainDayTaskSub,cost {} s ###", stopWatch.elapsed(TimeUnit.SECONDS));
         }
 
-        log.info("### end makeRetainDayTaskSub,cost {} s ###", stopWatch.getTotalTimeSeconds());
+        log.info("### end makeRetainDayTaskSub,cost {} s ###", stopWatch.elapsed(TimeUnit.SECONDS));
         stopWatch.stop();
     }
 }

@@ -97,7 +97,7 @@ public class TaskSubServiceImpl implements TaskSubService {
         DateTime nowDateTime = DateTime.now();
         DateTime createDateTime = new DateTime(task.getCreateTime());
         int interDay = DateTimeUitl.getDayInter(createDateTime, nowDateTime);
-        DateTime startTime = DateTimeUitl.getStartTime(task.getRunStartTime(), interDay);
+        DateTime startTime = DateTimeUitl.getStartTime(createDateTime, task.getRunStartTime(), interDay);
 
         if (interDay == 0) {                                                    //如果是当天，从当前时间之后算起
             times = times - DateTimeUitl.perTimeNum(task.getRunStartTime(), nowDateTime);

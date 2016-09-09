@@ -16,12 +16,13 @@ public class DateTimeUitl {
     /**
      * 获取任务开始时间
      *
+     * @param dateTime  任务创建时间
      * @param startHour 任务开始时间
      * @param dayIndex  第几天的任务
      * @return
      */
-    public static DateTime getStartTime(int startHour, int dayIndex) {
-        DateTime startTime = DateTime.now().plusDays(dayIndex).
+    public static DateTime getStartTime(DateTime dateTime, int startHour, int dayIndex) {
+        DateTime startTime = dateTime.plusDays(dayIndex).
                 withHourOfDay(startHour)
                 .withMinuteOfHour(0);
 
