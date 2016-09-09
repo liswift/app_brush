@@ -1,7 +1,6 @@
 package com.eazy.brush.controller.common;
 
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.eazy.brush.controller.common.models.ErrorModel;
+import com.eazy.brush.controller.common.models.ErrorType;
+import com.eazy.brush.controller.common.models.ResultDataModel;
 import com.google.common.collect.Maps;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -34,11 +37,14 @@ import com.google.gson.reflect.TypeToken;
  * @desc controller 基础操作类
  * @date 2016.3.19
  */
+@Slf4j
 public abstract class BaseController {
 
     protected HttpServletRequest request;
     protected HttpServletResponse response;
     protected RedirectAttributes redirectAttributes;
+
+    public static final ResultDataModel DEFAULT_SUCCESS_MODEL = new ResultDataModel(true, "操作成功。");
 
     public String getPara(String key) {
         return getRequest().getParameter(key);
@@ -112,6 +118,12 @@ public abstract class BaseController {
 
     public void renderJson(String data) {
         ActionRequest.renderJson(data, getResponse());
+    }
+
+    protected ErrorModel buildErrorModel(ErrorType errorType, Object... args) {
+        ErrorModel model = new ErrorModel(getRequest().getRequestURI(), errorType.getDisplayMessage(), errorType, args);
+        log.error(String.format("Error uri:%s, desc:%s", model.getRequest(), model.getDisplayMessage()));
+        return model;
     }
 
     public void renderJson(Object data) {

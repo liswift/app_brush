@@ -25,6 +25,6 @@ public class TaskController extends BaseController {
 
     @RequestMapping(value = "uploadApk", method = RequestMethod.GET)
     public void uploadApk(HttpServletRequest request) {
-//        renderJson();
+        renderJson(DEFAULT_SUCCESS_MODEL);
     }
 }

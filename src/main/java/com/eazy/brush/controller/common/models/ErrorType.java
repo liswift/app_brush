@@ -1,4 +1,4 @@
-package com.eazy.brush.controller.view;
+package com.eazy.brush.controller.common.models;
 
 
 import com.google.common.collect.Maps;
