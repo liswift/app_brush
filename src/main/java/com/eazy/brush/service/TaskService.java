@@ -17,6 +17,8 @@ public interface TaskService {
 
     List<Task> getList(int userId, int offset, int size);
 
+    void add(Task task);
+
     void changeState(int id, int state);
 
     void changeAllState(int state);

@@ -5,6 +5,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -20,17 +21,28 @@ import java.io.*;
 @Component
 public class FtpTool {
 
+    @Value("${ftp.addr}")
+    private String addr;
+
+    @Value("${ftp.port}")
+    private int port;
+
+    @Value("${ftp.username}")
+    private String username;
+
+    @Value("${ftp.password}")
+    private String password;
+
+    @Value("${ftp.path}")
+    private String path;
+
     private FTPClient ftp;
 
-    /**
-     * @param path     上传到ftp服务器哪个路径下
-     * @param addr     地址
-     * @param port     端口号
-     * @param username 用户名
-     * @param password 密码
-     */
+    public FtpTool() {
+    }
+
     @PostConstruct
-    public void connect(String path, String addr, int port, String username, String password) {
+    public void connect() {
         ftp = new FTPClient();
         int reply;
         try {
@@ -54,7 +66,7 @@ public class FtpTool {
      */
     public void upload(InputStream inputStream, String ftpName) {
         try {
-            ftp.storeFile(ftpName, inputStream);
+            ftp.storeFile(new String(ftpName.getBytes("UTF-8"), "iso-8859-1"), inputStream);
         } catch (IOException e) {
             log.error("upload ftp error {}", e);
         }
@@ -86,23 +98,12 @@ public class FtpTool {
      *
      * @param ftpFile ftp目录
      */
-    public OutputStream downLoad(String ftpFile) {
-        OutputStream os = new ByteArrayOutputStream();
+    public void downLoadToOutputStream(String ftpFile, OutputStream outputStream) {
         try {
-            ftp.retrieveFile(ftpFile, os);
+            ftp.retrieveFile(ftpFile, outputStream);
         } catch (Exception e) {
             e.printStackTrace();
             log.error("down ftp file error {}", e);
         }
-        return os;
-    }
-
-    public static void main(String[] args) throws FileNotFoundException {
-        FtpTool t = new FtpTool();
-
-        t.connect("", "115.28.7.101", 21, "lf", "liufeng65");
-        File file = new File("F:\\a.log");
-        t.upload(new FileInputStream(file), "a.log");
-        t.downLoad("test.log", "F:\\test.log");
     }
 }

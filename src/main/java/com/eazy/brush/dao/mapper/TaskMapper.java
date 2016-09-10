@@ -1,6 +1,7 @@
 package com.eazy.brush.dao.mapper;
 
 import com.eazy.brush.dao.entity.Task;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -13,9 +14,15 @@ import java.util.List;
  */
 public interface TaskMapper {
 
-    String FEILDS = "id,user_id,app_name,package_name,version_code,app_version,apk_url,remark_name,incr_day,day_limit," +
+    String INSERT_FEILDS = "user_id,app_name,package_name,version_code,app_version,apk_url,remark_name,incr_day,day_limit," +
             "incr_up_down,run_time,run_up_down,run_start_time," +
             "run_end_time,run_speed,retain_day,retain_percent,state,create_time";
+
+    String INSERT_VALUES = "#{user_id},#{app_name},#{package_name},#{version_code},#{app_version},#{apk_url}," +
+            "#{remark_name},#{incr_day,day_limit},#{incr_up_down},#{run_time},#{run_up_down},#{run_start_time}," +
+            "#{run_end_time},#{run_speed},#{retain_day},#{retain_percent},#{state,create_time}";
+
+    String FEILDS = "id," + INSERT_FEILDS;
 
     @Select("select " + FEILDS + " from task where id=#{id}")
     Task getById(@Param("id") int id);
@@ -25,6 +32,9 @@ public interface TaskMapper {
 
     @Select("select " + FEILDS + " from task where user_id=#{userId} order by id asc limit #{offset},#{size}")
     List<Task> getList(@Param("userId") int userId, @Param("offset") int offset, @Param("size") int size);
+
+    @Insert("insert into task(" + INSERT_FEILDS + ") values (" + INSERT_VALUES + ")")
+    void insert(Task task);
 
     @Update("update task set state=#{state} where id=#{id}")
     void changeState(@Param("id") int id, @Param("state") int state);

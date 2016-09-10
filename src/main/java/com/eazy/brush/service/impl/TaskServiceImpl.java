@@ -38,6 +38,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public void add(Task task) {
+        taskMapper.insert(task);
+    }
+
+    @Override
     public void changeState(int id, int state) {
         taskMapper.changeState(id, state);
     }
