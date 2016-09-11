@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 .add-task-form{
-    padding:15px;
+    padding:20px;
     max-width: 700px;
     border:1px solid #eee;
 }
@@ -36,7 +36,7 @@
     text-align: left;
 }
 .add-task-form .row{
-    margin-top:10px
+    margin-top:15px
 }
 .task-radio.radio-box{
     padding: 0;
