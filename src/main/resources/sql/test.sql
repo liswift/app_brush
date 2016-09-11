@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50539
 File Encoding         : 65001
 
-Date: 2016-09-11 11:08:58
+Date: 2016-09-11 13:11:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -38,18 +38,21 @@ DROP TABLE IF EXISTS `action_item`;
 CREATE TABLE `action_item` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL COMMENT '元动作名称',
-  `view_name` int(11) NOT NULL DEFAULT '0' COMMENT 'view类名',
+  `view_name` varchar(64) NOT NULL DEFAULT '0' COMMENT 'view类名',
+  `view_id` varchar(32) DEFAULT NULL,
   `view_content` varchar(32) NOT NULL COMMENT 'view内容',
   `action` int(11) NOT NULL DEFAULT '0' COMMENT '动作',
-  `acition_param` varchar(255) NOT NULL COMMENT '动作参数',
+  `acition_param` varchar(255) NOT NULL DEFAULT '' COMMENT '动作参数',
   `stay_time` int(11) NOT NULL DEFAULT '0' COMMENT '停留时间',
   `up_down` int(11) NOT NULL DEFAULT '0' COMMENT '波动范围',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of action_item
 -- ----------------------------
+INSERT INTO `action_item` VALUES ('4', 'ACTION_SCROLL_FORWARD', 'android.support.v4.view.ViewPager', 'bd/001', '滑动', '4096', '', '5', '1');
+INSERT INTO `action_item` VALUES ('5', 'ACTION_SCROLL_BACKWARD', 'android.support.v4.view.ViewPager', 'bd/002', '回退', '8192', ' ', '5', '1');
 
 -- ----------------------------
 -- Table structure for `action_page`
@@ -58,15 +61,16 @@ DROP TABLE IF EXISTS `action_page`;
 CREATE TABLE `action_page` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `page_name` varchar(255) NOT NULL COMMENT '页面名称',
-  `page_desc` varchar(64) DEFAULT NULL COMMENT '页面描述',
-  `action_item_id` varchar(64) DEFAULT NULL COMMENT '操作动作id集合',
-  `action_group_id` varchar(64) DEFAULT NULL COMMENT '操作动作组集合',
+  `page_desc` varchar(64) NOT NULL DEFAULT '' COMMENT '页面描述',
+  `action_item_id` varchar(64) NOT NULL DEFAULT '' COMMENT '操作动作id集合',
+  `action_group_id` varchar(64) NOT NULL DEFAULT '' COMMENT '操作动作组集合',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of action_page
 -- ----------------------------
+INSERT INTO `action_page` VALUES ('11', 'com.netease.nr.base.activity.BaseActivity', '', '4,5', '');
 
 -- ----------------------------
 -- Table structure for `conf`
@@ -903,7 +907,7 @@ CREATE TABLE `log` (
   `DESCRIPTION` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `REQUEST_PARAM` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4736 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4737 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of log
@@ -2810,6 +2814,7 @@ INSERT INTO `log` VALUES ('4732', null, '2016-09-11 10:24:20', null, 'Windows 8.
 INSERT INTO `log` VALUES ('4733', null, '2016-09-11 10:25:12', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 INSERT INTO `log` VALUES ('4734', null, '2016-09-11 10:28:43', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 INSERT INTO `log` VALUES ('4735', null, '2016-09-11 10:33:23', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4736', null, '2016-09-11 12:52:52', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `login_log`
@@ -3529,12 +3534,12 @@ CREATE TABLE `task` (
   `state` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '任务被执行，回调时间',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of task
 -- ----------------------------
-INSERT INTO `task` VALUES ('10', '9', '百度地图', 'com.wandoujia.phoenix2', '12', '2.3', 'https://dl.wandoujia.com/files/jupiter/latest/wandoujia-web_inner_referral_homepage.apk', '百度地图2.3', '9999', '100000', '10', '10', '2', '8', '23', '1', '60', '20', '', '4', '2016-09-06 21:30:20');
+INSERT INTO `task` VALUES ('11', '9', '网易新闻', 'com.netease.newsreader.activity', '560', '15.0', 'http://www.yuekuba.com/task/apk/download?file=netease_newsreader_android.apk', '网易新闻', '10000', '100000', '10', '60', '1', '0', '23', '1', '7', '50', '11', '2', '2016-09-11 11:38:59');
 
 -- ----------------------------
 -- Table structure for `task_action`

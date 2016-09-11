@@ -12,6 +12,7 @@ public class ActionItem {
     private int id;
     private String name;//元动作名称,
     private String viewName; //view类名,
+    private String viewId; //viewId,
     private String viewContent; //view内容,
     private String action;//动作,
     private String acitionParam;//动作参数,

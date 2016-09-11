@@ -47,7 +47,7 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
 
             Task task = taskService.getById(taskSub.getTaskId());
             DeviceInfo deviceInfo = deviceInfoService.getById(taskSub.getDeviceInfoId());
-            List<ActionPageVo> actionPageVos = actionPageVoService.getByIds(task.getActoinPageId());
+            List<ActionPageVo> actionPageVos = actionPageVoService.getByIds(task.getActionPageId());
 
             TaskSubVo taskSubVo = new TaskSubVo();
             taskSubVo.setId(taskSub.getId());
