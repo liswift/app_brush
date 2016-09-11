@@ -81,7 +81,7 @@ public class TaskSubServiceImpl implements TaskSubService {
     @Override
     public void makeIncrDayTaskSub(Task task) {
 
-        List<Action> actionList = taskActionService.getActionsByTaskId(task.getId());
+        List<ActionPage> actionPageList = taskActionService.getActionsByTaskId(task.getId());
         List<DeviceInfo> deviceInfos = deviceInfoService.getList(0, Integer.MAX_VALUE);
 
         int perNum = 0, times = 0;
@@ -107,7 +107,7 @@ public class TaskSubServiceImpl implements TaskSubService {
         while (i-- > 0) {
             long perTime = Long.parseLong(startTime.toString("yyyyMMddHHmm"));
             if (perNum > 0) {
-                buildTaskSubs(task, perTime, actionList, deviceInfos, perNum);
+                buildTaskSubs(task, perTime, actionPageList, deviceInfos, perNum);
             }
             startTime = startTime.plusMinutes(Constants.TASK_SUB_PER_MINITE);
         }
@@ -208,11 +208,11 @@ public class TaskSubServiceImpl implements TaskSubService {
      * 生成任务元
      *
      * @param task
-     * @param actionList
+     * @param actionPageList
      * @param deviceInfos
      * @param taskNum
      */
-    private void buildTaskSubs(Task task, long perTime, List<Action> actionList,
+    private void buildTaskSubs(Task task, long perTime, List<ActionPage> actionPageList,
                                List<DeviceInfo> deviceInfos, int taskNum) {
 
 
@@ -223,7 +223,6 @@ public class TaskSubServiceImpl implements TaskSubService {
             taskSub.setId(UUID.randomUUID().toString());
             taskSub.setTaskId(task.getId());
             taskSub.setPerTime(perTime);
-            taskSub.setActionId(actionList.get(random.nextInt(actionList.size())).getId());
             taskSub.setDeviceInfoId(LotteryUtil.lottery(deviceInfos).getId());
             taskSub.setRunTime(task.getRunTime());
             taskSub.setCreateDay(Integer.parseInt(DateTime.now().toString("yyyyMMdd")));

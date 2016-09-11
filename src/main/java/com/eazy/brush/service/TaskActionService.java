@@ -1,6 +1,6 @@
 package com.eazy.brush.service;
 
-import com.eazy.brush.dao.entity.Action;
+import com.eazy.brush.dao.entity.ActionPage;
 
 import java.util.List;
 
@@ -11,5 +11,5 @@ import java.util.List;
  */
 public interface TaskActionService {
 
-    List<Action> getActionsByTaskId(int taskId);
+    List<ActionPage> getActionsByTaskId(int taskId);
 }

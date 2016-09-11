@@ -164,7 +164,7 @@ public class LoginController extends BaseController {
     /**
      * 跳转到登录失败页面
      */
-    @RequestMapping(value = "/error", method = RequestMethod.GET)
+    @RequestMapping(value = "/error", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView error(ModelMap model) {
         return new ModelAndView("login/login", model);
     }

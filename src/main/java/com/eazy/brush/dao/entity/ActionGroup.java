@@ -8,10 +8,10 @@ import lombok.Data;
  * create time:2016/8/28 10:41
  */
 @Data
-public class ActionSub {
+public class ActionGroup {
 
     private int id;
-    private String name;
-    private String action;
-    private int runTime;        //运行时长
+    private String name;//组动作名称,
+    private String itemId;// 元动作id,
+    private int enable;
 }

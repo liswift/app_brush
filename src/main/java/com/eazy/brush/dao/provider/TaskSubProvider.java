@@ -25,7 +25,7 @@ public class TaskSubProvider {
         MessageFormat mf = new MessageFormat("" +
                 "(" +
                 "#'{'taskSubs[{0}].id'}',#'{'taskSubs[{0}].taskId'}',#'{'taskSubs[{0}].perTime'}'," +
-                "#'{'taskSubs[{0}].actionId'}',#'{'taskSubs[{0}].deviceInfoId'}'," +
+                "#'{'taskSubs[{0}].deviceInfoId'}'," +
                 "#'{'taskSubs[{0}].runTime'}',#'{'taskSubs[{0}].createDay'}'," +
                 "#'{'taskSubs[{0}].telAndroidId'}',#'{'taskSubs[{0}].subscriberId'}'," +
                 "#'{'taskSubs[{0}].operator'}',#'{'taskSubs[{0}].operatorName'}'," +

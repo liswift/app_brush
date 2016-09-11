@@ -39,7 +39,7 @@ public class TaskSubController extends BaseController {
         List<TaskSub> taskSubs = taskSubService.getUnConsumeList(perTime, Integer.parseInt(size));
         List<TaskSubVo> taskSubList = taskSubVoService.buildVo(taskSubs);
         taskSubService.changeTaskSubState(taskSubVoService.buildVoIds(taskSubs), 1);//任务已取走，未回调
-        renderJson200(taskSubList);
+        renderJson200(wrapField("tasks", taskSubList));
     }
 
     @RequestMapping("/callback")

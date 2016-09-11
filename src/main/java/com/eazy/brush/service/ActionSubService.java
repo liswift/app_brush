@@ -1,9 +1,5 @@
 package com.eazy.brush.service;
 
-import com.eazy.brush.dao.entity.ActionSub;
-
-import java.util.List;
-
 /**
  * 自动作服务
  * author : liufeng
@@ -11,5 +7,4 @@ import java.util.List;
  */
 public interface ActionSubService {
 
-    List<ActionSub> getByActionIds(String actions);
 }

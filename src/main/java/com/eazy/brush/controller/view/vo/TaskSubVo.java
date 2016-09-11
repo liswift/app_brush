@@ -5,6 +5,8 @@ import com.eazy.brush.dao.entity.DeviceInfo;
 import com.eazy.brush.dao.entity.NetInfo;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * 元任务
  * author : liufeng
@@ -18,7 +20,7 @@ public class TaskSubVo {
     private int versionCode;
     private int runTime;
     private String apkUrl;
-    private ActionVo actionVo;
+    private List<ActionPageVo> actionPageVo;
     private DeviceInfo deviceInfo;
     private CardInfo cardInfo;
     private NetInfo netInfo;

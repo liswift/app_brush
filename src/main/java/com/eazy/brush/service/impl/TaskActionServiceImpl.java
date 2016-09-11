@@ -1,7 +1,7 @@
 package com.eazy.brush.service.impl;
 
-import com.eazy.brush.dao.entity.Action;
-import com.eazy.brush.dao.mapper.ActionMapper;
+import com.eazy.brush.dao.entity.ActionPage;
+import com.eazy.brush.dao.mapper.ActionPageMapper;
 import com.eazy.brush.dao.mapper.TaskActionMapper;
 import com.eazy.brush.service.TaskActionService;
 import org.apache.commons.lang3.StringUtils;
@@ -21,11 +21,11 @@ public class TaskActionServiceImpl implements TaskActionService {
     TaskActionMapper taskActionMapper;
 
     @Autowired
-    ActionMapper actionMapper;
+    ActionPageMapper actionPageMapper;
 
     @Override
-    public List<Action> getActionsByTaskId(int taskId) {
+    public List<ActionPage> getActionsByTaskId(int taskId) {
         List<Integer> actionIds = taskActionMapper.getActionsByTaskId(taskId);
-        return actionMapper.getListByIds(StringUtils.join(actionIds, ","));
+        return actionPageMapper.getListByIds(StringUtils.join(actionIds, ","));
     }
 }

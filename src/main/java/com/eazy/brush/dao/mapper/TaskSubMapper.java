@@ -13,11 +13,11 @@ import java.util.List;
  */
 public interface TaskSubMapper {
 
-    String INSERT_FEILDS = "id,task_id,per_time,action_id,device_info_id,run_time,create_day,tel_android_id," +
+    String INSERT_FEILDS = "id,task_id,per_time,device_info_id,run_time,create_day,tel_android_id," +
             "subscriber_id,operator,operator_name,line1_number,simSerial_number,network_type," +
             "phone_type,`host`,`port`,mac,type";
 
-    String INSERT_VALUES = "#{id},#{taskId},#{perTime},#{actionId},#{deviceInfoId},#{runTime},#{create_day},#{telAndroidId}," +
+    String INSERT_VALUES = "#{id},#{taskId},#{perTime},#{deviceInfoId},#{runTime},#{create_day},#{telAndroidId}," +
             "#{subscriberId},#{operator},#{operatorName},#{line1Number},#{simSerialNumber},#{networkType}," +
             "#{phoneType},#{host},#{port},#{mac},#{type}";
 

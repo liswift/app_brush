@@ -29,6 +29,7 @@ public class Task {
     private int runSpeed;           //投放速度
     private int retainDay;          //留存天数
     private int retainPercent;      //留存率
-    private int state;      //任务被执行回调时间
-    private Date createTime;
+    private String actoinPageId;    //任务对应的页面动作集合
+    private int state;              //任务被执行回调时间
+    private Date createTime;        //创建时间
 }

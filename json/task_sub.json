@@ -1,58 +1,43 @@
 {
   "data": [
     {
-      "actionVo": {
-        "actionSubs": [
-          {
-            "action": "action1",
-            "id": 1,
-            "name": "name1",
-            "runTime": 10
-          },
-          {
-            "action": "actions3",
-            "id": 3,
-            "name": "name0",
-            "runTime": 10
-          }
-        ],
-        "id": 10,
-        "name": "name2"
-      },
+      "actionPageVo": [],
       "apkUrl": "https://dl.wandoujia.com/files/jupiter/latest/wandoujia-web_inner_referral_homepage.apk",
       "appName": "百度地图",
       "cardInfo": {
-        "line1Number": "14506656666",
+        "line1Number": "13702527109",
         "networkType": 13,
-        "operator": "01",
-        "operatorName": "中国联通",
+        "operator": "02",
+        "operatorName": "中国移动",
         "phoneType": "2",
-        "simSerialNumber": "8906011451473254863",
-        "subscriberId": "460016650863296",
-        "telAndroidId": "d5fd8e58-368b-4a"
+        "simSerialNumber": "8906021371473561606",
+        "subscriberId": "460022520606064",
+        "telAndroidId": "8ece5299-deca-4f"
       },
       "deviceInfo": {
-        "api": 21,
-        "board": "GT-I9500",
-        "brand": "samsung",
-        "coverage": 0.4221,
-        "height": 1920,
-        "id": 1709,
-        "rate": 0.4221,
-        "screenSize": 5,
+        "api": 18,
+        "board": "GN9005",
+        "brand": "gionee",
+        "coverage": 0.1036,
+        "height": 1280,
+        "id": 2056,
+        "rate": 0.1036,
+        "screenSize": 4.8,
         "versionRelease": "",
-        "width": 1080
+        "width": 720
       },
-      "id": 1159935,
+      "id": "043ce24e-e5e0-4a2d-bb80-c783f10da397",
       "netInfo": {
         "host": "192.168.1.102",
-        "mac": "00:21:05:DD:A2:52",
+        "mac": "00:21:9E:AB:78:29",
         "port": 8888,
-        "type": 0
+        "type": 1
       },
       "packageName": "com.wandoujia.phoenix2",
       "runTime": 10,
       "versionCode": 12
     }
-  ]
+  ],
+  "code": 200,
+  "msg": ""
 }

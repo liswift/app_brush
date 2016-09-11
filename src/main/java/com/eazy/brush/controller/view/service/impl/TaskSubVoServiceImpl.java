@@ -1,10 +1,11 @@
 package com.eazy.brush.controller.view.service.impl;
 
+import com.eazy.brush.controller.view.service.ActionPageVoService;
 import com.eazy.brush.controller.view.service.TaskSubVoService;
-import com.eazy.brush.controller.view.vo.ActionVo;
+import com.eazy.brush.controller.view.vo.ActionPageVo;
 import com.eazy.brush.controller.view.vo.TaskSubVo;
 import com.eazy.brush.dao.entity.*;
-import com.eazy.brush.service.ActionService;
+import com.eazy.brush.service.ActionPageService;
 import com.eazy.brush.service.ActionSubService;
 import com.eazy.brush.service.DeviceInfoService;
 import com.eazy.brush.service.TaskService;
@@ -28,7 +29,7 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
     TaskService taskService;
 
     @Autowired
-    ActionService actionService;
+    ActionPageService actionPageService;
 
     @Autowired
     ActionSubService actionSubService;
@@ -36,19 +37,17 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
     @Autowired
     DeviceInfoService deviceInfoService;
 
+    @Autowired
+    ActionPageVoService actionPageVoService;
+
     @Override
     public List<TaskSubVo> buildVo(List<TaskSub> list) {
         List<TaskSubVo> voList = Lists.newArrayList();
         for (TaskSub taskSub : list) {
 
             Task task = taskService.getById(taskSub.getTaskId());
-            Action action = actionService.getById(taskSub.getActionId());
             DeviceInfo deviceInfo = deviceInfoService.getById(taskSub.getDeviceInfoId());
-
-            ActionVo actionVo = new ActionVo();
-            actionVo.setId(taskSub.getActionId());
-            actionVo.setName(action.getName());
-            actionVo.setActionSubs(actionSubService.getByActionIds(action.getActions()));
+            List<ActionPageVo> actionPageVos = actionPageVoService.getByIds(task.getActoinPageId());
 
             TaskSubVo taskSubVo = new TaskSubVo();
             taskSubVo.setId(taskSub.getId());
@@ -56,8 +55,8 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
             taskSubVo.setAppName(task.getAppName());
             taskSubVo.setPackageName(task.getPackageName());
             taskSubVo.setVersionCode(task.getVersionCode());
+            taskSubVo.setActionPageVo(actionPageVos);
             taskSubVo.setApkUrl(task.getApkUrl());
-            taskSubVo.setActionVo(actionVo);
             taskSubVo.setDeviceInfo(deviceInfo);
 
             taskSubVo.setCardInfo(buildCardInfo(taskSub));
