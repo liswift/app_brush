@@ -51,7 +51,12 @@ public class ProxyIpServiceImpl implements ProxyIpService {
         String[] proxyIpPortArr = StringUtils.splitByWholeSeparator(proxyIpPort, ":");
         ProxyModel proxyModel = new ProxyModel();
         proxyModel.setIp(proxyIpPortArr[0]);
-        proxyModel.setPort(Integer.parseInt(proxyIpPortArr[1]));
+        try {
+            proxyModel.setPort(Integer.parseInt(proxyIpPortArr[1]));
+            return proxyModel;
+        } catch (Exception e) {
+            log.error("parse port error,proxyIpPort is {} error {}", proxyIpPort, e);
+        }
         return proxyModel;
     }
 }
