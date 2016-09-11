@@ -4,7 +4,37 @@
       {
         "actionPageVo": [
           {
-            "actionGroupVos": [],
+            "actionGroupVos": [
+              {
+                "acitionItems": [
+                  {
+                    "acitionParam": "",
+                    "action": "4096",
+                    "id": 4,
+                    "name": "ACTION_SCROLL_FORWARD",
+                    "stayTime": 5,
+                    "upDown": 1,
+                    "viewContent": "滑动",
+                    "viewId": "bd/001",
+                    "viewName": "android.support.v4.view.ViewPager"
+                  },
+                  {
+                    "acitionParam": " ",
+                    "action": "8192",
+                    "id": 5,
+                    "name": "ACTION_SCROLL_BACKWARD",
+                    "stayTime": 5,
+                    "upDown": 1,
+                    "viewContent": "回退",
+                    "viewId": "bd/002",
+                    "viewName": "android.support.v4.view.ViewPager"
+                  }
+                ],
+                "enable": 1,
+                "id": 4,
+                "name": "组动作1"
+              }
+            ],
             "actionItems": [
               {
                 "acitionParam": "",
@@ -37,31 +67,31 @@
         "apkUrl": "http://www.yuekuba.com/task/apk/download?file=netease_newsreader_android.apk",
         "appName": "网易新闻",
         "cardInfo": {
-          "line1Number": "13000436831",
+          "line1Number": "14708455564",
           "networkType": 13,
-          "operator": "01",
-          "operatorName": "中国联通",
-          "phoneType": "1",
-          "simSerialNumber": "8906011301473569580",
-          "subscriberId": "460010430580370",
-          "telAndroidId": "10003e1b-c6bf-4b"
+          "operator": "02",
+          "operatorName": "中国移动",
+          "phoneType": "2",
+          "simSerialNumber": "8906021471473570720",
+          "subscriberId": "460028450720662",
+          "telAndroidId": "f24825bd-634e-42"
         },
         "deviceInfo": {
-          "api": 21,
-          "board": "F103",
-          "brand": "gionee",
-          "coverage": 0.5322,
-          "height": 1280,
-          "id": 2179,
-          "rate": 0.5322,
-          "screenSize": 0,
+          "api": 19,
+          "board": "Y23L",
+          "brand": "vivo",
+          "coverage": 0.8198,
+          "height": 854,
+          "id": 2103,
+          "rate": 0.8198,
+          "screenSize": 4.5,
           "versionRelease": "",
-          "width": 720
+          "width": 480
         },
-        "id": "02f246ae-be7d-4751-96cc-c36ddb131705",
+        "id": "0175cc4b-a0ec-4fe6-871c-35865c8e92db",
         "netInfo": {
           "host": "192.168.1.102",
-          "mac": "00:05:1A:50:A3:2C",
+          "mac": "00:21:1C:82:D0:F9",
           "port": 8888,
           "type": 0
         },

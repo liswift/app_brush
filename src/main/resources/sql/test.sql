@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50539
 File Encoding         : 65001
 
-Date: 2016-09-11 13:11:56
+Date: 2016-09-11 13:27:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,11 +25,12 @@ CREATE TABLE `action_group` (
   `item_id` varchar(255) NOT NULL COMMENT '元动作id',
   `enable` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of action_group
 -- ----------------------------
+INSERT INTO `action_group` VALUES ('4', '组动作1', '4,5', '1');
 
 -- ----------------------------
 -- Table structure for `action_item`
@@ -70,7 +71,7 @@ CREATE TABLE `action_page` (
 -- ----------------------------
 -- Records of action_page
 -- ----------------------------
-INSERT INTO `action_page` VALUES ('11', 'com.netease.nr.base.activity.BaseActivity', '', '4,5', '');
+INSERT INTO `action_page` VALUES ('11', 'com.netease.nr.base.activity.BaseActivity', '', '4,5', '4');
 
 -- ----------------------------
 -- Table structure for `conf`
