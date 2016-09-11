@@ -1,0 +1,57 @@
+@charset "utf-8";
+
+.add-task-form{
+    padding:15px;
+    max-width: 700px;
+    border:1px solid #eee;
+}
+.add-task-item{
+    padding:0;
+    margin:0;
+}
+.task-progress{
+    display: inline-block;
+    vertical-align: middle;
+    height:18px;
+    width:180px;
+    margin-left:15px;
+}
+.task-progress .progress-bar,.task-progress .sr-only{
+    position: relative;
+    height: 18px;
+}
+.task-progress .sr-only{
+   background-color:#5a98de ;
+}
+.task-progress-tint{
+    position: absolute;
+    left:50%;
+    top:50%;
+    z-index: 9;
+}
+.required-dot{
+    color:#ea5550;
+}
+.form-horizontal.add-task-form .form-label{
+    text-align: left;
+}
+.add-task-form .row{
+    margin-top:10px
+}
+.task-radio.radio-box{
+    padding: 0;
+}
+.tabBar-1{
+    border-bottom: 0;
+}
+.tabBar.tabBar-1 span{
+    font-weight: normal;
+    margin-left:2px;
+    width: 70px;
+    text-align: center;
+    padding: 0 2px;
+}
+.tabBar.tabBar-1 span.speed-select{
+    background-color:#5a98de ;
+    color:#fff;
+}

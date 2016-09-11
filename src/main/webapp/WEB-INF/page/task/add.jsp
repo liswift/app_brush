@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -12,11 +14,11 @@
     <script type="text/javascript" src="lib/respond.min.js"></script>
     <script type="text/javascript" src="lib/PIE_IE678.js"></script>
     <![endif]-->
-    <link href="../../../resources/css/H-ui.min.css" rel="stylesheet" type="text/css"/>
-    <link href="../../../resources/css/H-ui.admin.css" rel="stylesheet" type="text/css"/>
-    <link href="../../../resources/lib/icheck/icheck.css" rel="stylesheet" type="text/css"/>
-    <link href="../../../resources/lib/Hui-iconfont/1.0.6/iconfont.css" rel="stylesheet" type="text/css"/>
-    <link href="../../../resources/css/task-style.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/resources/css/H-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/resources/css/H-ui.admin.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/resources/lib/icheck/icheck.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/resources/lib/Hui-iconfont/1.0.6/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/resources/css/task-style.css" rel="stylesheet" type="text/css"/>
     <!--[if IE 6]>
     <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
@@ -42,7 +44,7 @@
         <div class="formControls col-xs-6 col-sm-6">
             <label class="form-label col-xs-4 col-sm-4">应用名称：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" task_name="name" class="input-text" autocomplete="off">
+                <input type="text" task_name="appName" class="input-text" autocomplete="off">
             </div>
         </div>
     </div>
@@ -144,7 +146,7 @@
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <h3 id="myModalLabel">对话框标题</h3><a class="close" data-dismiss="modal" aria-hidden="true"
-                                           href="javascript:void();">×</a>
+                                           href="javascript:void(0);">×</a>
     </div>
     <div class="modal-body">
         <p>对话框内容…</p>
@@ -155,9 +157,9 @@
     </div>
 </div>
 
-<script type="text/javascript" src="../../../resources/lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="../../../resources/lib/bootstrap-modal/2.2.4/bootstrap-modalmanager.js"></script>
-<script type="text/javascript" src="../../../resources/lib/bootstrap-modal/2.2.4/bootstrap-modal.js"></script>
+<script type="text/javascript" src="${ctx}/resources/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modalmanager.js"></script>
+<script type="text/javascript" src="${ctx}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modal.js"></script>
 <script>
     $('#daily-speed,#daily-stay').on('click', 'span', function () {
         var self = $(this);

@@ -58,7 +58,7 @@ public class TaskController extends BaseController {
 
     @RequestMapping(value = "toAdd", method = RequestMethod.GET)
     public ModelAndView toAdd(HttpServletRequest request) {
-        return new ModelAndView("task/task_add");
+        return new ModelAndView("task/add");
     }
 
     @RequestMapping(value = "apk/upload", method = {RequestMethod.GET, RequestMethod.POST})

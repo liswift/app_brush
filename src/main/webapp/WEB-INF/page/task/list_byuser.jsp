@@ -35,7 +35,7 @@
     <div class="cl pd-5 bg-1 bk-gray">
         <span class="l">
             <a class="btn btn-primary radius" href="javascript:;"
-               onclick="layer_show('添加任务','${ctx}/task/toAdd','800')">
+               onclick="task_add('添加任务','${ctx}/task/toAdd')">
                 <i class="Hui-iconfont">&#xe600;</i> 添加任务</a> </span>
     </div>
     <table class="table table-border table-bordered table-bg">
@@ -90,6 +90,15 @@
                     $("#count").text(data.count);
                 }
         );
+    }
+    /*任务-添加*/
+    function task_add(title, url) {
+        var index = layer.open({
+            type: 2,
+            title: title,
+            content: url
+        });
+        layer.full(index);
     }
 </script>
 </body>
