@@ -1,55 +1,72 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : local
-Source Server Version : 50528
+Source Server         : localhost
+Source Server Version : 50539
 Source Host           : localhost:3306
 Source Database       : test
 
 Target Server Type    : MYSQL
-Target Server Version : 50528
+Target Server Version : 50539
 File Encoding         : 65001
 
-Date: 2016-09-09 13:40:53
+Date: 2016-09-11 11:08:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `action`
+-- Table structure for `action_group`
 -- ----------------------------
-DROP TABLE IF EXISTS `action`;
-CREATE TABLE `action` (
-  `id` int(9) NOT NULL AUTO_INCREMENT,
-  `actions` varchar(255) NOT NULL COMMENT '组合动作',
-  `name` varchar(32) DEFAULT NULL COMMENT '动作组名称',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of action
--- ----------------------------
-INSERT INTO `action` VALUES ('9', '1,2', 'name1');
-INSERT INTO `action` VALUES ('10', '1,3', 'name2');
-
--- ----------------------------
--- Table structure for `action_sub`
--- ----------------------------
-DROP TABLE IF EXISTS `action_sub`;
-CREATE TABLE `action_sub` (
-  `id` int(9) NOT NULL AUTO_INCREMENT,
-  `action` varchar(500) NOT NULL COMMENT '动作',
-  `run_time` int(11) NOT NULL COMMENT '运行时长',
-  `name` varchar(32) DEFAULT NULL COMMENT '动作名称',
+DROP TABLE IF EXISTS `action_group`;
+CREATE TABLE `action_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(16) NOT NULL COMMENT '组动作名称',
+  `item_id` varchar(255) NOT NULL COMMENT '元动作id',
+  `enable` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of action_sub
+-- Records of action_group
 -- ----------------------------
-INSERT INTO `action_sub` VALUES ('1', 'action1', '10', 'name1');
-INSERT INTO `action_sub` VALUES ('2', 'actions2', '20', 'name2');
-INSERT INTO `action_sub` VALUES ('3', 'actions3', '10', 'name0');
+
+-- ----------------------------
+-- Table structure for `action_item`
+-- ----------------------------
+DROP TABLE IF EXISTS `action_item`;
+CREATE TABLE `action_item` (
+  `id` int(9) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL COMMENT '元动作名称',
+  `view_name` int(11) NOT NULL DEFAULT '0' COMMENT 'view类名',
+  `view_content` varchar(32) NOT NULL COMMENT 'view内容',
+  `action` int(11) NOT NULL DEFAULT '0' COMMENT '动作',
+  `acition_param` varchar(255) NOT NULL COMMENT '动作参数',
+  `stay_time` int(11) NOT NULL DEFAULT '0' COMMENT '停留时间',
+  `up_down` int(11) NOT NULL DEFAULT '0' COMMENT '波动范围',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of action_item
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `action_page`
+-- ----------------------------
+DROP TABLE IF EXISTS `action_page`;
+CREATE TABLE `action_page` (
+  `id` int(9) NOT NULL AUTO_INCREMENT,
+  `page_name` varchar(255) NOT NULL COMMENT '页面名称',
+  `page_desc` varchar(64) DEFAULT NULL COMMENT '页面描述',
+  `action_item_id` varchar(64) DEFAULT NULL COMMENT '操作动作id集合',
+  `action_group_id` varchar(64) DEFAULT NULL COMMENT '操作动作组集合',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of action_page
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `conf`
@@ -886,7 +903,7 @@ CREATE TABLE `log` (
   `DESCRIPTION` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `REQUEST_PARAM` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4708 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4736 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of log
@@ -2765,6 +2782,34 @@ INSERT INTO `log` VALUES ('4704', null, '2016-09-08 15:57:00', null, 'Windows 7'
 INSERT INTO `log` VALUES ('4705', null, '2016-09-08 16:03:25', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
 INSERT INTO `log` VALUES ('4706', null, '2016-09-08 16:05:06', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
 INSERT INTO `log` VALUES ('4707', null, '2016-09-08 16:07:15', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4708', null, '2016-09-10 14:52:40', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4709', null, '2016-09-10 15:05:33', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4710', null, '2016-09-10 15:05:54', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4711', null, '2016-09-10 15:29:59', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4712', null, '2016-09-10 16:13:24', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4713', null, '2016-09-10 20:15:40', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4714', null, '2016-09-10 20:37:40', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4715', null, '2016-09-11 09:25:09', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4716', null, '2016-09-11 09:26:55', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4717', null, '2016-09-11 09:29:52', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4718', null, '2016-09-11 09:30:29', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4719', null, '2016-09-11 09:32:41', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4720', null, '2016-09-11 09:33:30', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4721', null, '2016-09-11 09:34:33', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4722', null, '2016-09-11 09:38:46', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4723', null, '2016-09-11 09:42:16', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4724', null, '2016-09-11 09:43:06', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4725', null, '2016-09-11 09:48:13', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4726', null, '2016-09-11 09:50:42', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4727', null, '2016-09-11 09:53:25', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4728', null, '2016-09-11 10:02:04', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4729', null, '2016-09-11 10:04:47', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4730', null, '2016-09-11 10:08:27', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4731', null, '2016-09-11 10:24:05', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4732', null, '2016-09-11 10:24:20', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4733', null, '2016-09-11 10:25:12', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4734', null, '2016-09-11 10:28:43', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4735', null, '2016-09-11 10:33:23', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `login_log`
@@ -3480,6 +3525,7 @@ CREATE TABLE `task` (
   `run_speed` int(11) NOT NULL DEFAULT '0' COMMENT '投放速度',
   `retain_day` int(11) NOT NULL DEFAULT '0' COMMENT '留存天数',
   `retain_percent` int(11) DEFAULT NULL COMMENT '留存率',
+  `action_page_id` varchar(64) NOT NULL DEFAULT '' COMMENT '页动作id',
   `state` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '任务被执行，回调时间',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -3488,7 +3534,7 @@ CREATE TABLE `task` (
 -- ----------------------------
 -- Records of task
 -- ----------------------------
-INSERT INTO `task` VALUES ('10', '9', '百度地图', 'com.wandoujia.phoenix2', '12', '2.3', 'https://dl.wandoujia.com/files/jupiter/latest/wandoujia-web_inner_referral_homepage.apk', '百度地图2.3', '9999', '100000', '10', '10', '2', '8', '23', '1', '60', '20', '2', '2016-09-06 21:30:20');
+INSERT INTO `task` VALUES ('10', '9', '百度地图', 'com.wandoujia.phoenix2', '12', '2.3', 'https://dl.wandoujia.com/files/jupiter/latest/wandoujia-web_inner_referral_homepage.apk', '百度地图2.3', '9999', '100000', '10', '10', '2', '8', '23', '1', '60', '20', '', '4', '2016-09-06 21:30:20');
 
 -- ----------------------------
 -- Table structure for `task_action`
@@ -3506,7 +3552,6 @@ CREATE TABLE `task_action` (
 -- ----------------------------
 -- Records of task_action
 -- ----------------------------
-INSERT INTO `task_action` VALUES ('44', '10', '10');
 
 -- ----------------------------
 -- Table structure for `task_sub`
@@ -3516,7 +3561,6 @@ CREATE TABLE `task_sub` (
   `id` varchar(36) NOT NULL,
   `task_id` int(11) NOT NULL COMMENT '任务id',
   `per_time` bigint(20) DEFAULT '0' COMMENT '所在粒度',
-  `action_id` int(11) unsigned NOT NULL COMMENT '动作组id',
   `device_info_id` int(11) NOT NULL COMMENT '设备信息',
   `run_time` int(11) NOT NULL COMMENT '任务执行时间',
   `create_day` int(11) DEFAULT NULL,
@@ -3562,7 +3606,7 @@ CREATE TABLE `user` (
   `LAST_VISIT` datetime DEFAULT NULL,
   `DEL_FLAG` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
@@ -3570,6 +3614,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` VALUES ('9', 'user1', 'e10adc3949ba59abbe56e057f20f883e', null, null, null, '', null, null, null, null, null, null, null, null, null);
 INSERT INTO `user` VALUES ('10', 'super', 'e10adc3949ba59abbe56e057f20f883e', null, null, null, '', null, null, null, null, null, null, null, null, null);
 INSERT INTO `user` VALUES ('11', 'admin', 'e10adc3949ba59abbe56e057f20f883e', null, null, null, '', null, null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('12', 'user2', 'e10adc3949ba59abbe56e057f20f883e', null, null, null, '', null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `user_account`
