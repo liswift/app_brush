@@ -5,10 +5,8 @@ import com.eazy.brush.controller.view.service.TaskSubVoService;
 import com.eazy.brush.controller.view.vo.ActionPageVo;
 import com.eazy.brush.controller.view.vo.TaskSubVo;
 import com.eazy.brush.dao.entity.*;
-import com.eazy.brush.service.ActionPageService;
-import com.eazy.brush.service.ActionSubService;
-import com.eazy.brush.service.DeviceInfoService;
-import com.eazy.brush.service.TaskService;
+import com.eazy.brush.model.ProxyModel;
+import com.eazy.brush.service.*;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +37,9 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
 
     @Autowired
     ActionPageVoService actionPageVoService;
+
+    @Autowired
+    ProxyIpService proxyIpService;
 
     @Override
     public List<TaskSubVo> buildVo(List<TaskSub> list) {
@@ -82,8 +83,10 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
 
     private NetInfo buildNetInfo(TaskSub taskSub) {
         NetInfo netInfo = new NetInfo();
-        netInfo.setHost(taskSub.getHost());              //代理主机地址
-        netInfo.setPort(taskSub.getPort());                  // 端口
+
+        ProxyModel proxyModel = proxyIpService.getRandom();
+        netInfo.setHost(proxyModel.getIp());              //代理主机地址
+        netInfo.setPort(proxyModel.getPort());                  // 端口
         netInfo.setMac(taskSub.getMac());               //mac地址 唯一
         netInfo.setType(taskSub.getType());                  //网络类型 0 手机网络 1 wifi
         return netInfo;

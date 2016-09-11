@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50539
 File Encoding         : 65001
 
-Date: 2016-09-11 13:27:23
+Date: 2016-09-11 20:29:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -908,7 +908,7 @@ CREATE TABLE `log` (
   `DESCRIPTION` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `REQUEST_PARAM` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4737 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4746 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of log
@@ -2816,6 +2816,15 @@ INSERT INTO `log` VALUES ('4733', null, '2016-09-11 10:25:12', null, 'Windows 8.
 INSERT INTO `log` VALUES ('4734', null, '2016-09-11 10:28:43', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 INSERT INTO `log` VALUES ('4735', null, '2016-09-11 10:33:23', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 INSERT INTO `log` VALUES ('4736', null, '2016-09-11 12:52:52', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4737', null, '2016-09-11 15:15:11', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4738', null, '2016-09-11 15:18:35', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4739', null, '2016-09-11 15:19:37', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4740', null, '2016-09-11 15:25:53', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4741', null, '2016-09-11 15:26:59', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4742', null, '2016-09-11 15:27:24', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4743', null, '2016-09-11 15:28:14', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4744', null, '2016-09-11 19:33:28', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4745', null, '2016-09-11 19:34:46', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `login_log`
@@ -3348,7 +3357,7 @@ CREATE TABLE `permission` (
   `STATE` varchar(10) DEFAULT NULL,
   `DESCRIPTION` text,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of permission
@@ -3399,6 +3408,8 @@ INSERT INTO `permission` VALUES ('131', '127', '推广记录', null, null, '', n
 INSERT INTO `permission` VALUES ('132', '124', '任务记录', null, null, '', null, null, null, '任务记录');
 INSERT INTO `permission` VALUES ('133', null, '资源管理', null, null, '', null, '&#xe61a;', null, '资源管理');
 INSERT INTO `permission` VALUES ('134', '133', '主机列表', null, null, '', null, null, null, '主机列表');
+INSERT INTO `permission` VALUES ('135', null, '任务记录', null, null, '', null, null, null, '任务记录');
+INSERT INTO `permission` VALUES ('136', null, '设置', null, null, '', null, null, null, '设置');
 
 -- ----------------------------
 -- Table structure for `role`
@@ -3412,14 +3423,15 @@ CREATE TABLE `role` (
   `SORT` smallint(6) DEFAULT NULL,
   `DEL_FLAG` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role
 -- ----------------------------
-INSERT INTO `role` VALUES ('1', 'admin', 'admin', '审核员', '2', null);
-INSERT INTO `role` VALUES ('5', 'guest', 'guest', '普通用户', '3', null);
+INSERT INTO `role` VALUES ('1', 'audit', 'audit', '审核员', '2', null);
+INSERT INTO `role` VALUES ('5', 'customer', 'customer', '普通用户', '3', null);
 INSERT INTO `role` VALUES ('13', 'superadmin', 'superadmin', '超级管理员', '1', null);
+INSERT INTO `role` VALUES ('14', 'admin', 'admin', '管理员', null, null);
 
 -- ----------------------------
 -- Table structure for `role_permission`
@@ -3432,39 +3444,11 @@ CREATE TABLE `role_permission` (
   PRIMARY KEY (`ID`),
   KEY `FK_ROLE_PER_REFERENCE_PERMISSI` (`PERMISSION_ID`) USING BTREE,
   KEY `FK_ROLE_PER_REFERENCE_ROLE` (`ROLE_ID`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1505 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1551 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role_permission
 -- ----------------------------
-INSERT INTO `role_permission` VALUES ('1266', '5', '124');
-INSERT INTO `role_permission` VALUES ('1267', '5', '125');
-INSERT INTO `role_permission` VALUES ('1268', '5', '127');
-INSERT INTO `role_permission` VALUES ('1269', '5', '1');
-INSERT INTO `role_permission` VALUES ('1270', '5', '2');
-INSERT INTO `role_permission` VALUES ('1271', '5', '3');
-INSERT INTO `role_permission` VALUES ('1272', '5', '39');
-INSERT INTO `role_permission` VALUES ('1273', '5', '45');
-INSERT INTO `role_permission` VALUES ('1274', '5', '58');
-INSERT INTO `role_permission` VALUES ('1275', '5', '59');
-INSERT INTO `role_permission` VALUES ('1276', '5', '70');
-INSERT INTO `role_permission` VALUES ('1277', '5', '15');
-INSERT INTO `role_permission` VALUES ('1278', '5', '20');
-INSERT INTO `role_permission` VALUES ('1279', '1', '106');
-INSERT INTO `role_permission` VALUES ('1280', '1', '107');
-INSERT INTO `role_permission` VALUES ('1281', '1', '121');
-INSERT INTO `role_permission` VALUES ('1282', '1', '124');
-INSERT INTO `role_permission` VALUES ('1283', '1', '125');
-INSERT INTO `role_permission` VALUES ('1284', '1', '127');
-INSERT INTO `role_permission` VALUES ('1285', '1', '1');
-INSERT INTO `role_permission` VALUES ('1286', '1', '2');
-INSERT INTO `role_permission` VALUES ('1287', '1', '3');
-INSERT INTO `role_permission` VALUES ('1288', '1', '12');
-INSERT INTO `role_permission` VALUES ('1289', '1', '39');
-INSERT INTO `role_permission` VALUES ('1290', '1', '15');
-INSERT INTO `role_permission` VALUES ('1291', '1', '14');
-INSERT INTO `role_permission` VALUES ('1292', '1', '20');
-INSERT INTO `role_permission` VALUES ('1294', '1', '111');
 INSERT INTO `role_permission` VALUES ('1461', '13', '124');
 INSERT INTO `role_permission` VALUES ('1462', '13', '125');
 INSERT INTO `role_permission` VALUES ('1463', '13', '132');
@@ -3507,6 +3491,26 @@ INSERT INTO `role_permission` VALUES ('1500', '13', '111');
 INSERT INTO `role_permission` VALUES ('1501', '13', '112');
 INSERT INTO `role_permission` VALUES ('1502', '13', '113');
 INSERT INTO `role_permission` VALUES ('1504', '13', '110');
+INSERT INTO `role_permission` VALUES ('1531', '1', '135');
+INSERT INTO `role_permission` VALUES ('1532', '1', '136');
+INSERT INTO `role_permission` VALUES ('1533', '5', '124');
+INSERT INTO `role_permission` VALUES ('1534', '5', '125');
+INSERT INTO `role_permission` VALUES ('1535', '5', '132');
+INSERT INTO `role_permission` VALUES ('1536', '5', '127');
+INSERT INTO `role_permission` VALUES ('1537', '5', '131');
+INSERT INTO `role_permission` VALUES ('1538', '5', '128');
+INSERT INTO `role_permission` VALUES ('1539', '5', '129');
+INSERT INTO `role_permission` VALUES ('1540', '5', '130');
+INSERT INTO `role_permission` VALUES ('1541', '14', '124');
+INSERT INTO `role_permission` VALUES ('1542', '14', '125');
+INSERT INTO `role_permission` VALUES ('1543', '14', '132');
+INSERT INTO `role_permission` VALUES ('1544', '14', '133');
+INSERT INTO `role_permission` VALUES ('1545', '14', '134');
+INSERT INTO `role_permission` VALUES ('1546', '14', '1');
+INSERT INTO `role_permission` VALUES ('1547', '14', '3');
+INSERT INTO `role_permission` VALUES ('1548', '14', '7');
+INSERT INTO `role_permission` VALUES ('1549', '14', '97');
+INSERT INTO `role_permission` VALUES ('1550', '14', '98');
 
 -- ----------------------------
 -- Table structure for `task`
@@ -3579,8 +3583,6 @@ CREATE TABLE `task_sub` (
   `simSerial_number` varchar(32) DEFAULT NULL COMMENT 'sim卡串号',
   `network_type` int(11) NOT NULL COMMENT '手机卡网络类型',
   `phone_type` varchar(32) DEFAULT NULL COMMENT '手机通话类型',
-  `host` varchar(16) DEFAULT NULL COMMENT '代理主机地址',
-  `port` int(11) NOT NULL COMMENT '端口',
   `mac` varchar(32) DEFAULT NULL COMMENT 'mac地址 唯一',
   `type` int(11) NOT NULL COMMENT '网络类型 0 手机网络 1 wifi',
   PRIMARY KEY (`id`)
@@ -3612,7 +3614,7 @@ CREATE TABLE `user` (
   `LAST_VISIT` datetime DEFAULT NULL,
   `DEL_FLAG` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
@@ -3621,6 +3623,7 @@ INSERT INTO `user` VALUES ('9', 'user1', 'e10adc3949ba59abbe56e057f20f883e', nul
 INSERT INTO `user` VALUES ('10', 'super', 'e10adc3949ba59abbe56e057f20f883e', null, null, null, '', null, null, null, null, null, null, null, null, null);
 INSERT INTO `user` VALUES ('11', 'admin', 'e10adc3949ba59abbe56e057f20f883e', null, null, null, '', null, null, null, null, null, null, null, null, null);
 INSERT INTO `user` VALUES ('12', 'user2', 'e10adc3949ba59abbe56e057f20f883e', null, null, null, '', null, null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('13', 'audit', 'e10adc3949ba59abbe56e057f20f883e', null, null, null, '', null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `user_account`
@@ -3666,11 +3669,12 @@ CREATE TABLE `user_role` (
   PRIMARY KEY (`ID`),
   KEY `FK_USER_ROL_REFERENCE_ROLE` (`ROLE_ID`) USING BTREE,
   KEY `FK_USER_ROL_REFERENCE_USERS` (`USER_ID`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_role
 -- ----------------------------
 INSERT INTO `user_role` VALUES ('41', '10', '13');
 INSERT INTO `user_role` VALUES ('42', '9', '5');
-INSERT INTO `user_role` VALUES ('43', '11', '1');
+INSERT INTO `user_role` VALUES ('45', '11', '14');
+INSERT INTO `user_role` VALUES ('46', '13', '1');

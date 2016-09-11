@@ -30,7 +30,7 @@ public class TaskSubProvider {
                 "#'{'taskSubs[{0}].telAndroidId'}',#'{'taskSubs[{0}].subscriberId'}'," +
                 "#'{'taskSubs[{0}].operator'}',#'{'taskSubs[{0}].operatorName'}'," +
                 "#'{'taskSubs[{0}].line1Number'}',#'{'taskSubs[{0}].simSerialNumber'}',#'{'taskSubs[{0}].networkType'}'," +
-                "#'{'taskSubs[{0}].phoneType'}',#'{'taskSubs[{0}].host'}',#'{'taskSubs[{0}].port'}',#'{'taskSubs[{0}].mac'}'," +
+                "#'{'taskSubs[{0}].phoneType'}',#'{'taskSubs[{0}].mac'}'," +
                 "#'{'taskSubs[{0}].type'}'" +
                 ")");
 

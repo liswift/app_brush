@@ -15,11 +15,11 @@ public interface TaskSubMapper {
 
     String INSERT_FEILDS = "id,task_id,per_time,device_info_id,run_time,create_day,tel_android_id," +
             "subscriber_id,operator,operator_name,line1_number,simSerial_number,network_type," +
-            "phone_type,`host`,`port`,mac,type";
+            "phone_type,mac,type";
 
     String INSERT_VALUES = "#{id},#{taskId},#{perTime},#{deviceInfoId},#{runTime},#{create_day},#{telAndroidId}," +
             "#{subscriberId},#{operator},#{operatorName},#{line1Number},#{simSerialNumber},#{networkType}," +
-            "#{phoneType},#{host},#{port},#{mac},#{type}";
+            "#{phoneType},#{mac},#{type}";
 
     String FEILDS = INSERT_FEILDS + ",callback_time";
 

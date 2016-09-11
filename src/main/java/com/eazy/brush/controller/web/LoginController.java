@@ -125,7 +125,7 @@ public class LoginController extends BaseController {
     public ModelAndView welcome() {
 
         Subject currentUser = SecurityUtils.getSubject();
-        if (currentUser.hasRole(Role.guest.name())) {
+        if (currentUser.hasRole(Role.customer.name())) {
             return getUserModelAndView();
         }
         return getAdminModelAndView();

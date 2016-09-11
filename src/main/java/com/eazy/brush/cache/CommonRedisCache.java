@@ -820,6 +820,20 @@ public class CommonRedisCache {
         });
     }
 
+    // lIndex
+    public String lIndex(final String key, final long index) {
+        return (String) this.redisTemplate.execute(new RedisCallback<String>() {
+            @Override
+            public String doInRedis(RedisConnection connection) throws DataAccessException {
+                try {
+                    return new String(connection.lIndex(rawString(key), index));
+                } catch (Exception e) {
+                    logger.error(e.getMessage(), e);
+                    return null;
+                }
+            }
+        });
+    }
 
     // bRPop
     public List<String> bRPop(final int popWait, final String key) {

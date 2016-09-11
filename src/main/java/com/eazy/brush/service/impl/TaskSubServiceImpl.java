@@ -10,10 +10,7 @@ import com.eazy.brush.core.utils.Constants;
 import com.eazy.brush.core.utils.DateTimeUitl;
 import com.eazy.brush.dao.entity.*;
 import com.eazy.brush.dao.mapper.TaskSubMapper;
-import com.eazy.brush.service.DeviceInfoService;
-import com.eazy.brush.service.TaskActionService;
-import com.eazy.brush.service.TaskService;
-import com.eazy.brush.service.TaskSubService;
+import com.eazy.brush.service.*;
 import com.eazy.brush.service.rank.HcountService;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
@@ -52,6 +49,9 @@ public class TaskSubServiceImpl implements TaskSubService {
 
     @Autowired
     private TaskService taskService;
+
+    @Autowired
+    private ProxyIpService proxyIpService;
 
     class NetType<T> implements Award {
 
@@ -116,7 +116,10 @@ public class TaskSubServiceImpl implements TaskSubService {
         int createDay = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));
 
         //删除多生成的任务
-        taskSubMapper.deleteRand(task.getId(), createDay, times * perNum - task.getIncrDay());
+        int size = times * perNum - task.getIncrDay();
+        if (size > 0) {
+            taskSubMapper.deleteRand(task.getId(), createDay, size);
+        }
 
         //计数
         hcountService.incrBy(task.getId(), createDay, CountType.taskSubDayNum, task.getIncrDay());
@@ -257,15 +260,11 @@ public class TaskSubServiceImpl implements TaskSubService {
     private void setNetInfo(TaskSub taskSub) {
         NetInfo netInfo = new NetInfo();
         netInfo.setMac(RandomMacAddress.getMacAddrWithFormat(":"));
-        netInfo.setHost("192.168.1.102");
-        netInfo.setPort(8888);
+
         List<NetType<Integer>> netInfoTypes = Lists.newArrayList();
         netInfoTypes.add(new NetType<>(0, 56937));
         netInfoTypes.add(new NetType<>(1, 10000));
         netInfo.setType(LotteryUtil.lottery(netInfoTypes).getNetType());
-
-        taskSub.setHost(netInfo.getHost());               //代理主机地址
-        taskSub.setPort(netInfo.getPort());                  // 端口
         taskSub.setMac(netInfo.getMac());                //mac地址 唯一
         taskSub.setType(netInfo.getType());                  //网络类型 0 手机网络 1 wifi
     }
