@@ -31,12 +31,8 @@ public class TaskVoServiceImpl implements TaskVoService {
     @Autowired
     ConfService confService;
 
-    @Override
-    public List<TaskVo> getList(int userId, int offset, int size) {
-
+    public List<TaskVo> getTaskVos(List<Task> tasks) {
         List<TaskVo> taskVos = Lists.newArrayList();
-        List<Task> tasks = taskService.getList(userId, offset, size);
-
         int todayDay = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));
         int yestoday = Integer.parseInt(DateTime.now().minusDays(1).toString("yyyyMMdd"));
 
@@ -60,5 +56,18 @@ public class TaskVoServiceImpl implements TaskVoService {
             taskVos.add(taskVo);
         }
         return taskVos;
+    }
+
+    @Override
+    public List<TaskVo> getList(int userId, int offset, int size) {
+
+        List<Task> tasks = taskService.getList(userId, offset, size);
+        return getTaskVos(tasks);
+    }
+
+    @Override
+    public List<TaskVo> getList(int offset, int size) {
+        List<Task> tasks = taskService.getList(offset, size);
+        return getTaskVos(tasks);
     }
 }

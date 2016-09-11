@@ -15,6 +15,8 @@ public interface TaskService {
 
     Task getByState(int state);
 
+    List<Task> getList(int offset, int size);
+
     List<Task> getList(int userId, int offset, int size);
 
     void add(Task task);

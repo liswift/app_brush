@@ -30,8 +30,12 @@ public interface TaskMapper {
     @Select("select " + FEILDS + " from task where state=#{state} order by id asc limit 1")
     Task getByState(@Param("state") int state);
 
+
+    @Select("select " + FEILDS + " from task order by id asc limit #{offset},#{size}")
+    List<Task> getList(@Param("offset") int offset, @Param("size") int size);
+
     @Select("select " + FEILDS + " from task where user_id=#{userId} order by id asc limit #{offset},#{size}")
-    List<Task> getList(@Param("userId") int userId, @Param("offset") int offset, @Param("size") int size);
+    List<Task> getListByUserId(@Param("userId") int userId, @Param("offset") int offset, @Param("size") int size);
 
     @Insert("insert into task(" + INSERT_FEILDS + ") values (" + INSERT_VALUES + ")")
     void insert(Task task);

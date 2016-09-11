@@ -2,10 +2,12 @@ package com.eazy.brush.controller.web;
 
 import com.eazy.brush.component.ftp.FtpTool;
 import com.eazy.brush.controller.common.BaseController;
+import com.eazy.brush.controller.view.service.TaskVoService;
+import com.eazy.brush.controller.view.service.UserAccountVoService;
+import com.eazy.brush.controller.view.vo.TaskVo;
 import com.eazy.brush.core.utils.ActionRequest;
 import com.eazy.brush.dao.entity.Task;
 import com.eazy.brush.service.TaskService;
-import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.Map;
+import java.util.List;
 
 /**
  * 任务管理Controller
@@ -36,6 +38,23 @@ public class TaskController extends BaseController {
 
     @Autowired
     private TaskService taskService;
+
+    @Autowired
+    private TaskVoService taskVoService;
+
+    @Autowired
+    private UserAccountVoService userAccountVoService;
+
+    @RequestMapping(value = "list", method = RequestMethod.GET)
+    public ModelAndView list() {
+        int curPage = getParaInt("curPage", 1);
+        int size = getParaInt("size", 20);
+
+        ModelAndView modelAndView = new ModelAndView("/task/task_update");
+        List<TaskVo> taskVos = taskVoService.getList((curPage - 1) * size, size);
+        modelAndView.addObject("taskVos", taskVos);
+        return modelAndView;
+    }
 
     @RequestMapping(value = "toAdd", method = RequestMethod.GET)
     public ModelAndView toAdd(HttpServletRequest request) {

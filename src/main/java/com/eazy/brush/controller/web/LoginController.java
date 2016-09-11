@@ -141,7 +141,7 @@ public class LoginController extends BaseController {
         int size = getParaInt("size", 20);
 
         User user = getCurrentUser();
-        ModelAndView model = new ModelAndView("index/welcome_user");
+        ModelAndView model = new ModelAndView("task/list_byuser");
         UserAccountVo userAccountVo = userAccountVoService.getByUserId(user.getId());
         List<TaskVo> taskVoses = taskVoService.getList(user.getId(), (curPage - 1) * size, size);
         model.addObject("userAccountVo", userAccountVo);
@@ -192,7 +192,7 @@ public class LoginController extends BaseController {
             String load = toJson(data);
             Redis.put("welcome", load);
         }
-        ModelAndView model = new ModelAndView("index/welcome_admin");
+        ModelAndView model = new ModelAndView("index/welcome");
         model.addObject("data", data);
         model.addObject("count", data.size());
 

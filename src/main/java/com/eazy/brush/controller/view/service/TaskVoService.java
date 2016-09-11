@@ -13,4 +13,6 @@ import java.util.List;
 public interface TaskVoService {
 
     List<TaskVo> getList(int userId,int offset,int size);
+
+    List<TaskVo> getList(int offset,int size);
 }

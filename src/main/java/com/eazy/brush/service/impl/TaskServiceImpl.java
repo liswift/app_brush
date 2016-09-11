@@ -33,8 +33,13 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public List<Task> getList(int offset, int size) {
+        return taskMapper.getList(offset, size);
+    }
+
+    @Override
     public List<Task> getList(int userId, int offset, int size) {
-        return taskMapper.getList(userId, offset, size);
+        return taskMapper.getListByUserId(userId, offset, size);
     }
 
     @Override
