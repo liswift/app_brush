@@ -8,6 +8,7 @@ import com.eazy.brush.core.utils.ActionRequest;
 import com.eazy.brush.dao.entity.Task;
 import com.eazy.brush.service.TaskService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 /**
@@ -85,11 +87,16 @@ public class TaskController extends BaseController {
 
     @RequestMapping(value = "apk/download", method = RequestMethod.GET)
     public void downloadApk(@RequestParam(value = "file") String file) {
+        OutputStream outputStream = null;
         try {
+            outputStream = response.getOutputStream();
             ActionRequest.renderStream(file, response);
-            ftpTool.downLoadToOutputStream(file, response.getOutputStream());
+            ftpTool.downLoadToOutputStream(file, outputStream);
+            outputStream.flush();
         } catch (IOException e) {
             log.error("down file error,{}", e);
+        } finally {
+            IOUtils.closeQuietly(outputStream);
         }
     }
 }

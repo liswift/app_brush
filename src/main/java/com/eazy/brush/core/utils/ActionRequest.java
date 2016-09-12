@@ -1,19 +1,18 @@
 package com.eazy.brush.core.utils;
 
+import com.eazy.brush.core.export.Export;
+import com.eazy.brush.core.export.ExportExcel;
+import com.eazy.brush.core.export.ExportPdf;
+import com.eazy.brush.core.export.ExportWord;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.eazy.brush.core.export.Export;
-import com.eazy.brush.core.export.ExportExcel;
-import com.eazy.brush.core.export.ExportPdf;
-import com.eazy.brush.core.export.ExportWord;
 
 /**
  * @author jzx
@@ -45,7 +44,6 @@ public class ActionRequest {
     }
 
     public static void renderStream(String data, HttpServletResponse response) {
-        response.reset();
         response.setHeader("Content-Disposition", "attachment;filename=" + data);// 指定下载的文件名
         response.setContentType("application/octet-stream");
     }
