@@ -1,8 +1,7 @@
 package com.eazy.brush.dao.mapper;
 
 import com.eazy.brush.dao.entity.ActionItem;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -14,8 +13,20 @@ import java.util.List;
  */
 public interface ActionItemMapper {
 
-    String FEILDS = "id,name,view_name,view_id,view_content,action,acition_param,stay_time,up_down";
+    String INSERT_FEILDS = "name,view_name,view_id,view_content,action,acition_param,stay_time,up_down";
+    String FEILDS = "id," + INSERT_FEILDS;
+    String INSERT_VALUES = "#{name},#{viewName},#{viewId},#{viewContent},#{action},#{acitionParam},#{stayTime},#{upDown}";
 
     @Select("select " + FEILDS + " from action_item where id in (${actionItemId})")
     List<ActionItem> getByIds(@Param("actionItemId") String actionItemId);
+
+    @Insert("insert into action_item(" + INSERT_FEILDS + ") values(" + INSERT_VALUES + ")")
+    void insert(ActionItem actionItem);
+
+    @Update("update action_item set name=#{name},view_name=#{viewName},view_id=#{viewId},view_content=#{viewContent}," +
+            "action=#{action},action_param=#{actionParam},stay_time=#{stayTime},up_down=#{upDown} where id=#{id}")
+    void update(ActionItem actionItem);
+
+    @Delete("delete from action_time where id=#{id}")
+    void delete(@Param("id") int id);
 }

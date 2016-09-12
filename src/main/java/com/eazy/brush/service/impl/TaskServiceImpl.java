@@ -74,6 +74,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public void delete(int id) {
+        taskMapper.delete(id);
+    }
+
+    @Override
     public int calcDayTaskNum(Task task, DateTime dateTime) {
 
         DateTime createDateTime = new DateTime(task.getCreateTime());

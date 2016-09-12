@@ -75,4 +75,9 @@ public interface TaskService {
      * @return
      */
     List<Task> getEnableList(int state, int offset, int size);
+
+    /**
+     * @param id
+     */
+    void delete(int id);
 }

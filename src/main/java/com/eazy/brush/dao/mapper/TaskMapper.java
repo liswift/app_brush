@@ -1,10 +1,7 @@
 package com.eazy.brush.dao.mapper;
 
 import com.eazy.brush.dao.entity.Task;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -30,6 +27,8 @@ public interface TaskMapper {
     @Select("select " + FEILDS + " from task where state=#{state} order by id asc limit 1")
     Task getByState(@Param("state") int state);
 
+    @Delete("delete from task where id=#{id}")
+    void delete(@Param("id") int id);
 
     @Select("select " + FEILDS + " from task order by id asc limit #{offset},#{size}")
     List<Task> getList(@Param("offset") int offset, @Param("size") int size);
