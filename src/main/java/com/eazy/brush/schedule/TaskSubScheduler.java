@@ -74,7 +74,6 @@ public class TaskSubScheduler {
     @Scheduled(cron = "0 0 0  * * ? ")
     public void makeRetainDayTaskSub() {
         Stopwatch stopWatch = Stopwatch.createStarted();
-        stopWatch.start();
         log.info("### start makeRetainDayTaskSub ###");
 
         List<Task> list = taskService.getListByState(TaskState.confirm_passed.getCode(), 0, Integer.MAX_VALUE);
