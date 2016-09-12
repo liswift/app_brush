@@ -31,7 +31,7 @@
         <span><span class="required-dot">*</span>应用apk文件：</span>
         <span class="btn-upload" style="margin-left:10px" id="select-file">
             <a href="javascript:void(0);" class="btn btn-primary radius">上传应用</a>
-            <input type="file" multiple name="file_0" class="input-file"/>
+            <input type="file" multiple name="file" class="input-file"/>
         </span>
         <div class="progress task-progress">
             <div class="progress-bar">
@@ -52,7 +52,7 @@
         <div class="formControls col-xs-6 col-sm-6">
             <label class="form-label col-xs-4 col-sm-4">应用版本：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" task_name="version" class="input-text" autocomplete="off">
+                <input type="text" task_name="appVersion" class="input-text" autocomplete="off">
             </div>
         </div>
     </div>
@@ -60,7 +60,7 @@
         <div class="formControls col-xs-6 col-sm-6">
             <label class="form-label col-xs-4 col-sm-4">备注名称：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" task_name="memo" class="input-text" autocomplete="off">
+                <input type="text" task_name="remarkName" class="input-text" autocomplete="off">
             </div>
         </div>
     </div>
@@ -68,14 +68,14 @@
         <div class="formControls col-xs-4 col-sm-4">
             <label class="form-label col-xs-6 col-sm-6">每日新增用户：</label>
             <div class="formControls col-xs-3 col-sm-3">
-                <input type="text" task_name="daily_new" class="input-text" autocomplete="off">
+                <input type="text" task_name="incrDay" class="input-text" autocomplete="off">
             </div>
             <label class="form-label col-xs-3 col-sm-3">个，</label>
         </div>
         <div class="formControls col-xs-4 col-sm-4">
             <label class="form-label col-xs-6 col-sm-6">上下波动范围：</label>
             <div class="formControls col-xs-3 col-sm-3">
-                <input type="text" task_name="daily_new_range" class="input-text" autocomplete="off">
+                <input type="text" task_name="incrUpDown" class="input-text" autocomplete="off">
             </div>
             <label class="form-label col-xs-3 col-sm-3">个</label>
         </div>
@@ -84,14 +84,14 @@
         <div class="formControls col-xs-4 col-sm-4">
             <label class="form-label col-xs-6 col-sm-6">应用运行时长：</label>
             <div class="formControls col-xs-3 col-sm-3">
-                <input type="text" task_name="daily_time" class="input-text" autocomplete="off">
+                <input type="text" task_name="runTime" class="input-text" autocomplete="off">
             </div>
             <label class="form-label col-xs-3 col-sm-3">分，</label>
         </div>
         <div class="formControls col-xs-4 col-sm-4">
             <label class="form-label col-xs-6 col-sm-6">上下波动范围：</label>
             <div class="formControls col-xs-3 col-sm-3">
-                <input type="text" task_name="daily_time_range" class="input-text" autocomplete="off">
+                <input type="text" task_name="runUpDown" class="input-text" autocomplete="off">
             </div>
             <label class="form-label col-xs-3 col-sm-3">秒</label>
         </div>
@@ -100,27 +100,27 @@
         <div class="formControls col-xs-6 col-sm-6">
             <label class="form-label col-xs-4 col-sm-4">投放时间：</label>
             <div class="formControls col-xs-3 col-sm-3">
-                <input type="text" task_name="daily_date_start" class="input-text" autocomplete="off">
+                <input type="text" task_name="runStartTime" class="input-text" autocomplete="off">
             </div>
             <label class="form-label col-xs-1 col-sm-1" style="text-align: center;">—</label>
             <div class="formControls col-xs-3 col-sm-3">
-                <input type="text" task_name="daily_date_end" class="input-text" autocomplete="off">
+                <input type="text" task_name="runEndTime" class="input-text" autocomplete="off">
             </div>
         </div>
     </div>
     <div class="row cl">
         <label class="form-label col-xs-2 col-sm-2">每日投放速度：</label>
         <div id="daily-speed" class="HuiTab formControls col-xs-10 col-sm-10" style="margin-left:-4px">
-            <div class="tabBar cl tabBar-1" task_name="daily_speed">
-                <span task_value="fast">最快投放</span>
-                <span task_value="average">均匀投放</span>
+            <div class="tabBar cl tabBar-1" task_name="drunSpeed">
+                <span task_value="0">最快投放</span>
+                <span task_value="1">均匀投放</span>
             </div>
         </div>
     </div>
     <div class="row cl">
         <label class="form-label col-xs-2 col-sm-2">留存率：</label>
         <div id="daily-stay" class="HuiTab formControls col-xs-8 col-sm-8" style="margin-left:-4px">
-            <div class="tabBar cl tabBar-1" task_name="daily_stay">
+            <div class="tabBar cl tabBar-1" task_name="retainDay">
                 <span task_value="0">无留存</span>
                 <span task_value="1">1天</span>
                 <span task_value="7">7天</span>
@@ -130,7 +130,7 @@
             </div>
         </div>
         <div class="formControls col-xs-2 col-sm-2" style="margin-left: 2px">
-            <input task_name="daily_stay_percent" maxlength="2" type="text" class="input-text" autocomplete="off"
+            <input task_name="retainPercent" maxlength="2" type="text" class="input-text" autocomplete="off"
                    style="width:60px">
             <label>%</label>
         </div>

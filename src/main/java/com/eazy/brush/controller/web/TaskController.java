@@ -3,7 +3,6 @@ package com.eazy.brush.controller.web;
 import com.eazy.brush.component.ftp.FtpTool;
 import com.eazy.brush.controller.common.BaseController;
 import com.eazy.brush.controller.view.service.TaskVoService;
-import com.eazy.brush.controller.view.service.UserAccountVoService;
 import com.eazy.brush.controller.view.vo.TaskVo;
 import com.eazy.brush.core.utils.ActionRequest;
 import com.eazy.brush.dao.entity.Task;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 
@@ -42,9 +40,6 @@ public class TaskController extends BaseController {
     @Autowired
     private TaskVoService taskVoService;
 
-    @Autowired
-    private UserAccountVoService userAccountVoService;
-
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public ModelAndView list() {
         int curPage = getParaInt("curPage", 1);
@@ -57,7 +52,7 @@ public class TaskController extends BaseController {
     }
 
     @RequestMapping(value = "toAdd", method = RequestMethod.GET)
-    public ModelAndView toAdd(HttpServletRequest request) {
+    public ModelAndView toAdd() {
         return new ModelAndView("task/add");
     }
 
