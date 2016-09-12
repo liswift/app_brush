@@ -1,20 +1,13 @@
 package com.eazy.brush.core.filter;
 
+import com.eazy.brush.core.utils.UserUtil;
+
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-
-import com.eazy.brush.core.utils.UserUtil;
 
 
 /**
@@ -54,7 +47,7 @@ public class LoginFilter implements Filter {
                 && !url.contains("/resources/js/")
                 && !url.contains("/resources/images/")) {
 
-            if (!url.equals("/") && !url.contains("api")) {
+            if (!url.equals("/") && !url.contains("api") && !url.contains("apk")) {
                 if (filterURL.get(url) == null) {
                     if (UserUtil.getCurrentUser() == null) {
                         res.sendRedirect("/index.jsp");
