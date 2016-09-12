@@ -1,9 +1,8 @@
 @charset "utf-8";
 
 .add-task-form{
-    padding:20px;
+    padding:20px 25px;
     max-width: 700px;
-    border:1px solid #eee;
 }
 .add-task-item{
     padding:0;
@@ -21,7 +20,7 @@
     height: 18px;
 }
 .task-progress .sr-only{
-   background-color:#5a98de ;
+    background-color:#5a98de ;
 }
 .task-progress-tint{
     position: absolute;
@@ -54,4 +53,14 @@
 .tabBar.tabBar-1 span.speed-select{
     background-color:#5a98de ;
     color:#fff;
+}
+.add-task-form .webuploader-pick{
+    background-color: transparent;
+    padding:0
+}
+.add-task-form .webuploader-pick-hover{
+    background-color: transparent;
+}
+.add-task-form  .webuploader-container{
+    vertical-align: middle;
 }

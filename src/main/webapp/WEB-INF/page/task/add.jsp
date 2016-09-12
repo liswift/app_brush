@@ -12,7 +12,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="lib/html5.js"></script>
     <script type="text/javascript" src="lib/respond.min.js"></script>
-    <script type="text/javascript" src="lib/PIE_IE678.js"></script>
+    <script type="text/javascript" src="lib/PIE-2.0beta1/PIE_IE678.js"></script>
     <![endif]-->
     <link href="${ctx}/resources/css/H-ui.min.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/resources/css/H-ui.admin.css" rel="stylesheet" type="text/css"/>
@@ -157,9 +157,13 @@
     </div>
 </div>
 
-<script type="text/javascript" src="${ctx}/resources/lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modalmanager.js"></script>
-<script type="text/javascript" src="${ctx}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modal.js"></script>
+<script type="text/javascript" src="${txt}/resources/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="${txt}/resources/lib/laydate/laydate.js"></script>
+<script type="text/javascript" src="${txt}/resources/js/common.js"></script>
+<script type="text/javascript" src="${txt}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modalmanager.js"></script>
+<script type="text/javascript" src="${txt}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modal.js"></script>
+<script type="text/javascript" src="${txt}/resources/lib/webuploader/0.1.5/webuploader.js"></script>
+<script type="text/javascript" src="${txt}/resources/js/task.js"></script>
 <script>
     $('#daily-speed,#daily-stay').on('click', 'span', function () {
         var self = $(this);
