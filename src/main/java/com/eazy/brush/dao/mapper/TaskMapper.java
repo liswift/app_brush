@@ -17,7 +17,7 @@ public interface TaskMapper {
 
     String INSERT_VALUES = "#{userId},#{appName},#{packageName},#{versionCode},#{appVersion},#{apkUrl}," +
             "#{remarkName},#{incrDay},#{dayLimit},#{incrUpDown},#{runTime},#{runUpDown},#{runStartTime}," +
-            "#{runEndTime},#{runSpeed},#{retainDay},#{retainPercent},#{actionPageId},#{state},createTime}";
+            "#{runEndTime},#{runSpeed},#{retainDay},#{retainPercent},#{actionPageId},#{state},#{createTime}";
 
     String FEILDS = "id," + INSERT_FEILDS;
 

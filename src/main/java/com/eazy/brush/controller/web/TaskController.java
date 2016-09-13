@@ -4,6 +4,7 @@ import com.eazy.brush.component.ftp.FtpTool;
 import com.eazy.brush.controller.common.BaseController;
 import com.eazy.brush.controller.view.service.TaskVoService;
 import com.eazy.brush.controller.view.vo.TaskVo;
+import com.eazy.brush.core.enums.TaskState;
 import com.eazy.brush.core.utils.ActionRequest;
 import com.eazy.brush.dao.entity.Task;
 import com.eazy.brush.service.TaskService;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -71,9 +73,15 @@ public class TaskController extends BaseController {
     }
 
     @RequestMapping(value = "add", method = {RequestMethod.POST, RequestMethod.GET})
-    public String add(Task task) {
+    public void add(Task task) {
+        task.setUserId(getCurrentUser().getId());
+        task.setCreateTime(new Date());
+        task.setPackageName("");
+        task.setApkUrl("");
+        task.setActionPageId("");
+        task.setState(TaskState.confirm_ing.getCode());
         taskService.add(task);
-        return "redirect:/task/list";
+        renderJsonResponse();
     }
 
     @RequestMapping(value = "get", method = {RequestMethod.GET})

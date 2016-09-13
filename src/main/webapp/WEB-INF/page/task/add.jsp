@@ -164,31 +164,5 @@
 <script type="text/javascript" src="${txt}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modal.js"></script>
 <script type="text/javascript" src="${txt}/resources/lib/webuploader/0.1.5/webuploader.js"></script>
 <script type="text/javascript" src="${txt}/resources/js/task.js"></script>
-<script>
-    $('#daily-speed,#daily-stay').on('click', 'span', function () {
-        var self = $(this);
-        self.addClass('speed-select').siblings().removeClass('speed-select');
-    });
-
-    var params = {};
-    $('#task-add-btn').on('click', function (e) {
-        $("[task_name]").each(function (index, item) {
-            item = $(item);
-            var name = item.attr('task_name');
-            if (item.is('input')) {
-                params[name] = item.val();
-            }
-            else if (name == 'daily_speed' || name == 'daily_stay') {
-                params[name] = $('span.speed-select', item).attr('task_value');
-            }
-        });
-        console.log(params)
-    });
-    $("#select-file").on('change', 'input', function (e, b) {
-        $("#select-file a").text(this.files[0].name)
-    });
-
-
-</script>
 </body>
 </html>

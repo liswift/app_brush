@@ -1,19 +1,36 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50539
+Source Server         : local
+Source Server Version : 50528
 Source Host           : localhost:3306
 Source Database       : test
 
 Target Server Type    : MYSQL
-Target Server Version : 50539
+Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2016-09-11 20:29:19
+Date: 2016-09-13 14:42:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `action`
+-- ----------------------------
+DROP TABLE IF EXISTS `action`;
+CREATE TABLE `action` (
+  `id` int(9) NOT NULL AUTO_INCREMENT,
+  `actions` varchar(255) NOT NULL COMMENT '组合动作',
+  `name` varchar(32) DEFAULT NULL COMMENT '动作组名称',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of action
+-- ----------------------------
+INSERT INTO `action` VALUES ('9', '1,2', 'name1');
+INSERT INTO `action` VALUES ('10', '1,3', 'name2');
 
 -- ----------------------------
 -- Table structure for `action_group`
@@ -72,6 +89,25 @@ CREATE TABLE `action_page` (
 -- Records of action_page
 -- ----------------------------
 INSERT INTO `action_page` VALUES ('11', 'com.netease.nr.base.activity.BaseActivity', '', '4,5', '4');
+
+-- ----------------------------
+-- Table structure for `action_sub`
+-- ----------------------------
+DROP TABLE IF EXISTS `action_sub`;
+CREATE TABLE `action_sub` (
+  `id` int(9) NOT NULL AUTO_INCREMENT,
+  `action` varchar(500) NOT NULL COMMENT '动作',
+  `run_time` int(11) NOT NULL COMMENT '运行时长',
+  `name` varchar(32) DEFAULT NULL COMMENT '动作名称',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of action_sub
+-- ----------------------------
+INSERT INTO `action_sub` VALUES ('1', 'action1', '10', 'name1');
+INSERT INTO `action_sub` VALUES ('2', 'actions2', '20', 'name2');
+INSERT INTO `action_sub` VALUES ('3', 'actions3', '10', 'name0');
 
 -- ----------------------------
 -- Table structure for `conf`
@@ -908,7 +944,7 @@ CREATE TABLE `log` (
   `DESCRIPTION` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `REQUEST_PARAM` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4746 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4751 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of log
@@ -2825,6 +2861,11 @@ INSERT INTO `log` VALUES ('4742', null, '2016-09-11 15:27:24', null, 'Windows 8.
 INSERT INTO `log` VALUES ('4743', null, '2016-09-11 15:28:14', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 INSERT INTO `log` VALUES ('4744', null, '2016-09-11 19:33:28', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
 INSERT INTO `log` VALUES ('4745', null, '2016-09-11 19:34:46', null, 'Windows 8.1', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4746', null, '2016-09-13 13:48:00', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4747', null, '2016-09-13 14:07:37', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4748', null, '2016-09-13 14:27:09', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4749', null, '2016-09-13 14:30:28', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4750', null, '2016-09-13 14:40:19', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `login_log`
@@ -3536,15 +3577,15 @@ CREATE TABLE `task` (
   `retain_day` int(11) NOT NULL DEFAULT '0' COMMENT '留存天数',
   `retain_percent` int(11) DEFAULT NULL COMMENT '留存率',
   `action_page_id` varchar(64) NOT NULL DEFAULT '' COMMENT '页动作id',
-  `state` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '任务被执行，回调时间',
+  `state` int(11) NOT NULL DEFAULT '0' COMMENT '任务被执行，回调时间',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of task
 -- ----------------------------
-INSERT INTO `task` VALUES ('11', '9', '网易新闻', 'com.netease.newsreader.activity', '560', '15.0', 'http://www.yuekuba.com/task/apk/download?file=netease_newsreader_android.apk', '网易新闻', '10000', '100000', '10', '60', '1', '0', '23', '1', '7', '50', '11', '2', '2016-09-11 11:38:59');
+INSERT INTO `task` VALUES ('11', '9', '网易新闻', 'com.netease.newsreader.activity', '560', '15.0', 'http://www.yuekuba.com/task/apk/download?file=netease_newsreader_android.apk', '网易新闻', '10000', '100000', '10', '60', '1', '0', '23', '1', '7', '50', '11', '4', '2016-09-11 11:38:59');
 
 -- ----------------------------
 -- Table structure for `task_action`

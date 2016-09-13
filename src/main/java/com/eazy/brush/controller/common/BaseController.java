@@ -126,6 +126,14 @@ public abstract class BaseController {
         return model;
     }
 
+    public void renderJsonResponse() {
+        renderJsonResponse(null, 0, "操作成功!");
+    }
+
+    public void renderJsonResponse(int code, String msg) {
+        renderJsonResponse(null, code, msg);
+    }
+
     public void renderJsonResponse(Object data, int code, String msg) {
         Map<String, Object> dataMap = Maps.newHashMap();
         dataMap.put("code", code);
