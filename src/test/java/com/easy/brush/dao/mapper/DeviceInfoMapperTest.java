@@ -46,8 +46,6 @@ public class DeviceInfoMapperTest {
 
             deviceInfo.setVersionRelease(jsonObject.getString("releaseVer"));
             deviceInfo.setSerial("");
-            deviceInfo.setVersionIncremental("");
-            deviceInfo.setBuildId("");
             deviceInfo.setSecureId("");
             deviceInfoMapper.insert(deviceInfo);
         }

@@ -232,7 +232,10 @@ public class TaskSubServiceImpl implements TaskSubService {
             taskSub.setCreateDay(Integer.parseInt(DateTime.now().toString("yyyyMMdd")));
             setCardInfo(taskSub);
             setNetInfo(taskSub);
-            taskSub.setVersionIncremental(RandomUtil.generateString(13));
+            taskSub.setVersionIncremental(RandomUtil.generateMixString(13));
+            taskSub.setBuildId(RandomUtil.generateMixString(7));
+            taskSub.setSecureId(UUID.randomUUID().toString());
+            taskSub.setSerial(RandomUtil.generateMixString(16));
             taskSubs.add(taskSub);
         }
         insertTaskBatch(taskSubs);

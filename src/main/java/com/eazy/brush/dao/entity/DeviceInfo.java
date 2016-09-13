@@ -13,6 +13,7 @@ public class DeviceInfo implements Award {
     private int id;
     private String serial;
     private String versionRelease;
+    private String brand;
     private String board;
     private String secureId;
     private int width;

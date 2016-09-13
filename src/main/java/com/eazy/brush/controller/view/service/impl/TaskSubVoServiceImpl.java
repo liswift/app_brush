@@ -62,7 +62,11 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
 
             taskSubVo.setCardInfo(buildCardInfo(taskSub));
             taskSubVo.setNetInfo(buildNetInfo(taskSub));
+
             taskSubVo.setVersionIncremental(taskSub.getVersionIncremental());
+            taskSubVo.setBuildId(taskSub.getBuildId());
+            taskSubVo.setSecureId(taskSub.getSecureId());
+            taskSubVo.setSerial(taskSub.getSerial());
 
             voList.add(taskSubVo);
         }

@@ -34,7 +34,8 @@ public class TaskSub {
 
     //deviceinfo 信息
     private String versionIncremental;
-    private String brand;
     private String buildId;
+    private String secureId;
+    private String serial;              //16位
 
 }
