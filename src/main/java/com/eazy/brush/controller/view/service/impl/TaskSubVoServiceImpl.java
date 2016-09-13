@@ -63,8 +63,6 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
             taskSubVo.setCardInfo(buildCardInfo(taskSub));
             taskSubVo.setNetInfo(buildNetInfo(taskSub));
 
-            taskSubVo.setVersionIncremental(taskSub.getVersionIncremental());
-
             voList.add(taskSubVo);
         }
         return voList;
@@ -72,6 +70,7 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
 
     private DeviceInfo buildDeviceInfo(TaskSub taskSub) {
         DeviceInfo deviceInfo = deviceInfoService.getById(taskSub.getDeviceInfoId());
+        deviceInfo.setVersionIncremental(taskSub.getVersionIncremental());
         deviceInfo.setBuildId(taskSub.getBuildId());
         deviceInfo.setSecureId(taskSub.getSecureId());
         deviceInfo.setSerial(taskSub.getSerial());

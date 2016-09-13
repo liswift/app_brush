@@ -20,7 +20,6 @@ public class TaskSubVo {
     private int versionCode;
     private int runTime;
     private String apkUrl;
-    private String versionIncremental;
 
     private List<ActionPageVo> actionPageVo;
     private DeviceInfo deviceInfo;

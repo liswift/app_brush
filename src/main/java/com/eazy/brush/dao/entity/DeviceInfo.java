@@ -19,6 +19,8 @@ public class DeviceInfo implements Award {
     private int api;
     private double coverage;
     private double screenSize;
+
+    private String versionIncremental;
     private String buildId;
     private String secureId;
     private String serial;              //16位
