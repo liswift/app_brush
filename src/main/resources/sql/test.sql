@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2016-09-13 14:42:46
+Date: 2016-09-13 15:28:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -944,7 +944,7 @@ CREATE TABLE `log` (
   `DESCRIPTION` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `REQUEST_PARAM` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4751 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4752 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of log
@@ -2866,6 +2866,7 @@ INSERT INTO `log` VALUES ('4747', null, '2016-09-13 14:07:37', null, 'Windows 7'
 INSERT INTO `log` VALUES ('4748', null, '2016-09-13 14:27:09', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
 INSERT INTO `log` VALUES ('4749', null, '2016-09-13 14:30:28', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
 INSERT INTO `log` VALUES ('4750', null, '2016-09-13 14:40:19', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
+INSERT INTO `log` VALUES ('4751', null, '2016-09-13 14:44:49', null, 'Windows 7', 'Chrome', '127.0.0.1', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `login_log`
@@ -3580,12 +3581,12 @@ CREATE TABLE `task` (
   `state` int(11) NOT NULL DEFAULT '0' COMMENT '任务被执行，回调时间',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of task
 -- ----------------------------
-INSERT INTO `task` VALUES ('11', '9', '网易新闻', 'com.netease.newsreader.activity', '560', '15.0', 'http://www.yuekuba.com/task/apk/download?file=netease_newsreader_android.apk', '网易新闻', '10000', '100000', '10', '60', '1', '0', '23', '1', '7', '50', '11', '4', '2016-09-11 11:38:59');
+INSERT INTO `task` VALUES ('11', '9', 'Mainac', 'com.yuekuba.maintest', '1', '15.0', 'http://www.yuekuba.com/task/apk/download?file=maintest-debug.apk', '网易新闻', '10000', '100000', '10', '60', '1', '0', '23', '1', '7', '50', '11', '2', '2016-09-11 03:38:59');
 
 -- ----------------------------
 -- Table structure for `task_action`
