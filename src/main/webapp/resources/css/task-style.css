@@ -1,5 +1,7 @@
 @charset "utf-8";
 
+
+/*task css*/
 .add-task-form{
     padding:20px 25px;
     max-width: 700px;
@@ -20,7 +22,7 @@
     height: 18px;
 }
 .task-progress .sr-only{
-    background-color:#5a98de ;
+   background-color:#5a98de ;
 }
 .task-progress-tint{
     position: absolute;
@@ -63,4 +65,67 @@
 }
 .add-task-form  .webuploader-container{
     vertical-align: middle;
+}
+
+
+/*action css*/
+.unit-action-box{
+    border: 1px solid #e6e6e6;
+    padding:10px;
+}
+.unit-action-box .btn{
+    margin-bottom: 15px;
+    position: relative;
+    overflow: visible;
+    margin-right: 10px;
+}
+.group-action-box{
+    /*border: 1px solid #e6e6e6;*/
+}
+.group-action-item{
+    border:1px solid #e6e6e6;
+    margin-bottom: 10px;
+    position: relative;
+}
+.group-action-name{
+    background-color: #e6e6e6;
+    padding: 5px;
+    display: inline-block;
+}
+.group-action-item .group-actions{
+    border:1px solid #e6e6e6;
+    margin:5px;
+    padding:10px 15px;
+}
+.group-action-name i{
+    display: inline-block;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background-color: #069991;
+    margin-bottom: -5px;
+}
+.group-action-del{
+    display: inline-block;
+    cursor: pointer;
+    width: 22px;
+    height: 22px;
+    background-color: #069991;
+    position: absolute;
+    right:7px;
+    top:7px;
+}
+.unit-action-del{
+    display: none;
+    cursor: pointer;
+    width: 22px;
+    height: 22px;
+    background-color: #ea5550;
+    position: absolute;
+    border-radius: 11px;
+    right:-11px;
+    top:-11px;
+}
+.unit-action-box .btn:hover .unit-action-del{
+    display: inline-block;
 }
