@@ -21,9 +21,6 @@ public class TaskSubVo {
     private int runTime;
     private String apkUrl;
     private String versionIncremental;
-    private String buildId;
-    private String secureId;
-    private String serial;              //16位
 
     private List<ActionPageVo> actionPageVo;
     private DeviceInfo deviceInfo;

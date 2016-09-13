@@ -11,16 +11,17 @@ import lombok.Data;
 @Data
 public class DeviceInfo implements Award {
     private int id;
-    private String serial;
     private String versionRelease;
     private String brand;
     private String board;
-    private String secureId;
     private int width;
     private int height;
     private int api;
     private double coverage;
     private double screenSize;
+    private String buildId;
+    private String secureId;
+    private String serial;              //16位
 
     @Override
     public double getRate() {

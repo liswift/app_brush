@@ -47,7 +47,7 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
         for (TaskSub taskSub : list) {
 
             Task task = taskService.getById(taskSub.getTaskId());
-            DeviceInfo deviceInfo = deviceInfoService.getById(taskSub.getDeviceInfoId());
+            DeviceInfo deviceInfo = buildDeviceInfo(taskSub);
             List<ActionPageVo> actionPageVos = actionPageVoService.getByIds(task.getActionPageId());
 
             TaskSubVo taskSubVo = new TaskSubVo();
@@ -64,13 +64,18 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
             taskSubVo.setNetInfo(buildNetInfo(taskSub));
 
             taskSubVo.setVersionIncremental(taskSub.getVersionIncremental());
-            taskSubVo.setBuildId(taskSub.getBuildId());
-            taskSubVo.setSecureId(taskSub.getSecureId());
-            taskSubVo.setSerial(taskSub.getSerial());
 
             voList.add(taskSubVo);
         }
         return voList;
+    }
+
+    private DeviceInfo buildDeviceInfo(TaskSub taskSub) {
+        DeviceInfo deviceInfo = deviceInfoService.getById(taskSub.getDeviceInfoId());
+        deviceInfo.setBuildId(taskSub.getBuildId());
+        deviceInfo.setSecureId(taskSub.getSecureId());
+        deviceInfo.setSerial(taskSub.getSerial());
+        return deviceInfo;
     }
 
     private CardInfo buildCardInfo(TaskSub taskSub) {
