@@ -95,7 +95,9 @@ public class TaskController extends BaseController {
     public void downloadApk(@RequestParam(value = "file") String file) {
         try {
             ActionRequest.renderStream(file, response);
+            ftpTool.connect();
             ftpTool.downLoadToOutputStream(file, response.getOutputStream());
+            ftpTool.disconnect();
         } catch (IOException e) {
             log.error("down file error,{}", e);
         }

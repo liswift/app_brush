@@ -2,13 +2,11 @@ package com.eazy.brush.component.ftp;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.io.*;
 
 /**
@@ -36,14 +34,12 @@ public class FtpTool {
     @Value("${ftp.path}")
     private String path;
 
-    private FTPClient ftp;
+    private FTPClient ftp = new FTPClient();
 
     public FtpTool() {
     }
 
-    @PostConstruct
     public void connect() {
-        ftp = new FTPClient();
         int reply;
         try {
             ftp.connect(addr, port);
@@ -57,6 +53,15 @@ public class FtpTool {
         } catch (IOException e) {
             e.printStackTrace();
             log.error("collect ftp error {}", e);
+        }
+    }
+
+    public void disconnect() {
+        try {
+            ftp.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.error("discollect ftp error {}", e);
         }
     }
 
