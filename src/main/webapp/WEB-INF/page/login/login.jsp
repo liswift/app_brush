@@ -17,7 +17,7 @@ request.setAttribute("error", error);
 <!--[if lt IE 9]>
 <script type="text/javascript" src="lib/html5.js"></script>
 <script type="text/javascript" src="lib/respond.min.js"></script>
-<script type="text/javascript" src="lib/PIE_IE678.js"></script>
+<script type="text/javascript" src="lib/PIE-2.0beta1/PIE_IE678.js"></script>
 <![endif]-->
 <%@ include file="/WEB-INF/page/base/css.jsp"%>
 <!--[if IE 6]>
