@@ -31,4 +31,10 @@ public class TaskSub {
     //netInfo 信息
     private String mac;                //mac地址 唯一
     private int type;                  //网络类型 0 手机网络 1 wifi
+
+    //deviceinfo 信息
+    private String versionIncremental;
+    private String brand;
+    private String buildId;
+
 }

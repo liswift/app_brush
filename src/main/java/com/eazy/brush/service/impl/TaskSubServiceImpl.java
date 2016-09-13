@@ -8,6 +8,7 @@ import com.eazy.brush.core.lottery.Award;
 import com.eazy.brush.core.lottery.LotteryUtil;
 import com.eazy.brush.core.utils.Constants;
 import com.eazy.brush.core.utils.DateTimeUitl;
+import com.eazy.brush.core.utils.RandomUtil;
 import com.eazy.brush.dao.entity.*;
 import com.eazy.brush.dao.mapper.TaskSubMapper;
 import com.eazy.brush.service.*;
@@ -231,7 +232,7 @@ public class TaskSubServiceImpl implements TaskSubService {
             taskSub.setCreateDay(Integer.parseInt(DateTime.now().toString("yyyyMMdd")));
             setCardInfo(taskSub);
             setNetInfo(taskSub);
-
+            taskSub.setVersionIncremental(RandomUtil.generateString(13));
             taskSubs.add(taskSub);
         }
         insertTaskBatch(taskSubs);
