@@ -68,9 +68,11 @@
                     <td>${t.yestodayNum}</td>
                     <td>${t.state}</td>
                     <td>
-                        <a href="javascript:;"
-                           onclick="fullOpen('编辑任务','${ctx}/task/toEdit?id=${t.id}')">编辑</a>
                         <a href="${ctx}/task/delete?id=${t.id}">删除</a>
+                        <a href="javascript:;"
+                           onclick="fullOpen('编辑任务','${ctx}/task/toEdit?id=${t.id}')">修改</a>
+                        <a href="javascript:;"
+                           onclick="fullOpen('编辑任务','${ctx}/task/toEdit?id=${t.id}')">更新包</a>
                     </td>
                 </tr>
             </c:forEach>

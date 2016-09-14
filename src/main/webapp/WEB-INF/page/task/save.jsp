@@ -27,7 +27,9 @@
 </head>
 <body>
 <div class="add-task-form form-horizontal">
-    <div class="add-task-item">
+
+<c:if test="${task == null }">
+<div class="add-task-item">
         <span><span class="required-dot">*</span>应用apk文件：</span>
         <span class="btn-upload" style="margin-left:10px" id="select-file">
             <a href="javascript:void(0);" class="btn btn-primary radius">上传应用</a>
@@ -57,6 +59,8 @@
             </div>
         </div>
     </div>
+</c:if>
+
     <div class="row cl">
         <div class="formControls col-xs-6 col-sm-6">
             <label class="form-label col-xs-4 col-sm-4">备注名称：</label>
