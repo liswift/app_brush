@@ -30,46 +30,13 @@ $(document).ready(function () {
         });
     });
 
-    $("#select-file").on('change', 'input', function (e, b) {
-        $("#select-file a").text(this.files[0].name)
-    });
-
-    var date_start = {
-        elem: '#date_start',
-        format: 'YYYY/MM/DD hh:mm',
-        min: laydate.now(), //设定最小日期为当前日期
-        max: '2099-06-16 23:59:59', //最大日期
-        istime: true,
-        istoday: false,
-        choose: function (datas) {
-            params.daily_date_end = +new Date(datas);
-            date_end.min = datas; //开始日选好后，重置结束日的最小日期
-            date_end.start = datas;//将结束日的初始值设定为开始日
-        }
-    };
-    var date_end = {
-        elem: '#date_end',
-        format: 'YYYY/MM/DD hh:mm',
-        min: laydate.now(),
-        max: '2099-06-16 23:59:59',
-        istime: true,
-        istoday: false,
-        choose: function (datas) {
-            params.daily_date_start = +new Date(datas);
-            date_start.max = datas; //结束日选好后，重置开始日的最大日期
-        }
-    };
-    laydate(date_start);
-    laydate(date_end);
-
-
     //上传文件
     var uploader = WebUploader.create({
         // swf文件路径
-        swf: '../../../resources/lib/webuploader/0.1.5' + '/js/Uploader.swf',
+        swf: '${ctx}/resources/lib/webuploader/0.1.5' + '/js/Uploader.swf',
 
         // 文件接收服务端。
-        server: '/',
+        server: '/task/apk/upload',
 
         // 选择文件的按钮。可选。
         // 内部根据当前运行是创建，可能是input元素，也可能是flash.
@@ -117,6 +84,39 @@ $(document).ready(function () {
         } else {
         }
     });
+    $("#select-file").on('change', 'input', function (e, b) {
+        $("#select-file a").text(this.files[0].name);
+        $progressBar.show();
+        uploader.upload();
+    });
+
+    var date_start = {
+        elem: '#date_start',
+        format: 'YYYY/MM/DD hh:mm',
+        min: laydate.now(), //设定最小日期为当前日期
+        max: '2099-06-16 23:59:59', //最大日期
+        istime: true,
+        istoday: false,
+        choose: function (datas) {
+            params.daily_date_end = +new Date(datas);
+            date_end.min = datas; //开始日选好后，重置结束日的最小日期
+            date_end.start = datas;//将结束日的初始值设定为开始日
+        }
+    };
+    var date_end = {
+        elem: '#date_end',
+        format: 'YYYY/MM/DD hh:mm',
+        min: laydate.now(),
+        max: '2099-06-16 23:59:59',
+        istime: true,
+        istoday: false,
+        choose: function (datas) {
+            params.daily_date_start = +new Date(datas);
+            date_start.max = datas; //结束日选好后，重置开始日的最大日期
+        }
+    };
+    laydate(date_start);
+    laydate(date_end);
 });
 
 

@@ -105,8 +105,10 @@ public class TaskController extends BaseController {
 
     @RequestMapping(value = "toEdit", method = {RequestMethod.GET})
     public ModelAndView toEdit(int id) {
+        String ac = getPara("ac");
         ModelAndView modelAndView = new ModelAndView("task/save");
         modelAndView.addObject("task", taskService.getById(id));
+        modelAndView.addObject("ac", ac);
         return modelAndView;
     }
 

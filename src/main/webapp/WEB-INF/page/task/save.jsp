@@ -28,7 +28,7 @@
 <body>
 <div class="add-task-form form-horizontal">
 
-<c:if test="${task == null }">
+<c:if test="${task == null || ac == 'upPg'}">
 <div class="add-task-item">
         <span><span class="required-dot">*</span>应用apk文件：</span>
         <span class="btn-upload" style="margin-left:10px" id="select-file">
@@ -60,7 +60,7 @@
         </div>
     </div>
 </c:if>
-
+<c:if test="${task == null || ac == 'editor'}">
     <div class="row cl">
         <div class="formControls col-xs-6 col-sm-6">
             <label class="form-label col-xs-4 col-sm-4">备注名称：</label>
@@ -153,6 +153,7 @@
         </div>
     </div>
 </div>
+</c:if>
 
 <!--<a data-toggle="modal" href="#myModal" class="btn btn-primary size-L">弹出对话框</a>-->
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
