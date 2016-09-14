@@ -88,9 +88,9 @@ public class TaskController extends BaseController {
         renderJsonResponse();
     }
 
-    @RequestMapping(value = "get", method = {RequestMethod.GET})
-    public ModelAndView get(int id) {
-        ModelAndView modelAndView = new ModelAndView("/task/task_update");
+    @RequestMapping(value = "toEdit", method = {RequestMethod.GET})
+    public ModelAndView toEdit(int id) {
+        ModelAndView modelAndView = new ModelAndView("/task/save");
         modelAndView.addObject("task", taskService.getById(id));
         return modelAndView;
     }
