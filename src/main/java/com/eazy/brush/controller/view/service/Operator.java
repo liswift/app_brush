@@ -4,7 +4,6 @@ import com.eazy.brush.core.lottery.Award;
 import com.eazy.brush.dao.entity.CardInfo;
 
 import java.util.Random;
-import java.util.UUID;
 
 public class Operator implements Award {
 
@@ -106,7 +105,7 @@ public class Operator implements Award {
         }
 
         String getAndroidId() {
-            return UUID.randomUUID().toString().substring(0, 16);
+            return ImeiMaker.getIMEI();
         }
 
         //15位
