@@ -24,7 +24,7 @@ $(document).ready(function () {
             }
         });
         ajaxPost('/task/add', params, function (d) {
-            location.href = "/login/welcome";
+            location.href = "/sys/welcome";
         }, function (d) {
             alert("添加失败!");
         });

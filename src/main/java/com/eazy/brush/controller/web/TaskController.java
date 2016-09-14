@@ -84,6 +84,13 @@ public class TaskController extends BaseController {
         renderJsonResponse();
     }
 
+    @RequestMapping(value = "delete", method = {RequestMethod.POST, RequestMethod.GET})
+    public String delete(@RequestParam(value = "id") int id) {
+        taskService.delete(id);
+        return "redirect:list";
+    }
+
+
     @RequestMapping(value = "get", method = {RequestMethod.GET})
     public ModelAndView get(int id) {
         ModelAndView modelAndView = new ModelAndView("/task/task_update");
