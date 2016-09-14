@@ -19,12 +19,12 @@ $(document).ready(function () {
             if (item.is('input')) {
                 params[name] = item.val();
             }
-            else if (name == 'daily_speed' || name == 'daily_stay') {
+            else if (name == 'runSpeed' || name == 'retainDay') {
                 params[name] = $('span.speed-select', item).attr('task_value');
             }
         });
         ajaxPost('/task/add', params, function (d) {
-            location.href = "/sys/welcome";
+            location.href = "/task/listByUser";
         }, function (d) {
             alert("添加失败!");
         });
@@ -117,6 +117,7 @@ $(document).ready(function () {
         } else {
         }
     });
+
 });
 
 

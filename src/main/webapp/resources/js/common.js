@@ -28,3 +28,12 @@ function ajaxPost(url,data,callback,failback){
         dataType: "json"
     });
 }
+
+function fullOpen(title, url) {
+    var index = layer.open({
+        type: 2,
+        title: title,
+        content: url
+    });
+    layer.full(index);
+}

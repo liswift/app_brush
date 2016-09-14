@@ -35,71 +35,56 @@
     <div class="cl pd-5 bg-1 bk-gray">
         <span class="l">
             <a class="btn btn-primary radius" href="javascript:;"
-               onclick="task_add('添加任务','${ctx}/task/toAdd')">
+               onclick="fullOpen('添加任务','${ctx}/task/toAdd')">
                 <i class="Hui-iconfont">&#xe600;</i> 添加任务</a> </span>
     </div>
-    <table class="table table-border table-bordered table-bg">
-        <thead>
-        <tr>
-            <th colspan="9" scope="col">定时任务管理</th>
-        </tr>
-        <tr class="text-c">
-            <th>任务id</th>
-            <th>任务名</th>
-            <th>上传时间</th>
-            <th>预设量</th>
-            <th>预设金额(单价点)</th>
-            <th>今日量</th>
-            <th>昨日量</th>
-            <th>状态</th>
-            <th>操作</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${ tasks }" var="t">
-            <tr class="text-c">
-                <td>${t.id}</td>
-                <td>${t.appName}</td>
-                <td>${t.createTime}</td>
-                <td>${t.incrDay}</td>
-                <td>${t.amount}</td>
-                <td>${t.todayNum}</td>
-                <td>${t.yestodayNum}</td>
-                <td>${t.state}</td>
-                <td>
-                    <a href="javascript:;"
-                       onclick="edit_permission('修改权限','${ctx}/function/toUpdate/${d.id }','700','300')">编辑</a>
-                    <a href="${ctx}/function/delete/${d.id}/${d.pid}">删除</a>
-                </td>
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-bg table-sort">
+            <thead>
+            <tr>
+                <th colspan="9" scope="col">定时任务管理</th>
             </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+            <tr class="text-c">
+                <th>任务id</th>
+                <th>任务名</th>
+                <th>上传时间</th>
+                <th>预设量</th>
+                <th>预设金额(单价点)</th>
+                <th>今日量</th>
+                <th>昨日量</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${ tasks }" var="t">
+                <tr class="text-c">
+                    <td>${t.id}</td>
+                    <td>${t.appName}</td>
+                    <td>${t.createTime}</td>
+                    <td>${t.incrDay}</td>
+                    <td>${t.amount}</td>
+                    <td>${t.todayNum}</td>
+                    <td>${t.yestodayNum}</td>
+                    <td>${t.state}</td>
+                    <td>
+                        <a href="javascript:;"
+                           onclick="fullOpen('编辑任务','${ctx}/task/toEdit?id=${t.id}')">编辑</a>
+                        <a href="${ctx}/task/delete?id=${t.id}">删除</a>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 </div>
 <script type="text/javascript" src="${ctx }/resources/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/lib/layer/2.1/layer.js"></script>
 <script type="text/javascript" src="${ctx }/resources/js/H-ui.js"></script>
 <script type="text/javascript" src="${ctx }/resources/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="${ctx }/resources/js/common.js"></script>
+<script type="text/javascript" src="${ctx }/resources/js/task.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        setInterval(getnums, 1000);
-    });
-    getnums();
-    function getnums() {
-        $.get("${ctx}/sessioncount/index", function (data) {
-                    $("#count").text(data.count);
-                }
-        );
-    }
-    /*任务-添加*/
-    function task_add(title, url) {
-        var index = layer.open({
-            type: 2,
-            title: title,
-            content: url
-        });
-        layer.full(index);
-    }
 </script>
 </body>
 </html>

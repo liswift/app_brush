@@ -44,7 +44,7 @@
         <div class="formControls col-xs-6 col-sm-6">
             <label class="form-label col-xs-4 col-sm-4">应用名称：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" task_name="appName" class="input-text" autocomplete="off">
+                <input type="text" task_name="appName" value="${task.appName}" class="input-text" autocomplete="off">
             </div>
         </div>
     </div>
@@ -52,7 +52,8 @@
         <div class="formControls col-xs-6 col-sm-6">
             <label class="form-label col-xs-4 col-sm-4">应用版本：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" task_name="appVersion" class="input-text" autocomplete="off">
+                <input type="text" task_name="appVersion" value="${task.appVersion}" class="input-text"
+                       autocomplete="off">
             </div>
         </div>
     </div>
@@ -60,7 +61,8 @@
         <div class="formControls col-xs-6 col-sm-6">
             <label class="form-label col-xs-4 col-sm-4">备注名称：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" task_name="remarkName" class="input-text" autocomplete="off">
+                <input type="text" task_name="remarkName" value="${task.remarkName}" class="input-text"
+                       autocomplete="off">
             </div>
         </div>
     </div>
@@ -68,14 +70,15 @@
         <div class="formControls col-xs-4 col-sm-4">
             <label class="form-label col-xs-6 col-sm-6">每日新增用户：</label>
             <div class="formControls col-xs-3 col-sm-3">
-                <input type="text" task_name="incrDay" class="input-text" autocomplete="off">
+                <input type="text" task_name="incrDay" value="${task.incrDay}" class="input-text" autocomplete="off">
             </div>
             <label class="form-label col-xs-3 col-sm-3">个，</label>
         </div>
         <div class="formControls col-xs-4 col-sm-4">
             <label class="form-label col-xs-6 col-sm-6">上下波动范围：</label>
             <div class="formControls col-xs-3 col-sm-3">
-                <input type="text" task_name="incrUpDown" class="input-text" autocomplete="off">
+                <input type="text" task_name="incrUpDown" value="${task.incrUpDown}" class="input-text"
+                       autocomplete="off">
             </div>
             <label class="form-label col-xs-3 col-sm-3">个</label>
         </div>
@@ -84,14 +87,15 @@
         <div class="formControls col-xs-4 col-sm-4">
             <label class="form-label col-xs-6 col-sm-6">应用运行时长：</label>
             <div class="formControls col-xs-3 col-sm-3">
-                <input type="text" task_name="runTime" class="input-text" autocomplete="off">
+                <input type="text" task_name="runTime" value="${task.runTime}" class="input-text" autocomplete="off">
             </div>
             <label class="form-label col-xs-3 col-sm-3">分，</label>
         </div>
         <div class="formControls col-xs-4 col-sm-4">
             <label class="form-label col-xs-6 col-sm-6">上下波动范围：</label>
             <div class="formControls col-xs-3 col-sm-3">
-                <input type="text" task_name="runUpDown" class="input-text" autocomplete="off">
+                <input type="text" task_name="runUpDown" value="${task.runUpDown}" class="input-text"
+                       autocomplete="off">
             </div>
             <label class="form-label col-xs-3 col-sm-3">秒</label>
         </div>
@@ -100,20 +104,22 @@
         <div class="formControls col-xs-6 col-sm-6">
             <label class="form-label col-xs-4 col-sm-4">投放时间：</label>
             <div class="formControls col-xs-3 col-sm-3">
-                <input type="text" task_name="runStartTime" class="input-text" autocomplete="off">
+                <input type="text" task_name="runStartTime" value="${task.runStartTime}" class="input-text"
+                       autocomplete="off">
             </div>
             <label class="form-label col-xs-1 col-sm-1" style="text-align: center;">—</label>
             <div class="formControls col-xs-3 col-sm-3">
-                <input type="text" task_name="runEndTime" class="input-text" autocomplete="off">
+                <input type="text" task_name="runEndTime" value="${task.runEndTime}" class="input-text"
+                       autocomplete="off">
             </div>
         </div>
     </div>
     <div class="row cl">
         <label class="form-label col-xs-2 col-sm-2">每日投放速度：</label>
         <div id="daily-speed" class="HuiTab formControls col-xs-10 col-sm-10" style="margin-left:-4px">
-            <div class="tabBar cl tabBar-1" task_name="drunSpeed">
-                <span task_value="0">最快投放</span>
-                <span task_value="1">均匀投放</span>
+            <div class="tabBar cl tabBar-1" task_name="runSpeed">
+                <span task_value="0" <c:if test="task.runSpeed==0">class="speed-select" </c:if>>最快投放</span>
+                <span task_value="1" <c:if test="task.runSpeed==1">class="speed-select" </c:if>>均匀投放</span>
             </div>
         </div>
     </div>
@@ -163,6 +169,7 @@
 <script type="text/javascript" src="${txt}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modalmanager.js"></script>
 <script type="text/javascript" src="${txt}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modal.js"></script>
 <script type="text/javascript" src="${txt}/resources/lib/webuploader/0.1.5/webuploader.js"></script>
+<script type="text/javascript" src="${txt}/resources/js/common.js"></script>
 <script type="text/javascript" src="${txt}/resources/js/task.js"></script>
 </body>
 </html>
