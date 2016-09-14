@@ -70,9 +70,9 @@
                     <td>
                         <a href="${ctx}/task/delete?id=${t.id}">删除</a>
                         <a href="javascript:;"
-                           onclick="fullOpen('编辑任务','${ctx}/task/toEdit?id=${t.id}')">修改</a>
+                           onclick="fullOpen('修改任务','${ctx}/task/toEdit?id=${t.id}&ac=editor')">修改</a>
                         <a href="javascript:;"
-                           onclick="fullOpen('编辑任务','${ctx}/task/toEdit?id=${t.id}')">更新包</a>
+                           onclick="fullOpen('更新包','${ctx}/task/toEdit?id=${t.id}&ac=upPg')">更新包</a>
                     </td>
                 </tr>
             </c:forEach>
