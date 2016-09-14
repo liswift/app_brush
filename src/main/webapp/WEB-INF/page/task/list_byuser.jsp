@@ -84,6 +84,6 @@
 <script type="text/javascript" src="${ctx }/resources/js/H-ui.js"></script>
 <script type="text/javascript" src="${ctx }/resources/js/H-ui.admin.js"></script>
 <script type="text/javascript" src="${ctx }/resources/js/common.js"></script>
-<script type="text/javascript" src="${ctx }/resources/js/task.js"></script>
+<script type="text/javascript" src="${ctx }/resources/js/task/task_list.js"></script>
 </body>
 </html>
