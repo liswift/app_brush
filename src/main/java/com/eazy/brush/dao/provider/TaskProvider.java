@@ -19,57 +19,57 @@ public class TaskProvider {
         BEGIN();
         UPDATE(tableName);
         if (StringUtils.isNotEmpty(task.getAppName())) {
-            SET("app_name=#{task.appName}");
+            SET("app_name=#{appName}");
         }
         if (StringUtils.isNotEmpty(task.getPackageName())) {
-            SET("package_name=#{task.packageName}");
+            SET("package_name=#{packageName}");
         }
         if (task.getVersionCode() > 0) {
-            SET("version_code=#{task.versionCode}");
+            SET("version_code=#{versionCode}");
         }
         if (StringUtils.isNotEmpty(task.getAppVersion())) {
-            SET("app_version=#{task.appVersion}");
+            SET("app_version=#{appVersion}");
         }
         if (StringUtils.isNotEmpty(task.getApkUrl())) {
-            SET("app_url=#{task.apkUrl}");
+            SET("apk_url=#{apkUrl}");
         }
         if (StringUtils.isNotEmpty(task.getRemarkName())) {
-            SET("app_url=#{task.remarkName}");
+            SET("remark_name=#{remarkName}");
         }
         if (task.getIncrDay() > 0) {
-            SET("incr_day=#{task.IncrDay}");
+            SET("incr_day=#{incrDay}");
         }
         if (task.getDayLimit() > 0) {
-            SET("day_limit=#{task.dayLimit}");
+            SET("day_limit=#{dayLimit}");
         }
         if (task.getIncrUpDown() > 0) {
-            SET("day_limit=#{task.dayLimit}");
+            SET("day_limit=#{dayLimit}");
         }
         if (task.getRunTime() > 0) {
-            SET("run_time=#{task.runTime}");
+            SET("run_time=#{runTime}");
         }
         if (task.getRunUpDown() > 0) {
-            SET("incr_up_down=#{task.runUpDown}");
+            SET("incr_up_down=#{runUpDown}");
         }
         if (task.getRunStartTime() > 0) {
-            SET("run_start_time=#{task.runStartTime}");
+            SET("run_start_time=#{runStartTime}");
         }
         if (task.getRunEndTime() > 0) {
-            SET("run_end_time=#{task.runEndTime}");
+            SET("run_end_time=#{runEndTime}");
         }
         if (task.getRunSpeed() > 0) {
-            SET("run_speed=#{task.runSpeed}");
+            SET("run_speed=#{runSpeed}");
         }
         if (task.getRetainDay() > 0) {
-            SET("retain_day=#{task.retainDay}");
+            SET("retain_day=#{retainDay}");
         }
         if (task.getRetainPercent() > 0) {
-            SET("retain_percent=#{task.retainPercent}");
+            SET("retain_percent=#{retainPercent}");
         }
         if (StringUtils.isNotEmpty(task.getActionPageId())) {
-            SET("action_page_id=#{task.actionPageId}");
+            SET("action_page_id=#{actionPageId}");
         }
-        WHERE("id=#{task.id}");
+        WHERE("id=#{id}");
         return SQL();
     }
 }

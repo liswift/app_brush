@@ -3,10 +3,13 @@ package com.eazy.brush.controller.web;
 import com.eazy.brush.component.ftp.FtpTool;
 import com.eazy.brush.controller.common.BaseController;
 import com.eazy.brush.controller.view.service.TaskVoService;
+import com.eazy.brush.controller.view.service.UserAccountVoService;
 import com.eazy.brush.controller.view.vo.TaskVo;
+import com.eazy.brush.controller.view.vo.UserAccountVo;
 import com.eazy.brush.core.enums.TaskState;
 import com.eazy.brush.core.utils.ActionRequest;
 import com.eazy.brush.dao.entity.Task;
+import com.eazy.brush.model.User;
 import com.eazy.brush.service.TaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
@@ -42,15 +45,21 @@ public class TaskController extends BaseController {
     @Autowired
     private TaskVoService taskVoService;
 
-    @RequestMapping(value = "list", method = RequestMethod.GET)
-    public ModelAndView list() {
+    @Autowired
+    private UserAccountVoService userAccountVoService;
+
+    @RequestMapping(value = "listByUser", method = RequestMethod.GET)
+    public ModelAndView listByUser() {
         int curPage = getParaInt("curPage", 1);
         int size = getParaInt("size", 20);
 
-        ModelAndView modelAndView = new ModelAndView("/task/task_update");
-        List<TaskVo> taskVos = taskVoService.getList((curPage - 1) * size, size);
-        modelAndView.addObject("taskVos", taskVos);
-        return modelAndView;
+        User user = getCurrentUser();
+        ModelAndView model = new ModelAndView("task/list_byuser");
+        UserAccountVo userAccountVo = userAccountVoService.getByUserId(user.getId());
+        List<TaskVo> taskVoses = taskVoService.getList(user.getId(), (curPage - 1) * size, size);
+        model.addObject("userAccountVo", userAccountVo);
+        model.addObject("tasks", taskVoses);
+        return model;
     }
 
     @RequestMapping(value = "toAdd", method = RequestMethod.GET)
@@ -88,9 +97,15 @@ public class TaskController extends BaseController {
         renderJsonResponse();
     }
 
+    @RequestMapping(value = "delete", method = {RequestMethod.POST, RequestMethod.GET})
+    public String delete(@RequestParam(value = "id") int id) {
+        taskService.delete(id);
+        return "redirect:/task/listByUser";
+    }
+
     @RequestMapping(value = "toEdit", method = {RequestMethod.GET})
     public ModelAndView toEdit(int id) {
-        ModelAndView modelAndView = new ModelAndView("/task/save");
+        ModelAndView modelAndView = new ModelAndView("task/save");
         modelAndView.addObject("task", taskService.getById(id));
         return modelAndView;
     }
