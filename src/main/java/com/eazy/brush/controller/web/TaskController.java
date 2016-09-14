@@ -64,7 +64,7 @@ public class TaskController extends BaseController {
 
     @RequestMapping(value = "toAdd", method = RequestMethod.GET)
     public ModelAndView toAdd() {
-        return new ModelAndView("task/add");
+        return new ModelAndView("task/save");
     }
 
     @RequestMapping(value = "apk/upload", method = {RequestMethod.GET, RequestMethod.POST})
@@ -81,15 +81,19 @@ public class TaskController extends BaseController {
         renderJson200(wrapField("fileName", fileName));
     }
 
-    @RequestMapping(value = "add", method = {RequestMethod.POST, RequestMethod.GET})
-    public void add(Task task) {
-        task.setUserId(getCurrentUser().getId());
-        task.setCreateTime(new Date());
-        task.setPackageName("");
-        task.setApkUrl("");
-        task.setActionPageId("");
-        task.setState(TaskState.confirm_ing.getCode());
-        taskService.add(task);
+    @RequestMapping(value = "save", method = {RequestMethod.POST, RequestMethod.GET})
+    public void save(Task task) {
+        if (task.getId() <= 0) {
+            task.setUserId(getCurrentUser().getId());
+            task.setCreateTime(new Date());
+            task.setPackageName("");
+            task.setApkUrl("");
+            task.setActionPageId("");
+            task.setState(TaskState.confirm_ing.getCode());
+            taskService.add(task);
+        } else {
+            taskService.update(task);
+        }
         renderJsonResponse();
     }
 

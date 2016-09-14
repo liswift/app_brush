@@ -118,8 +118,8 @@
         <label class="form-label col-xs-2 col-sm-2">每日投放速度：</label>
         <div id="daily-speed" class="HuiTab formControls col-xs-10 col-sm-10" style="margin-left:-4px">
             <div class="tabBar cl tabBar-1" task_name="runSpeed">
-                <span task_value="0" <c:if test="task.runSpeed==0">class="speed-select" </c:if>>最快投放</span>
-                <span task_value="1" <c:if test="task.runSpeed==1">class="speed-select" </c:if>>均匀投放</span>
+                <span task_value="0" <c:if test="${task.runSpeed eq 0}">class="speed-select" </c:if>>最快投放</span>
+                <span task_value="1" <c:if test="${task.runSpeed eq 1}">class="speed-select" </c:if>>均匀投放</span>
             </div>
         </div>
     </div>
@@ -127,22 +127,24 @@
         <label class="form-label col-xs-2 col-sm-2">留存率：</label>
         <div id="daily-stay" class="HuiTab formControls col-xs-8 col-sm-8" style="margin-left:-4px">
             <div class="tabBar cl tabBar-1" task_name="retainDay">
-                <span task_value="0">无留存</span>
-                <span task_value="1">1天</span>
-                <span task_value="7">7天</span>
-                <span task_value="14">14天</span>
-                <span task_value="30">30天</span>
-                <span task_value="60">60天</span>
+                <span task_value="0"
+                      <c:if test="${task.retainDay eq 0}">class="speed-select" </c:if> >无留存</span>
+                <span task_value="1" <c:if test="${task.retainDay eq 1}">class="speed-select" </c:if>>1天</span>
+                <span task_value="7" <c:if test="${task.retainDay eq 7}">class="speed-select" </c:if>>7天</span>
+                <span task_value="14" <c:if test="${task.retainDay eq 14}">class="speed-select" </c:if>>14天</span>
+                <span task_value="30" <c:if test="${task.retainDay eq 30}">class="speed-select" </c:if>>30天</span>
+                <span task_value="60" <c:if test="${task.retainDay eq 60}">class="speed-select" </c:if>>60天</span>
             </div>
         </div>
         <div class="formControls col-xs-2 col-sm-2" style="margin-left: 2px">
             <input task_name="retainPercent" maxlength="2" type="text" class="input-text" autocomplete="off"
-                   style="width:60px">
+                   style="width:60px" value="${task.retainPercent}">
             <label>%</label>
         </div>
     </div>
     <div class="row cl">
         <div class="col-xs-10 col-sm-10 col-xs-offset-4 col-sm-offset-5">
+            <input type="hidden" task_name="id" value="${task.id}">
             <input id="task-add-btn" class="btn btn-primary radius" type="submit" style="width: 90px" value="提交">
         </div>
     </div>

@@ -21,6 +21,8 @@ public interface TaskService {
 
     void add(Task task);
 
+    void update(Task task);
+
     void changeState(int id, int state);
 
     void changeAllState(int state);

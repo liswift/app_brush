@@ -1,6 +1,7 @@
 package com.eazy.brush.dao.mapper;
 
 import com.eazy.brush.dao.entity.Task;
+import com.eazy.brush.dao.provider.TaskProvider;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -53,4 +54,7 @@ public interface TaskMapper {
 
     @Select("select " + FEILDS + " from task where state>#{state} limit #{offset},#{size}")
     List<Task> getEnableList(@Param("state") int state, @Param("offset") int offset, @Param("size") int size);
+
+    @UpdateProvider(type = TaskProvider.class, method = "update")
+    void update(Task task);
 }

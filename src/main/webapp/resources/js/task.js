@@ -23,7 +23,7 @@ $(document).ready(function () {
                 params[name] = $('span.speed-select', item).attr('task_value');
             }
         });
-        ajaxPost('/task/add', params, function (d) {
+        ajaxPost('/task/save', params, function (d) {
             location.href = "/task/listByUser";
         }, function (d) {
             alert("添加失败!");
