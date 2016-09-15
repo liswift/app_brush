@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -48,11 +49,58 @@
             <div class="formControls col-xs-6 col-sm-6">
                 <label class="form-label col-xs-4 col-sm-4">应用软件包：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                   <lable>${task.apkUrl}</lablel>
+                   <a href=${task.apkUrl}>点击下载</a>
                 </div>
             </div>
         </div>
 
+</div>
+
+<div class="pd-20">
+	<div class="cl pd-5 bg-1 bk-gray"> <span class="l">  <a class="btn btn-primary radius" href="javascript:;" onclick="add_city('添加页动作','${ctx}/audit/toAddPageAction','700','300')" ><i class="Hui-iconfont">&#xe600;</i> 添加页动作</a> </span>  </div>
+	<table class="table table-border table-bordered table-hover table-bg">
+		<thead>
+			<tr>
+				<th scope="col" colspan="6">页动作</th>
+			</tr>
+		    <tr class="text-c">
+                        <th>页面(Action/Dialog/PopuWindow)</th>
+                        <th>描述</th>
+                        <th>动作组数量</th>
+                        <th>状态</th>
+                        <th>操作</th>
+            </tr>
+        </thead>
+            <tbody>
+                    <c:forEach items="${ actionPages }" var="t">
+                        <tr class="text-c">
+                            <td>${t.pageName}</td>
+                            <td>${t.pageDesc}</td>
+                            <td>${fn:length(t.actionGroupVos)}/td>
+                            <c:choose>
+                              <c:when test="${t.enable=='1'}">
+                                  <td>启用中</td>
+                                  <td>
+                                     <a href="javascript:;"
+                                     onclick="fullOpen('编辑','${ctx}/task/toEdit?id=${t.id}&ac=editor')">编辑</a>
+                                     <a href="javascript:;"
+                                     onclick="">禁用</a>
+                                  </td>
+                              </c:when>
+                              <c:otherwise>
+                                   <td>禁用中</td>
+                                   <td>
+                                       <a href="javascript:;"
+                                     onclick="fullOpen('编辑','${ctx}/task/toEdit?id=${t.id}&ac=editor')">编辑</a>
+                                          <a href="javascript:;"
+                                     onclick="">启用</a>
+                                   </td>
+                              </c:otherwise>
+                            </c:choose>
+                        </tr>
+                    </c:forEach>
+            </tbody>
+	</table>
 </div>
 
 <script type="text/javascript" src="${txt}/resources/lib/jquery/1.9.1/jquery.min.js"></script>

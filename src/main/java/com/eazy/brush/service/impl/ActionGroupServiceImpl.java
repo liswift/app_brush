@@ -22,4 +22,9 @@ public class ActionGroupServiceImpl implements ActionGroupService {
     public List<ActionGroup> getByIds(String actionGroupId) {
         return actionGroupMapper.getByIds(actionGroupId);
     }
+
+    @Override
+    public List<ActionGroup> getByPageActionId(int pageActionId) {
+        return actionGroupMapper.getByActionPageId(pageActionId);
+    }
 }

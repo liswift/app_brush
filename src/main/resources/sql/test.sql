@@ -1656,7 +1656,7 @@ CREATE TABLE `task` (
 -- ----------------------------
 INSERT INTO `task` VALUES ('11', '9','13', 'Mainac', 'com.yuekuba.maintest', '1', '15.0', 'http://www.yuekuba.com/task/apk/download?file=maintest-debug.apk', '网易新闻', '10000', '100000', '10', '60', '1', '0', '23', '1', '7', '50', '2', '2016-09-11 03:38:59');
 
-INSERT INTO `task` VALUES ('11', '9','13', 'Mainac', 'com.yuekuba.maintest', '1', '15.0', 'http://www.yuekuba.com/task/apk/download?file=maintest-debug.apk', '网易新闻', '10000', '100000', '10', '60', '1', '0', '23', '1', '7', '50', '-1', '2016-09-11 03:38:59');
+INSERT INTO `task` VALUES ('12', '9','0', 'Mainac', 'com.yuekuba.maintest', '1', '15.0', 'http://www.yuekuba.com/task/apk/download?file=maintest-debug.apk', '网易新闻', '10000', '100000', '10', '60', '1', '0', '23', '1', '7', '50', '-1', '2016-09-11 03:38:59');
 
 -- ----------------------------
 -- Table structure for `task_sub`

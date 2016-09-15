@@ -11,4 +11,6 @@ import java.util.List;
 public interface ActionPageVoService {
 
     List<ActionPageVo> getByTaskId(int id);
+
+    List<ActionPageVo> getByTaskIdNum(int id);
 }

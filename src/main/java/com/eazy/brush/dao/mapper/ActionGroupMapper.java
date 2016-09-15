@@ -18,6 +18,9 @@ public interface ActionGroupMapper {
     @Select("select " + FEILDS + " from action_group where id in (#{actionGroupId})")
     List<ActionGroup> getByIds(@Param("actionGroupId") String actionGroupId);
 
+    @Select("select " + FEILDS + " from action_group where action_page_id in (#{actionPageId})")
+    List<ActionGroup> getByActionPageId(@Param("actionPageId") int actionPageId);
+
     @Insert("insert into action_group(" + INSERT_FEILDS + ") values(#{actionPageId},#{name},#{actionItemIds},#{enable})")
     void insert(ActionGroup actionGroup);
 

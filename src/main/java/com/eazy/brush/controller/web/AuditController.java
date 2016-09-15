@@ -1,10 +1,11 @@
 package com.eazy.brush.controller.web;
 
 import com.eazy.brush.controller.common.BaseController;
+import com.eazy.brush.controller.view.service.ActionGroupVoService;
+import com.eazy.brush.controller.view.service.ActionPageVoService;
+import com.eazy.brush.controller.view.vo.ActionPageVo;
 import com.eazy.brush.core.enums.TaskState;
-import com.eazy.brush.dao.entity.ActionPage;
 import com.eazy.brush.dao.entity.Task;
-import com.eazy.brush.service.ActionPageService;
 import com.eazy.brush.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,27 +27,34 @@ public class AuditController extends BaseController {
     private TaskService taskService;
 
     @Autowired
-    private ActionPageService actionPageService;
+    private ActionPageVoService actionPageVoService;
 
+    @Autowired
+    private ActionGroupVoService actionGroupVoService;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView index(ModelMap map) {
         int userId=getCurrentUser().getId();
         Task task=taskService.getAuditSingleTask(userId,TaskState.confirm_ing.getCode());
-        List<ActionPage> actionPages=new ArrayList<>();
+        List<ActionPageVo> actionPages=new ArrayList<>();
         if(task==null){
             task = taskService.getRandomTask(userId);
         }else{
-            actionPages = actionPageService.getByTaskId(task.getId());
+            actionPages = actionPageVoService.getByTaskIdNum(task.getId());
         }
 
         if(task==null){//没有可以审核的任何task,直接返回欢迎页面
-            return new ModelAndView("audit/welcome",map);
+            return new ModelAndView("audit/welcome");
         }else{
             map.put("task",task);
             map.put("actionPages",actionPages);
             return new ModelAndView("audit/index", map);
         }
+    }
+
+    @RequestMapping(value = "/toAddPageAction", method = RequestMethod.GET)
+    public ModelAndView addPageActions(ModelMap map) {
+       return new ModelAndView("action/add");
     }
 
 }

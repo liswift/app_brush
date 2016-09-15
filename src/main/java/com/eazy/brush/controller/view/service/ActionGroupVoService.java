@@ -11,5 +11,7 @@ import java.util.List;
 public interface ActionGroupVoService {
 
     List<ActionGroupVo> getByIds(String actionGroupId);
+
+    List<ActionGroupVo> getByPageId(int pageId);
 }
 

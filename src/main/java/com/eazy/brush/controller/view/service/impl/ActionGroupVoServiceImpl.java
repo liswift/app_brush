@@ -27,7 +27,16 @@ public class ActionGroupVoServiceImpl implements ActionGroupVoService {
     @Override
     public List<ActionGroupVo> getByIds(String actionGroupId) {
         List<ActionGroup> actionGroups = actionGroupService.getByIds(actionGroupId);
-        List<ActionGroupVo> actionGroupVos = Lists.newArrayList();
+        return transforActionGroup(actionGroups);
+    }
+
+    @Override
+    public List<ActionGroupVo> getByPageId(int pageId) {
+        return transforActionGroup(actionGroupService.getByPageActionId(pageId));
+    }
+
+    private List<ActionGroupVo> transforActionGroup(List<ActionGroup> actionGroups){
+         List<ActionGroupVo> actionGroupVos = Lists.newArrayList();
         for (ActionGroup actionGroup : actionGroups) {
             ActionGroupVo actionGroupVo = new ActionGroupVo();
             actionGroupVo.setId(actionGroup.getId());
@@ -35,6 +44,7 @@ public class ActionGroupVoServiceImpl implements ActionGroupVoService {
             actionGroupVo.setEnable(actionGroup.getEnable());
             actionGroupVos.add(actionGroupVo);
         }
-        return actionGroupVos;
+       return actionGroupVos;
     }
+
 }

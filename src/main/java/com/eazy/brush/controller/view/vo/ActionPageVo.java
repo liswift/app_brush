@@ -13,8 +13,11 @@ import java.util.List;
 @Data
 public class ActionPageVo {
     private int id;
+    private int enable=1;//是否可用默认是1
     private String pageName;//页面名称
+    private int taskId;//task Id
     private String pageDesc;//页面描述
+
     private List<ActionItem> actionItems;//操作动作id集合
     private List<ActionGroupVo> actionGroupVos;
 }
