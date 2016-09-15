@@ -17,6 +17,6 @@ public class ActionItem {
     private String viewContent; //view内容,
     private String action;//动作,
     private String acitionParam;//动作参数,type:value/type:value
-    private int stayTime;//停留时间,
-    private int upDown;//波动范围,
+    private int stayTime;//停留时间,秒
+    private int upDown;//波动范围,秒
 }

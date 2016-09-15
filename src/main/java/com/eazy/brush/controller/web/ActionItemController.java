@@ -17,7 +17,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/action")
 @Slf4j
-public class ActionItemController extends BaseController{
+public class ActionItemController extends BaseController {
 
     @Autowired
     ActionItemService actionItemService;
@@ -26,28 +26,45 @@ public class ActionItemController extends BaseController{
     /**
      * add
      */
-    @RequestMapping(value="add",method = RequestMethod.GET)
-    public void add(){
-        ActionItem actionItem=new ActionItem();
-        actionItem.setAction(getPara("action"));
-        actionItem.setActionPageId(getParaInt("actionPageid",0));
-        actionItem.setName(getPara("name"));
-        actionItem.setStayTime(getParaInt("stayTime",5));
-
-
+    @RequestMapping(value = "add", method = RequestMethod.GET)
+    public void add() {
+        ActionItem actionItem = initActionItem(0);
         actionItemService.add(actionItem);
         renderResult(true);
     }
 
-    @RequestMapping(value="delete",method = RequestMethod.GET)
-    public void delete(){
-        actionItemService.deleteItemById(getParaInt("id",0));
+    private ActionItem initActionItem(int id) {
+        ActionItem actionItem = new ActionItem();
+        if (id != 0) {
+            actionItem.setId(id);
+        }
+        actionItem.setAction(getPara("action"));
+        actionItem.setActionPageId(getParaInt("actionPageid", 0));
+        actionItem.setName(getPara("name"));
+        actionItem.setStayTime(getParaInt("stayTime", 50));
+        actionItem.setUpDown(getParaInt("upDown", 1));
+        actionItem.setAcitionParam(getPara("param"));
+        actionItem.setViewContent(getPara("viewContent"));
+        actionItem.setViewId(getPara("viewId"));
+        actionItem.setViewName(getPara("viewName"));
+        return actionItem;
+    }
+
+    @RequestMapping(value = "update", method = RequestMethod.GET)
+    public void update() {
+        actionItemService.update(initActionItem(getParaInt("id", 0)));
         renderResult(true);
     }
 
-    @RequestMapping(value="get",method = RequestMethod.GET)
-    public void get(){
-        List<ActionItem> actionItemList=actionItemService.getByPageId(getParaInt("pageId",0));
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
+    public void delete() {
+        actionItemService.deleteItemById(getParaInt("id", 0));
+        renderResult(true);
+    }
+
+    @RequestMapping(value = "get", method = RequestMethod.GET)
+    public void get() {
+        List<ActionItem> actionItemList = actionItemService.getByPageId(getParaInt("pageId", 0));
     }
 
 
