@@ -32,7 +32,7 @@ public class AuditController extends BaseController {
     @Autowired
     private ActionPageService actionPageService;
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequestMapping(value = "index", method = RequestMethod.GET)
     public ModelAndView index(ModelMap map) {
         int userId=getCurrentUser().getId();
         Task task=taskService.getAuditSingleTask(userId,TaskState.confirm_ing.getCode());
@@ -52,14 +52,14 @@ public class AuditController extends BaseController {
         }
     }
 
-    @RequestMapping(value = "/toAddPageAction", method = RequestMethod.GET)
+    @RequestMapping(value = "toAddPageAction", method = RequestMethod.GET)
     public ModelAndView toAddPageAction(ModelMap map) {
        String taskId = getPara("id");
         map.put("taskId",taskId);
        return new ModelAndView("action/add",map);
     }
 
-    @RequestMapping(value="/enable" ,method=RequestMethod.GET)
+    @RequestMapping(value="enable" ,method=RequestMethod.GET)
     public String enable(ModelMap map){
         int curPage = getParaInt("pageId", 0);
         if(curPage==0){
@@ -69,7 +69,7 @@ public class AuditController extends BaseController {
         return "redirect:/audit/index";
     }
 
-    @RequestMapping(value="/disable" ,method=RequestMethod.GET)
+    @RequestMapping(value="disable" ,method=RequestMethod.GET)
     public String disable(ModelMap map){
         int curPage = getParaInt("pageId", 0);
         if(curPage==0){
