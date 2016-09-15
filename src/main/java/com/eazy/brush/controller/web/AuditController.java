@@ -54,6 +54,15 @@ public class AuditController extends BaseController {
         }
     }
 
+    @RequestMapping(value = "editorTask", method = RequestMethod.GET)
+    public ModelAndView editorTask(ModelMap map){
+        Task task=taskService.getById(getParaInt("id",0));
+        List<ActionPageVo> actionPages = actionPageVoService.getByTaskIdNum(task.getId());
+        map.put("task",task);
+        map.put("actionPages",actionPages);
+        return new ModelAndView("audit/history",map);
+    }
+
     @RequestMapping(value = "historyList", method = RequestMethod.GET)
     public ModelAndView historyList(ModelMap map){
         List<Task> tasks=taskService.getByAuditUserId(getCurrentUser().getId());

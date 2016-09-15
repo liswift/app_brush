@@ -51,7 +51,7 @@
                     <c:choose>
                               <c:when test="${t.state=='-1'}">
                                   <td>
-                                     <a href="javascript:;">编辑</a>
+                                     <a href="javascript:;" onclick="fullOpen('查看任务详情','${ctx}/audit/editorTask?id=${t.id}')">编辑</a>
                                      <a href="javascript:;">通过</a>
                                      <a href="javascript:;">拒绝</a>
                                      <a href="javascript:;">放回</a>
@@ -59,7 +59,7 @@
                               </c:when>
                               <c:otherwise>
                                    <td>
-                                          <a href="javascript:;" onclick="fullOpen('编辑','${ctx}/audit/viewTask?id=${t.id}')">查看</a>
+                                          <a href="javascript:;" onclick="fullOpen('查看任务详情','${ctx}/audit/viewTask?id=${t.id}')">查看</a>
                                    </td>
                               </c:otherwise>
                             </c:choose>
