@@ -7,6 +7,7 @@ import com.eazy.brush.core.enums.TaskState;
 import com.eazy.brush.dao.entity.Task;
 import com.eazy.brush.service.ActionPageService;
 import com.eazy.brush.service.TaskService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,6 +23,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/audit")
+@Slf4j
 public class AuditController extends BaseController {
     @Autowired
     private TaskService taskService;
