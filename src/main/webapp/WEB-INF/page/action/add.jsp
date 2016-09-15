@@ -131,7 +131,7 @@
     </div>
     <div class="row cl" style="margin-top:50px">
         <div class="col-xs-10 col-sm-10 col-xs-offset-4 col-sm-offset-5">
-            <input id="action-add-btn" class="btn btn-primary radius" type="submit" style="width: 90px" value="提交">
+            <input id="action-add-btn" class="btn btn-primary radius" type="submit" taskid="${taskId}" style="width: 90px" value="提交">
         </div>
     </div>
 </div>

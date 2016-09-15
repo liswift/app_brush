@@ -29,7 +29,6 @@ public class AuditController extends BaseController {
     @Autowired
     private ActionPageVoService actionPageVoService;
 
-
     @Autowired
     private ActionPageService actionPageService;
 
@@ -55,7 +54,9 @@ public class AuditController extends BaseController {
 
     @RequestMapping(value = "/toAddPageAction", method = RequestMethod.GET)
     public ModelAndView addPageActions(ModelMap map) {
-       return new ModelAndView("action/add");
+       String taskId = getPara("id");
+        map.put("taskId",taskId);
+       return new ModelAndView("action/add",map);
     }
 
     @RequestMapping(value="/enable" ,method=RequestMethod.GET)

@@ -57,11 +57,11 @@
 </div>
 
 <div class="pd-20">
-	<div class="cl pd-5 bg-1 bk-gray"> <span class="l">  <a class="btn btn-primary radius" href="javascript:;" onclick="add_city('添加页动作','${ctx}/audit/toAddPageAction','700','300')" ><i class="Hui-iconfont">&#xe600;</i> 添加页动作</a> </span>  </div>
+	<div class="cl pd-5 bg-1 bk-gray"> <span class="l">  <a class="btn btn-primary radius" href="javascript:;" onclick="fullOpen('添加页动作','${ctx}/audit/toAddPageAction?id=${task.id}')" ><i class="Hui-iconfont">&#xe600;</i> 添加页动作</a> </span>  </div>
 	<table class="table table-border table-bordered table-hover table-bg">
 		<thead>
 			<tr>
-				<th scope="col" colspan="6">页动作</th>
+				<th scope="col" colspan="5">页动作</th>
 			</tr>
 		    <tr class="text-c">
                         <th>页面(Action/Dialog/PopuWindow)</th>
