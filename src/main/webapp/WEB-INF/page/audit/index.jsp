@@ -101,6 +101,9 @@
 	</table>
 </div>
 
+<input class="btn btn-primary size-M radius" type="button" value="通过"><!--通过传递/audit/changeState id,state 2-->
+<input class="btn btn-primary size-M radius" type="button" value="拒绝"><!--通过传递/audit/changeState id,state 0,msg:应用非法-->
+<input class="btn btn-default size-M radius" type="button" value="放回"><!--/audit/release id-->
 
 <script type="text/javascript" src="${ctx }/resources/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/lib/layer/2.1/layer.js"></script>
