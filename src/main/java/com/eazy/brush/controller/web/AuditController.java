@@ -54,6 +54,13 @@ public class AuditController extends BaseController {
         }
     }
 
+    @RequestMapping(value = "historyList", method = RequestMethod.GET)
+    public ModelAndView historyList(ModelMap map){
+        List<Task> tasks=taskService.getByAuditUserId(getCurrentUser().getId());
+        map.put("task",tasks);
+        return new ModelAndView("audit/history",map);
+    }
+
     @RequestMapping(value = "toAddPageAction", method = RequestMethod.GET)
     public ModelAndView toAddPageAction(ModelMap map) {
        String taskId = getPara("id");
