@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StopWatch;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -48,13 +47,13 @@ public class TaskSubScheduler {
         Task task = taskService.getByState(TaskState.confirm_passed.getCode());
 
         if (null != task) {
-            taskService.changeState(task.getId(), TaskState.running.getCode());
+            taskService.changeState(task.getId(), TaskState.running.getCode(),"");
 
             log.info("### start makeIncrDayTaskSub ###");
             taskSubService.makeIncrDayTaskSub(task);
             log.info("### end makeIncrDayTaskSub,cost {} s ###", stopwatch.elapsed(TimeUnit.SECONDS));
 
-            taskService.changeState(task.getId(), TaskState.run_end.getCode());
+            taskService.changeState(task.getId(), TaskState.run_end.getCode(),"");
             log.info("### make tasksubs success！,task_id {} ###", task.getId());
         }
 
@@ -62,11 +61,15 @@ public class TaskSubScheduler {
         stopwatch.stop();
     }
 
+    /**
+     * 这个写的不对吧?
+     * 把所有已经停止的任务,全部搞成通过?什么个意思?
+     */
     @Scheduled(cron = "0 0 0  * * ? ")
     public void changeTaskState() {
         List<Task> list = taskService.getEnableList(TaskState.stoped.getCode(), 0, Integer.MAX_VALUE);
         for (Task task : list) {
-            taskService.changeState(task.getId(), TaskState.confirm_passed.getCode());
+            taskService.changeState(task.getId(), TaskState.confirm_passed.getCode(),"");
         }
         log.info("### change enable Task State success ###");
     }

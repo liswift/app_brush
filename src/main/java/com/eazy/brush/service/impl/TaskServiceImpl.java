@@ -58,6 +58,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public int changeState(int id, int state,String msg) {
+        return taskMapper.changeState(id,state,msg);
+    }
+
+    @Override
     public void changeAllState(int state) {
         taskMapper.changeAllState(state);
     }

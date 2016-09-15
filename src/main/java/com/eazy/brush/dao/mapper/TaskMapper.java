@@ -43,6 +43,9 @@ public interface TaskMapper {
     @Update("update task set state=#{state},msg=#{msg} where id=#{id} and audit_user_id=#{auditUserId}")
     int changeState(@Param("id") int id,@Param("auditUserId")int auditUserId ,@Param("state") int state,@Param("msg")String msg);
 
+    @Update("update task set state=#{state},msg=#{msg} where id=#{id}")
+    int changeState(@Param("id") int id, @Param("state")int state,@Param("msg")String msg);
+
     @Update("update task set state=#{state}")
     void changeAllState(@Param("state") int state);
 

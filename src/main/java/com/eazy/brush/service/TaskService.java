@@ -25,6 +25,8 @@ public interface TaskService {
 
     int changeState(int id,int auditUserId, int state,String msg);
 
+    int changeState(int id,int state,String msg);
+
     void changeAllState(int state);
 
     /**
