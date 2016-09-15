@@ -59,7 +59,7 @@
                               </c:when>
                               <c:otherwise>
                                    <td>
-                                          <a href="javascript:;">查看</a>
+                                          <a href="javascript:;" onclick="fullOpen('编辑','${ctx}/audit/viewTask?id=${t.id}')">查看</a>
                                    </td>
                               </c:otherwise>
                             </c:choose>
