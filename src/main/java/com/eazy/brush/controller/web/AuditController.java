@@ -54,6 +54,33 @@ public class AuditController extends BaseController {
         }
     }
 
+    /**
+     * 放回操作
+     */
+    @RequestMapping(value="release",method = RequestMethod.GET)
+    public void release(){
+        taskService.assignAuditUserId(getCurrentUser().getId(),getParaInt("id",0));
+        renderResult(true);
+    }
+
+    /**
+     * 通过 拒绝操作
+     */
+    @RequestMapping(value = "changeState", method = RequestMethod.GET)
+    public void changeState(){
+        int taskId=getParaInt("id",0);
+        int state=getParaInt("state",-10);
+        if(!TaskState.isEnable(state)){
+            renderResult(false);
+            return;
+        }
+        String message=getPara("msg","");
+
+        int result=taskService.changeState(taskId,getCurrentUser().getId(),state,message);
+        renderResult(result>0);
+    }
+
+
     @RequestMapping(value = "editorTask", method = RequestMethod.GET)
     public ModelAndView editorTask(ModelMap map){
         Task task=taskService.getById(getParaInt("id",0));

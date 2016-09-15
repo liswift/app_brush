@@ -12,6 +12,16 @@ public enum TaskState {
     running("运行中", 3),
     run_end("运行完成", 4);
 
+    public static boolean isEnable(int state){
+        TaskState[] values = TaskState.values();
+        for(TaskState value:values){
+            if(value.code==state){
+                return  true;
+            }
+        }
+        return false;
+    }
+
     private String name;
     private int code;
 

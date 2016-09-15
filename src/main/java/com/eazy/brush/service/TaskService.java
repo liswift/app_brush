@@ -23,7 +23,7 @@ public interface TaskService {
 
     void update(Task task);
 
-    void changeState(int id, int state);
+    int changeState(int id,int auditUserId, int state,String msg);
 
     void changeAllState(int state);
 
@@ -53,6 +53,13 @@ public interface TaskService {
      * @param outUserid
      */
     void changeAuditUserId(int currentUserId, int outUserid);
+
+    /**
+     * 放回操作
+     * @param auditUserId
+     * @param taskId
+     */
+    void assignAuditUserId(int auditUserId,int taskId);
     /**
      * 计算 给定时间的子任务数
      *

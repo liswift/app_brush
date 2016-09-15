@@ -32,4 +32,5 @@ public class Task {
     private int retainPercent;      //留存率
     private int state;              //任务被执行回调时间
     private Date createTime;        //创建时间
+    private String msg;             //备注内容,例如审核失败的内容
 }

@@ -53,8 +53,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void changeState(int id, int state) {
-        taskMapper.changeState(id, state);
+    public int changeState(int id,int auditUserId, int state,String msg) {
+        return taskMapper.changeState(id,auditUserId, state,msg);
     }
 
     @Override
@@ -87,6 +87,12 @@ public class TaskServiceImpl implements TaskService {
     public void changeAuditUserId(int currentUserId, int outUserid) {
         taskMapper.changeAuditUserId(currentUserId, outUserid);
     }
+
+    @Override
+    public void assignAuditUserId(int auditUserId, int taskId) {
+        taskMapper.assignAuditUserId(auditUserId,taskId);
+    }
+
 
     @Override
     public double calcRetainPercent(Task task) {

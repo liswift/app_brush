@@ -51,10 +51,10 @@
                     <c:choose>
                               <c:when test="${t.state=='-1'}">
                                   <td>
-                                     <a href="javascript:;" onclick="fullOpen('查看任务详情','${ctx}/audit/editorTask?id=${t.id}')">编辑</a>
-                                     <a href="javascript:;">通过</a>
-                                     <a href="javascript:;">拒绝</a>
-                                     <a href="javascript:;">放回</a>
+                                     <a href="javascript:;" onclick="fullOpen('编辑任务详情','${ctx}/audit/editorTask?id=${t.id}')">编辑</a>
+                                     <a href="javascript:;">通过</a><!--通过传递/audit/changeState id,state 2-->
+                                     <a href="javascript:;">拒绝</a><!--通过传递/audit/changeState id,state 0,msg:应用非法-->
+                                     <a href="javascript:;">放回</a><!--/audit/release id-->
                                   </td>
                               </c:when>
                               <c:otherwise>

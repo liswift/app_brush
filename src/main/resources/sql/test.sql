@@ -1648,15 +1648,16 @@ CREATE TABLE `task` (
   `retain_percent` int(11) DEFAULT NULL COMMENT '留存率',
   `state` int(11) NOT NULL DEFAULT '0' COMMENT '任务被执行，回调时间',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `msg` varchar(512) DEFAULT '' COMMENT '备注内容',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of task
 -- ----------------------------
-INSERT INTO `task` VALUES ('11', '9','13', 'Mainac', 'com.yuekuba.maintest', '1', '15.0', 'http://www.yuekuba.com/task/apk/download?file=maintest-debug.apk', '网易新闻', '10000', '100000', '10', '60', '1', '0', '23', '1', '7', '50', '2', '2016-09-11 03:38:59');
+INSERT INTO `task` VALUES ('11', '9','13', 'Mainac', 'com.yuekuba.maintest', '1', '15.0', 'http://www.yuekuba.com/task/apk/download?file=maintest-debug.apk', '网易新闻', '10000', '100000', '10', '60', '1', '0', '23', '1', '7', '50', '2', '2016-09-11 03:38:59','');
 
-INSERT INTO `task` VALUES ('12', '9','0', 'Mainac', 'com.yuekuba.maintest', '1', '15.0', 'http://www.yuekuba.com/task/apk/download?file=maintest-debug.apk', '网易新闻', '10000', '100000', '10', '60', '1', '0', '23', '1', '7', '50', '-1', '2016-09-11 03:38:59');
+INSERT INTO `task` VALUES ('12', '9','0', 'Mainac', 'com.yuekuba.maintest', '1', '15.0', 'http://www.yuekuba.com/task/apk/download?file=maintest-debug.apk', '网易新闻', '10000', '100000', '10', '60', '1', '0', '23', '1', '7', '50', '-1', '2016-09-11 03:38:59','');
 
 -- ----------------------------
 -- Table structure for `task_sub`
