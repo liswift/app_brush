@@ -29,8 +29,6 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
     @Autowired
     ActionPageService actionPageService;
 
-    @Autowired
-    ActionSubService actionSubService;
 
     @Autowired
     DeviceInfoService deviceInfoService;
@@ -48,7 +46,7 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
 
             Task task = taskService.getById(taskSub.getTaskId());
             DeviceInfo deviceInfo = buildDeviceInfo(taskSub);
-            List<ActionPageVo> actionPageVos = actionPageVoService.getByIds(task.getActionPageId());
+            List<ActionPageVo> actionPageVos = actionPageVoService.getByTaskId(task.getId());
 
             TaskSubVo taskSubVo = new TaskSubVo();
             taskSubVo.setId(taskSub.getId());

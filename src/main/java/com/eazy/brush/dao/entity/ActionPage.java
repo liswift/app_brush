@@ -10,8 +10,8 @@ import lombok.Data;
 @Data
 public class ActionPage {
     private int id;
+    private int taskId;//task Id
     private String pageName;//页面名称
     private String pageDesc;//页面描述
-    private String actionItemId;//操作动作id集合
-    private String actionGroupId;//操作动作组集合
+    private int enable=1;//是否可用默认是1
 }

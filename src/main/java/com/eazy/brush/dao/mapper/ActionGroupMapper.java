@@ -12,16 +12,16 @@ import java.util.List;
  */
 public interface ActionGroupMapper {
 
-    String INSERT_FEILDS = "name,item_id,enable";
+    String INSERT_FEILDS = "action_page_id,name,action_item_ids,enable";
     String FEILDS = "id," + INSERT_FEILDS;
 
     @Select("select " + FEILDS + " from action_group where id in (#{actionGroupId})")
     List<ActionGroup> getByIds(@Param("actionGroupId") String actionGroupId);
 
-    @Insert("insert into action_group(" + INSERT_FEILDS + ") values(#{name},#{itemId},#{enable})")
+    @Insert("insert into action_group(" + INSERT_FEILDS + ") values(#{actionPageId},#{name},#{actionItemIds},#{enable})")
     void insert(ActionGroup actionGroup);
 
-    @Update("update action_group set name=#{name},item_id=#{itemId},enable=#{enable} where id=#{id}")
+    @Update("update action_group set name=#{name},action_item_ids=#{actionItemIds},enable=#{enable} where id=#{id}")
     void update(ActionGroup actionGroup);
 
     @Delete("delete from action_group where id=#{id}")

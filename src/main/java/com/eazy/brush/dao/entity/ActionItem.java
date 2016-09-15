@@ -10,6 +10,7 @@ import lombok.Data;
 @Data
 public class ActionItem {
     private int id;
+    private int actionPageId;//页动作id
     private String name;//元动作名称,
     private String viewName; //view类名,
     private String viewId; //viewId,

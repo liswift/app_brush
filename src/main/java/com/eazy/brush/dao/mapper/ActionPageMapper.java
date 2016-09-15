@@ -13,8 +13,14 @@ import java.util.List;
  */
 public interface ActionPageMapper {
 
-    String INSERT_FIELDS = "page_name,page_desc,action_item_id,action_group_id";
+    String INSERT_FIELDS = "task_id,page_name,page_desc,enable";
     String FIELDS = "id," + INSERT_FIELDS;
+
+    @Select("select "+FIELDS+" from action_page where task_id=#{taskId}")
+    List<ActionPage> getByTaskId(@Param("taskId")int taskId);
+
+    @Update("update action_page set enable=#{enable} where id=#{id}")
+    void updateEnable(@Param("id")int id,@Param("enable")int enable);
 
     @Select("select " + FIELDS + " from action_page where id=#{id}")
     ActionPage getById(@Param("id") int id);
@@ -22,12 +28,11 @@ public interface ActionPageMapper {
     @Select("select " + FIELDS + " from action_page where id in (#{ids})")
     List<ActionPage> getListByIds(@Param("ids") String ids);
 
-    @Insert("insert into action_page(" + INSERT_FIELDS + ") values(#{pageName},#{pageDesc}," +
-            "#{actionItemId},#{actionGroupId})")
+    @Insert("insert into action_page(" + INSERT_FIELDS + ") values(#{taskId},#{pageName},#{pageDesc}," +
+            "#{enable})")
     void insert(ActionPage actionPage);
 
-    @Update("update action_page set page_name=#{pageName},page_desc=#{pageDesc}," +
-            "action_item_id=#{actionItemId},action_group_id=#{actionGroupId} where id=#{id}")
+    @Update("update action_page set page_name=#{pageName},page_desc=#{pageDesc},enable=#{enable} where id=#{id}")
     void update(ActionPage actionPage);
 
     @Delete("delete from action_page where id=#{id}")

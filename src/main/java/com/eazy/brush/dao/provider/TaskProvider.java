@@ -21,6 +21,9 @@ public class TaskProvider {
         if (StringUtils.isNotEmpty(task.getAppName())) {
             SET("app_name=#{appName}");
         }
+        if(task.getAuditUserId()>-1){
+            SET("audit_user_id=#{auditUserId}");
+        }
         if (StringUtils.isNotEmpty(task.getPackageName())) {
             SET("package_name=#{packageName}");
         }
@@ -65,9 +68,6 @@ public class TaskProvider {
         }
         if (task.getRetainPercent() > 0) {
             SET("retain_percent=#{retainPercent}");
-        }
-        if (StringUtils.isNotEmpty(task.getActionPageId())) {
-            SET("action_page_id=#{actionPageId}");
         }
         WHERE("id=#{id}");
         return SQL();

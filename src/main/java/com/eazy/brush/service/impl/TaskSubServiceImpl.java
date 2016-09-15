@@ -34,13 +34,8 @@ import java.util.UUID;
 @Service
 public class TaskSubServiceImpl implements TaskSubService {
 
-    private Random random = new Random();
-
     @Autowired
     private TaskSubMapper taskSubMapper;
-
-    @Autowired
-    private TaskActionService taskActionService;
 
     @Autowired
     private DeviceInfoService deviceInfoService;
@@ -82,7 +77,6 @@ public class TaskSubServiceImpl implements TaskSubService {
     @Override
     public void makeIncrDayTaskSub(Task task) {
 
-        List<ActionPage> actionPageList = taskActionService.getActionsByTaskId(task.getId());
         List<DeviceInfo> deviceInfos = deviceInfoService.getList(0, Integer.MAX_VALUE);
 
         int perNum = 0, times = 0;
@@ -108,7 +102,7 @@ public class TaskSubServiceImpl implements TaskSubService {
         while (i-- > 0) {
             long perTime = Long.parseLong(startTime.toString("yyyyMMddHHmm"));
             if (perNum > 0) {
-                buildTaskSubs(task, perTime, actionPageList, deviceInfos, perNum);
+                buildTaskSubs(task, perTime, deviceInfos, perNum);
             }
             startTime = startTime.plusMinutes(Constants.TASK_SUB_PER_MINITE);
         }
@@ -212,11 +206,10 @@ public class TaskSubServiceImpl implements TaskSubService {
      * 生成任务元
      *
      * @param task
-     * @param actionPageList
      * @param deviceInfos
      * @param taskNum
      */
-    private void buildTaskSubs(Task task, long perTime, List<ActionPage> actionPageList,
+    private void buildTaskSubs(Task task, long perTime,
                                List<DeviceInfo> deviceInfos, int taskNum) {
 
 

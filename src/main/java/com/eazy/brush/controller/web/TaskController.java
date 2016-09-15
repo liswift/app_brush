@@ -88,7 +88,6 @@ public class TaskController extends BaseController {
             task.setCreateTime(new Date());
             task.setPackageName("");
             task.setApkUrl("");
-            task.setActionPageId("");
             task.setState(TaskState.confirm_ing.getCode());
             taskService.add(task);
         } else {

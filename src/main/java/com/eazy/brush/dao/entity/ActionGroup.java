@@ -11,7 +11,8 @@ import lombok.Data;
 public class ActionGroup {
 
     private int id;
+    private int actionPageId;//也动作id
     private String name;//组动作名称,
-    private String itemId;// 元动作id,
+    private String actionItemIds;// 元动作id,
     private int enable;
 }

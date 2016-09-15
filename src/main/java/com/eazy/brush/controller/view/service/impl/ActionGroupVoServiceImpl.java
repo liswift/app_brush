@@ -33,7 +33,6 @@ public class ActionGroupVoServiceImpl implements ActionGroupVoService {
             actionGroupVo.setId(actionGroup.getId());
             actionGroupVo.setName(actionGroup.getName());
             actionGroupVo.setEnable(actionGroup.getEnable());
-            actionGroupVo.setAcitionItems(actionItemService.getByIds(actionGroup.getItemId()));
             actionGroupVos.add(actionGroupVo);
         }
         return actionGroupVos;

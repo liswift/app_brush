@@ -2,10 +2,6 @@ package com.eazy.brush.controller.web;
 
 import com.eazy.brush.component.redis.Redis;
 import com.eazy.brush.controller.common.BaseController;
-import com.eazy.brush.controller.view.service.TaskVoService;
-import com.eazy.brush.controller.view.service.UserAccountVoService;
-import com.eazy.brush.controller.view.vo.TaskVo;
-import com.eazy.brush.controller.view.vo.UserAccountVo;
 import com.eazy.brush.core.enums.Role;
 import com.eazy.brush.core.utils.MD5;
 import com.eazy.brush.core.utils.StrKit;
@@ -122,6 +118,8 @@ public class LoginController extends BaseController {
         Subject currentUser = SecurityUtils.getSubject();
         if (currentUser.hasRole(Role.customer.name())) {
             return "redirect:/task/listByUser";
+        }else if(currentUser.hasRole(Role.audit.name())){
+            return "redirect:/audit/index";
         } else {
             return "redirect:/sys/welcomeAdmin";
         }

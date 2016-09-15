@@ -28,6 +28,32 @@ public interface TaskService {
     void changeAllState(int state);
 
     /**
+     * 获取当前审核人员的所有Task
+     * @param auditUserId
+     * @return
+     */
+    List<Task> getByAuditUserId(int auditUserId);
+
+    /**
+     * 随机获取一个未被审核的Task
+     * @return
+     */
+    Task getRandomTask(int auditUserId);
+
+    /**
+     * 根据状态获取当前用户的task
+     * @param auditUserId
+     * @param state
+     * @return
+     */
+    Task getAuditSingleTask(int auditUserId,int state);
+    /**
+     * 审核人员离职,调用此方法,切换负责人
+     * @param currentUserId
+     * @param outUserid
+     */
+    void changeAuditUserId(int currentUserId, int outUserid);
+    /**
      * 计算 给定时间的子任务数
      *
      * @param task

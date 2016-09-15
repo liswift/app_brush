@@ -14,4 +14,6 @@ public interface ActionPageService {
     ActionPage getById(int id);
 
     List<ActionPage> getByIds(String ids);
+
+    List<ActionPage> getByTaskId(int taskId);
 }

@@ -63,6 +63,30 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public List<Task> getByAuditUserId(int auditUserId) {
+        return taskMapper.getByAuditUserId(auditUserId);
+    }
+
+    @Override
+    public Task getRandomTask(int auditUserId) {
+        Task task=taskMapper.getSingleTask();
+        taskMapper.assignAuditUserId(auditUserId,task.getId());
+        task.setAuditUserId(auditUserId);
+        return task;
+    }
+
+    @Override
+    public Task getAuditSingleTask(int auditUserId, int state) {
+        return taskMapper.getAuditSingleTask(auditUserId,state);
+    }
+
+
+    @Override
+    public void changeAuditUserId(int currentUserId, int outUserid) {
+        taskMapper.changeAuditUserId(currentUserId,outUserid);
+    }
+
+    @Override
     public double calcRetainPercent(Task task) {
         //Math.pow(27,1d/3) == 27 开 3 次方
         return Math.pow(task.getRetainPercent() * 1.0 / 100, 1d / task.getRetainDay());

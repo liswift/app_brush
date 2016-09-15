@@ -27,4 +27,9 @@ public class ActionPageServiceImpl implements ActionPageService {
     public List<ActionPage> getByIds(String ids) {
         return actionPageMapper.getListByIds(ids);
     }
+
+    @Override
+    public List<ActionPage> getByTaskId(int taskId) {
+        return actionPageMapper.getByTaskId(taskId);
+    }
 }

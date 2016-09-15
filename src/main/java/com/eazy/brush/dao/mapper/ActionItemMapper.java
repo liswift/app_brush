@@ -13,9 +13,9 @@ import java.util.List;
  */
 public interface ActionItemMapper {
 
-    String INSERT_FEILDS = "name,view_name,view_id,view_content,action,acition_param,stay_time,up_down";
+    String INSERT_FEILDS = "action_page_id,name,view_name,view_id,view_content,action,acition_param,stay_time,up_down";
     String FEILDS = "id," + INSERT_FEILDS;
-    String INSERT_VALUES = "#{name},#{viewName},#{viewId},#{viewContent},#{action},#{acitionParam},#{stayTime},#{upDown}";
+    String INSERT_VALUES = "#{actionPageId},#{name},#{viewName},#{viewId},#{viewContent},#{action},#{acitionParam},#{stayTime},#{upDown}";
 
     @Select("select " + FEILDS + " from action_item where id in (${actionItemId})")
     List<ActionItem> getByIds(@Param("actionItemId") String actionItemId);
