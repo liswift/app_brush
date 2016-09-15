@@ -31,7 +31,7 @@
         <table class="table table-border table-bordered table-bg table-sort">
             <thead>
             <tr>
-                <th colspan="5" scope="col">定时任务管理</th>
+                <th colspan="5" scope="col">任务记录</th>
             </tr>
             <tr class="text-c">
                 <th>ID</th>
