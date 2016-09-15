@@ -69,21 +69,23 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task getRandomTask(int auditUserId) {
-        Task task=taskMapper.getSingleTask();
-        taskMapper.assignAuditUserId(auditUserId,task.getId());
-        task.setAuditUserId(auditUserId);
+        Task task = taskMapper.getSingleTask();
+        if (task != null) {
+            taskMapper.assignAuditUserId(auditUserId, task.getId());
+            task.setAuditUserId(auditUserId);
+        }
         return task;
     }
 
     @Override
     public Task getAuditSingleTask(int auditUserId, int state) {
-        return taskMapper.getAuditSingleTask(auditUserId,state);
+        return taskMapper.getAuditSingleTask(auditUserId, state);
     }
 
 
     @Override
     public void changeAuditUserId(int currentUserId, int outUserid) {
-        taskMapper.changeAuditUserId(currentUserId,outUserid);
+        taskMapper.changeAuditUserId(currentUserId, outUserid);
     }
 
     @Override
