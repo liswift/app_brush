@@ -71,12 +71,12 @@ public interface TaskMapper {
 
     /**
      * 根据任务状态获取当前用户的task
-     * @param auditUserid
+     * @param auditUserId
      * @param state
      * @return
      */
     @Select("select "+FEILDS+" from task where audit_user_id=#{auditUserId} and state =#{state} limit 1")
-    Task getAuditSingleTask(@Param("auditUserid")int auditUserid,@Param("state")int state);
+    Task getAuditSingleTask(@Param("auditUserId")int auditUserId,@Param("state")int state);
     /**
      * 分配当前任务于当前用户名下
      * @param id
