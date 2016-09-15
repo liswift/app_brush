@@ -32,4 +32,9 @@ public class ActionPageServiceImpl implements ActionPageService {
     public List<ActionPage> getByTaskId(int taskId) {
         return actionPageMapper.getByTaskId(taskId);
     }
+
+    @Override
+    public void changeState(int id,int enable) {
+        actionPageMapper.updateEnable(id,enable);
+    }
 }

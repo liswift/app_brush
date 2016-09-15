@@ -16,4 +16,6 @@ public interface ActionPageService {
     List<ActionPage> getByIds(String ids);
 
     List<ActionPage> getByTaskId(int taskId);
+
+    void changeState(int id,int enable);
 }

@@ -1,11 +1,11 @@
 package com.eazy.brush.controller.web;
 
 import com.eazy.brush.controller.common.BaseController;
-import com.eazy.brush.controller.view.service.ActionGroupVoService;
 import com.eazy.brush.controller.view.service.ActionPageVoService;
 import com.eazy.brush.controller.view.vo.ActionPageVo;
 import com.eazy.brush.core.enums.TaskState;
 import com.eazy.brush.dao.entity.Task;
+import com.eazy.brush.service.ActionPageService;
 import com.eazy.brush.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,8 +29,9 @@ public class AuditController extends BaseController {
     @Autowired
     private ActionPageVoService actionPageVoService;
 
+
     @Autowired
-    private ActionGroupVoService actionGroupVoService;
+    private ActionPageService actionPageService;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView index(ModelMap map) {
@@ -55,6 +56,26 @@ public class AuditController extends BaseController {
     @RequestMapping(value = "/toAddPageAction", method = RequestMethod.GET)
     public ModelAndView addPageActions(ModelMap map) {
        return new ModelAndView("action/add");
+    }
+
+    @RequestMapping(value="/enable" ,method=RequestMethod.GET)
+    public String changeState(String pageId){
+        int curPage = getParaInt("pageId", 0);
+        if(curPage==0){
+            return "redirect:/sys/error";
+        }
+        actionPageService.changeState(curPage,1);
+        return "redirect:/audit/index";
+    }
+
+    @RequestMapping(value="/disable" ,method=RequestMethod.GET)
+    public String disableState(String pageId){
+        int curPage = getParaInt("pageId", 0);
+        if(curPage==0){
+            return "redirect:/sys/error";
+        }
+        actionPageService.changeState(curPage,0);
+        return "redirect:/audit/index";
     }
 
 }

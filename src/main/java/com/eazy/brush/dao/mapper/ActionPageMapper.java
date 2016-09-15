@@ -22,6 +22,7 @@ public interface ActionPageMapper {
     @Update("update action_page set enable=#{enable} where id=#{id}")
     void updateEnable(@Param("id")int id,@Param("enable")int enable);
 
+
     @Select("select " + FIELDS + " from action_page where id=#{id}")
     ActionPage getById(@Param("id") int id);
 
