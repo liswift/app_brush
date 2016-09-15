@@ -57,7 +57,7 @@
 </div>
 
 <div class="pd-20">
-	<div class="cl pd-5 bg-1 bk-gray"> <span class="l">  <a class="btn btn-primary radius" href="javascript:;" onclick="fullOpen('添加页动作','${ctx}/task/toAdd')" ><i class="Hui-iconfont">&#xe600;</i> 添加页动作</a> </span>  </div>
+	<div class="cl pd-5 bg-1 bk-gray"> <span class="l">  <a class="btn btn-primary radius" href="javascript:;" onclick="fullOpen('添加页动作','${ctx}/audit/toAddPageAction?id=${task,id}')" ><i class="Hui-iconfont">&#xe600;</i> 添加页动作</a> </span>  </div>
 	<table class="table table-border table-bordered table-hover table-bg">
 		<thead>
 			<tr>
@@ -101,12 +101,11 @@
 	</table>
 </div>
 
-<script type="text/javascript" src="${txt}/resources/lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="${txt}/resources/lib/laydate/laydate.js"></script>
-<script type="text/javascript" src="${txt}/resources/js/common.js"></script>
-<script type="text/javascript" src="${txt}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modalmanager.js"></script>
-<script type="text/javascript" src="${txt}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modal.js"></script>
-<script type="text/javascript" src="${txt}/resources/lib/webuploader/0.1.5/webuploader.js"></script>
-<script type="text/javascript" src="${txt}/resources/js/common.js"></script>
+
+<script type="text/javascript" src="${ctx }/resources/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx }/resources/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="${ctx }/resources/js/H-ui.js"></script>
+<script type="text/javascript" src="${ctx }/resources/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="${ctx }/resources/js/common.js"></script>
 </body>
 </html>
