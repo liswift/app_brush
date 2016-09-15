@@ -13,6 +13,12 @@ public interface ActionItemService {
 
     List<ActionItem> getByIds(String actionItemId);
 
+    List<ActionItem> getByPageId(int pageid);
 
+    void deleteItemById(int id);
+
+    void add(ActionItem actionItem);
+
+    void update(ActionItem actionItem);
 }
 

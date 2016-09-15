@@ -22,4 +22,26 @@ public class ActionItemServiceImpl implements ActionItemService {
     public List<ActionItem> getByIds(String actionItemId) {
         return actionItemMapper.getByIds(actionItemId);
     }
+
+    @Override
+    public List<ActionItem> getByPageId(int pageid) {
+        return actionItemMapper.getByPageId(pageid);
+    }
+
+    @Override
+    public void deleteItemById(int id) {
+        actionItemMapper.delete(id);
+    }
+
+    @Override
+    public void add(ActionItem actionItem) {
+        actionItemMapper.insert(actionItem);
+    }
+
+    @Override
+    public void update(ActionItem actionItem) {
+        actionItemMapper.update(actionItem);
+    }
+
+
 }

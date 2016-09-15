@@ -20,6 +20,9 @@ public interface ActionItemMapper {
     @Select("select " + FEILDS + " from action_item where id in (${actionItemId})")
     List<ActionItem> getByIds(@Param("actionItemId") String actionItemId);
 
+    @Select("select " + FEILDS + " from action_item where action_page_id in (${actionPageId})")
+    List<ActionItem> getByPageId(@Param("actionPageId") int actionPageId);
+
     @Insert("insert into action_item(" + INSERT_FEILDS + ") values(" + INSERT_VALUES + ")")
     void insert(ActionItem actionItem);
 
