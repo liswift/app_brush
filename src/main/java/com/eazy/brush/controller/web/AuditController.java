@@ -53,14 +53,14 @@ public class AuditController extends BaseController {
     }
 
     @RequestMapping(value = "/toAddPageAction", method = RequestMethod.GET)
-    public ModelAndView addPageActions(ModelMap map) {
+    public ModelAndView toAddPageAction(ModelMap map) {
        String taskId = getPara("id");
         map.put("taskId",taskId);
        return new ModelAndView("action/add",map);
     }
 
     @RequestMapping(value="/enable" ,method=RequestMethod.GET)
-    public String changeState(String pageId){
+    public String enable(ModelMap map){
         int curPage = getParaInt("pageId", 0);
         if(curPage==0){
             return "redirect:/sys/error";
@@ -70,7 +70,7 @@ public class AuditController extends BaseController {
     }
 
     @RequestMapping(value="/disable" ,method=RequestMethod.GET)
-    public String disableState(String pageId){
+    public String disable(ModelMap map){
         int curPage = getParaInt("pageId", 0);
         if(curPage==0){
             return "redirect:/sys/error";
