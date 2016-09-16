@@ -29,15 +29,17 @@
 <body>
 <div class="add-task-form form-horizontal" style="padding-bottom:50px">
     <div class="row cl">
-        <label class="form-label col-xs-2 col-sm-2">页面名称：${actionPageVo.id},${pageId}</label>
+        <label class="form-label col-xs-2 col-sm-2">页面名称：${actionPageVo.id}/label>
         <div class="col-xs-10 col-sm-10">
-            <input type="text" id='page-name' group_name="pageName" class="input-text" autocomplete="off" value="默认页面名称">
+            <input type="text" id='page-name' group_name="pageName" class="input-text" autocomplete="off"
+                   value="${actionPageVo.pageName}">
         </div>
     </div>
     <div class="row cl">
         <label class="form-label col-xs-2 col-sm-2">页面描述：</label>
         <div class="col-xs-10 col-sm-10">
-            <textarea type="text" id='page-desc' group_name="pageDesc" class="textarea" autocomplete="off"></textarea>
+            <textarea type="text" id='page-desc' group_name="pageDesc" class="textarea"
+                      autocomplete="off">${actionPageVo.pageDesc}</textarea>
         </div>
     </div>
     <div class="row cl">
@@ -45,32 +47,11 @@
         <div class="col-xs-10 col-sm-10 unit-action-box" id="unit-action-box">
             <button action_id="0" class="btn btn-default radius"><span>actionAactionA</span><i
                     class="unit-action-del"></i></button>
-            <button action_id="1" class="btn btn-default radius"><span>actionA12</span><i class="unit-action-del"></i>
-            </button>
-            <button action_id="2" class="btn btn-default radius"><span>actionA</span><i class="unit-action-del"></i>
-            </button>
-            <button action_id="3" class="btn btn-default radius"><span>action32A</span><i class="unit-action-del"></i>
-            </button>
-            <button action_id="4" class="btn btn-default radius"><span>action32Aactions</span><i
-                    class="unit-action-del"></i></button>
-            <button action_id="5" class="btn btn-default radius"><span>actionAactions</span><i
-                    class="unit-action-del"></i></button>
-            <button action_id="6" class="btn btn-default radius"><span>action43A</span><i class="unit-action-del"></i>
-            </button>
-            <button action_id="7" class="btn btn-default radius"><span>action411A</span><i class="unit-action-del"></i>
-            </button>
-            <button action_id="8" class="btn btn-default radius"><span>actionA</span><i class="unit-action-del"></i>
-            </button>
-            <button action_id="9" class="btn btn-default radius"><span>action1222A</span><i class="unit-action-del"></i>
-            </button>
-            <button action_id="10" class="btn btn-default radius"><span>actionA</span><i class="unit-action-del"></i>
-            </button>
-            <button action_id="11" class="btn btn-default radius"><span>actionA</span><i class="unit-action-del"></i>
-            </button>
-            <button action_id="12" class="btn btn-default radius"><span>actionA</span><i class="unit-action-del"></i>
-            </button>
-            <button action_id="13" class="btn btn-default radius"><span>actionA</span><i class="unit-action-del"></i>
-            </button>
+            <c:forEach items="${ actionPageVo.actionItems }" var="t">
+                <button action_id="${t.id}" class="btn btn-default radius"><span>${t.name}</span><i
+                        class="unit-action-del"></i>
+                </button>
+            </c:forEach>
             <button class="btn btn-primary radius" add_btn style="padding: 0 20px">+</button>
         </div>
     </div>
@@ -78,7 +59,22 @@
         <label class="form-label col-xs-2 col-sm-2">动作组：</label>
         <div class="col-xs-10 col-sm-10 group-action-box" id="group-action-box">
             <div class="groups-box">
-
+                <c:forEach items="${ actionPageVo.actionGroupVos }" var="t">
+                    <div group_id="${t.id}" class="group-action-item">
+                        <div class="group-action-name"><span>${t.name}</span><i>ed</i></div>
+                        <i class="group-action-del">del</i>
+                        <div class="group-actions">
+                            <c:forEach items="${ t.acitionItems }" var="item">
+                            <span class="dropDown dropDown_hover">
+                                <a class="dropDown_A action-selected-a" action_id="${item.id}">${item.name}</a> &gt;&nbsp;
+                            </span>
+                            </c:forEach>
+                            <span class="dropDown dropDown_hover">
+                                <a class="dropDown_A action-selected-a">选择动作</a>
+                            </span>
+                        </div>
+                    </div>
+                </c:forEach>
             </div>
             <div class="group-action-add">
                 <button id="group-action-add" class="btn btn-primary radius">+添加动作组</button>

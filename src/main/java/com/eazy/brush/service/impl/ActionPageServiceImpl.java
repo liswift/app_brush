@@ -43,6 +43,7 @@ public class ActionPageServiceImpl implements ActionPageService {
         ActionPage actionPage=new ActionPage();
         actionPage.setTaskId(taskId);
         actionPage.setPageName("默认页面名称");
+        actionPageMapper.insert(actionPage);
         return actionPage;
     }
 }
