@@ -30,13 +30,13 @@
         <div class="row cl">
         <label class="form-label col-xs-2 col-sm-2">页面名称：</label>
         <div class="col-xs-10 col-sm-10">
-        <input type="text" task_name="name" class="input-text" autocomplete="off">
+        <input type="text" id='page-name' group_name="pageName" class="input-text" autocomplete="off">
         </div>
         </div>
         <div class="row cl">
         <label class="form-label col-xs-2 col-sm-2">页面描述：</label>
         <div class="col-xs-10 col-sm-10">
-        <textarea type="text"  task_name="version" class="textarea" autocomplete="off"></textarea>
+        <textarea type="text"  id='page-desc' group_name="pageDesc" class="textarea" autocomplete="off"></textarea>
         </div>
         </div>
         <div class="row cl">
@@ -84,7 +84,7 @@
         <div class="formControls col-xs-8 col-sm-8">
         <label class="form-label col-xs-3 col-sm-3">名称：</label>
         <div class="formControls col-xs-9 col-sm-9">
-        <input type="text" task_name="name"  class="input-text" autocomplete="off">
+        <input type="text" group_name="name"  class="input-text" autocomplete="off">
         </div>
         </div>
         </div>
@@ -169,7 +169,7 @@
         <div class="formControls col-xs-8 col-sm-8">
         <label class="form-label col-xs-3 col-sm-3">名称：</label>
         <div class="formControls col-xs-9 col-sm-9">
-        <input type="text" task_name="name"  class="input-text" autocomplete="off">
+        <input type="text" group_name="name"  class="input-text" autocomplete="off">
         </div>
         </div>
         </div>

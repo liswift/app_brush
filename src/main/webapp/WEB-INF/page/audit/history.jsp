@@ -28,7 +28,7 @@
 <div class="pd-20" style="padding-top:20px;">
 
     <div class="mt-20">
-        <table class="table table-border table-bordered table-bg table-sort">
+        <table class="table table-border table-bordered table-bg table-sort" id=task-list-table>
             <thead>
             <tr>
                 <th colspan="5" scope="col">任务记录</th>
@@ -52,14 +52,14 @@
                               <c:when test="${t.state=='-1'}">
                                   <td>
                                      <a href="javascript:;" onclick="fullOpen('编辑任务详情','${ctx}/audit/editorTask?id=${t.id}')">编辑</a>
-                                     <a href="javascript:;">通过</a><!--通过传递/audit/changeState id,state 2-->
-                                     <a href="javascript:;">拒绝</a><!--通过传递/audit/changeState id,state 0,msg:应用非法-->
-                                     <a href="javascript:;">放回</a><!--/audit/release id-->
+                                     <a option_id="${t.id}" option_a='2' href="javascript:;">通过</a><!--通过传递/audit/changeState id,state 2-->
+                                     <a option_id="${t.id}" option_a='0' href="javascript:;">拒绝</a><!--通过传递/audit/changeState id,state 0,msg:应用非法-->
+                                     <a option_id="${t.id}" option_a='-1'  href="javascript:;">放回</a><!--/audit/release id-->
                                   </td>
                               </c:when>
                               <c:otherwise>
                                    <td>
-                                          <a href="javascript:;" onclick="fullOpen('查看任务详情','${ctx}/audit/viewTask?id=${t.id}')">查看</a>
+                                      <a href="javascript:;" onclick="fullOpen('查看任务详情','${ctx}/audit/viewTask?id=${t.id}')">查看</a>
                                    </td>
                               </c:otherwise>
                             </c:choose>
@@ -69,6 +69,18 @@
         </table>
     </div>
 </div>
+
+<div id="denyModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-header">
+<h3 id="denyLabel">拒绝理由</h3><a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void();">×</a>
+</div>
+<div class="modal-body">
+<input type="text" class="input-text" autocomplete="off">
+</div>
+<div class="modal-footer">
+<button id="deny-confirm" class="btn btn-primary">确定</button> <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+</div>
+</div>
 <script type="text/javascript" src="${ctx }/resources/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/lib/layer/2.1/layer.js"></script>
 <script type="text/javascript" src="${ctx }/resources/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
@@ -77,23 +89,58 @@
 <script type="text/javascript" src="${ctx }/resources/js/common.js"></script>
 <script type="text/javascript">
 $(function(){
-       $('.table-sort').dataTable({
-    		"aaSorting": [[ 3, "desc" ]],//默认第几个排序
-    		"bStateSave": true,//状态保存
-    		"aoColumnDefs": [
-    		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-    		  {"orderable":false,"aTargets":[0,1,2,4]}// 制定列不参与排序
-    		]
-    	});
-    	$('.table-sort tbody').on( 'click', 'tr', function () {
-    		if ( $(this).hasClass('selected') ) {
-    			$(this).removeClass('selected');
-    		}
-    		else {
-    			table.$('tr.selected').removeClass('selected');
-    			$(this).addClass('selected');
-    		}
-    	});
+
+    var $denyModal = $("#denyModal");
+    var $denyInput = $("input",$denyModal);
+    var currentDenyParams = {};
+   $('.table-sort').dataTable({
+        "aaSorting": [[ 3, "desc" ]],//默认第几个排序
+        "bStateSave": true,//状态保存
+        "aoColumnDefs": [
+          //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+          {"orderable":false,"aTargets":[0,1,2,4]}// 制定列不参与排序
+        ]
+    });
+
+    $("#task-list-table").on('click','a[option_a]',function(e){
+        e.stopPropagation();
+        var status = $(this).attr('option_a');
+        var id = $(this).attr('option_id');
+        var url = name=='release' ? '/audit/release' : '/audit/changeState';
+        var params = {id:id};
+        status != '-1' && (params.state = +status);
+        if(status=='0'){
+            denyAction(params);
+        }else{
+            var uri = status == '2'? '/audit/changeState':'/audit/release';
+            ajaxPost(uri,params,function(d){
+                    alert('操作成功');
+                    window.location.reload();
+                },function(d){
+                    alert('操作失败');
+                    //删除请求失败:
+            });
+        }
+
+    });
+
+    $("#deny-confirm").click(function(e){
+        var txt = $denyInput.val().trim();
+        currentDenyParams.msg = txt;
+        ajaxPost('/audit/changeState',currentDenyParams,function(d){
+            alert('操作成功');
+            window.location.reload();
+        },function(d){
+            alert('操作失败');
+            //删除请求失败:
+        });
+        $denyModal.modal('hide');
+    });
+
+    function denyAction(params){
+        currentDenyParams = params;
+        $denyModal.modal('show');
+    }
  });
 </script>
 </body>
