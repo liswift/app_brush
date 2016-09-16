@@ -87,7 +87,7 @@ public class AuditController extends BaseController {
         List<ActionPageVo> actionPages = actionPageVoService.getByTaskIdNum(task.getId());
         map.put("task",task);
         map.put("actionPages",actionPages);
-        return new ModelAndView("audit/history",map);
+        return new ModelAndView("audit/index",map);
     }
 
     @RequestMapping(value = "historyList", method = RequestMethod.GET)
