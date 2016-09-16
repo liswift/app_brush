@@ -51,7 +51,7 @@ $(document).ready(function(){
 
         //$editActionModal.modal('show');
 
-        $editActionModal.load('../../page/task/unit_action.html',function(){
+        $editActionModal.load('/resources/html/unit_add.html',function(){
             $editActionModal.modal();
         })
     });
