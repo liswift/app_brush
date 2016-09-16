@@ -24,9 +24,9 @@ $(document).ready(function () {
             }
         });
         ajaxPost('/task/save', params, function (d) {
-            location.href = "/task/listByUser";
+            alert("保存成功！");
         }, function (d) {
-            alert("添加失败!");
+            alert("保存失败！");
         });
     });
 
