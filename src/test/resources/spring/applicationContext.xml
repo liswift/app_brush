@@ -14,16 +14,16 @@
         <property name="locations">
             <list>
                 <value>classpath:properties/email.properties</value>
-                <value>classpath:db.properties</value>
-                <value>classpath:ftp.properties</value>
+                <value>classpath:properties/db.properties</value>
+                <value>classpath:properties/ftp.properties</value>
             </list>
         </property>
     </bean>
 
-    <import resource="spring/spring-mybatis.xml"/>
-    <import resource="spring/spring-redis.xml"/>
-    <import resource="spring/spring-shiro.xml"/>
-    <import resource="spring/spring-email.xml"/>
-    <import resource="spring/spring-scheduler.xml"/>
+    <import resource="spring-mybatis.xml"/>
+    <import resource="spring-redis.xml"/>
+    <import resource="spring-shiro.xml"/>
+    <import resource="spring-email.xml"/>
+    <import resource="spring-scheduler.xml"/>
 
 </beans>

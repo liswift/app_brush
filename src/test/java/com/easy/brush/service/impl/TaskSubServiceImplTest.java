@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:applicationContext.xml")
+@ContextConfiguration("classpath:spring/applicationContext.xml")
 public class TaskSubServiceImplTest {
 
     @Autowired
