@@ -16,7 +16,7 @@ public interface TaskMapper {
             "incr_up_down,run_time,run_up_down,run_start_time," +
             "run_end_time,run_speed,retain_day,retain_percent,state,create_time,msg";
 
-    String INSERT_VALUES = "#{userId},#{auditUseId},#{appName},#{packageName},#{versionCode},#{appVersion},#{apkUrl}," +
+    String INSERT_VALUES = "#{userId},#{auditUserId},#{appName},#{packageName},#{versionCode},#{appVersion},#{apkUrl}," +
             "#{remarkName},#{incrDay},#{dayLimit},#{incrUpDown},#{runTime},#{runUpDown},#{runStartTime}," +
             "#{runEndTime},#{runSpeed},#{retainDay},#{retainPercent},#{state},#{createTime},#{msg}";
 
