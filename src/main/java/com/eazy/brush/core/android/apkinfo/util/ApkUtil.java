@@ -49,9 +49,11 @@ public class ApkUtil {
             xmlInputStream = new ByteArrayInputStream(xmlPrinter.getBuf().toString().getBytes("UTF-8"));
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
             IOUtils.closeQuietly(inputStream);
             IOUtils.closeQuietly(zipFile);
         }
+
         return xmlInputStream;
     }
 

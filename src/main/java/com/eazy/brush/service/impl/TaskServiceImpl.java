@@ -1,6 +1,8 @@
 package com.eazy.brush.service.impl;
 
+import com.eazy.brush.core.android.apkinfo.bean.ApkInfo;
 import com.eazy.brush.core.enums.TaskSpeedType;
+import com.eazy.brush.core.utils.Constants;
 import com.eazy.brush.core.utils.DateTimeUitl;
 import com.eazy.brush.dao.entity.Task;
 import com.eazy.brush.dao.mapper.TaskMapper;
@@ -53,13 +55,13 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public int changeState(int id,int auditUserId, int state,String msg) {
-       return taskMapper.changeStateWithMsg(id,auditUserId, state,msg);
+    public int changeState(int id, int auditUserId, int state, String msg) {
+        return taskMapper.changeStateWithMsg(id, auditUserId, state, msg);
     }
 
     @Override
-    public int changeState(int id, int state,String msg) {
-        taskMapper.changeState(id,state,msg);
+    public int changeState(int id, int state, String msg) {
+        taskMapper.changeState(id, state, msg);
         return 1;
     }
 
@@ -96,7 +98,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void assignAuditUserId(int auditUserId, int taskId) {
-        taskMapper.assignAuditUserId(auditUserId,taskId);
+        taskMapper.assignAuditUserId(auditUserId, taskId);
     }
 
 
@@ -119,6 +121,17 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void delete(int id) {
         taskMapper.delete(id);
+    }
+
+    @Override
+    public void updateApkInfo(int id, ApkInfo apkInfo, String fileName) {
+        Task task = new Task();
+        task.setId(id);
+        task.setVersionCode(Integer.parseInt(apkInfo.getVersionCode()));
+        task.setAppVersion(apkInfo.getVersionName());
+        task.setPackageName(apkInfo.getApkPackage());
+        task.setApkUrl(Constants.APK_URL_PRE + fileName);
+        taskMapper.update(task);
     }
 
     @Override
