@@ -39,10 +39,10 @@ public class ActionPageServiceImpl implements ActionPageService {
     }
 
     @Override
-    public int insertAndGetKey(int taskId) {
+    public ActionPage insertAndGetKey(int taskId) {
         ActionPage actionPage=new ActionPage();
         actionPage.setTaskId(taskId);
-        actionPageMapper.insert(actionPage);
-        return actionPage.getId();
+        actionPage.setPageName("默认页面名称");
+        return actionPage;
     }
 }

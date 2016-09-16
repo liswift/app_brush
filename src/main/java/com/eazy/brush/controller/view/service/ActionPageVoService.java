@@ -13,4 +13,13 @@ public interface ActionPageVoService {
     List<ActionPageVo> getByTaskId(int id);
 
     List<ActionPageVo> getByTaskIdNum(int id);
+
+    /**
+     * 获取actionPageVo 如果pageId没有的话,会自动填充一个默认的ActionPage
+     *
+     * @param taskId
+     * @param pageId
+     * @return
+     */
+    ActionPageVo getByTaskIdOrPageId(int taskId,int pageId);
 }

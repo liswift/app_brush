@@ -29,9 +29,11 @@ public interface ActionPageMapper {
     @Select("select " + FIELDS + " from action_page where id in (#{ids})")
     List<ActionPage> getListByIds(@Param("ids") String ids);
 
+
     @Insert("insert into action_page(" + INSERT_FIELDS + ") values(#{taskId},#{pageName},#{pageDesc}," +
             "#{enable})")
-    void insert(ActionPage actionPage);
+    @Options(useGeneratedKeys=true, keyProperty="id")
+    Integer insert(ActionPage actionPage);
 
 
     @Update("update action_page set page_name=#{pageName},page_desc=#{pageDesc},enable=#{enable} where id=#{id}")

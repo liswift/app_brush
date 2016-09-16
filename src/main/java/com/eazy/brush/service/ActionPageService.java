@@ -19,5 +19,5 @@ public interface ActionPageService {
 
     void changeState(int id,int enable);
 
-    int insertAndGetKey(int taskId);
+    ActionPage insertAndGetKey(int taskId);
 }

@@ -42,6 +42,7 @@ public class ActionGroupVoServiceImpl implements ActionGroupVoService {
             actionGroupVo.setId(actionGroup.getId());
             actionGroupVo.setName(actionGroup.getName());
             actionGroupVo.setEnable(actionGroup.getEnable());
+            actionGroupVo.setAcitionItems(actionItemService.getByIds(actionGroup.getActionItemIds()));
             actionGroupVos.add(actionGroupVo);
         }
        return actionGroupVos;

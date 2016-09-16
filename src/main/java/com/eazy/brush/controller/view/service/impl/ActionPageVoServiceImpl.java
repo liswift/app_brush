@@ -37,20 +37,30 @@ public class ActionPageVoServiceImpl implements ActionPageVoService {
 
 
 
+
     @Override
     public List<ActionPageVo> getByTaskIdNum(int taskId) {
         List<ActionPage> actionPages = actionPageService.getByTaskId(taskId);
         List<ActionPageVo> result=new ArrayList<>();
         for(ActionPage actionPage:actionPages){
             ActionPageVo actionPageVo=new ActionPageVo();
-            actionPageVo.setEnable(actionPage.getEnable());
-            actionPageVo.setId(actionPage.getId());
-            actionPageVo.setPageDesc(actionPage.getPageDesc());
-            actionPageVo.setPageName(actionPage.getPageName());
-            actionPageVo.setTaskId(actionPage.getTaskId());
+            actionPageVo.setActionPage(actionPage);
             actionPageVo.setActionGroupVos(actionGroupVoService.getByPageId(actionPage.getId()));
             result.add(actionPageVo);
         }
         return result;
+    }
+
+    @Override
+    public ActionPageVo getByTaskIdOrPageId(int taskId, int pageId) {
+        ActionPageVo actionPageVo = new ActionPageVo();
+        if(pageId==0){
+            actionPageVo.setActionPage(actionPageService.insertAndGetKey(taskId));
+        }else{
+            actionPageVo.setActionPage(actionPageService.getById(pageId));
+            actionPageVo.setActionGroupVos(actionGroupVoService.getByPageId(pageId));
+            actionPageVo.setActionItems(actionItemService.getByPageId(pageId));
+        }
+        return actionPageVo;
     }
 }

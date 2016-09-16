@@ -81,7 +81,7 @@ CREATE TABLE `action_page` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `task_id` int(11) NOT NULL DEFAULT '0' COMMENT 'taskId',
   `page_name` varchar(255) NOT NULL COMMENT '页面名称',
-  `page_desc` varchar(64) NOT NULL DEFAULT '' COMMENT '页面描述',
+  `page_desc` varchar(64) DEFAULT '' COMMENT '页面描述',
   `enable` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否启用',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
