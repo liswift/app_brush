@@ -26,9 +26,9 @@
           class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">
             <set>
-                <!--<bean class="com.eazy.brush.controller.converter.DateConverter"/>-->
-                <!--<bean class="com.eazy.brush.controller.converter.IntegerConverter"/>-->
-                <!--<bean class="com.eazy.brush.controller.converter.LongConverter"/>-->
+                <bean class="com.eazy.brush.controller.converter.DateConverter"/>
+                <bean class="com.eazy.brush.controller.converter.IntegerConverter"/>
+                <bean class="com.eazy.brush.controller.converter.LongConverter"/>
             </set>
         </property>
     </bean>
