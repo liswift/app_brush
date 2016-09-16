@@ -23,7 +23,27 @@ $(document).ready(function(){
     });
 
     $actionGroupAddBtn.on('click',function(){
-        top.window.eventEmitter.emit('actionSubmitOk',{action_id:'0',action_name:'hahaha'})
+        var params = {};
+        params.id = 323;
+        params.pageName = $("#page-name").val().trim();
+        params.pageDesc = $("#page-desc").val().trim();
+
+        var actionsGroups = [];
+        $('div.group-action-item',$groupActionBox).each(function(index,item){
+            var $item = $(item);
+            var name = $(".group-action-name span",$item).text();
+            var actionItemIds = [];
+            $('a.action-selected-a',$item).each(function(idx,itemA){
+                var aId = $(itemA).attr('action_id');
+                actionItemIds.push(aId);
+            });
+            actionsGroups.push({
+                name:name,
+                actionItemIds:actionItemIds.join(',')
+            })
+        });
+        console.log(params)
+        //top.window.eventEmitter.emit('actionSubmitOk',{action_id:'0',action_name:'hahaha'})
     });
 
 
