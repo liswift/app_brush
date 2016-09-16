@@ -37,4 +37,12 @@ public class ActionPageServiceImpl implements ActionPageService {
     public void changeState(int id,int enable) {
         actionPageMapper.updateEnable(id,enable);
     }
+
+    @Override
+    public int insertAndGetKey(int taskId) {
+        ActionPage actionPage=new ActionPage();
+        actionPage.setTaskId(taskId);
+        actionPageMapper.insert(actionPage);
+        return actionPage.getId();
+    }
 }

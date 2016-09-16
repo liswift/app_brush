@@ -15,7 +15,7 @@ public class ActionItem {
     private String viewName; //view类名,
     private String viewId; //viewId,
     private String viewContent; //view内容,
-    private String action;//动作,
+    private int action;//动作,
     private String actionParams;//动作参数,type:value;type:value
     private int stayTime;//停留时间,秒
     private int upDown;//波动范围,秒

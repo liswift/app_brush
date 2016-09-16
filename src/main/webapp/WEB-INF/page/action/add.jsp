@@ -28,7 +28,7 @@
         <body>
         <div class="add-task-form form-horizontal" style="padding-bottom:50px">
         <div class="row cl">
-        <label class="form-label col-xs-2 col-sm-2">页面名称：</label>
+        <label class="form-label col-xs-2 col-sm-2">页面名称：${taskId},${pageId}</label>
         <div class="col-xs-10 col-sm-10">
         <input type="text" task_name="name" class="input-text" autocomplete="off">
         </div>

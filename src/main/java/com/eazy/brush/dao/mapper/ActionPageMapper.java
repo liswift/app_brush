@@ -33,6 +33,7 @@ public interface ActionPageMapper {
             "#{enable})")
     void insert(ActionPage actionPage);
 
+
     @Update("update action_page set page_name=#{pageName},page_desc=#{pageDesc},enable=#{enable} where id=#{id}")
     void update(ActionPage actionPage);
 

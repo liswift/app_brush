@@ -42,15 +42,19 @@ public enum ActionType {
         return value;
     }
 
-    private static final java.util.Map<Integer, ArgumentType> map = new java.util.HashMap<Integer, ArgumentType>();
+    public String getKey(){
+        return key;
+    }
+
+    private static final java.util.Map<String, ActionType> map = new java.util.HashMap<String, ActionType>();
 
     static {
-        for (ArgumentType e : ArgumentType.values()) {
-            map.put(e.getValue(), e);
+        for (ActionType e : ActionType.values()) {
+            map.put(e.getKey(), e);
         }
     }
 
-    public static final ArgumentType fromValue(int status) {
-        return map.get(status);
+    public static final ActionType fromValue(String key) {
+        return map.get(key);
     }
 }

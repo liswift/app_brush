@@ -18,4 +18,6 @@ public interface ActionPageService {
     List<ActionPage> getByTaskId(int taskId);
 
     void changeState(int id,int enable);
+
+    int insertAndGetKey(int taskId);
 }

@@ -1,6 +1,7 @@
 package com.eazy.brush.controller.web;
 
 import com.eazy.brush.controller.common.BaseController;
+import com.eazy.brush.core.enums.ActionType;
 import com.eazy.brush.dao.entity.ActionItem;
 import com.eazy.brush.service.ActionGroupService;
 import com.eazy.brush.service.ActionItemService;
@@ -67,7 +68,7 @@ public class ActionController extends BaseController {
         if (id != 0) {
             actionItem.setId(id);
         }
-        actionItem.setAction(getPara("action"));
+        actionItem.setAction(ActionType.fromValue(getPara("action")).getValue());
         actionItem.setActionPageId(getParaInt("actionPageId", 0));
         actionItem.setName(getPara("name"));
         actionItem.setStayTime(getParaInt("stayTime", 50));
