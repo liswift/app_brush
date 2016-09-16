@@ -28,39 +28,40 @@
 <body>
 <div class="add-task-form form-horizontal">
 
-<c:if test="${task == null || ac == 'upPg'}">
-<div class="add-task-item">
-        <span><span class="required-dot">*</span>应用apk文件：</span>
-        <span class="btn-upload" style="margin-left:10px" id="select-file">
+    <c:if test="${task == null || ac == 'upPg'}">
+        <div class="add-task-item">
+            <span><span class="required-dot">*</span>应用apk文件：</span>
+            <span class="btn-upload" style="margin-left:10px" id="select-file">
             <a href="javascript:void(0);" class="btn btn-primary radius">上传应用</a>
             <input type="file" multiple name="file" class="input-file"/>
         </span>
-        <div class="progress task-progress">
-            <div class="progress-bar">
-                <span class="task-progress-tint">25%</span>
-                <span class="sr-only" style="width:25%"></span>
+            <div class="progress task-progress">
+                <div class="progress-bar">
+                    <span class="task-progress-tint">25%</span>
+                    <span class="sr-only" style="width:25%"></span>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row cl">
-        <div class="formControls col-xs-6 col-sm-6">
-            <label class="form-label col-xs-4 col-sm-4">应用名称：</label>
-            <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" task_name="appName" value="${task.appName}" class="input-text" autocomplete="off">
+        <div class="row cl">
+            <div class="formControls col-xs-6 col-sm-6">
+                <label class="form-label col-xs-4 col-sm-4">应用名称：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" task_name="appName" value="${task.appName}" class="input-text"
+                           autocomplete="off">
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row cl">
-        <div class="formControls col-xs-6 col-sm-6">
-            <label class="form-label col-xs-4 col-sm-4">应用版本：</label>
-            <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" task_name="appVersion" value="${task.appVersion}" class="input-text"
-                       autocomplete="off">
+        <div class="row cl">
+            <div class="formControls col-xs-6 col-sm-6">
+                <label class="form-label col-xs-4 col-sm-4">应用版本：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" task_name="appVersion" value="${task.appVersion}" class="input-text"
+                           autocomplete="off">
+                </div>
             </div>
         </div>
-    </div>
-</c:if>
-<c:if test="${task == null || ac == 'editor'}">
+    </c:if>
+    <c:if test="${task == null || ac == 'editor'}">
     <div class="row cl">
         <div class="formControls col-xs-6 col-sm-6">
             <label class="form-label col-xs-4 col-sm-4">备注名称：</label>
@@ -170,13 +171,13 @@
     </div>
 </div>
 
-<script type="text/javascript" src="${txt}/resources/lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="${txt}/resources/lib/laydate/laydate.js"></script>
-<script type="text/javascript" src="${txt}/resources/js/common.js"></script>
-<script type="text/javascript" src="${txt}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modalmanager.js"></script>
-<script type="text/javascript" src="${txt}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modal.js"></script>
-<script type="text/javascript" src="${txt}/resources/lib/webuploader/0.1.5/webuploader.js"></script>
-<script type="text/javascript" src="${txt}/resources/js/common.js"></script>
-<script type="text/javascript" src="${txt}/resources/js/task.js"></script>
+<script type="text/javascript" src="${ctx}/resources/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx}/resources/lib/laydate/laydate.js"></script>
+<script type="text/javascript" src="${ctx}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modalmanager.js"></script>
+<script type="text/javascript" src="${ctx}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modal.js"></script>
+<script type="text/javascript" src="${ctx}/resources/lib/webuploader/0.1.5/webuploader.js"></script>
+<script type="text/javascript" src="${ctx}/resources/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/common.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/task.js"></script>
 </body>
 </html>

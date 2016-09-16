@@ -6,12 +6,16 @@ import com.eazy.brush.controller.view.service.TaskVoService;
 import com.eazy.brush.controller.view.service.UserAccountVoService;
 import com.eazy.brush.controller.view.vo.TaskVo;
 import com.eazy.brush.controller.view.vo.UserAccountVo;
+import com.eazy.brush.core.android.apkinfo.bean.ApkInfo;
+import com.eazy.brush.core.android.apkinfo.util.ApkUtil;
 import com.eazy.brush.core.enums.TaskState;
 import com.eazy.brush.core.utils.ActionRequest;
+import com.eazy.brush.core.utils.Constants;
 import com.eazy.brush.dao.entity.Task;
 import com.eazy.brush.model.User;
 import com.eazy.brush.service.TaskService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,8 +25,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -71,24 +75,29 @@ public class TaskController extends BaseController {
     public void uploadApk(@RequestParam(value = "file", required = false) MultipartFile file) {
         String now = DateTime.now().toString("yyyyMMddHHmmssSSS");
         String fileName = now + "_" + file.getOriginalFilename();
+        ApkInfo apkInfo = null;
         try {
+            ftpTool.connect();
             ftpTool.upload(file.getInputStream(), fileName);
+            ftpTool.disconnect();
+            File tempFile = new File(fileName);
+            FileUtils.copyInputStreamToFile(file.getInputStream(), tempFile);
+            apkInfo = ApkUtil.getApkInfo(tempFile);
+            FileUtils.deleteQuietly(tempFile);
         } catch (IOException e) {
             log.error("upload apk file error {}", e);
             e.printStackTrace();
             renderJson500();
         }
-        renderJson200(wrapField("fileName", fileName));
+        renderJsonResponse(apkInfo, 0, "");
     }
 
     @RequestMapping(value = "save", method = {RequestMethod.POST, RequestMethod.GET})
     public void save(Task task) {
         if (task.getId() <= 0) {
             task.setUserId(getCurrentUser().getId());
-            task.setCreateTime(new Date());
-            task.setPackageName("");
-            task.setApkUrl("");
             task.setState(TaskState.confirm_ing.getCode());
+            task.setDayLimit(Constants.TASK_DAY_LIMIT);
             taskService.add(task);
         } else {
             taskService.update(task);

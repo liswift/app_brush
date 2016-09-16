@@ -21,7 +21,7 @@ import java.io.IOException;
  */
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:applicationContext.xml")
+@ContextConfiguration("classpath:spring/applicationContext.xml")
 public class DeviceInfoMapperTest {
 
     @Autowired
