@@ -1509,17 +1509,18 @@ INSERT INTO `permission` VALUES ('112', '37', '暂停', null, null, null, 'sys:q
 INSERT INTO `permission` VALUES ('113', '37', '恢复', null, null, null, 'sys:quartz:resume', null, null, '');
 INSERT INTO `permission` VALUES ('121', '106', '百度统计', null, null, '/baidu/list', null, null, null, '');
 INSERT INTO `permission` VALUES ('124', null, '任务管理', null, null, '', null, '&#xe61a;', null, '任务管理');
-INSERT INTO `permission` VALUES ('125', '124', '激活留存', null, null, '', null, null, null, '激活留存');
+INSERT INTO `permission` VALUES ('125', '124', '激活留存', null, null, '', null, '&#xe61c;', null, '激活留存');
 INSERT INTO `permission` VALUES ('127', null, '历史数据', null, null, '', null, '&#xe61a;', null, '历史数据');
-INSERT INTO `permission` VALUES ('128', null, '账户管理', null, null, '', null, '&#xe61a;', null, '账户管理');
-INSERT INTO `permission` VALUES ('129', '128', '费用记录', null, null, '', null, null, null, '费用记录');
-INSERT INTO `permission` VALUES ('130', '128', '账户充值', null, null, '', null, null, null, '账户充值');
-INSERT INTO `permission` VALUES ('131', '127', '推广记录', null, null, '', null, null, null, '推广记录');
-INSERT INTO `permission` VALUES ('132', '124', '任务记录', null, null, '', null, null, null, '任务记录');
+INSERT INTO `permission` VALUES ('128', null, '账户管理', null, null, '', null, '&#xe63a;', null, '账户管理');
+INSERT INTO `permission` VALUES ('129', '128', '费用记录', null, null, '', null, '&#xe6bf;', null, '费用记录');
+INSERT INTO `permission` VALUES ('130', '128', '账户充值', null, null, '', null, '&#xe628;', null, '账户充值');
+INSERT INTO `permission` VALUES ('131', '127', '推广记录', null, null, '', null, '&#xe627;', null, '推广记录');
+INSERT INTO `permission` VALUES ('132', '124', '任务记录', null, null, '', null, '&#xe687;', null, '任务记录');
 INSERT INTO `permission` VALUES ('133', null, '资源管理', null, null, '', null, '&#xe61a;', null, '资源管理');
-INSERT INTO `permission` VALUES ('134', '133', '主机列表', null, null, '', null, null, null, '主机列表');
-INSERT INTO `permission` VALUES ('135', null, '任务记录', null, null, '', null, null, null, '任务记录');
-INSERT INTO `permission` VALUES ('136', null, '设置', null, null, '', null, null, null, '设置');
+INSERT INTO `permission` VALUES ('134', '133', '主机列表', null, null, '', null, '&#xe64f;', null, '主机列表');
+INSERT INTO `permission` VALUES ('135', null, '任务记录', null, null, '', null, '&#xe623;', null, '任务记录');
+INSERT INTO `permission` VALUES ('136', null, '设置', null, null, '', null, '&#xe62e;', null, '设置');
+INSERT INTO `permission` VALUES ('137', '135', '任务记录', null, null, '/audit/historyList', null, '&#xe720;', null, '任务记录');
 
 -- ----------------------------
 -- Table structure for `role`
