@@ -13,9 +13,9 @@ import java.util.List;
  */
 public interface ActionItemMapper {
 
-    String INSERT_FEILDS = "action_page_id,name,view_name,view_id,view_content,action,acition_param,stay_time,up_down";
+    String INSERT_FEILDS = "action_page_id,name,view_name,view_id,view_content,action,action_params,stay_time,up_down";
     String FEILDS = "id," + INSERT_FEILDS;
-    String INSERT_VALUES = "#{actionPageId},#{name},#{viewName},#{viewId},#{viewContent},#{action},#{acitionParam},#{stayTime},#{upDown}";
+    String INSERT_VALUES = "#{actionPageId},#{name},#{viewName},#{viewId},#{viewContent},#{action},#{actionParams},#{stayTime},#{upDown}";
 
     @Select("select " + FEILDS + " from action_item where id in (${actionItemId})")
     List<ActionItem> getByIds(@Param("actionItemId") String actionItemId);
@@ -27,7 +27,7 @@ public interface ActionItemMapper {
     void insert(ActionItem actionItem);
 
     @Update("update action_item set name=#{name},view_name=#{viewName},view_id=#{viewId},view_content=#{viewContent}," +
-            "action=#{action},action_param=#{actionParam},stay_time=#{stayTime},up_down=#{upDown} where id=#{id}")
+            "action=#{action},action_params=#{actionParams},stay_time=#{stayTime},up_down=#{upDown} where id=#{id}")
     void update(ActionItem actionItem);
 
     @Delete("delete from action_time where id=#{id}")

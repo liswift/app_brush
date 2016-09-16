@@ -61,7 +61,7 @@ CREATE TABLE `action_item` (
   `view_id` varchar(32) DEFAULT NULL,
   `view_content` varchar(32) NOT NULL COMMENT 'view内容',
   `action` int(11) NOT NULL DEFAULT '0' COMMENT '动作',
-  `acition_param` varchar(255) NOT NULL DEFAULT '' COMMENT '动作参数',
+  `action_params` varchar(255) NOT NULL DEFAULT '' COMMENT '动作参数',
   `stay_time` int(11) NOT NULL DEFAULT '0' COMMENT '停留时间',
   `up_down` int(11) NOT NULL DEFAULT '0' COMMENT '波动范围',
   PRIMARY KEY (`id`)
