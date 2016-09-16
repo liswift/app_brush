@@ -2,7 +2,9 @@ package com.eazy.brush.controller.web;
 
 import com.eazy.brush.controller.common.BaseController;
 import com.eazy.brush.dao.entity.ActionItem;
+import com.eazy.brush.service.ActionGroupService;
 import com.eazy.brush.service.ActionItemService;
+import com.eazy.brush.service.ActionPageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,21 +19,48 @@ import java.util.List;
 @Controller
 @RequestMapping("/action")
 @Slf4j
-public class ActionItemController extends BaseController {
+public class ActionController extends BaseController {
 
     @Autowired
     ActionItemService actionItemService;
 
+    @Autowired
+    ActionPageService actionPageService;
+
+    @Autowired
+    ActionGroupService actionGroupService;
 
     /**
      * add
      */
-    @RequestMapping(value = "add", method = RequestMethod.GET)
+    @RequestMapping(value = "add", method = RequestMethod.POST)
     public void add() {
         ActionItem actionItem = initActionItem(0);
         actionItemService.add(actionItem);
         renderResult(true);
     }
+
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public void update() {
+        actionItemService.update(initActionItem(getParaInt("id", 0)));
+        renderResult(true);
+    }
+
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
+    public void delete() {
+        actionItemService.deleteItemById(getParaInt("id", 0));
+        renderResult(true);
+    }
+
+    @RequestMapping(value = "get", method = RequestMethod.GET)
+    public void get() {
+        List<ActionItem> actionItemList = actionItemService.getByPageId(getParaInt("pageId", 0));
+    }
+
+
+
+
+
 
     private ActionItem initActionItem(int id) {
         ActionItem actionItem = new ActionItem();
@@ -49,24 +78,6 @@ public class ActionItemController extends BaseController {
         actionItem.setViewName(getPara("viewName"));
         return actionItem;
     }
-
-    @RequestMapping(value = "update", method = RequestMethod.GET)
-    public void update() {
-        actionItemService.update(initActionItem(getParaInt("id", 0)));
-        renderResult(true);
-    }
-
-    @RequestMapping(value = "delete", method = RequestMethod.GET)
-    public void delete() {
-        actionItemService.deleteItemById(getParaInt("id", 0));
-        renderResult(true);
-    }
-
-    @RequestMapping(value = "get", method = RequestMethod.GET)
-    public void get() {
-        List<ActionItem> actionItemList = actionItemService.getByPageId(getParaInt("pageId", 0));
-    }
-
 
 }
 
