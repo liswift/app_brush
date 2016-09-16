@@ -129,6 +129,7 @@ public class TaskServiceImpl implements TaskService {
         task.setId(id);
         task.setVersionCode(Integer.parseInt(apkInfo.getVersionCode()));
         task.setAppVersion(apkInfo.getVersionName());
+        task.setAppName(apkInfo.getApkName());
         task.setPackageName(apkInfo.getApkPackage());
         task.setApkUrl(Constants.APK_URL_PRE + fileName);
         taskMapper.update(task);

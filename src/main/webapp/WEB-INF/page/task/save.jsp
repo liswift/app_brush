@@ -28,38 +28,47 @@
 <body>
 <div class="add-task-form form-horizontal">
 
-    <c:if test="${task == null || ac == 'upPg'}">
-        <div class="add-task-item">
-            <span><span class="required-dot">*</span>应用apk文件：</span>
-            <span class="btn-upload" style="margin-left:10px" id="select-file">
+    <c:if test="${ac == 'upPg'}">
+        <form id="form1" action="${ctx}/task/apk/upload" enctype="multipart/form-data" method="post">
+            <div class="add-task-item">
+                <span><span class="required-dot">*</span>应用apk文件：</span>
+                <span class="btn-upload" style="margin-left:10px" id="select-file">
             <a href="javascript:void(0);" class="btn btn-primary radius">上传应用</a>
             <input type="file" multiple name="file" class="input-file"/>
         </span>
-            <div class="progress task-progress">
-                <div class="progress-bar">
-                    <span class="task-progress-tint">25%</span>
-                    <span class="sr-only" style="width:25%"></span>
+                <div class="progress task-progress">
+                    <div class="progress-bar">
+                        <span class="task-progress-tint">25%</span>
+                        <span class="sr-only" style="width:25%"></span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row cl">
-            <div class="formControls col-xs-6 col-sm-6">
-                <label class="form-label col-xs-4 col-sm-4">应用名称：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" task_name="appName" value="${task.appName}" class="input-text"
-                           autocomplete="off">
+            <div class="row cl">
+                <div class="formControls col-xs-6 col-sm-6">
+                    <label class="form-label col-xs-4 col-sm-4">应用名称：</label>
+                    <div class="formControls col-xs-8 col-sm-8">
+                        <input type="text" task_name="appName" value="${task.appName}" class="input-text"
+                               autocomplete="off" readonly="readonly">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row cl">
-            <div class="formControls col-xs-6 col-sm-6">
-                <label class="form-label col-xs-4 col-sm-4">应用版本：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" task_name="appVersion" value="${task.appVersion}" class="input-text"
-                           autocomplete="off">
+            <div class="row cl">
+                <div class="formControls col-xs-6 col-sm-6">
+                    <label class="form-label col-xs-4 col-sm-4">应用版本：</label>
+                    <div class="formControls col-xs-8 col-sm-8">
+                        <input type="text" task_name="appVersion" value="${task.appVersion}" class="input-text"
+                               autocomplete="off" readonly="readonly">
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="row cl">
+                <div class="col-xs-10 col-sm-10 col-xs-offset-4 col-sm-offset-5">
+                    <input type="hidden" name="id" value="${task.id}">
+                    <input id="task-add-btn-apk" class="btn btn-primary radius" type="submit" style="width: 90px"
+                           value="提交">
+                </div>
+            </div>
+        </form>
     </c:if>
     <c:if test="${task == null || ac == 'editor'}">
     <div class="row cl">
@@ -75,7 +84,8 @@
         <div class="formControls col-xs-4 col-sm-4">
             <label class="form-label col-xs-6 col-sm-6">每日新增用户：</label>
             <div class="formControls col-xs-3 col-sm-3">
-                <input type="text" task_name="incrDay" value="${task.incrDay}" class="input-text" autocomplete="off">
+                <input type="text" task_name="incrDay" value="${task.incrDay}" class="input-text"
+                       autocomplete="off">
             </div>
             <label class="form-label col-xs-3 col-sm-3">个，</label>
         </div>
@@ -92,7 +102,8 @@
         <div class="formControls col-xs-4 col-sm-4">
             <label class="form-label col-xs-6 col-sm-6">应用运行时长：</label>
             <div class="formControls col-xs-3 col-sm-3">
-                <input type="text" task_name="runTime" value="${task.runTime}" class="input-text" autocomplete="off">
+                <input type="text" task_name="runTime" value="${task.runTime}" class="input-text"
+                       autocomplete="off">
             </div>
             <label class="form-label col-xs-3 col-sm-3">分，</label>
         </div>

@@ -33,14 +33,14 @@ public class ActionController extends BaseController {
     /**
      * add
      */
-    @RequestMapping(value = "add", method = RequestMethod.GET)
+    @RequestMapping(value = "add", method = RequestMethod.POST)
     public void add() {
         ActionItem actionItem = initActionItem(0);
         actionItemService.add(actionItem);
         renderResult(true);
     }
 
-    @RequestMapping(value = "update", method = RequestMethod.GET)
+    @RequestMapping(value = "update", method = RequestMethod.POST)
     public void update() {
         actionItemService.update(initActionItem(getParaInt("id", 0)));
         renderResult(true);
