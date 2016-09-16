@@ -16,7 +16,7 @@ public interface TaskMapper {
             "incr_up_down,run_time,run_up_down,run_start_time," +
             "run_end_time,run_speed,retain_day,retain_percent,state,create_time,msg";
 
-    String INSERT_VALUES = "#{userId},#{auditUseId},#{appName},#{packageName},#{versionCode},#{appVersion},#{apkUrl}," +
+    String INSERT_VALUES = "#{userId},#{auditUserId},#{appName},#{packageName},#{versionCode},#{appVersion},#{apkUrl}," +
             "#{remarkName},#{incrDay},#{dayLimit},#{incrUpDown},#{runTime},#{runUpDown},#{runStartTime}," +
             "#{runEndTime},#{runSpeed},#{retainDay},#{retainPercent},#{state},#{createTime},#{msg}";
 
@@ -41,10 +41,10 @@ public interface TaskMapper {
     void insert(Task task);
 
     @Update("update task set state=#{state},msg=#{msg} where id=#{id} and audit_user_id=#{auditUserId}")
-    int changeState(@Param("id") int id,@Param("auditUserId")int auditUserId ,@Param("state") int state,@Param("msg")String msg);
+    void changeState(@Param("id") int id,@Param("auditUserId")int auditUserId ,@Param("state") int state,@Param("msg")String msg);
 
     @Update("update task set state=#{state},msg=#{msg} where id=#{id}")
-    int changeState(@Param("id") int id, @Param("state")int state,@Param("msg")String msg);
+    void changeState(@Param("id") int id, @Param("state")int state,@Param("msg")String msg);
 
     @Update("update task set state=#{state}")
     void changeAllState(@Param("state") int state);
