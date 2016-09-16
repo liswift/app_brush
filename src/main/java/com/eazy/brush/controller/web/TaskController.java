@@ -8,6 +8,7 @@ import com.eazy.brush.controller.view.vo.TaskVo;
 import com.eazy.brush.controller.view.vo.UserAccountVo;
 import com.eazy.brush.core.enums.TaskState;
 import com.eazy.brush.core.utils.ActionRequest;
+import com.eazy.brush.core.utils.Constants;
 import com.eazy.brush.dao.entity.Task;
 import com.eazy.brush.model.User;
 import com.eazy.brush.service.TaskService;
@@ -22,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -85,10 +85,8 @@ public class TaskController extends BaseController {
     public void save(Task task) {
         if (task.getId() <= 0) {
             task.setUserId(getCurrentUser().getId());
-            task.setCreateTime(new Date());
-            task.setPackageName("");
-            task.setApkUrl("");
             task.setState(TaskState.confirm_ing.getCode());
+            task.setDayLimit(Constants.TASK_DAY_LIMIT);
             taskService.add(task);
         } else {
             taskService.update(task);

@@ -16,4 +16,9 @@ public interface Constants {
      * 快速投放，时间粒度内，执行元任务的上限
      */
     int TASK_BATCH_UP = 1000;
+
+    /**
+     * 任务日增长量上线
+     */
+    int TASK_DAY_LIMIT = 100000;
 }
