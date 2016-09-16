@@ -21,4 +21,9 @@ public interface Constants {
      * 任务日增长量上线
      */
     int TASK_DAY_LIMIT = 100000;
+
+    /**
+     * apk文件下载路径前缀
+     */
+    String APK_URL_PRE = "http://www.yuekuba.com/task/apk/download?file=";
 }

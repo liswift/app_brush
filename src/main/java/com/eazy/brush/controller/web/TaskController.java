@@ -72,7 +72,7 @@ public class TaskController extends BaseController {
     }
 
     @RequestMapping(value = "apk/upload", method = {RequestMethod.GET, RequestMethod.POST})
-    public void uploadApk(@RequestParam(value = "file", required = false) MultipartFile file) {
+    public void uploadApk(@RequestParam(value = "file") MultipartFile file, @RequestParam(value = "id") int id) {
         String now = DateTime.now().toString("yyyyMMddHHmmssSSS");
         String fileName = now + "_" + file.getOriginalFilename();
         ApkInfo apkInfo = null;
@@ -80,16 +80,19 @@ public class TaskController extends BaseController {
             ftpTool.connect();
             ftpTool.upload(file.getInputStream(), fileName);
             ftpTool.disconnect();
+
             File tempFile = new File(fileName);
             FileUtils.copyInputStreamToFile(file.getInputStream(), tempFile);
             apkInfo = ApkUtil.getApkInfo(tempFile);
-            FileUtils.deleteQuietly(tempFile);
+            FileUtils.forceDelete(tempFile);
+
+            taskService.updateApkInfo(id, apkInfo, fileName);
         } catch (IOException e) {
             log.error("upload apk file error {}", e);
             e.printStackTrace();
             renderJson500();
         }
-        renderJsonResponse(apkInfo, 0, "");
+        renderJsonResponse();
     }
 
     @RequestMapping(value = "save", method = {RequestMethod.POST, RequestMethod.GET})
