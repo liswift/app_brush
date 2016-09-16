@@ -1518,7 +1518,7 @@ INSERT INTO `permission` VALUES ('131', '127', '推广记录', null, null, '', n
 INSERT INTO `permission` VALUES ('132', '124', '任务记录', null, null, '', null, '&#xe687;', null, '任务记录');
 INSERT INTO `permission` VALUES ('133', null, '资源管理', null, null, '', null, '&#xe61a;', null, '资源管理');
 INSERT INTO `permission` VALUES ('134', '133', '主机列表', null, null, '', null, '&#xe64f;', null, '主机列表');
-INSERT INTO `permission` VALUES ('135', null, '任务记录', null, null, '', null, '&#xe623;', null, '任务记录');
+INSERT INTO `permission` VALUES ('135', null, '任务记录', null, null, '', null, '&#xe637;', null, '任务记录');
 INSERT INTO `permission` VALUES ('136', null, '设置', null, null, '', null, '&#xe62e;', null, '设置');
 INSERT INTO `permission` VALUES ('137', '135', '任务记录', null, null, '/audit/historyList', null, '&#xe720;', null, '任务记录');
 
@@ -1622,6 +1622,7 @@ INSERT INTO `role_permission` VALUES ('1547', '14', '3');
 INSERT INTO `role_permission` VALUES ('1548', '14', '7');
 INSERT INTO `role_permission` VALUES ('1549', '14', '97');
 INSERT INTO `role_permission` VALUES ('1550', '14', '98');
+INSERT INTO `role_permission` VALUES ('1551', '1', '137');
 
 -- ----------------------------
 -- Table structure for `task`
