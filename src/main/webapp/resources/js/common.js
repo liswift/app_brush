@@ -29,6 +29,35 @@ function ajaxPost(url,data,callback,failback){
     });
 }
 
+
+
+top.window.eventEmitter = {
+    _events: {},
+    emit: function (event, data) {
+        if (!this._events[event]) return;
+        var len = this._events[event].length , i = 0;
+        for (; i < len; i++) {
+            typeof this._events[event][i] =='function' && this._events[event][i](data);
+        }
+        return this;
+    },
+    addListener: function (event, callback) {
+        if (!this._events[event]){
+            this._events[event] = [];
+        }
+        this._events[event].push(callback);
+        return this;
+    },
+    removeListener:function(event,callback){
+        if (!this._events[event]) return;
+        this._events[event] = null;
+        delete this._events[event];
+        typeof callback =='function' && callback();
+        return this;
+    }
+
+};
+
 function fullOpen(title, url) {
     var index = layer.open({
         type: 2,
@@ -37,3 +66,4 @@ function fullOpen(title, url) {
     });
     layer.full(index);
 }
+
