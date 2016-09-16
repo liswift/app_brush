@@ -54,8 +54,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public int changeState(int id,int auditUserId, int state,String msg) {
-        taskMapper.changeState(id,auditUserId, state,msg);
-        return 1;
+       return taskMapper.changeStateWithMsg(id,auditUserId, state,msg);
     }
 
     @Override
