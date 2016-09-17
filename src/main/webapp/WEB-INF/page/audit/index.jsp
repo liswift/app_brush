@@ -95,7 +95,7 @@
                                      onclick="fullOpen('编辑','${ctx}/task/toEdit?id=${t.id}&ac=editor')">编辑</a>
                                        <a href="javascript:;"
                                           onclick="">删除</a>
-                                          <a href="${ctx}/audit/enable?pageId=${t.id}">>启用</a>
+                                          <a href="${ctx}/audit/enable?pageId=${t.id}">启用</a>
                                    </td>
                               </c:otherwise>
                             </c:choose>
