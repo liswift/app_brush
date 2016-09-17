@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div class="modal-header">
     <h3 id="editActionLabel">添加动作</h3><a class="close" data-dismiss="modal" aria-hidden="true"
                                          href="javascript:void();">×</a>
