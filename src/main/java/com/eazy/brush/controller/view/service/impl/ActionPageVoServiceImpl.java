@@ -6,6 +6,7 @@ import com.eazy.brush.controller.view.vo.ActionPageVo;
 import com.eazy.brush.dao.entity.ActionPage;
 import com.eazy.brush.service.ActionItemService;
 import com.eazy.brush.service.ActionPageService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.util.List;
  * create time:2016/9/10 21:52
  */
 @Service
+@Slf4j
 public class ActionPageVoServiceImpl implements ActionPageVoService {
 
     @Autowired
@@ -54,6 +56,7 @@ public class ActionPageVoServiceImpl implements ActionPageVoService {
     @Override
     public ActionPageVo getByTaskIdOrPageId(int taskId, int pageId) {
         ActionPageVo actionPageVo = new ActionPageVo();
+        log.info("outpageId>>>>>>>>>>>>>"+pageId);
         if(pageId==0){
             actionPageVo.setActionPage(actionPageService.insertAndGetKey(taskId));
         }else{
