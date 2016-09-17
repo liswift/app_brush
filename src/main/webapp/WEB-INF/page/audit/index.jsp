@@ -41,7 +41,7 @@
         <div class="formControls col-xs-6 col-sm-6">
             <label class="form-label col-xs-4 col-sm-4">应用版本：</label>
             <div class="formControls col-xs-8 col-sm-8">
-               <lable>${task.appVersion}</ablel>
+               <lable>${task.appVersion}</lable>
             </div>
         </div>
     </div>
@@ -82,7 +82,9 @@
                                   <td>启用中</td>
                                   <td>
                                      <a href="javascript:;"
-                                     onclick="fullOpen('编辑','${ctx}/task/toEdit?id=${t.id}&ac=editor')">编辑</a>
+                                     onclick="">编辑</a>
+                                      <a href="javascript:;"
+                                         onclick="">删除</a>
                                      <a href="${ctx}/audit/disable?pageId=${t.id}">禁用</a>
                                   </td>
                               </c:when>
@@ -91,6 +93,8 @@
                                    <td>
                                        <a href="javascript:;"
                                      onclick="fullOpen('编辑','${ctx}/task/toEdit?id=${t.id}&ac=editor')">编辑</a>
+                                       <a href="javascript:;"
+                                          onclick="">删除</a>
                                           <a href="${ctx}/audit/enable?pageId=${t.id}">>启用</a>
                                    </td>
                               </c:otherwise>
