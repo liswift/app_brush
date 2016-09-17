@@ -16,6 +16,9 @@ $(document).ready(function(){
     var currentNameDom = null;
     var currentGroupDom = null;
 
+    var taskId = $('#add-page-hidden').attr('task_id');
+    var pageId = $('#add-page-hidden').attr('page_id');
+
 
     //全局事件派发器,可在不同子iframe间通信.
     top.window.eventEmitter.addListener('actionSubmitOk',function(data){
@@ -24,7 +27,8 @@ $(document).ready(function(){
 
     $actionGroupAddBtn.on('click',function(){
         var params = {};
-        params.id = 323;
+        params.id = taskId;
+        params.actionPageId = pageId;
         params.pageName = $("#page-name").val().trim();
         params.pageDesc = $("#page-desc").val().trim();
 
@@ -42,7 +46,7 @@ $(document).ready(function(){
                 actionItemIds:actionItemIds.join(',')
             })
         });
-        console.log(params)
+
         //top.window.eventEmitter.emit('actionSubmitOk',{action_id:'0',action_name:'hahaha'})
     });
 
