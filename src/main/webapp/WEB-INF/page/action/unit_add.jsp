@@ -174,7 +174,7 @@
         params.actionPageId = currentPageId;
 
         ajaxPost('${ctx}/action/add', params, function (d) {
-            top.window.eventEmitter.emit('actionSubmitOk', {action_id: d.data.id, action_name: d.data.name});
+            top.window.eventEmitter.emit('actionSubmitOk', {action_id: d.id, action_name: d.name});
         }, function (res) {
             alert('操作失败');
         });

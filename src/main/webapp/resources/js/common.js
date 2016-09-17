@@ -18,7 +18,7 @@ function ajaxPost(url,data,callback,failback){
                 if ($.isFunction(failback)) {
                     failback(res);
                 } else {
-                    alert(res.desc);
+                    alert(res.msg);
                 }
             }
         },
