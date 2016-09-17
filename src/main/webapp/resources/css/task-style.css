@@ -100,17 +100,20 @@
 .group-action-name i{
     display: inline-block;
     cursor: pointer;
-    width: 20px;
-    height: 20px;
-    background-color: #069991;
+    width: 18px;
+    height: 18px;
+    background: url("../images/edit.png") center no-repeat;
+    background-size: contain;
     margin-bottom: -5px;
+    margin-left: 5px;
 }
 .group-action-del{
     display: inline-block;
     cursor: pointer;
     width: 22px;
     height: 22px;
-    background-color: #069991;
+    background: url("../images/del.png") center no-repeat;
+    background-size: contain;
     position: absolute;
     right:7px;
     top:7px;
@@ -120,7 +123,8 @@
     cursor: pointer;
     width: 22px;
     height: 22px;
-    background-color: #ea5550;
+    background: url("../images/del.png") center no-repeat;
+    background-size: contain;
     position: absolute;
     border-radius: 11px;
     right:-11px;

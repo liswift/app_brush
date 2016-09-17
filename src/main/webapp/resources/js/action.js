@@ -4,6 +4,7 @@
 
 $(document).ready(function(){
     var $unitActionBox = $("#unit-action-box");
+    var $addActionBtn = $("button[add_btn]",$unitActionBox);
     var $groupActionBox = $("#group-action-box");
     var $delActionModal = $("#delActionModal");
     var $delGroupModal = $("#delGroupModal");
@@ -22,6 +23,7 @@ $(document).ready(function(){
 
     //全局事件派发器,可在不同子iframe间通信.
     top.window.eventEmitter.addListener('actionSubmitOk',function(data){
+        $editActionModal.modal('hide');
         updateActions(data);
     });
 
@@ -171,14 +173,32 @@ $(document).ready(function(){
     function updateActions(data){
         var action_id = data.action_id;
         var action_name = data.action_name;
+
+        var $action_btn = $('button[action_id='+action_id+']',$unitActionBox);
+        if($action_btn.length){
+            $action_btn.find('span').text(action_name);
+        }else {
+            var html = '<button action_id="'+action_id+'" class="btn btn-default radius"><span>'+action_name+'</span><i class="unit-action-del"></i></button>';
+            $addActionBtn.prepend($(html));
+        }
+
         var items_a = $('a.action-selected-a,li.action-li',$groupActionBox).filter(function(index,item){
             var actionId = $(item).attr('action_id');
             return action_id == actionId;
         });
-        items_a.length && items_a.each(function(index,item){
-            var txt = $(item).text();
-            $(item).is('a') ? $(item).text(action_name) : $(item).children('a').text(action_name);
-        });
+
+        if(items_a.length){
+            items_a.each(function(index,item){
+                var txt = $(item).text();
+                $(item).is('a') ? $(item).text(action_name) : $(item).children('a').text(action_name);
+            });
+        }else {
+            actionsObj['action_'+action_id] = action_name;
+            $('.action-ul',$groupActionBox).each(function(index,item){
+                $(item).append($('<li action_id="'+action_id+'" class="action-li"><a>'+action_name+'</a></li>'));
+            });
+        }
+
     }
 
     //删除元动作
@@ -205,7 +225,7 @@ $(document).ready(function(){
 
     function createActionsHtml(actions){
         var html = '<span class="dropDown dropDown_hover"><a class="dropDown_A action-selected-a">选择动作</a> >&nbsp;' +
-            '<ul class="dropDown-menu menu radius box-shadow" style="max-height: 200px;overflow: auto">' +
+            '<ul class="dropDown-menu menu radius box-shadow action-ul" style="max-height: 200px;overflow: auto">' +
             '<li class="del-unit-action-btn"><a>删除此动作</a></li>';
         for(var key in actions){
             html += '<li action_id="'+key.split('_')[1]+'" class="action-li"><a>'+actions[key]+'</a></li>';
