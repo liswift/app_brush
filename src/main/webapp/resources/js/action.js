@@ -77,6 +77,9 @@ $(document).ready(function () {
 
         //$editActionModal.modal('show');
 
+        if(typeof (currentActionId)=="undefined"){
+            currentActionId=0;
+        }
         $editActionModal.load('../action/toUnitAdd?id=' + currentActionId + '&pageId=' + pageId, function () {
             $editActionModal.modal();
         })
