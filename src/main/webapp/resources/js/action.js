@@ -77,7 +77,7 @@ $(document).ready(function () {
 
         //$editActionModal.modal('show');
 
-        $editActionModal.load('../action/toUnitAdd?id=' + currentActionId + "&pageId=" + pageId, function () {
+        $editActionModal.load('../action/toUnitAdd?id=' + currentActionId + '&pageId=' + pageId, function () {
             $editActionModal.modal();
         })
     });

@@ -76,7 +76,7 @@
                         <tr class="text-c">
                             <td>${t.pageName}</td>
                             <td>${t.pageDesc}</td>
-                            <td>${fn:length(t.actionGroupVos)}/td>
+                            <td>${fn:length(t.actionGroupVos)}</td>
                             <c:choose>
                               <c:when test="${t.enable=='1'}">
                                   <td>启用中</td>
