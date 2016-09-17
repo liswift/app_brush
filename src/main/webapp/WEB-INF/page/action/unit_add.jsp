@@ -21,7 +21,7 @@
                 <label class="form-label col-xs-3 col-sm-3">View类名：</label>
                 <div class="formControls col-xs-9 col-sm-9">
                     <input type="text" action_name="viewName" class="input-text" autocomplete="off"
-                           value="${actionItem.viewName}">>
+                           value="${actionItem.viewName}">
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
                 <label class="form-label col-xs-3 col-sm-3">ViewID：</label>
                 <div class="formControls col-xs-9 col-sm-9">
                     <input type="text" action_name="viewId" class="input-text" autocomplete="off"
-                           value="${actionItem.naviewIdme}">>
+                           value="${actionItem.naviewIdme}">
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
                 <label class="form-label col-xs-3 col-sm-3">View内容：</label>
                 <div class="formControls col-xs-9 col-sm-9">
                     <input type="text" action_name="viewContent" class="input-text" autocomplete="off"
-                           value="${actionItem.viewContent}">>
+                           value="${actionItem.viewContent}">
                 </div>
             </div>
         </div>
