@@ -140,8 +140,8 @@
     var $editModalBody = $("#edit-modal-body");
     var $actionParamBox = $("#action-params-box");
     var $realActionSelect = $("#real-action-select");
-    var currentId=${actionItem.id};
-    var currentPageId=${actionItem.actionPageId};
+    var currentId='${actionItem.id}';
+    var currentPageId='${actionItem.actionPageId}';
 
     $actionParamBox.on('click', 'button.param-add-btn', function (e) {
         $(this).before($(createActionParam()));
