@@ -172,12 +172,10 @@
         params.actionPageId = 2;
 
         ajaxPost('/action/add', params, function (d) {
-            console.log(d);
+            top.window.eventEmitter.emit('actionSubmitOk', {action_id: d.data.id, action_name: d.data.name});
         }, function (res) {
             console.log(res)
         });
-
-        top.window.eventEmitter.emit('actionSubmitOk', {action_id: '0', action_name: 'ha21ha'});
     });
 
     function submitForm(params) {
