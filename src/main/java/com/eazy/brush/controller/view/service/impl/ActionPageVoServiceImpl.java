@@ -56,7 +56,6 @@ public class ActionPageVoServiceImpl implements ActionPageVoService {
     @Override
     public ActionPageVo getByTaskIdOrPageId(int taskId, int pageId) {
         ActionPageVo actionPageVo = new ActionPageVo();
-        log.info("outpageId>>>>>>>>>>>>>"+pageId);
         if(pageId==0){
             actionPageVo.setActionPage(actionPageService.insertAndGetKey(taskId));
         }else{
