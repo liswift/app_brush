@@ -29,5 +29,8 @@ public interface ActionGroupMapper {
 
     @Delete("delete from action_group where id=#{id}")
     void delete(@Param("id") int id);
+
+    @Delete("delete from action_group where action_page_id=#{pageId}")
+    void deleteByPageId(@Param("pageId") int id);
 }
 

@@ -13,4 +13,8 @@ public interface ActionGroupService {
     List<ActionGroup> getByIds(String actionGroupId);
 
     List<ActionGroup> getByPageActionId(int pageActionId);
+
+    void deleteByPageId(int pageId);
+
+    void insert(List<ActionGroup> actionGroups);
 }

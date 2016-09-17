@@ -29,8 +29,8 @@ $(document).ready(function () {
 
     $actionGroupAddBtn.on('click', function () {
         var params = {};
-        params.id = taskId;
-        params.actionPageId = pageId;
+        params.id = pageId;
+        params.taskId = taskId;
         params.pageName = $("#page-name").val().trim();
         params.pageDesc = $("#page-desc").val().trim();
 
@@ -44,11 +44,18 @@ $(document).ready(function () {
                 actionItemIds.push(aId);
             });
             actionsGroups.push({
+                actionPageId: pageId,
                 name: name,
                 actionItemIds: actionItemIds.join(',')
             })
         });
-
+        params.actionGroups=actionsGroups;
+        ajaxPost("/action/addActionPage",params,function(d){
+            parent.location.reload();
+            layer_close();
+        },function (res) {
+            alert("添加失败")
+        });
         //top.window.eventEmitter.emit('actionSubmitOk',{action_id:'0',action_name:'hahaha'})
     });
 

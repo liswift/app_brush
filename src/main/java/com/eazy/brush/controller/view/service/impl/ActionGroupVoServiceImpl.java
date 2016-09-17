@@ -35,6 +35,13 @@ public class ActionGroupVoServiceImpl implements ActionGroupVoService {
         return transforActionGroup(actionGroupService.getByPageActionId(pageId));
     }
 
+    @Override
+    public void update(int pageId, List<ActionGroup> actionGroups) {
+        actionGroupService.deleteByPageId(pageId);
+        actionGroupService.insert(actionGroups);
+//        actionGroupService
+    }
+
     private List<ActionGroupVo> transforActionGroup(List<ActionGroup> actionGroups){
          List<ActionGroupVo> actionGroupVos = Lists.newArrayList();
         for (ActionGroup actionGroup : actionGroups) {

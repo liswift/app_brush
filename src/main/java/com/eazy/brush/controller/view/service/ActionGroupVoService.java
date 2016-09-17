@@ -1,6 +1,7 @@
 package com.eazy.brush.controller.view.service;
 
 import com.eazy.brush.controller.view.vo.ActionGroupVo;
+import com.eazy.brush.dao.entity.ActionGroup;
 
 import java.util.List;
 
@@ -13,5 +14,7 @@ public interface ActionGroupVoService {
     List<ActionGroupVo> getByIds(String actionGroupId);
 
     List<ActionGroupVo> getByPageId(int pageId);
+
+    void update(int pageId,List<ActionGroup>  actionGroup);
 }
 

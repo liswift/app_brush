@@ -20,4 +20,6 @@ public interface ActionPageService {
     void changeState(int id,int enable);
 
     ActionPage insertAndGetKey(int taskId);
+
+    void update(ActionPage actionPage);
 }

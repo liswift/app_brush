@@ -48,4 +48,9 @@ public class ActionPageServiceImpl implements ActionPageService {
         actionPageMapper.insert(actionPage);
         return actionPage;
     }
+
+    @Override
+    public void update(ActionPage actionPage) {
+        actionPageMapper.update(actionPage);
+    }
 }

@@ -4,6 +4,7 @@ import com.eazy.brush.controller.common.BaseController;
 import com.eazy.brush.controller.view.service.ActionPageVoService;
 import com.eazy.brush.controller.view.vo.ActionPageVo;
 import com.eazy.brush.core.enums.TaskState;
+import com.eazy.brush.dao.entity.ActionPage;
 import com.eazy.brush.dao.entity.Task;
 import com.eazy.brush.service.ActionPageService;
 import com.eazy.brush.service.TaskService;
@@ -118,11 +119,8 @@ public class AuditController extends BaseController {
     }
 
     @RequestMapping(value = "addActionPage", method = RequestMethod.POST)
-    public void addPageAction() {
-        Map<String, String> formPage = getFormPage();
-        ActionPageVo actionPageVo = new ActionPageVo();
-
-//        actionPageVo.setTaskId(IntegerConstant.valueOf(formPage.get("taskId"));
+    public void addPageAction(ActionPage actionPage) {
+        actionPageVoService.update(actionPage);
         renderResult(true);
     }
 

@@ -27,4 +27,16 @@ public class ActionGroupServiceImpl implements ActionGroupService {
     public List<ActionGroup> getByPageActionId(int pageActionId) {
         return actionGroupMapper.getByActionPageId(pageActionId);
     }
+
+    @Override
+    public void deleteByPageId(int pageId) {
+        actionGroupMapper.delete(pageId);
+    }
+
+    @Override
+    public void insert(List<ActionGroup> actionGroups) {
+        for (ActionGroup actionGroup:actionGroups){
+            actionGroupMapper.insert(actionGroup);
+        }
+    }
 }

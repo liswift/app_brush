@@ -1,6 +1,7 @@
 package com.eazy.brush.controller.view.service;
 
 import com.eazy.brush.controller.view.vo.ActionPageVo;
+import com.eazy.brush.dao.entity.ActionPage;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface ActionPageVoService {
      * @return
      */
     ActionPageVo getByTaskIdOrPageId(int taskId,int pageId);
+
+    void update(ActionPage actionPage);
 }

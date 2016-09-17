@@ -14,5 +14,5 @@ public class ActionGroup {
     private int actionPageId;//也动作id
     private String name;//组动作名称,
     private String actionItemIds;// 元动作id,以逗号分割开来
-    private int enable;
+    private int enable=1;
 }
