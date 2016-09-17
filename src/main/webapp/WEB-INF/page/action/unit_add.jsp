@@ -140,6 +140,8 @@
     var $editModalBody = $("#edit-modal-body");
     var $actionParamBox = $("#action-params-box");
     var $realActionSelect = $("#real-action-select");
+    var currentId=${actionItem.id};
+    var currentPageId=${actionItem.actionPageId};
 
     $actionParamBox.on('click', 'button.param-add-btn', function (e) {
         $(this).before($(createActionParam()));
@@ -168,8 +170,8 @@
         });
         params.actionParams = actionsArr.join(';');
 
-        params.id = 2;
-        params.actionPageId = 2;
+        params.id = currentId;
+        params.actionPageId = currentPageId;
 
         ajaxPost('/action/add', params, function (d) {
             top.window.eventEmitter.emit('actionSubmitOk', {action_id: d.data.id, action_name: d.data.name});
