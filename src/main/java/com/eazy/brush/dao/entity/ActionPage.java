@@ -2,6 +2,7 @@ package com.eazy.brush.dao.entity;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,5 +17,5 @@ public class ActionPage {
     private String pageName;//页面名称
     private String pageDesc;//页面描述
     private int enable=1;//是否可用默认是1
-    private List<ActionGroup> actionGroups;//actionGroups
+    private List<ActionGroup> actionGroups=new ArrayList<>();//actionGroups
 }
