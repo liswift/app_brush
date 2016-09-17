@@ -99,6 +99,8 @@
     var $editModalBody = $("#edit-modal-body");
     var $actionParamBox = $("#action-params-box");
     var $realActionSelect = $("#real-action-select");
+    var taskId = $('#add-page-hidden').attr('task_id');
+    var pageId = $('#add-page-hidden').attr('page_id');
 
     $actionParamBox.on('click','button.param-add-btn',function(e){
         $(this).before($(createActionParam()));
@@ -127,8 +129,8 @@
         });
         params.actionParams = actionsArr.join(';');
 
-        params.id = 2;
-        params.actionPageId = 2;
+        params.id = taskId;
+        params.actionPageId = pageId;
 
         ajaxPost('/action/add',params,function(d){
             console.log(d);
