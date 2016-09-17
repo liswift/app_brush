@@ -73,7 +73,7 @@ public class ActionController extends BaseController {
         actionItem.setName(getPara("name"));
         actionItem.setStayTime(getParaInt("stayTime", 50));
         actionItem.setUpDown(getParaInt("upDown", 1));
-        actionItem.setActionParams(getPara("actionParam"));
+        actionItem.setActionParams(getPara("actionParams"));
         actionItem.setViewContent(getPara("viewContent"));
         actionItem.setViewId(getPara("viewId"));
         actionItem.setViewName(getPara("viewName"));

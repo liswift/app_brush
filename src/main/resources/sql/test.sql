@@ -57,13 +57,13 @@ CREATE TABLE `action_item` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `action_page_id` int(9) NOT NULL DEFAULT '0' COMMENT '对应的action_page_id',
   `name` varchar(32) NOT NULL COMMENT '元动作名称',
-  `view_name` varchar(64) NOT NULL DEFAULT '0' COMMENT 'view类名',
+  `view_name` varchar(64) DEFAULT '0' COMMENT 'view类名',
   `view_id` varchar(32) DEFAULT NULL,
-  `view_content` varchar(32) NOT NULL COMMENT 'view内容',
+  `view_content` varchar(32) COMMENT 'view内容',
   `action` int(11) NOT NULL DEFAULT '0' COMMENT '动作',
-  `action_params` varchar(255) NOT NULL DEFAULT '' COMMENT '动作参数',
+  `action_params` varchar(255) DEFAULT '' COMMENT '动作参数',
   `stay_time` int(11) NOT NULL DEFAULT '0' COMMENT '停留时间',
-  `up_down` int(11) NOT NULL DEFAULT '0' COMMENT '波动范围',
+  `up_down` int(11) DEFAULT '0' COMMENT '波动范围',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
