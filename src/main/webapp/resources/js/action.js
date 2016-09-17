@@ -179,7 +179,7 @@ $(document).ready(function(){
             $action_btn.find('span').text(action_name);
         }else {
             var html = '<button action_id="'+action_id+'" class="btn btn-default radius"><span>'+action_name+'</span><i class="unit-action-del"></i></button>';
-            $addActionBtn.prepend($(html));
+            $addActionBtn.before($(html));
         }
 
         var items_a = $('a.action-selected-a,li.action-li',$groupActionBox).filter(function(index,item){
