@@ -24,6 +24,11 @@ public class ActionItemServiceImpl implements ActionItemService {
     }
 
     @Override
+    public ActionItem getById(int id) {
+        return actionItemMapper.getById(id);
+    }
+
+    @Override
     public List<ActionItem> getByPageId(int pageid) {
         return actionItemMapper.getByPageId(pageid);
     }

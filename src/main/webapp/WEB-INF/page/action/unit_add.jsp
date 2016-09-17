@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="modal-header">
     <h3 id="editActionLabel">添加动作</h3><a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void();">×</a>
 </div>
@@ -99,8 +101,6 @@
     var $editModalBody = $("#edit-modal-body");
     var $actionParamBox = $("#action-params-box");
     var $realActionSelect = $("#real-action-select");
-    var taskId = $('#add-page-hidden').attr('task_id');
-    var pageId = $('#add-page-hidden').attr('page_id');
 
     $actionParamBox.on('click','button.param-add-btn',function(e){
         $(this).before($(createActionParam()));
@@ -129,8 +129,8 @@
         });
         params.actionParams = actionsArr.join(';');
 
-        params.id = taskId;
-        params.actionPageId = pageId;
+        params.id = 2;
+        params.actionPageId = 2;
 
         ajaxPost('/action/add',params,function(d){
             console.log(d);

@@ -13,6 +13,8 @@ public interface ActionItemService {
 
     List<ActionItem> getByIds(String actionItemId);
 
+    ActionItem getById(int id);
+
     List<ActionItem> getByPageId(int pageid);
 
     void deleteItemById(int id);

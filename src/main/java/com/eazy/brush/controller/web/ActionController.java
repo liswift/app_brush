@@ -9,8 +9,10 @@ import com.eazy.brush.service.ActionPageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -34,11 +36,24 @@ public class ActionController extends BaseController {
     /**
      * add
      */
+    @RequestMapping(value = "toUnitAdd", method = RequestMethod.POST)
+    public ModelAndView toUnitAdd(ModelMap map) {
+        int unitId = getParaInt("id",0);
+        if(unitId!=0){
+            ActionItem actionItem=actionItemService.getById(unitId);
+            map.put("actionItem",actionItem);
+        }
+        return new ModelAndView("action/unit_add",map);
+    }
+
+    /**
+     * add
+     */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public void add() {
         ActionItem actionItem = initActionItem(0);
         actionItemService.add(actionItem);
-        renderResult(true);
+        renderJson200(actionItem);
     }
 
     @RequestMapping(value = "update", method = RequestMethod.POST)
@@ -57,10 +72,6 @@ public class ActionController extends BaseController {
     public void get() {
         List<ActionItem> actionItemList = actionItemService.getByPageId(getParaInt("pageId", 0));
     }
-
-
-
-
 
 
     private ActionItem initActionItem(int id) {

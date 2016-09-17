@@ -20,10 +20,14 @@ public interface ActionItemMapper {
     @Select("select " + FEILDS + " from action_item where id in (${actionItemId})")
     List<ActionItem> getByIds(@Param("actionItemId") String actionItemId);
 
+    @Select("select " + FEILDS + " from action_item where id =${id}")
+    ActionItem getById(@Param("id") int actionItemId);
+
     @Select("select " + FEILDS + " from action_item where action_page_id in (${actionPageId})")
     List<ActionItem> getByPageId(@Param("actionPageId") int actionPageId);
 
     @Insert("insert into action_item(" + INSERT_FEILDS + ") values(" + INSERT_VALUES + ")")
+    @Options(useGeneratedKeys=true,keyProperty="id")
     void insert(ActionItem actionItem);
 
     @Update("update action_item set name=#{name},view_name=#{viewName},view_id=#{viewId},view_content=#{viewContent}," +
