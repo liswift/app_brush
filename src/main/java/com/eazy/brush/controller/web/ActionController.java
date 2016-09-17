@@ -37,7 +37,7 @@ public class ActionController extends BaseController {
     /**
      * add
      */
-    @RequestMapping(value = "toUnitAdd", method = RequestMethod.POST)
+    @RequestMapping(value = "toUnitAdd", method = RequestMethod.GET)
     public ModelAndView toUnitAdd(ModelMap map) {
         int unitId = getParaInt("id",0);
         if(unitId!=0){
