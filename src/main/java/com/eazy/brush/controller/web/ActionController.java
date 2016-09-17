@@ -2,6 +2,7 @@ package com.eazy.brush.controller.web;
 
 import com.eazy.brush.controller.common.BaseController;
 import com.eazy.brush.core.enums.ActionType;
+import com.eazy.brush.core.enums.ArgumentType;
 import com.eazy.brush.dao.entity.ActionItem;
 import com.eazy.brush.service.ActionGroupService;
 import com.eazy.brush.service.ActionItemService;
@@ -41,8 +42,10 @@ public class ActionController extends BaseController {
         int unitId = getParaInt("id",0);
         if(unitId!=0){
             ActionItem actionItem=actionItemService.getById(unitId);
-            map.put("actionItem",actionItem);
+            map.put("actionItem",actionItem.transform2Vo());
         }
+        map.put("actions",ActionType.values());
+        map.put("arguments", ArgumentType.values());
         return new ModelAndView("action/unit_add",map);
     }
 

@@ -75,7 +75,7 @@ $(document).ready(function(){
 
         //$editActionModal.modal('show');
 
-        $editActionModal.load('../resources/html/unit_add.html',function(){
+        $editActionModal.load('../action/toUnitAdd',function(){
             $editActionModal.modal();
         })
     });

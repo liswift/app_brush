@@ -28,6 +28,18 @@ public enum ArgumentType {
         return value;
     }
 
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
     private static final java.util.Map<Integer, ArgumentType> map = new java.util.HashMap<Integer, ArgumentType>();
 
     static {

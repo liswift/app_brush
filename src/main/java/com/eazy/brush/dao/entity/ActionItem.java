@@ -1,6 +1,12 @@
 package com.eazy.brush.dao.entity;
 
+import com.eazy.brush.controller.view.vo.ActionItemVo;
 import lombok.Data;
+import org.apache.commons.collections.keyvalue.DefaultKeyValue;
+import org.apache.commons.lang.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 元动作
@@ -19,4 +25,29 @@ public class ActionItem {
     private String actionParams;//动作参数,type:value;type:value
     private int stayTime;//停留时间,秒
     private int upDown;//波动范围,秒
+
+    public ActionItemVo transform2Vo(){
+        ActionItemVo actionItemVo=new ActionItemVo();
+        actionItemVo.setId(id);
+        actionItemVo.setAction(action);
+        actionItemVo.setActionPageId(actionPageId);
+        actionItemVo.setName(name);
+        actionItemVo.setStayTime(stayTime);
+        actionItemVo.setUpDown(upDown);
+        actionItemVo.setViewContent(viewContent);
+        actionItemVo.setViewId(viewId);
+        actionItemVo.setViewName(viewName);
+        List<DefaultKeyValue> params=new ArrayList<>();
+        if(StringUtils.isNotEmpty(actionParams)){
+            String[] param=actionParams.split(";");
+            for(String item:param){
+                if(StringUtils.isNotEmpty(item)){
+                    String[] keyvalue=item.split(":");
+                   params.add(new DefaultKeyValue(keyvalue[0],keyvalue[1]));
+                }
+            }
+        }
+        actionItemVo.setActionParams(params);
+        return actionItemVo;
+    }
 }
