@@ -29,7 +29,7 @@
 <body>
 <div class="add-task-form form-horizontal" style="padding-bottom:50px">
     <div class="row cl">
-        <label class="form-label col-xs-2 col-sm-2">页面名称：${actionPageVo.id}/label>
+        <label class="form-label col-xs-2 col-sm-2">页面名称：${actionPageVo.id}</label>
         <div class="col-xs-10 col-sm-10">
             <input type="text" id='page-name' group_name="pageName" class="input-text" autocomplete="off"
                    value="${actionPageVo.pageName}">
@@ -45,8 +45,6 @@
     <div class="row cl">
         <label class="form-label col-xs-2 col-sm-2">操作动作：</label>
         <div class="col-xs-10 col-sm-10 unit-action-box" id="unit-action-box">
-            <button action_id="0" class="btn btn-default radius"><span>actionAactionA</span><i
-                    class="unit-action-del"></i></button>
             <c:forEach items="${ actionPageVo.actionItems }" var="t">
                 <button action_id="${t.id}" class="btn btn-default radius"><span>${t.name}</span><i
                         class="unit-action-del"></i>

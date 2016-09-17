@@ -32,7 +32,7 @@ public interface ActionPageMapper {
 
     @Insert("insert into action_page(" + INSERT_FIELDS + ") values(#{taskId},#{pageName},#{pageDesc}," +
             "#{enable})")
-    @Options(useGeneratedKeys=true, keyProperty="id")
+   // @Options(useGeneratedKeys=true)
     Integer insert(ActionPage actionPage);
 
 

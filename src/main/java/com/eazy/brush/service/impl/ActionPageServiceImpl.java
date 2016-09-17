@@ -3,6 +3,7 @@ package com.eazy.brush.service.impl;
 import com.eazy.brush.dao.entity.ActionPage;
 import com.eazy.brush.dao.mapper.ActionPageMapper;
 import com.eazy.brush.service.ActionPageService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * create time:2016/8/31 22:11
  */
 @Service
+@Slf4j
 public class ActionPageServiceImpl implements ActionPageService {
 
     @Autowired
@@ -43,7 +45,8 @@ public class ActionPageServiceImpl implements ActionPageService {
         ActionPage actionPage=new ActionPage();
         actionPage.setTaskId(taskId);
         actionPage.setPageName("默认页面名称");
-        actionPageMapper.insert(actionPage);
+        int result=actionPageMapper.insert(actionPage);
+        log.info("result:insert id>>>>>{}",result);
         return actionPage;
     }
 }
