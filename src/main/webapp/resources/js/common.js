@@ -10,7 +10,7 @@ function ajaxPost(url,data,callback,failback){
         url: url,
         data: data,
         success: function(res) {
-            if (res.code == 0) {
+            if (res.code == 200) {
                 if ($.isFunction(callback)) {
                     callback(res.data, res);
                 }

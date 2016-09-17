@@ -176,7 +176,7 @@
         ajaxPost('${ctx}/action/add', params, function (d) {
             top.window.eventEmitter.emit('actionSubmitOk', {action_id: d.data.id, action_name: d.data.name});
         }, function (res) {
-            alert('操作失败'+res);
+            alert('操作失败');
         });
     });
 
