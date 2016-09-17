@@ -50,7 +50,7 @@ $(document).ready(function () {
             })
         });
         params.actionGroups=actionsGroups;
-        ajaxPost("/action/addActionPage",params,function(d){
+        ajaxPost("/audit/addActionPage",params,function(d){
             parent.location.reload();
             layer_close();
         },function (res) {
