@@ -87,6 +87,7 @@
     </div>
 </div>
 
+<div id="editActionModal" class="modal hide fade edit-action-dlg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
 <div id="delActionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
@@ -138,7 +139,6 @@
 <script type="text/javascript" src="${ctx}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modalmanager.js"></script>
 <script type="text/javascript" src="${ctx}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modal.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/H-ui.js"></script>
-<script type="text/javascript" src="${ctx}/resources/lib/webuploader/0.1.5/webuploader.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/action.js"></script>
 
 </body>

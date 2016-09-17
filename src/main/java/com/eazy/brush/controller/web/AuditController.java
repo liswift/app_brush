@@ -112,7 +112,6 @@ public class AuditController extends BaseController {
     public ModelAndView toAddPageAction(ModelMap map) {
         int taskId = getParaInt("id", 0);
         int pageId=getParaInt("pageId",0);
-        log.info("<<<<<<pageId"+pageId+">>>>>>>>>>>");
         ActionPageVo actionPageVo=actionPageVoService.getByTaskIdOrPageId(taskId,pageId);
         map.put("actionPageVo", actionPageVo);
         return new ModelAndView("action/add", map);

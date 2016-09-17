@@ -45,8 +45,7 @@ public class ActionPageServiceImpl implements ActionPageService {
         ActionPage actionPage=new ActionPage();
         actionPage.setTaskId(taskId);
         actionPage.setPageName("默认页面名称");
-        int result=actionPageMapper.insert(actionPage);
-        log.info("result:insert id>>>>>{}",result);
+        actionPageMapper.insert(actionPage);
         return actionPage;
     }
 }
