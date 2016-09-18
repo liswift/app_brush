@@ -6,11 +6,12 @@
 function ajaxPost(url,data,callback,failback,contenttype){
     data = data || {};
     var contpy=arguments[4]?arguments[4]:"application/x-www-form-urlencoded";
+    var newdata=arguments[4]?data:JSON.stringify(data);
     return $.ajax({
         type: "post",
         url: url,
         contentType: contpy,
-        data: JSON.stringify(data),
+        data: newdata,
         success: function(res) {
             if (res.code == 200) {
                 if ($.isFunction(callback)) {
