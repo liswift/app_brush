@@ -6,6 +6,7 @@ import com.eazy.brush.dao.entity.ActionGroup;
 import com.eazy.brush.service.ActionGroupService;
 import com.eazy.brush.service.ActionItemService;
 import com.google.common.collect.Lists;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +50,9 @@ public class ActionGroupVoServiceImpl implements ActionGroupVoService {
             actionGroupVo.setId(actionGroup.getId());
             actionGroupVo.setName(actionGroup.getName());
             actionGroupVo.setEnable(actionGroup.getEnable());
-            actionGroupVo.setAcitionItems(actionItemService.getByIds(actionGroup.getActionItemIds()));
+            if(StringUtils.isNotEmpty(actionGroup.getActionItemIds())){
+                actionGroupVo.setAcitionItems(actionItemService.getByIds(actionGroup.getActionItemIds()));
+            }
             actionGroupVos.add(actionGroupVo);
         }
        return actionGroupVos;
