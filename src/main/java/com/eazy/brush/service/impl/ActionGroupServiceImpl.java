@@ -30,7 +30,7 @@ public class ActionGroupServiceImpl implements ActionGroupService {
 
     @Override
     public void deleteByPageId(int pageId) {
-        actionGroupMapper.delete(pageId);
+        actionGroupMapper.deleteByPageId(pageId);
     }
 
     @Override
