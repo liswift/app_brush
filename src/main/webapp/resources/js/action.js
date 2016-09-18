@@ -218,7 +218,7 @@ $(document).ready(function () {
         var $btn = $('button[action_id=' + actionId + ']', $unitActionBox);
         if ($btn.length) {
             var txt = $('span', $btn);
-            ajaxPost('/action/delete', {id: actionId, action_name: txt}, function (d) {
+            ajaxPost('../action/delete', {id: actionId, action_name: txt}, function (d) {
                 //删除请求成功:
                 $btn.remove();
                 delete actionsObj['action_' + actionId];
