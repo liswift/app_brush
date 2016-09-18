@@ -54,10 +54,10 @@
 
                                   <c:choose>
                                       <c:when test="${act.value==actionItem.action}">
-                                          <option value="${act.key}" selected>${act.key}</option>
+                                          <option value="${act.value}" selected>${act.key}</option>
                                       </c:when>
                                       <c:otherwise>
-                                          <option value="${act.key}">${act.key}</option>
+                                          <option value="${act.value}">${act.key}</option>
                                       </c:otherwise>
                                   </c:choose>
                               </c:forEach>
