@@ -223,7 +223,7 @@ $(document).ready(function () {
                 $btn.remove();
                 delete actionsObj['action_' + actionId];
                 delSelectedActions(actionId);
-            }, function (d) {
+            }, function (res) {
                 //删除请求失败:
                 alert('删除失败');
             });
