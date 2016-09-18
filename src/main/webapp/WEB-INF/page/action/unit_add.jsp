@@ -72,7 +72,7 @@
             <div class="col-xs-6 col-sm-6" id="action-params-box" style="margin-left:-5px">
                 <c:if test="${(actionItem.actionParams)!= null && fn:length(actionItem.actionParams) > 0}">
                     <c:forEach items="${actionItem.actionParams}" var="param">
-                        <div class="action-params-item">
+                        <div class="action-params-item">${param.key}:${param.value}
                             <div class="col-xs-5 col-sm-5">
                                 <span class="select-box">
                                 <select class="select" size="1" name="arguments">
@@ -83,7 +83,7 @@
                                                 <option value="${argument.key}" selected <c:if test="${view==1}"> disabled</c:if>>${argument.key}</option>
                                             </c:when>
                                             <c:otherwise>
-                                                <option value="${argument.key}" selected <c:if test="${view==1}"> disabled</c:if>>${argument.key}</option>
+                                                <option value="${argument.key}" <c:if test="${view==1}"> disabled</c:if>>${argument.key}</option>
                                             </c:otherwise>
                                         </c:choose>
                                     </c:forEach>
