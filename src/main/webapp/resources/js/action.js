@@ -90,6 +90,10 @@ $(document).ready(function () {
         if(typeof (currentActionId)=="undefined"){
             currentActionId=0;
         }
+        if(typeof (view)=='undefined'){
+            view=0;
+        }
+
         $editActionModal.load('../action/toUnitAdd?id=' + currentActionId + '&pageId=' + pageId+'&view='+view, function () {
             $editActionModal.modal();
         })

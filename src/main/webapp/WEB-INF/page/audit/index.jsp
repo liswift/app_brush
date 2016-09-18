@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -33,7 +33,7 @@
         <div class="formControls col-xs-6 col-sm-6">
             <label class="form-label col-xs-4 col-sm-4">应用名称：</label>
             <div class="formControls col-xs-8 col-sm-8">
-               <label>${task.appName}</label>
+                <label>${task.appName}</label>
             </div>
         </div>
     </div>
@@ -41,68 +41,70 @@
         <div class="formControls col-xs-6 col-sm-6">
             <label class="form-label col-xs-4 col-sm-4">应用版本：</label>
             <div class="formControls col-xs-8 col-sm-8">
-               <lable>${task.appVersion}</lable>
+                <lable>${task.appVersion}</lable>
             </div>
         </div>
     </div>
-      <div class="row cl">
-            <div class="formControls col-xs-6 col-sm-6">
-                <label class="form-label col-xs-4 col-sm-4">应用软件包：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                   <a href=${task.apkUrl}>点击下载</a>
-                </div>
+    <div class="row cl">
+        <div class="formControls col-xs-6 col-sm-6">
+            <label class="form-label col-xs-4 col-sm-4">应用软件包：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <a href=${task.apkUrl}>点击下载</a>
             </div>
         </div>
+    </div>
 
 </div>
 
 <div class="pd-20">
-	<div class="cl pd-5 bg-1 bk-gray"> <span class="l">  <a class="btn btn-primary radius" href="javascript:;" onclick="fullOpen('添加页动作','${ctx}/audit/toAddPageAction?id=${task.id}')" ><i class="Hui-iconfont">&#xe600;</i> 添加页动作</a> </span>  </div>
-	<table class="table table-border table-bordered table-hover table-bg">
-		<thead>
-			<tr>
-				<th scope="col" colspan="5">页动作</th>
-			</tr>
-		    <tr class="text-c">
-                        <th>页面(Action/Dialog/PopuWindow)</th>
-                        <th>描述</th>
-                        <th>动作组数量</th>
-                        <th>状态</th>
-                        <th>操作</th>
-            </tr>
+    <div class="cl pd-5 bg-1 bk-gray"><span class="l">  <a class="btn btn-primary radius" href="javascript:;"
+                                                           onclick="fullOpen('添加页动作','${ctx}/audit/toAddPageAction?id=${task.id}')"><i
+            class="Hui-iconfont">&#xe600;</i> 添加页动作</a> </span></div>
+    <table class="table table-border table-bordered table-hover table-bg">
+        <thead>
+        <tr>
+            <th scope="col" colspan="5">页动作</th>
+        </tr>
+        <tr class="text-c">
+            <th>页面(Action/Dialog/PopuWindow)</th>
+            <th>描述</th>
+            <th>动作组数量</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
         </thead>
-            <tbody>
-                    <c:forEach items="${ actionPages }" var="t">
-                        <tr class="text-c">
-                            <td>${t.pageName}</td>
-                            <td>${t.pageDesc}</td>
-                            <td>${fn:length(t.actionGroupVos)}</td>
-                            <c:choose>
-                              <c:when test="${t.enable=='1'}">
-                                  <td>启用中</td>
-                                  <td>
-                                     <a href="javascript:;"
-                                     onclick="fullOpen('编辑页动作','${ctx}/audit/toAddPageAction?id=${t.taskId}&pageId=${t.id}')">编辑</a>
-                                      <a href="javascript:;"
-                                         onclick="">删除</a>
-                                     <a href="${ctx}/audit/disable?pageId=${t.id}">禁用</a>
-                                  </td>
-                              </c:when>
-                              <c:otherwise>
-                                   <td>禁用中</td>
-                                   <td>
-                                       <a href="javascript:;"
-                                          onclick="fullOpen('编辑页动作','${ctx}/audit/toAddPageAction?id=${t.taskId}&pageId=${t.id}')">编辑</a>
-                                       <a href="javascript:;"
-                                          onclick="">删除</a>
-                                          <a href="${ctx}/audit/enable?pageId=${t.id}">启用</a>
-                                   </td>
-                              </c:otherwise>
-                            </c:choose>
-                        </tr>
-                    </c:forEach>
-            </tbody>
-	</table>
+        <tbody>
+        <c:forEach items="${ actionPages }" var="t">
+            <tr class="text-c">
+                <td>${t.pageName}</td>
+                <td>${t.pageDesc}</td>
+                <td>${fn:length(t.actionGroupVos)}</td>
+                <c:choose>
+                    <c:when test="${t.enable=='1'}">
+                        <td>启用中</td>
+                        <td>
+                            <a href="javascript:;"
+                               onclick="fullOpen('编辑页动作','${ctx}/audit/toAddPageAction?id=${t.taskId}&pageId=${t.id}')">编辑</a>
+                            <a href="javascript:;"
+                               onclick="javascript:funReflocak(${t.id},${t.taskId},'deleteActionPage');">删除</a>
+                            <a href="${ctx}/audit/disable?pageId=${t.id}">禁用</a>
+                        </td>
+                    </c:when>
+                    <c:otherwise>
+                        <td>禁用中</td>
+                        <td>
+                            <a href="javascript:;"
+                               onclick="fullOpen('编辑页动作','${ctx}/audit/toAddPageAction?id=${t.taskId}&pageId=${t.id}')">编辑</a>
+                            <a href="javascript:;"
+                               onclick="javascript:funReflocak(${t.id},${t.taskId},,'deleteActionPage');">删除</a>
+                            <a href="${ctx}/audit/enable?pageId=${t.id}">启用</a>
+                        </td>
+                    </c:otherwise>
+                </c:choose>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 </div>
 
 <input class="btn btn-primary size-M radius" type="button" value="通过"><!--通过传递/audit/changeState id,state 2-->
@@ -114,5 +116,23 @@
 <script type="text/javascript" src="${ctx }/resources/js/H-ui.js"></script>
 <script type="text/javascript" src="${ctx }/resources/js/H-ui.admin.js"></script>
 <script type="text/javascript" src="${ctx }/resources/js/common.js"></script>
+<script type="text/javascript">
+
+    function funReflocak(pageId,taskId, action) {
+        var param = {};
+        param.id = pageId;
+        ajaxPost('${ctx}/audit/' + action, param, function (d) {
+            window.location.href='${ctx}/audit/editorTask?id='+taskId;
+        }, function (res) {
+            layer.msg("操作失败")
+        });
+    }
+
+
+    function forget(title, url, id, w, h) {
+        layer_show(title, url, w, h);
+    }
+
+</script>
 </body>
 </html>
