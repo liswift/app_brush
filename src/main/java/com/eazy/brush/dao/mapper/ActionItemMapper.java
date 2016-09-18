@@ -34,6 +34,6 @@ public interface ActionItemMapper {
             "action=#{action},action_params=#{actionParams},stay_time=#{stayTime},up_down=#{upDown} where id=#{id}")
     void update(ActionItem actionItem);
 
-    @Delete("delete from action_time where id=#{id}")
+    @Delete("delete from action_item where id=#{id}")
     void delete(@Param("id") int id);
 }
