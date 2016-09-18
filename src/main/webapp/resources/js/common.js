@@ -8,7 +8,8 @@ function ajaxPost(url,data,callback,failback){
     return $.ajax({
         type: "post",
         url: url,
-        data: data,
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(data),
         success: function(res) {
             if (res.code == 200) {
                 if ($.isFunction(callback)) {
