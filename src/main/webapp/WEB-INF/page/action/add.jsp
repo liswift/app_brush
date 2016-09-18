@@ -29,10 +29,10 @@
 <body>
 <div class="add-task-form form-horizontal" style="padding-bottom:50px">
     <div class="row cl">
-        <label class="form-label col-xs-2 col-sm-2">页面名称：${view==1}</label>
+    <label class="form-label col-xs-2 col-sm-2">页面名称：</label>
         <div class="col-xs-10 col-sm-10">
             <input type="text" id='page-name' group_name="pageName" class="input-text" autocomplete="off"
-                   <c:if test="${view}==1">disabled</c:if>
+                   <c:if test="${view==1}">disabled</c:if>
                    value="${actionPageVo.pageName}">
         </div>
     </div>
@@ -40,7 +40,7 @@
         <label class="form-label col-xs-2 col-sm-2">页面描述：</label>
         <div class="col-xs-10 col-sm-10">
             <textarea type="text" id='page-desc' group_name="pageDesc" class="textarea"
-                      <c:if test="${view}==1">disabled</c:if>
+                      <c:if test="${view==1}">disabled</c:if>
                       autocomplete="off">${actionPageVo.pageDesc}</textarea>
         </div>
     </div>
@@ -50,12 +50,12 @@
 
             <c:forEach items="${ actionPageVo.actionItems }" var="t">
                 <button action_id="${t.id}" class="btn btn-default radius"><span>${t.name}</span>
-                    <c:if test="${view}!=1">
+                    <c:if test="${view!=1}">
                         <i class="unit-action-del"></i>
                     </c:if>
                 </button>
             </c:forEach>
-            <c:if test="${view}==0">
+            <c:if test="${view!=1}">
                 <button class="btn btn-primary radius" add_btn style="padding: 0 20px">+</button>
             </c:if>
 
@@ -73,7 +73,7 @@
                             <c:forEach items="${ t.acitionItems }" var="item">
                             <span class="dropDown dropDown_hover">
                                 <a class="dropDown_A action-selected-a" action_id="${item.id}">${item.name}</a> &gt;&nbsp;
-                                <c:if test="${view}!=1">
+                                <c:if test="${view!=1}">
                                     <ul class="dropDown-menu menu radius box-shadow action-ul"
                                                             style="max-height: 200px;overflow: auto">
                                     <li class="del-unit-action-btn"><a>删除此动作</a></li>
@@ -84,7 +84,7 @@
                                </c:if>
                             </span>
                             </c:forEach>
-                            <c:if test="${view}!=1">
+                            <c:if test="${view!=1}">
                                 <span class="dropDown dropDown_hover">
                                 <a class="dropDown_A action-selected-a">选择动作</a>
                                      <ul class="dropDown-menu menu radius box-shadow action-ul"
@@ -100,17 +100,21 @@
                     </div>
                 </c:forEach>
             </div>
-            <div class="group-action-add">
-                <button id="group-action-add" class="btn btn-primary radius">+添加动作组</button>
+            <c:if test="${view!=1}">
+                <div class="group-action-add">
+                    <button id="group-action-add" class="btn btn-primary radius">+添加动作组</button>
+                </div>
+            </c:if>
+        </div>
+    </div>
+    <c:if test="${view!=1}">
+        <div class="row cl" style="margin-top:50px">
+            <div class="col-xs-10 col-sm-10 col-xs-offset-4 col-sm-offset-5">
+                <input id="action-group-add-btn" class="btn btn-primary radius" type="submit" style="width: 90px"
+                       value="提交">
             </div>
         </div>
-    </div>
-    <div class="row cl" style="margin-top:50px">
-        <div class="col-xs-10 col-sm-10 col-xs-offset-4 col-sm-offset-5">
-            <input id="action-group-add-btn" class="btn btn-primary radius" type="submit" style="width: 90px"
-                   value="提交">
-        </div>
-    </div>
+    </c:if>
 </div>
 
 <div id="editActionModal" class="modal hide fade edit-action-dlg" tabindex="-1" role="dialog"
