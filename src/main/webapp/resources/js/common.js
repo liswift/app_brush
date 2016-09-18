@@ -3,12 +3,13 @@
  */
 
 
-function ajaxPost(url,data,callback,failback){
+function ajaxPost(url,data,callback,failback,contenttype){
     data = data || {};
+    var contpy=arguments[4]?arguments[4]:"application/x-www-form-urlencoded";
     return $.ajax({
         type: "post",
         url: url,
-        contentType: "application/json; charset=utf-8",
+        contentType: contpy,
         data: JSON.stringify(data),
         success: function(res) {
             if (res.code == 200) {
