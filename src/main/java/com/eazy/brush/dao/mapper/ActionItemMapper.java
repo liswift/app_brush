@@ -17,8 +17,8 @@ public interface ActionItemMapper {
     String FEILDS = "id," + INSERT_FEILDS;
     String INSERT_VALUES = "#{actionPageId},#{name},#{viewName},#{viewId},#{viewContent},#{action},#{actionParams},#{stayTime},#{upDown}";
 
-    @Select("select " + FEILDS + " from action_item where id in (${actionItemId})")
-    List<ActionItem> getByIds(@Param("actionItemId") String actionItemId);
+    @Select("select " + FEILDS + " from action_item where id in (${actionIds})")
+    List<ActionItem> getByIds(@Param("actionIds") String actionItemId);
 
     @Select("select " + FEILDS + " from action_item where id =${id}")
     ActionItem getById(@Param("id") int actionItemId);

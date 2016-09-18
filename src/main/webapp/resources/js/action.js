@@ -41,7 +41,9 @@ $(document).ready(function () {
             var actionItemIds = [];
             $('a.action-selected-a', $item).each(function (idx, itemA) {
                 var aId = $(itemA).attr('action_id');
-                actionItemIds.push(aId);
+                if(typeof(aId)!='undefined'){
+                    actionItemIds.push(aId);
+                }
             });
             actionsGroups.push({
                 actionPageId: pageId,
