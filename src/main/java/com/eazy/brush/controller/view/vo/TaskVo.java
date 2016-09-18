@@ -19,4 +19,5 @@ public class TaskVo {
     private int todayNum;
     private int yestodayNum;
     private String state;
+    private String msg;
 }

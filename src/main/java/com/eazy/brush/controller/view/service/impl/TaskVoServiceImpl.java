@@ -39,6 +39,7 @@ public class TaskVoServiceImpl implements TaskVoService {
         for (Task task : tasks) {
             TaskVo taskVo = new TaskVo();
             taskVo.setId(task.getId());
+            taskVo.setMsg(task.getMsg());
             taskVo.setAppName(task.getAppName());
             taskVo.setCreateTime(new DateTime(task.getCreateTime()).toString("yyyy-MM-dd HH:mm:ss"));
             taskVo.setIncrDay(task.getIncrDay());

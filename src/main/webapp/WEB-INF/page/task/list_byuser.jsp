@@ -66,7 +66,12 @@
                     <td>${t.amount}</td>
                     <td>${t.todayNum}</td>
                     <td>${t.yestodayNum}</td>
-                    <td>${t.state}</td>
+                    <c:when test="${t.state eq '审核失败'}">
+                        <td><a href="javascript:;" onclick="javascript:showMsg(${t.msg})">${t.state}</a></td>
+                    </c:when>
+                    <c:otherwise>
+                        <td>${t.state}</td>
+                    </c:otherwise>
                     <td>
                         <a href="${ctx}/task/delete?id=${t.id}">删除</a>
                         <a href="javascript:;"
@@ -87,5 +92,15 @@
 <script type="text/javascript" src="${ctx }/resources/js/H-ui.admin.js"></script>
 <script type="text/javascript" src="${ctx }/resources/js/common.js"></script>
 <script type="text/javascript" src="${ctx }/resources/js/task/task_list.js"></script>
+<script>
+    function showMsg(msg) {
+        layer.open({
+            type: 1,
+            area: ['600px', '360px'],
+            shadeClose: true, //点击遮罩关闭
+            content: msg
+        });
+    }
+</script>
 </body>
 </html>
