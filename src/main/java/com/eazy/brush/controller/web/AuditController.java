@@ -74,7 +74,7 @@ public class AuditController extends BaseController {
         int taskId = getParaInt("id", 0);
         int state = getParaInt("state", -10);
         if (!TaskState.isEnable(state)) {
-            renderResult(false);
+            renderJsonResponse(-1,"状态错误!");
             return;
         }
         String message = getPara("msg", "");

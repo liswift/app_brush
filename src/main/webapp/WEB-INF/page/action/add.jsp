@@ -67,8 +67,14 @@
             <div class="groups-box">
                 <c:forEach items="${ actionPageVo.actionGroupVos }" var="t">
                     <div group_id="${t.id}" class="group-action-item">
-                        <div class="group-action-name"><span>${t.name}</span><i></i></div>
-                        <i class="group-action-del"></i>
+                        <div class="group-action-name"><span>${t.name}</span>
+                            <c:if test="${view!=1}">
+                                <i></i>
+                            </c:if>
+                        </div>
+                        <c:if test="${view!=1}">
+                            <i class="group-action-del"></i>
+                        </c:if>
                         <div class="group-actions">
                             <c:forEach items="${ t.acitionItems }" var="item">
                             <span class="dropDown dropDown_hover">

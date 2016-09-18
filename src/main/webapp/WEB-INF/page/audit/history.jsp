@@ -122,10 +122,9 @@
             } else {
                 var uri = status == '2' ? '/audit/changeState' : '/audit/release';
                 ajaxPost(uri, params, function (d) {
-                    alert('操作成功');
                     window.location.reload();
-                }, function (d) {
-                    alert('操作失败');
+                }, function (res) {
+                    layer.msg(res.msg)
                     //删除请求失败:
                 });
             }
@@ -136,10 +135,9 @@
             var txt = $denyInput.val().trim();
             currentDenyParams.msg = txt;
             ajaxPost('/audit/changeState', currentDenyParams, function (d) {
-                alert('操作成功');
                 window.location.reload();
-            }, function (d) {
-                alert('操作失败');
+            }, function (res) {
+                layer.msg(d.msg)
                 //删除请求失败:
             });
             $denyModal.modal('hide');

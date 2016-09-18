@@ -56,8 +56,11 @@ public class ActionController extends BaseController {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public void add(ActionItem actionItem) {
-//        ActionItem actionItem = initActionItem(0);
-        actionItemService.add(actionItem);
+        if(actionItem.getId()>0){
+            actionItemService.update(actionItem);
+        }else{
+            actionItemService.add(actionItem);
+        }
         renderJson200(actionItem);
     }
 

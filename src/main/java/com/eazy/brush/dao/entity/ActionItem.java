@@ -42,7 +42,9 @@ public class ActionItem {
             for(String item:param){
                 if(StringUtils.isNotEmpty(item)){
                     String[] keyvalue=item.split(":");
-                    map.put(keyvalue[0],keyvalue[1]);
+                    if(keyvalue.length>=2&&StringUtils.isNotEmpty(keyvalue[0])&&StringUtils.isNotEmpty(keyvalue[1])){
+                        map.put(keyvalue[0],keyvalue[1]);
+                    }
                 }
             }
         }

@@ -60,13 +60,12 @@
     <table class="table table-border table-bordered table-hover table-bg">
         <thead>
         <tr>
-            <th scope="col" colspan="5">页动作</th>
+            <th scope="col" colspan="4">页动作</th>
         </tr>
         <tr class="text-c">
             <th>页面(Action/Dialog/PopuWindow)</th>
             <th>描述</th>
             <th>动作组数量</th>
-            <th>状态</th>
             <th>操作</th>
         </tr>
         </thead>
