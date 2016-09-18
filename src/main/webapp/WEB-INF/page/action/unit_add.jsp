@@ -71,15 +71,15 @@
             <label class="form-label col-xs-2 col-sm-2">动作参数：</label>
             <div class="col-xs-6 col-sm-6" id="action-params-box" style="margin-left:-5px">
                 <c:if test="${(actionItem.actionParams)!= null && fn:length(actionItem.actionParams) > 0}">
-                    <c:forEach items="${actionItem.actionParams}" var="param">
-                        <div class="action-params-item">${param.key}:${param.value}
+                    <c:forEach items="${actionItem.actionParams}" var="entity">
+                        <div class="action-params-item">
                             <div class="col-xs-5 col-sm-5">
                                 <span class="select-box">
                                 <select class="select" size="1" name="arguments">
                                     <option value="">请填写动作参数类型</option>
                                     <c:forEach items="${arguments}" var="argument">
                                         <c:choose>
-                                            <c:when test="${argument.key eq param.key}">
+                                            <c:when test="${argument.key eq entity.key}">
                                                 <option value="${argument.key}" selected <c:if test="${view==1}"> disabled</c:if>>${argument.key}</option>
                                             </c:when>
                                             <c:otherwise>
@@ -91,7 +91,7 @@
                             </span>
                             </div>
                             <div class="col-xs-5 col-sm-5" style="margin-left: 10px">
-                                <input type="text" class="input-text" placeholder="请填写动作参数值" autocomplete="off" value="${param.value}" <c:if test="${view==1}"> disabled</c:if>></div>
+                                <input type="text" class="input-text" placeholder="请填写动作参数值" autocomplete="off" value="${entity.value}" <c:if test="${view==1}"> disabled</c:if>></div>
                             <c:if test="${view!=1}">
                                 <div class="col-xs-1 col-sm-1" style="margin-left: 10px">
                                     <button class="btn btn-danger radius param-del-btn" style="padding: 0 10px;width:31px">

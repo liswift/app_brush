@@ -2,11 +2,10 @@ package com.eazy.brush.dao.entity;
 
 import com.eazy.brush.controller.view.vo.ActionItemVo;
 import lombok.Data;
-import org.apache.commons.collections.keyvalue.DefaultKeyValue;
 import org.apache.commons.lang.StringUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 元动作
@@ -37,17 +36,17 @@ public class ActionItem {
         actionItemVo.setViewContent(viewContent);
         actionItemVo.setViewId(viewId);
         actionItemVo.setViewName(viewName);
-        List<DefaultKeyValue> params=new ArrayList<>();
+        Map<String,String> map=new HashMap<>();
         if(StringUtils.isNotEmpty(actionParams)){
             String[] param=actionParams.split(";");
             for(String item:param){
                 if(StringUtils.isNotEmpty(item)){
                     String[] keyvalue=item.split(":");
-                   params.add(new DefaultKeyValue(keyvalue[0],keyvalue[1]));
+                    map.put(keyvalue[0],keyvalue[1]);
                 }
             }
         }
-        actionItemVo.setActionParams(params);
+        actionItemVo.setActionParams(map);
         return actionItemVo;
     }
 }
