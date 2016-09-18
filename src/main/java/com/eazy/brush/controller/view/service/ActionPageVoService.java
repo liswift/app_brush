@@ -25,4 +25,6 @@ public interface ActionPageVoService {
     ActionPageVo getByTaskIdOrPageId(int taskId,int pageId);
 
     void update(ActionPage actionPage);
+
+    void deleteById(int id);
 }

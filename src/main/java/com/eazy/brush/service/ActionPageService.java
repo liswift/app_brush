@@ -22,4 +22,6 @@ public interface ActionPageService {
     ActionPage insertAndGetKey(int taskId);
 
     void update(ActionPage actionPage);
+
+    void deleteById(int id);
 }

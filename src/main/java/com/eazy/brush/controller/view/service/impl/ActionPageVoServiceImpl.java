@@ -72,4 +72,11 @@ public class ActionPageVoServiceImpl implements ActionPageVoService {
         log.info("actionPage info >>>>>>>>>>>>"+actionPage.toString());
         actionGroupVoService.update(actionPage.getId(),actionPage.getActionGroups());
     }
+
+    @Override
+    public void deleteById(int id) {
+        actionPageService.deleteById(id);
+        actionItemService.deleteByPageid(id);
+        actionGroupVoService.deleteByPageId(id);
+    }
 }

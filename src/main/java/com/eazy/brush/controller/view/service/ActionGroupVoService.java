@@ -16,5 +16,7 @@ public interface ActionGroupVoService {
     List<ActionGroupVo> getByPageId(int pageId);
 
     void update(int pageId,List<ActionGroup>  actionGroup);
+
+    void deleteByPageId(int pageId);
 }
 

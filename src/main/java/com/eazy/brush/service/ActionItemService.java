@@ -19,6 +19,8 @@ public interface ActionItemService {
 
     void deleteItemById(int id);
 
+    void deleteByPageid(int pageId);
+
     void add(ActionItem actionItem);
 
     void update(ActionItem actionItem);

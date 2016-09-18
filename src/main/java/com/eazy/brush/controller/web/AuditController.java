@@ -136,30 +136,31 @@ public class AuditController extends BaseController {
 
     @RequestMapping(value = "deleteActionPage", method = RequestMethod.POST)
     public void deleteActionPage() {
-        Map<String, String> formPage = getFormPage();
-        ActionPageVo actionPageVo = new ActionPageVo();
-//        actionPageVo.setTaskId(IntegerConstant.valueOf(formPage.get("taskId"));
+        int id=getParaInt("pageId",0);
+        actionPageVoService.deleteById(id);
         renderResult(true);
     }
 
     @RequestMapping(value = "enable", method = RequestMethod.GET)
-    public String enable(ModelMap map) {
+    public void enable(ModelMap map) {
         int curPage = getParaInt("pageId", 0);
         if (curPage == 0) {
-            return "redirect:/sys/error";
+            renderJsonResponse(-1,"当前页面不存在!");
+            return;
         }
         actionPageService.changeState(curPage, 1);
-        return "redirect:/audit/index";
+        renderJson200();
     }
 
     @RequestMapping(value = "disable", method = RequestMethod.GET)
-    public String disable(ModelMap map) {
+    public void disable(ModelMap map) {
         int curPage = getParaInt("pageId", 0);
         if (curPage == 0) {
-            return "redirect:/sys/error";
+            renderJsonResponse(-1,"当前页面不存在!");
+            return;
         }
         actionPageService.changeState(curPage, 0);
-        return "redirect:/audit/index";
+        renderJson200();
     }
 
 }

@@ -53,4 +53,9 @@ public class ActionPageServiceImpl implements ActionPageService {
     public void update(ActionPage actionPage) {
         actionPageMapper.update(actionPage);
     }
+
+    @Override
+    public void deleteById(int id) {
+        actionPageMapper.delete(id);
+    }
 }

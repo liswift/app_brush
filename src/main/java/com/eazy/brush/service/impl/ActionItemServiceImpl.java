@@ -39,6 +39,11 @@ public class ActionItemServiceImpl implements ActionItemService {
     }
 
     @Override
+    public void deleteByPageid(int pageId) {
+        actionItemMapper.deleteByPageId(pageId);
+    }
+
+    @Override
     public void add(ActionItem actionItem) {
         actionItemMapper.insert(actionItem);
     }

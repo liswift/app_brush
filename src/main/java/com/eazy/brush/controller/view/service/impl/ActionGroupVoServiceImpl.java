@@ -43,6 +43,11 @@ public class ActionGroupVoServiceImpl implements ActionGroupVoService {
 //        actionGroupService
     }
 
+    @Override
+    public void deleteByPageId(int pageId) {
+        actionGroupService.deleteByPageId(pageId);
+    }
+
     private List<ActionGroupVo> transforActionGroup(List<ActionGroup> actionGroups){
          List<ActionGroupVo> actionGroupVos = Lists.newArrayList();
         for (ActionGroup actionGroup : actionGroups) {

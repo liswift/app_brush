@@ -36,4 +36,7 @@ public interface ActionItemMapper {
 
     @Delete("delete from action_item where id=#{id}")
     void delete(@Param("id") int id);
+
+    @Delete("delete from action_item where action_page_id=#{pageId}")
+    void deleteByPageId(@Param("pageId") int pageId);
 }
