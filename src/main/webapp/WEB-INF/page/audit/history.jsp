@@ -64,7 +64,7 @@
                         </c:when>
                         <c:otherwise>
                             <td>
-                                <a href="javascript:;" onclick="fullOpen('查看任务详情','${ctx}/audit/viewTask?id=${t.id}')">查看</a>
+                                <a href="javascript:;" onclick="fullOpen('查看任务详情','${ctx}/audit/toViewTask?id=${t.id}')">查看</a>
                             </td>
                         </c:otherwise>
                     </c:choose>

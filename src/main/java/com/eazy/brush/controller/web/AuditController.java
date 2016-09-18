@@ -100,8 +100,8 @@ public class AuditController extends BaseController {
         return new ModelAndView("audit/history", map);
     }
 
-    @RequestMapping(value = "viewTask", method = RequestMethod.GET)
-    public ModelAndView viewTask(ModelMap map) {
+    @RequestMapping(value = "toViewTask", method = RequestMethod.GET)
+    public ModelAndView toViewTask(ModelMap map) {
         Task task = taskService.getById(getParaInt("id", 0));
         List<ActionPageVo> actionPageVos = actionPageVoService.getByTaskIdNum(task.getId());
         map.put("task", task);
@@ -116,6 +116,7 @@ public class AuditController extends BaseController {
         int pageId=getParaInt("pageId",0);
         ActionPageVo actionPageVo=actionPageVoService.getByTaskIdOrPageId(taskId,pageId);
         map.put("actionPageVo", actionPageVo);
+        map.put("view",getParaInt("view",0));
         return new ModelAndView("action/add", map);
     }
 

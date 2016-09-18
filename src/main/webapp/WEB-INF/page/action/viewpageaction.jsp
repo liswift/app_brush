@@ -32,7 +32,6 @@
         <label class="form-label col-xs-2 col-sm-2">页面名称：</label>
         <div class="col-xs-10 col-sm-10">
             <input type="text" id='page-name' group_name="pageName" class="input-text" autocomplete="off"
-                   <c:if test="${view}==1">disabled</c:if>
                    value="${actionPageVo.pageName}">
         </div>
     </div>
@@ -40,7 +39,6 @@
         <label class="form-label col-xs-2 col-sm-2">页面描述：</label>
         <div class="col-xs-10 col-sm-10">
             <textarea type="text" id='page-desc' group_name="pageDesc" class="textarea"
-                      <c:if test="${view}==1">disabled</c:if>
                       autocomplete="off">${actionPageVo.pageDesc}</textarea>
         </div>
     </div>
@@ -48,15 +46,11 @@
         <label class="form-label col-xs-2 col-sm-2">操作动作：</label>
         <div class="col-xs-10 col-sm-10 unit-action-box" id="unit-action-box">
             <c:forEach items="${ actionPageVo.actionItems }" var="t">
-                <button action_id="${t.id}" class="btn btn-default radius"><span>${t.name}</span>
-                    <c:if test="${view}!=1">
-                        <i class="unit-action-del"></i>
-                    </c:if>
+                <button action_id="${t.id}" class="btn btn-default radius"><span>${t.name}</span><i
+                        class="unit-action-del"></i>
                 </button>
             </c:forEach>
-            <c:if test="${view}!=1">
-                <button class="btn btn-primary radius" add_btn style="padding: 0 20px">+</button>
-            </c:if>
+            <button class="btn btn-primary radius" add_btn style="padding: 0 20px">+</button>
         </div>
     </div>
     <div class="row cl">
@@ -71,19 +65,18 @@
                             <c:forEach items="${ t.acitionItems }" var="item">
                             <span class="dropDown dropDown_hover">
                                 <a class="dropDown_A action-selected-a" action_id="${item.id}">${item.name}</a> &gt;&nbsp;
-                                <c:if test="${view}!=1">
-                                    <ul class="dropDown-menu menu radius box-shadow action-ul"
-                                                            style="max-height: 200px;overflow: auto">
+
+                                <ul class="dropDown-menu menu radius box-shadow action-ul"
+                                    style="max-height: 200px;overflow: auto">
                                     <li class="del-unit-action-btn"><a>删除此动作</a></li>
                                                 <c:forEach items="${ actionPageVo.actionItems }" var="t">
                                                     <li action_id="${t.id}" class="action-li"><a>${t.name}</a></li>
                                                 </c:forEach>
-                                       </ul>
-                               </c:if>
+                                </ul>
+
                             </span>
                             </c:forEach>
-                            <c:if test="${view}!=1">
-                                <span class="dropDown dropDown_hover">
+                            <span class="dropDown dropDown_hover">
                                 <a class="dropDown_A action-selected-a">选择动作</a>
                                      <ul class="dropDown-menu menu radius box-shadow action-ul"
                                          style="max-height: 200px;overflow: auto">
@@ -93,7 +86,6 @@
                                                 </c:forEach>
                                 </ul>
                             </span>
-                            </c:if>
                         </div>
                     </div>
                 </c:forEach>
