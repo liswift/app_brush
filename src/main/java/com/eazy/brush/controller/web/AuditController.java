@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by yuekuapp on 16-9-15.
@@ -120,17 +119,9 @@ public class AuditController extends BaseController {
         return new ModelAndView("action/add", map);
     }
 
-    @RequestMapping(value = "addActionPage", method = RequestMethod.POST)
+    @RequestMapping(value = "addActionPage", method = {RequestMethod.POST,RequestMethod.GET})
     public void addPageAction(@RequestBody ActionPage actionPage) {
         actionPageVoService.update(actionPage);
-        renderResult(true);
-    }
-
-    @RequestMapping(value = "editActionPage", method = RequestMethod.POST)
-    public void editActionPage() {
-        Map<String, String> formPage = getFormPage();
-        ActionPageVo actionPageVo = new ActionPageVo();
-//        actionPageVo.setTaskId(IntegerConstant.valueOf(formPage.get("taskId"));
         renderResult(true);
     }
 
@@ -141,7 +132,7 @@ public class AuditController extends BaseController {
         renderResult(true);
     }
 
-    @RequestMapping(value = "enable", method = RequestMethod.GET)
+    @RequestMapping(value = "enable", method = RequestMethod.POST)
     public void enable(ModelMap map) {
         int curPage = getParaInt("pageId", 0);
         if (curPage == 0) {
@@ -152,7 +143,7 @@ public class AuditController extends BaseController {
         renderJson200();
     }
 
-    @RequestMapping(value = "disable", method = RequestMethod.GET)
+    @RequestMapping(value = "disable", method = RequestMethod.POST)
     public void disable(ModelMap map) {
         int curPage = getParaInt("pageId", 0);
         if (curPage == 0) {
