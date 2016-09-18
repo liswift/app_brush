@@ -18,4 +18,16 @@ public class ActionPage {
     private String pageDesc;//页面描述
     private int enable=1;//是否可用默认是1
     private List<ActionGroup> actionGroups=new ArrayList<>();//actionGroups
+
+    @Override
+    public String toString() {
+        return "ActionPage{" +
+                "id=" + id +
+                ", taskId=" + taskId +
+                ", pageName='" + pageName + '\'' +
+                ", pageDesc='" + pageDesc + '\'' +
+                ", enable=" + enable +
+                ", actionGroups=" + actionGroups +
+                '}';
+    }
 }

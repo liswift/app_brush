@@ -69,6 +69,7 @@ public class ActionPageVoServiceImpl implements ActionPageVoService {
     @Override
     public void update(ActionPage actionPage) {
         actionPageService.update(actionPage);
+        log.info("actionPage info >>>>>>>>>>>>"+actionPage.toString());
         actionGroupVoService.update(actionPage.getId(),actionPage.getActionGroups());
     }
 }
