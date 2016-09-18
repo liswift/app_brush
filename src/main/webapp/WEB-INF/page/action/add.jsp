@@ -87,7 +87,8 @@
     </div>
 </div>
 
-<div id="editActionModal" class="modal hide fade edit-action-dlg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="editActionModal" class="modal hide fade edit-action-dlg" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true"></div>
 
 <div id="delActionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
@@ -133,9 +134,10 @@
         <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
     </div>
 </div>
-<input type="hidden" id="add-page-hidden" task_id="${actionPageVo.taskId}" page_id="${actionPageVo.id}" />
+<input type="hidden" id="add-page-hidden" task_id="${actionPageVo.taskId}" page_id="${actionPageVo.id}"/>
 <script type="text/javascript" src="${ctx}/resources/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/common.js"></script>
+<script type="text/javascript" src="${ctx }/resources/lib/layer/2.1/layer.js"></script>
 <script type="text/javascript" src="${ctx}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modalmanager.js"></script>
 <script type="text/javascript" src="${ctx}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modal.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/H-ui.js"></script>
