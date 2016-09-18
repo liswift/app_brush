@@ -29,7 +29,7 @@
 <body>
 <div class="add-task-form form-horizontal" style="padding-bottom:50px">
     <div class="row cl">
-        <label class="form-label col-xs-2 col-sm-2">页面名称：${view}</label>
+        <label class="form-label col-xs-2 col-sm-2">页面名称：${view==1}</label>
         <div class="col-xs-10 col-sm-10">
             <input type="text" id='page-name' group_name="pageName" class="input-text" autocomplete="off"
                    <c:if test="${view}==1">disabled</c:if>
