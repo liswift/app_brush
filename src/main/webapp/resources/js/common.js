@@ -2,10 +2,18 @@
  * Created by liswift on 16/9/12.
  */
 
-
+/**
+ * 只是两种格式,json form表单
+ * @param url
+ * @param data
+ * @param callback
+ * @param failback
+ * @param contenttype
+ * @returns {*}
+ */
 function ajaxPost(url,data,callback,failback,contenttype){
     data = data || {};
-    var contpy=arguments[4]?arguments[4]:"application/x-www-form-urlencoded";
+    var contpy=arguments[4]?arguments[4]:"application/x-www-form-urlencoded; charset=UTF-8";
     var newdata=arguments[4]?data:JSON.stringify(data);
     return $.ajax({
         type: "post",
