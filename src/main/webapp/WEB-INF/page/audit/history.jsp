@@ -40,11 +40,13 @@
                 <th>应用名称</th>
                 <th>应用版本</th>
                 <th>创建时间</th>
+                <th>状态</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${ tasks }" var="t">
+
                 <tr class="text-c">
                     <td>${t.id}</td>
                     <td>${t.appName}</td>
@@ -52,6 +54,7 @@
                     <td>${t.createTime}</td>
                     <c:choose>
                         <c:when test="${t.state=='-1'}">
+                            <td>待审核</td>
                             <td>
                                 <a href="javascript:;"
                                    onclick="fullOpen('编辑任务详情','${ctx}/audit/editorTask?id=${t.id}')">编辑</a>
@@ -62,9 +65,16 @@
                                 <!--<a option_id="${t.id}" option_a='-1' href="javascript:;">放回</a>--><!--/audit/release id 放回暂时不做,这个功能暂时不需要-->
                             </td>
                         </c:when>
-                        <c:otherwise>
+                        <c:when test="${t.state=='0'}">
+                            <td>审核拒绝</td>
                             <td>
-                                <a href="javascript:;" onclick="fullOpen('查看任务详情','${ctx}/audit/toViewTask?id=${t.id}')">查看</a>
+                                <a href="javascript:;" onclick="fullOpen('查看任务详情','${ctx}/audit/toViewTask?id=${t.id}')">查看详情</a>
+                            </td>
+                        </c:when>
+                        <c:otherwise>
+                            <td>审核通过</td>
+                            <td>
+                                <a href="javascript:;" onclick="fullOpen('查看任务详情','${ctx}/audit/toViewTask?id=${t.id}')">查看详情</a>
                             </td>
                         </c:otherwise>
                     </c:choose>
