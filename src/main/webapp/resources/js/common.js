@@ -95,7 +95,11 @@ function fullOpen(title, url) {
     var index = layer.open({
         type: 2,
         title: title,
-        content: url
+        content: url,
+        zIndex: layer.zIndex, //重点1
+        success: function(layero){
+            layer.setTop(layero); //重点2
+        }
     });
     layer.full(index);
 }
