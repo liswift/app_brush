@@ -109,9 +109,12 @@
     </table>
 </div>
 
-<input class="btn btn-primary size-M radius" type="button" value="通过"><!--通过传递/audit/changeState id,state 2-->
-<input class="btn btn-primary size-M radius" type="button" value="拒绝"><!--通过传递/audit/changeState id,state 0,msg:应用非法-->
-<input class="btn btn-default size-M radius" type="button" value="放回"><!--/audit/release id-->
+<div class="col-xs-10 col-sm-10 col-xs-offset-1 col-sm-offset-1">
+    <input id="action-confirm-btn" class="btn btn-primary radius" type="submit" style="width: 90px;margin-left:-5px" value="通过"><!--通过传递/audit/changeState id,state 2-->
+    <input id="action-cancel-btn" class="btn btn-default radius" type="submit" style="width: 90px;margin-left:150px" value="拒绝"><!--通过传递/audit/changeState id,state 0,msg:应用非法-->
+</div>
+
+<!--<input class="btn btn-default size-M radius" type="button" value="放回">--><!--/audit/release id 暂时不做。暂时没有必要-->
 
 <script type="text/javascript" src="${ctx }/resources/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/lib/layer/2.1/layer.js"></script>
