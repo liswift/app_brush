@@ -45,6 +45,7 @@ public class ActionController extends BaseController {
             map.put("actionItem",actionItem.transform2Vo());
         }
         map.put("pageId",getParaInt("pageId",0));
+        map.put("view",getParaInt("view",0));
         map.put("actions",ActionType.values());
         map.put("arguments", ArgumentType.values());
         return new ModelAndView("action/unit_add",map);

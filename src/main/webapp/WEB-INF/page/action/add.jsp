@@ -49,7 +49,7 @@
         <div class="col-xs-10 col-sm-10 unit-action-box" id="unit-action-box">
 
             <c:forEach items="${ actionPageVo.actionItems }" var="t">
-                <button action_id="${t.id}" class="btn btn-default radius"><span>${t.name}</span>
+                <button action_id="${t.id}" view="${view}" class="btn btn-default radius"><span>${t.name}</span>
                     <c:if test="${view!=1}">
                         <i class="unit-action-del"></i>
                     </c:if>

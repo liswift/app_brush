@@ -11,7 +11,7 @@
             <div class="formControls col-xs-8 col-sm-8">
                 <label class="form-label col-xs-3 col-sm-3">名称：</label>
                 <div class="formControls col-xs-9 col-sm-9">
-                    <input type="text" action_name="name" class="input-text" autocomplete="off"
+                    <input type="text" action_name="name" class="input-text" autocomplete="off" <c:if test="${view==1}"> disabled</c:if>
                            value="${actionItem.name}">
                 </div>
             </div>
@@ -20,7 +20,7 @@
             <div class="formControls col-xs-8 col-sm-8">
                 <label class="form-label col-xs-3 col-sm-3">View类名：</label>
                 <div class="formControls col-xs-9 col-sm-9">
-                    <input type="text" action_name="viewName" class="input-text" autocomplete="off"
+                    <input type="text" action_name="viewName" class="input-text" autocomplete="off" <c:if test="${view==1}"> disabled</c:if>
                            value="${actionItem.viewName}">
                 </div>
             </div>
@@ -29,8 +29,8 @@
             <div class="formControls col-xs-8 col-sm-8">
                 <label class="form-label col-xs-3 col-sm-3">ViewID：</label>
                 <div class="formControls col-xs-9 col-sm-9">
-                    <input type="text" action_name="viewId" class="input-text" autocomplete="off"
-                           value="${actionItem.naviewIdme}">
+                    <input type="text" action_name="viewId" class="input-text" autocomplete="off" <c:if test="${view==1}"> disabled</c:if>
+                           value="${actionItem.viewId}">
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
             <div class="formControls col-xs-8 col-sm-8">
                 <label class="form-label col-xs-3 col-sm-3">View内容：</label>
                 <div class="formControls col-xs-9 col-sm-9">
-                    <input type="text" action_name="viewContent" class="input-text" autocomplete="off"
+                    <input type="text" action_name="viewContent" class="input-text" autocomplete="off" <c:if test="${view==1}"> disabled</c:if>
                            value="${actionItem.viewContent}">
                 </div>
             </div>
@@ -48,7 +48,7 @@
                 <label class="form-label col-xs-3 col-sm-3">动作：</label>
                 <div class="formControls col-xs-9 col-sm-9">
                         <span class="select-box">
-                          <select class="select" size="1" name="action" id="real-action-select" action_name="action">
+                          <select class="select" size="1" name="action" id="real-action-select" action_name="action" <c:if test="${view==1}"> disabled</c:if>>
                               <option value="">请选择动作</option>
                               <c:forEach items="${actions}" var="act">
 
@@ -80,10 +80,10 @@
                                     <c:forEach items="${arguments}" var="argument">
                                         <c:choose>
                                             <c:when test="${argument.key eq param.key}">
-                                                <option value="${argument.key}" selected>${argument.key}</option>
+                                                <option value="${argument.key}" selected <c:if test="${view==1}"> disabled</c:if>>${argument.key}</option>
                                             </c:when>
                                             <c:otherwise>
-                                                <option value="${argument.key}" selected>${argument.key}</option>
+                                                <option value="${argument.key}" selected <c:if test="${view==1}"> disabled</c:if>>${argument.key}</option>
                                             </c:otherwise>
                                         </c:choose>
                                     </c:forEach>
@@ -91,23 +91,27 @@
                             </span>
                             </div>
                             <div class="col-xs-5 col-sm-5" style="margin-left: 10px">
-                                <input type="text" class="input-text" placeholder="请填写动作参数值" autocomplete="off" value="${param.value}"></div>
-                            <div class="col-xs-1 col-sm-1" style="margin-left: 10px">
-                                <button class="btn btn-danger radius param-del-btn" style="padding: 0 10px;width:31px">
-                                    x
-                                </button>
-                            </div>
+                                <input type="text" class="input-text" placeholder="请填写动作参数值" autocomplete="off" value="${param.value}" <c:if test="${view==1}"> disabled</c:if>></div>
+                            <c:if test="${view!=1}">
+                                <div class="col-xs-1 col-sm-1" style="margin-left: 10px">
+                                    <button class="btn btn-danger radius param-del-btn" style="padding: 0 10px;width:31px">
+                                        x
+                                    </button>
+                                </div>
+                            </c:if>
                         </div>
                     </c:forEach>
                 </c:if>
-                <button class="btn btn-primary radius param-add-btn" style="padding: 0 20px;">+</button>
+                <c:if test="${view!=1}">
+                    <button class="btn btn-primary radius param-add-btn" style="padding: 0 20px;">+</button>
+                </c:if>
             </div>
         </div>
         <div class="row cl">
             <div class="formControls col-xs-4 col-sm-4">
                 <label class="form-label col-xs-6 col-sm-6">停留时间：</label>
                 <div class="formControls col-xs-3 col-sm-3">
-                    <input type="text" action_name="stayTime" style="margin-left: 2px" class="input-text"
+                    <input type="text" action_name="stayTime" style="margin-left: 2px" class="input-text" <c:if test="${view==1}"> disabled</c:if>
                            autocomplete="off" value="${actionItem.stayTime}">
                 </div>
                 <label class="form-label col-xs-3 col-sm-3">秒，</label>
@@ -115,20 +119,24 @@
             <div class="formControls col-xs-4 col-sm-4">
                 <label class="form-label col-xs-5 col-sm-5">波动范围：</label>
                 <div class="formControls col-xs-3 col-sm-3">
-                    <input type="text" action_name="upDown" class="input-text" autocomplete="off"
+                    <input type="text" action_name="upDown" class="input-text" autocomplete="off" <c:if test="${view==1}"> disabled</c:if>
                            value="${actionItem.upDown}">
                 </div>
                 <label class="form-label col-xs-3 col-sm-3">秒</label>
             </div>
         </div>
+
         <div class="row cl" style="margin-top:50px">
             <div class="col-xs-10 col-sm-10 col-xs-offset-1 col-sm-offset-1">
-                <input id="action-confirm-btn" class="btn btn-primary radius" type="submit"
-                       style="width: 90px;margin-left:-5px" value="确定">
+                <c:if test="${view!=1}">
+                    <input id="action-confirm-btn" class="btn btn-primary radius" type="submit"
+                           style="width: 90px;margin-left:-5px" value="确定">
+                </c:if>
                 <input id="action-cancel-btn" class="btn btn-default radius" type="submit" data-dismiss="modal"
                        aria-hidden="true" style="width: 90px;margin-left:150px" value="取消">
             </div>
         </div>
+
     </div>
 </div>
 

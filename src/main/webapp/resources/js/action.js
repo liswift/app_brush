@@ -79,6 +79,7 @@ $(document).ready(function () {
     //添加查看修改元动作
     $unitActionBox.on('click', 'button', function (e) {
         currentActionId = $(this).attr('action_id');
+        var view = $(this).attr('view');
         /*var isAdd = $(this).is('[add_btn]');
          var $newBody = createActionModalBody({},isAdd);
          console.log($newBody)
@@ -89,7 +90,7 @@ $(document).ready(function () {
         if(typeof (currentActionId)=="undefined"){
             currentActionId=0;
         }
-        $editActionModal.load('../action/toUnitAdd?id=' + currentActionId + '&pageId=' + pageId, function () {
+        $editActionModal.load('../action/toUnitAdd?id=' + currentActionId + '&pageId=' + pageId+'&view='+view, function () {
             $editActionModal.modal();
         })
     });
