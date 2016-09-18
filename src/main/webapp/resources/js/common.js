@@ -11,10 +11,10 @@
  * @param contenttype
  * @returns {*}
  */
-function ajaxPost(url,data,callback,failback,contenttype){
+function ajaxPost(url,data,callback,failback,bejson){
     data = data || {};
-    var contpy=arguments[4]?arguments[4]:"application/x-www-form-urlencoded; charset=UTF-8";
-    var newdata=arguments[4]?data:JSON.stringify(data);
+    var contpy=bejson===true?"application/json; charset=UTF-8":"application/x-www-form-urlencoded; charset=UTF-8";
+    var newdata=bejson===true?JSON.stringify(data):data;
     return $.ajax({
         type: "post",
         url: url,

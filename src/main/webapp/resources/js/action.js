@@ -55,7 +55,7 @@ $(document).ready(function () {
             layer_close();
         },function (res) {
             alert("添加失败")
-        },"application/json; charset=utf-8");
+        },true);
         //top.window.eventEmitter.emit('actionSubmitOk',{action_id:'0',action_name:'hahaha'})
     });
 
