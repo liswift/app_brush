@@ -216,14 +216,16 @@ $(document).ready(function () {
     //删除元动作
     function delAction(actionId) {
         var $btn = $('button[action_id=' + actionId + ']', $unitActionBox);
+        var param={};
         if ($btn.length) {
             var txt = $('span', $btn);
-            ajaxPost('../action/delete', {id: actionId, action_name: txt}, function (d) {
+            param.id=actionId;
+            ajaxPost('/action/delete',param,function(d){
                 //删除请求成功:
                 $btn.remove();
                 delete actionsObj['action_' + actionId];
                 delSelectedActions(actionId);
-            }, function (res) {
+            },function(res){
                 //删除请求失败:
                 alert('删除失败');
             });
