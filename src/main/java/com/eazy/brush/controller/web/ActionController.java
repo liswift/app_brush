@@ -66,7 +66,7 @@ public class ActionController extends BaseController {
         renderResult(true);
     }
 
-    @RequestMapping(value = "delete", method = RequestMethod.GET)
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
     public void delete() {
         actionItemService.deleteItemById(getParaInt("id", 0));
         renderResult(true);
