@@ -48,7 +48,7 @@ public class TaskVoServiceImpl implements TaskVoService {
             taskVo.setAmount(task.getIncrDay() * k);
             taskVo.setTodayNum(taskSubService.count(task.getId(), todayDay) * k);
             taskVo.setYestodayNum(taskSubService.count(task.getId(), yestoday) * k);
-
+            taskVo.setIntState(task.getState());
             TaskState taskState = TaskState.valueOf(task.getState());
             if (null != taskState) {
                 taskVo.setState(taskState.getName());

@@ -66,7 +66,7 @@
                     <td>${t.amount}</td>
                     <td>${t.todayNum}</td>
                     <td>${t.yestodayNum}</td>
-                    <c:when test="${t.state eq '审核失败'}">
+                    <c:when test="${t.intState==0}">
                         <td><a href="javascript:;" onclick="javascript:showMsg(${t.msg})">${t.state}</a></td>
                     </c:when>
                     <c:otherwise>
