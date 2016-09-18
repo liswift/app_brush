@@ -59,7 +59,7 @@
                                 <!--通过传递/audit/changeState id,state 2-->
                                 <a option_id="${t.id}" option_a='0' href="javascript:;">拒绝</a>
                                 <!--通过传递/audit/changeState id,state 0,msg:应用非法-->
-                                <a option_id="${t.id}" option_a='-1' href="javascript:;">放回</a><!--/audit/release id-->
+                                <!--<a option_id="${t.id}" option_a='-1' href="javascript:;">放回</a>--><!--/audit/release id 放回暂时不做,这个功能暂时不需要-->
                             </td>
                         </c:when>
                         <c:otherwise>
@@ -95,6 +95,10 @@
 <script type="text/javascript" src="${ctx }/resources/js/H-ui.js"></script>
 <script type="text/javascript" src="${ctx }/resources/js/H-ui.admin.js"></script>
 <script type="text/javascript" src="${ctx }/resources/js/common.js"></script>
+<script type="text/javascript" src="${ctx}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modalmanager.js"></script>
+<script type="text/javascript" src="${ctx}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modal.js"></script>
+
+
 <script type="text/javascript">
     $(function () {
 

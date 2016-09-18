@@ -178,7 +178,6 @@
 <script type="text/javascript" src="${ctx }/resources/lib/layer/2.1/layer.js"></script>
 <script type="text/javascript" src="${ctx}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modalmanager.js"></script>
 <script type="text/javascript" src="${ctx}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modal.js"></script>
-<script type="text/javascript" src="${ctx}/resources/js/H-ui.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/action.js"></script>
 
 </body>
