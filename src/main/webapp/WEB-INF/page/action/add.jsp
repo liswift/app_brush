@@ -172,6 +172,8 @@
 </div>
 <input type="hidden" id="add-page-hidden" task_id="${actionPageVo.taskId}" page_id="${actionPageVo.id}"/>
 <script type="text/javascript" src="${ctx}/resources/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx }/resources/js/H-ui.js"></script>
+<script type="text/javascript" src="${ctx }/resources/js/H-ui.admin.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/common.js"></script>
 <script type="text/javascript" src="${ctx }/resources/lib/layer/2.1/layer.js"></script>
 <script type="text/javascript" src="${ctx}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modalmanager.js"></script>

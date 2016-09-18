@@ -88,7 +88,7 @@
                             <a href="javascript:;"
                                onclick="javascript:funReflocak(${t.id},${t.taskId},'deleteActionPage');">删除</a>
                             <a href="javascript:;"
-                               onclick="javascript:funReflocak(${t.id},${t.taskId},,'disable');">禁用</a>
+                               onclick="javascript:funReflocak(${t.id},${t.taskId},'disable');">禁用</a>
                         </td>
                     </c:when>
                     <c:otherwise>
@@ -97,9 +97,9 @@
                             <a href="javascript:;"
                                onclick="fullOpen('编辑页动作','${ctx}/audit/toAddPageAction?id=${t.taskId}&pageId=${t.id}')">编辑</a>
                             <a href="javascript:;"
-                               onclick="javascript:funReflocak(${t.id},${t.taskId},,'deleteActionPage');">删除</a>
+                               onclick="javascript:funReflocak(${t.id},${t.taskId},'deleteActionPage');">删除</a>
                             <a href="javascript:;"
-                               onclick="javascript:funReflocak(${t.id},${t.taskId},,'enable');">启用</a>
+                               onclick="javascript:funReflocak(${t.id},${t.taskId},'enable');">启用</a>
                         </td>
                     </c:otherwise>
                 </c:choose>
