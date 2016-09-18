@@ -65,10 +65,26 @@
                             <c:forEach items="${ t.acitionItems }" var="item">
                             <span class="dropDown dropDown_hover">
                                 <a class="dropDown_A action-selected-a" action_id="${item.id}">${item.name}</a> &gt;&nbsp;
+
+                                <ul class="dropDown-menu menu radius box-shadow action-ul"
+                                    style="max-height: 200px;overflow: auto">
+                                    <li class="del-unit-action-btn"><a>删除此动作</a></li>
+                                                <c:forEach items="${ actionPageVo.actionItems }" var="t">
+                                                    <li action_id="${t.id}" class="action-li"><a>${t.name}</a></li>
+                                                </c:forEach>
+                                </ul>
+
                             </span>
                             </c:forEach>
                             <span class="dropDown dropDown_hover">
                                 <a class="dropDown_A action-selected-a">选择动作</a>
+                                     <ul class="dropDown-menu menu radius box-shadow action-ul"
+                                                                    style="max-height: 200px;overflow: auto">
+                                    <li class="del-unit-action-btn"><a>删除此动作</a></li>
+                                                <c:forEach items="${ actionPageVo.actionItems }" var="t">
+                                                    <li action_id="${t.id}" class="action-li"><a>${t.name}</a></li>
+                                                </c:forEach>
+                                </ul>
                             </span>
                         </div>
                     </div>
