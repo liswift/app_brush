@@ -68,7 +68,7 @@ public class AuditController extends BaseController {
     /**
      * 通过 拒绝操作
      */
-    @RequestMapping(value = "changeState", method = RequestMethod.GET)
+    @RequestMapping(value = "changeState", method = {RequestMethod.GET,RequestMethod.POST})
     public void changeState() {
         int taskId = getParaInt("id", 0);
         int state = getParaInt("state", -10);
