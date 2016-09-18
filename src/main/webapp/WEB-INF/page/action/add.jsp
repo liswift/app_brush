@@ -47,6 +47,7 @@
     <div class="row cl">
         <label class="form-label col-xs-2 col-sm-2">操作动作：</label>
         <div class="col-xs-10 col-sm-10 unit-action-box" id="unit-action-box">
+
             <c:forEach items="${ actionPageVo.actionItems }" var="t">
                 <button action_id="${t.id}" class="btn btn-default radius"><span>${t.name}</span>
                     <c:if test="${view}!=1">
@@ -54,9 +55,10 @@
                     </c:if>
                 </button>
             </c:forEach>
-            <c:if test="${view}!=1">
+            <c:if test="${view}==0">
                 <button class="btn btn-primary radius" add_btn style="padding: 0 20px">+</button>
             </c:if>
+
         </div>
     </div>
     <div class="row cl">

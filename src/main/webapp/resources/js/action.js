@@ -56,7 +56,7 @@ $(document).ready(function () {
             parent.location.reload();
             layer_close();
         },function (res) {
-            alert("添加失败")
+            layer.msg('操作失败!');
         });
         //top.window.eventEmitter.emit('actionSubmitOk',{action_id:'0',action_name:'hahaha'})
     });
