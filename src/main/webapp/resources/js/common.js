@@ -11,15 +11,12 @@
  * @param contenttype
  * @returns {*}
  */
-function ajaxPost(url,data,callback,failback,bejson){
+function ajaxPost(url,data,callback,failback){
     data = data || {};
-    var contpy=bejson===true?"application/json; charset=UTF-8":"application/x-www-form-urlencoded; charset=UTF-8";
-    var newdata=bejson===true?JSON.stringify(data):data;
     return $.ajax({
         type: "post",
         url: url,
-        contentType: contpy,
-        data: newdata,
+        data: data,
         success: function(res) {
             if (res.code == 200) {
                 if ($.isFunction(callback)) {
@@ -40,7 +37,32 @@ function ajaxPost(url,data,callback,failback,bejson){
     });
 }
 
-
+function ajaxPostJSON(url,data,callback,failback){
+    data = data || {};
+    return $.ajax({
+        type: "post",
+        url: url,
+        contentType: "application/json; charset=UTF-8",
+        data: JSON.stringify(data),
+        success: function(res) {
+            if (res.code == 200) {
+                if ($.isFunction(callback)) {
+                    callback(res.data, res);
+                }
+            } else {
+                if ($.isFunction(failback)) {
+                    failback(res);
+                } else {
+                    alert(res.msg);
+                }
+            }
+        },
+        error: function(request, textStatus, err) {
+            console.log(err, "error");
+        },
+        dataType: "json"
+    });
+}
 
 top.window.eventEmitter = {
     _events: {},

@@ -50,12 +50,12 @@ $(document).ready(function () {
             })
         });
         params.actionGroups=actionsGroups;
-        ajaxPost("/audit/addActionPage",params,function(d){
+        ajaxPostJSON("/audit/addActionPage",params,function(d){
             parent.location.reload();
             layer_close();
         },function (res) {
             alert("添加失败")
-        },true);
+        });
         //top.window.eventEmitter.emit('actionSubmitOk',{action_id:'0',action_name:'hahaha'})
     });
 
