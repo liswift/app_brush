@@ -66,12 +66,14 @@
                     <td>${t.amount}</td>
                     <td>${t.todayNum}</td>
                     <td>${t.yestodayNum}</td>
+                    <c:choose>
                     <c:when test="${t.intState==0}">
                         <td><a href="javascript:;" onclick="javascript:showMsg(${t.msg})">${t.state}</a></td>
                     </c:when>
                     <c:otherwise>
                         <td>${t.state}</td>
                     </c:otherwise>
+                    </c:choose>
                     <td>
                         <a href="${ctx}/task/delete?id=${t.id}">删除</a>
                         <a href="javascript:;"
