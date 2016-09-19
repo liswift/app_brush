@@ -68,7 +68,7 @@
                     <td>${t.yestodayNum}</td>
                     <c:choose>
                     <c:when test="${t.intState==0}">
-                        <td><a href="javascript:;" onclick="javascript:showMsg(${t.msg})">${t.state}</a></td>
+                        <td><a href="javascript:;" onclick="javascript:showMsg('${t.msg}')">${t.state}</a></td>
                     </c:when>
                     <c:otherwise>
                         <td>${t.state}</td>
