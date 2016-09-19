@@ -28,6 +28,9 @@ public class TaskSubScheduler {
     TaskSubService taskSubService;
 
 
+    /**
+     * 把所有的任务状态都搞成 通过 why?
+     */
     @Scheduled(cron = "0 0 0  * * ? ")
     public void resetTaskState() {
         log.info("### start resetTaskState ###");
@@ -36,7 +39,7 @@ public class TaskSubScheduler {
     }
 
     /**
-     * 生成每日task_sub
+     * 生成每日task_sub,每日的零点运行
      */
     @Scheduled(cron = "0 0/1 *  * * ? ")
     public void invokeMakeTaskSub() {
@@ -63,7 +66,7 @@ public class TaskSubScheduler {
 
     /**
      * 这个写的不对吧?
-     * 把所有已经停止的任务,全部搞成通过?什么个意思?
+     * 把所有已经停止的任务,全部搞成通过?什么个意思?,每日零点运行
      */
     @Scheduled(cron = "0 0 0  * * ? ")
     public void changeTaskState() {
@@ -74,6 +77,9 @@ public class TaskSubScheduler {
         log.info("### change enable Task State success ###");
     }
 
+    /**
+     * 每日零点运行
+     */
     @Scheduled(cron = "0 0 0  * * ? ")
     public void makeRetainDayTaskSub() {
         Stopwatch stopWatch = Stopwatch.createStarted();
