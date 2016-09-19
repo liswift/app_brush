@@ -8,17 +8,7 @@ $('.table-sort').dataTable({
     "bStateSave": true,//状态保存
     "aoColumnDefs": [
         //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-        {"orderable": false, "aTargets": [1, 7, 8]}// 制定列不参与排序
+        {"orderable": false, "aTargets": [1,6,7]}// 制定列不参与排序
     ]
 });
-$('.table-sort tbody').on('click', 'tr', function () {
-    if ($(this).hasClass('selected')) {
-        $(this).removeClass('selected');
-    }
-    else {
-        table.$('tr.selected').removeClass('selected');
-        $(this).addClass('selected');
-    }
-});
-
 });

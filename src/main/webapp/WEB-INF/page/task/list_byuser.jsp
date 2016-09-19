@@ -25,13 +25,15 @@
 </head>
 <body>
 <div class="pd-20" style="padding-top:20px;">
-    <p class="f-20 text-success">欢迎您, <span class="f-14">${userAccountVo.userRealName}</span></p>
-    <p>帐户余额：${userAccountVo.pointCount},
+    <p class="f-20 text-success">欢迎您, <span class="f-14">${user.name}</span></p>
+    <!--
+        <p>帐户余额：${userAccountVo.pointCount},
         今日所需点数：${userAccountVo.todayPointNeed}点，明日所需点数：${userAccountVo.tomorrowPointNeed}点
         <a class="btn btn-primary radius" href="javascript:;"
            onclick="admin_role_add('充值','${ctx}/role/toAddRole','800')">
             <i class="Hui-iconfont">&#xe600;</i> 充值</a>
     </p>
+    -->
     <div class="cl pd-5 bg-1 bk-gray">
         <span class="l">
             <a class="btn btn-primary radius" href="javascript:;"
@@ -63,7 +65,6 @@
                     <td>${t.appName}</td>
                     <td>${t.createTime}</td>
                     <td>${t.incrDay}</td>
-                    <td>${t.amount}</td>
                     <td>${t.todayNum}</td>
                     <td>${t.yestodayNum}</td>
                     <c:choose>
