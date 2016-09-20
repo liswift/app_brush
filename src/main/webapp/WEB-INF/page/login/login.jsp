@@ -42,7 +42,7 @@ request.setAttribute("error", error);
   <div id="loginform" class="loginBox">
     <form class="form form-horizontal" action="${ctx }/sys/login" method="post">
       <div class="row cl">
-        <label class="form-label col-3"><i class="Hui-iconfont">&#xe60d;</i>/label>
+        <label class="form-label col-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-8">
           <input id="" name="name" value="admin" type="text" placeholder="账户" class="input-text size-L">
         </div>
