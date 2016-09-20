@@ -278,6 +278,7 @@ public class TaskSubServiceImpl implements TaskSubService {
             }
             log.info("##### insert number:" + number+" time:"+time);
             List<TaskSub> taskSubs = Lists.newArrayList();
+
             for (int num = 0; num < number; num++) {
 
                 TaskSub taskSub = new TaskSub();

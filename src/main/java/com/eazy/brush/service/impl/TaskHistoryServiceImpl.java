@@ -5,6 +5,7 @@ import com.eazy.brush.dao.mapper.TaskHistoryMapper;
 import com.eazy.brush.service.TaskHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -36,6 +37,9 @@ public class TaskHistoryServiceImpl implements TaskHistoryService {
 
     @Override
     public void insert(List<TaskHistory> histories) {
+        if(CollectionUtils.isEmpty(histories)){
+            return;
+        }
         taskHistoryMapper.insertBatch(histories);
     }
 
