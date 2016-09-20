@@ -27,7 +27,7 @@ public class TaskHistoryProvider {
         List<TaskHistory>  taskHistories= (List<TaskHistory>) map.get("histories");
 
         StringBuilder sb = new StringBuilder();
-        sb.append("INSERT INTO task_sub ");
+        sb.append("INSERT INTO task_history ");
         sb.append("(" + TaskHistoryMapper.INSERT_FEILDS + ") ");
         sb.append("VALUES ");
 

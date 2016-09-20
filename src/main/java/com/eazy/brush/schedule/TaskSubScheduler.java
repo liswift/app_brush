@@ -76,6 +76,7 @@ public class TaskSubScheduler {
             history.setUserId(task.getUserId());
             history.setRetainStayday(task.getRetainDay());//这里不要写错!
             history.setRetainPercent(task.getRetainPercent());
+            history.setCreateDay(historyDay);
         }
         log.info("### begin insert historys ###" + historys);
         taskHistoryService.insert(historys);
