@@ -146,7 +146,7 @@ public class TaskSubServiceImpl implements TaskSubService {
         }
         int number = task.getIncrDay()*task.getRetainPercent()/100;//获取留存数目
 
-        List<TaskSub> listByCreateDay = taskSubMapper.getListByCreateDay(task.getTaskId(),task.getCreateDate(), number);
+        List<TaskSub> listByCreateDay = taskSubMapper.getListByCreateDay(task.getTaskId(),task.getCreateDay(), number);
         int times = 24*60/Constants.TASK_SUB_PER_MINITE;//平均分配24小时运行
         int perNum = number/times+1;
 

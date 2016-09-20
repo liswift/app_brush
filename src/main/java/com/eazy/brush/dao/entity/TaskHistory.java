@@ -22,5 +22,5 @@ public class TaskHistory {
     private int retainUnfinish;//当前的阻塞量
     private int retainPercent;//当前的留存率,(用于计算当前新任务的留存数据)重要
     private int retainStayday;//当前剩余的留存天数
-    private int createDate;//任务对应的日期
+    private int createDay;//任务对应的日期
 }

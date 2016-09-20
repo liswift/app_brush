@@ -1191,7 +1191,7 @@ CREATE TABLE `task_history` (
   `retain_unfinish` int(11) NOT NULL DEFAULT '0' COMMENT '当天阻塞数目',
   `retain_percent` int(11) DEFAULT NULL COMMENT '当天的留存率,需要根据这个生成下一天的留存数据',
   `retain_stayday` int(11) DEFAULT NULL COMMENT '当天的剩余的留存天数',
-  `create_date` int(11)  NOT NULL,
+  `create_day` int(11)  NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
