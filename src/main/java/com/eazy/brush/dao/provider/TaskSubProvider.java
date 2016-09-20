@@ -33,7 +33,7 @@ public class TaskSubProvider {
                 "(" +
                 "#'{'taskSubs[{0}].id'}',#'{'taskSubs[{0}].taskId'}',#'{'taskSubs[{0}].perTime'}'," +
                 "#'{'taskSubs[{0}].deviceInfoId'}'," +
-                "#'{'taskSubs[{0}].runTime'}'#'{'taskSubs[{0}].createDay'}',,#'{'taskSubs[{0}].state'}',#'{'taskSubs[{0}].taskType'}'," +
+                "#'{'taskSubs[{0}].runTime'}',#'{'taskSubs[{0}].createDay'}',#'{'taskSubs[{0}].state'}',#'{'taskSubs[{0}].taskType'}'," +
                 "#'{'taskSubs[{0}].telAndroidId'}',#'{'taskSubs[{0}].subscriberId'}'," +
                 "#'{'taskSubs[{0}].operator'}',#'{'taskSubs[{0}].operatorName'}'," +
                 "#'{'taskSubs[{0}].line1Number'}',#'{'taskSubs[{0}].simSerialNumber'}',#'{'taskSubs[{0}].networkType'}'," +
