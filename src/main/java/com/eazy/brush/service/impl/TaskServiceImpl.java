@@ -30,7 +30,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task getByState(int state) {
+    public List<Task> getByState(int state) {
         return taskMapper.getByState(state);
     }
 

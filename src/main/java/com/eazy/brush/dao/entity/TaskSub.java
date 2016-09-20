@@ -13,10 +13,11 @@ public class TaskSub {
     private String id;
     private int taskId;              //任务id
     private long perTime;             //时间粒度
-    private int deviceInfoId;        //设备信息
-    private int runTime;             //任务执行时间
-    private int callbackTime;        //任务执行完回调时间 0 未取走 1已取走未回调 time 回调
-    private int createDay;          //任务创建日期
+    private int deviceInfoId;        //设备信息,例如三星/索尼/...
+    private int runTime;             //任务运行时间 秒单位
+    private int createDay;           //任务执行运行日期
+    private int state;              //三种状态 0 init,1 running,2 finish
+    private int taskType;           //有两种类型,一种是留存任务0,一种是激活任务1
 
     //cardInfo 信息
     private String telAndroidId;       //android_id 唯一

@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class TaskHistoryServiceImpl implements TaskHistoryService {
 
-    private static final int MIN_RETAINPERCENT=5;//暂时定义>=5的任务记录,可以做留存,小于这个数字留存直接不跑了
+    private static final int MIN_RETAINPERCENT=1;//暂时定义>=1的任务记录,可以做留存,小于这个数字留存直接不跑了
 
     @Autowired
     TaskHistoryMapper taskHistoryMapper;
@@ -32,6 +32,21 @@ public class TaskHistoryServiceImpl implements TaskHistoryService {
     @Override
     public void insert(TaskHistory taskHistory) {
         taskHistoryMapper.insert(taskHistory);
+    }
+
+    @Override
+    public void insert(List<TaskHistory> histories) {
+        taskHistoryMapper.insertBatch(histories);
+    }
+
+    /**
+     * 留存率减少一,留存天数减少一
+     * 注意:暂时定义未 留存率每天都减少1,留存天数也是递减
+     * @param history
+     */
+    @Override
+    public void changeRetainPercent(TaskHistory history) {
+        taskHistoryMapper.changeRetain(history.getRetainPercent()-1,history.getRetainStayday()-1,history.getId());
     }
 
 

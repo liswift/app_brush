@@ -2,16 +2,19 @@ package com.eazy.brush.service.impl;
 
 import com.eazy.brush.controller.view.service.Operator;
 import com.eazy.brush.controller.view.service.RandomMacAddress;
-import com.eazy.brush.core.enums.CountType;
+import com.eazy.brush.core.enums.SubTaskState;
+import com.eazy.brush.core.enums.SubTaskType;
 import com.eazy.brush.core.enums.TaskSpeedType;
 import com.eazy.brush.core.lottery.Award;
 import com.eazy.brush.core.lottery.LotteryUtil;
 import com.eazy.brush.core.utils.Constants;
-import com.eazy.brush.core.utils.DateTimeUitl;
 import com.eazy.brush.core.utils.RandomUtil;
 import com.eazy.brush.dao.entity.*;
 import com.eazy.brush.dao.mapper.TaskSubMapper;
-import com.eazy.brush.service.*;
+import com.eazy.brush.service.DeviceInfoService;
+import com.eazy.brush.service.ProxyIpService;
+import com.eazy.brush.service.TaskService;
+import com.eazy.brush.service.TaskSubService;
 import com.eazy.brush.service.rank.HcountService;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
@@ -70,115 +73,110 @@ public class TaskSubServiceImpl implements TaskSubService {
     }
 
     @Override
-    public List<TaskSub> getUnConsumeList(long pertime, int size) {
-        return taskSubMapper.getList(pertime, size);
+    public List<TaskHistory> getHistoryByCreateDay(int createDay) {
+        return taskSubMapper.getHistoryCount(createDay);//计算前天的数据;
     }
 
+    /**
+     * 根据当前的时间点,随机获取当前时间点之前所有未完成的subTask
+     * @param size
+     * @return
+     */
+    @Override
+    public List<TaskSub> getUnConsumeList(int size) {
+        long perTime = Long.parseLong(DateTime.now().toString("yyyyMMddHHmm"));
+        return taskSubMapper.getRandomList(perTime,taskSubMapper.getRandomCount(perTime),size);
+    }
+
+    /**
+     * 生成新增数据序列
+     * @param task
+     */
     @Override
     public void makeIncrDayTaskSub(Task task) {
-
+        /**
+         * 获取所有的deviceId
+         */
         List<DeviceInfo> deviceInfos = deviceInfoService.getList(0, Integer.MAX_VALUE);
+        int createDay = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));
 
-        int perNum = 0, times = 0;
+        int newnumber=task.getRetainDay();
+        int newupdown=task.getIncrUpDown();
+        int number = newnumber-newupdown + new Random().nextInt(2*newupdown);//计算当天的新增数量总数
 
-        if (TaskSpeedType.make_immediate.getCode() == task.getRunSpeed()) {     //立即投放
-            times = task.getIncrDay() / Constants.TASK_BATCH_UP + 1;            //需要分多少批次执行
-            perNum = times > 0 ? Constants.TASK_BATCH_UP : task.getIncrDay();
-        } else {                                                                //函数投放
+        int times = 0;
+        int perNum=0;
+
+        if (TaskSpeedType.make_immediate.getCode() == task.getRunSpeed()) {     //立即投放,一次性全部生成,去任务的时候,会自动进行随机获取
+            times = 1;            //需要分多少批次执行
+            perNum = number;
+        } else {                                                                //函数投放,暂时是均匀函数投放
             times = (task.getRunEndTime() - task.getRunStartTime()) * 60 / Constants.TASK_SUB_PER_MINITE;
-            perNum = task.getIncrDay() / times + 1;                             //不能整除，所以多运行几个
+            perNum = number / times + 1;                             //不能整除，所以多运行一个
         }
 
-        DateTime nowDateTime = DateTime.now();
-        DateTime createDateTime = new DateTime(task.getCreateTime());
-        int interDay = DateTimeUitl.getDayInter(createDateTime, nowDateTime);
-        DateTime startTime = DateTimeUitl.getStartTime(createDateTime, task.getRunStartTime(), interDay);
-
-        if (interDay == 0) {                                                    //如果是当天，从当前时间之后算起
-            times = times - DateTimeUitl.perTimeNum(task.getRunStartTime(), nowDateTime);
-        }
-
-        int i = times;
-        while (i-- > 0) {
+        DateTime startTime = DateTime.now().withHourOfDay(task.getRunStartTime()).withMinuteOfHour(0); //设定开始时间
+        while (times-- > 0) {
             long perTime = Long.parseLong(startTime.toString("yyyyMMddHHmm"));
-            if (perNum > 0) {
-                buildTaskSubs(task, perTime, deviceInfos, perNum);
+            if (perNum > 0&&number>0) {
+                if(number < perNum){//最后的数目不够了,直接全部运行完
+                    perNum = number;
+                }
+                buildTaskSubs(task, perTime, deviceInfos, perNum,createDay);
+                number=number-perNum;
             }
             startTime = startTime.plusMinutes(Constants.TASK_SUB_PER_MINITE);
         }
+
         log.info("### taskId:{},taskNum:{} make finished! ###", task.getId(), task.getIncrDay());
-
-        int createDay = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));
-
-        //删除多生成的任务
-        int size = times * perNum - task.getIncrDay();
-        if (size > 0) {
-            taskSubMapper.deleteRand(task.getId(), createDay, size);
-        }
-
-        //计数
-        hcountService.incrBy(task.getId(), createDay, CountType.taskSubDayNum, task.getIncrDay());
     }
 
+    /**
+     * 生成留存数据序列
+     * @param task
+     */
     @Override
-    public void makeRetainDayTaskSub(Task task) {
-
-        DateTime curDateTime = new DateTime(task.getCreateTime());
-        int inderDay = DateTimeUitl.getDayInter(curDateTime, DateTime.now());
+    public void makeRetainDayTaskSub(TaskHistory task) {
         int createDay = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));
-        int totalNum = 0;
+        int retainDay = task.getRetainDay();
+        int percent = task.getRetainPercent();
 
-        //从任务开始到今日
-        for (int i = 0; i < inderDay && i < task.getRetainDay(); i++) {
-            curDateTime = curDateTime.plusDays(i);
-            int retainNum = taskService.calcDayRetainNum(task, DateTime.now());
-            totalNum = totalNum + retainNum;
+        if(retainDay==0||percent==0){//留存天数为0,或者剩余留存率为0,直接return
+            return;
+        }
+        int number = task.getIncrDay()*task.getRetainPercent()/100;//获取留存数目
 
-            int count = 0, size = 100;
-            DateTime start = DateTime.now().withHourOfDay(task.getRunStartTime()).withMinuteOfHour(0).withSecondOfMinute(0);
-            DateTime end = DateTime.now().withHourOfDay(task.getRunEndTime()).withMinuteOfHour(0).withSecondOfMinute(0);
+        List<TaskSub> listByCreateDay = taskSubMapper.getListByCreateDay(task.getTaskId(),task.getCreateDate(), number);
+        int times = 24*60/Constants.TASK_SUB_PER_MINITE;//平均分配24小时运行
+        int perNum = number/times+1;
 
-            int rDay = Integer.parseInt(curDateTime.toString("yyyyMMdd"));
-            List<TaskSub> randList = taskSubMapper.getRandList(rDay, size);
+        DateTime startTime = DateTime.now().withHourOfDay(0).withMinuteOfHour(0); //设定开始时间
 
-            int times = retainNum / size;
-            int t = 0;
-            while (!CollectionUtils.isEmpty(randList)) {
-                if (t > times - 2) {
-                    break;
+        while(times-->0){
+            long perTime = Long.parseLong(startTime.toString("yyyyMMddHHmm"));
+            if (perNum > 0&&number>0) {
+                if(listByCreateDay.size() < perNum){//最后的数目不够了,直接全部运行完
+                    perNum = listByCreateDay.size();
                 }
-                makeRetain(randList, start, end);
-                t++;
-                count += size;
-                randList = taskSubMapper.getRandList(rDay, size);
-                log.info("### make TaskSub retain taskid {},day {},size {},count {} ###", task.getId(), rDay, size, count);
+                List<TaskSub> taskSubs = listByCreateDay.subList(0, perNum);
+                listByCreateDay.removeAll(taskSubs);
+                reUseTaskSub(taskSubs,perTime,createDay);
             }
-            //最后一次循环少运行的，补充
-            size = retainNum - (t * size);
-            randList = taskSubMapper.getRandList(rDay, size);
-            makeRetain(randList, start, end);
-            log.info("### make last TaskSub retain taskid {},day {},size {} ###", task.getId(), rDay, size);
-
-            //删除未被留存的taskSub
-            int num = taskSubMapper.deleteUnRetain(rDay);
-            log.info("### deleteUnRetain taskSub taskid {},day {},num {} ###", task.getId(), rDay, num);
-        }
-        //计数
-        hcountService.incrBy(task.getId(), createDay, CountType.taskSubDayNum, totalNum);
-    }
-
-    private void makeRetain(List<TaskSub> randList, DateTime start, DateTime end) {
-        for (TaskSub taskSub : randList) {
-            taskSub.setCallbackTime(0);
-            taskSub.setPerTime(DateTimeUitl.getRandomPerTime(start, end));
-            taskSubMapper.makeRetain(taskSub);
+            startTime = startTime.plusMinutes(Constants.TASK_SUB_PER_MINITE);
         }
     }
 
-    @Override
-    public void insertTaskSub(TaskSub taskSub) {
-        taskSubMapper.insertTaskSub(taskSub);
+    private void reUseTaskSub(List<TaskSub> taskSubs,long perTime,int createDay) {
+        for(TaskSub tasksub:taskSubs){
+            tasksub.setId(UUID.randomUUID().toString());
+            tasksub.setPerTime(perTime);
+            tasksub.setTaskType(SubTaskType.RETAIN.getCode());
+            tasksub.setState(SubTaskState.INIT.getState());
+            tasksub.setCreateDay(createDay);
+        }
+        insertTaskBatch(taskSubs);
     }
+
 
     @Override
     public void insertTaskBatch(List<TaskSub> taskSubList) {
@@ -188,29 +186,70 @@ public class TaskSubServiceImpl implements TaskSubService {
     }
 
     @Override
-    public void changeTaskSubState(String ids, long callbackTime) {
-        taskSubMapper.changeTaskSubState(ids, callbackTime);
-    }
-
-    @Override
-    public List<TaskSub> getRandList(int createDay, int size) {
-        return taskSubMapper.getRandList(createDay, size);
-    }
-
-    @Override
-    public int count(int taskId, int createDay) {
-        return 0;
+    public void changeTaskSubState(String ids, SubTaskState subTaskState) {
+        taskSubMapper.changeTaskSubState(subTaskState.getState(),ids);
     }
 
     /**
-     * 生成任务元
+     * 获取今天新增的数据
+     * @param taskId
+     * @return
+     */
+    @Override
+    public int getTodayCount(int taskId) {
+        int createDay = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));
+        return  taskSubMapper.getCountByTaskId(taskId,createDay,SubTaskState.FINISHED.getState(),SubTaskType.ACTIVE.getCode());
+    }
+
+    /**
+     * 获取昨天新增的数据
+     * @param taskId
+     * @return
+     */
+    @Override
+    public int getYestdayCount(int taskId) {
+        int createDay = Integer.parseInt(DateTime.now().minusDays(1).toString("yyyyMMdd"));
+        return  taskSubMapper.getCountByTaskId(taskId,createDay,SubTaskState.FINISHED.getState(),SubTaskType.ACTIVE.getCode());
+    }
+
+    /**
+     * 获取昨天的历史数据
+     * @param taskType
+     * @return
+     */
+    @Override
+    public int getSubTaskCount(SubTaskType taskType, SubTaskState subTaskState) {
+        int createDay = Integer.parseInt(DateTime.now().minusDays(1).toString("yyyyMMdd"));
+        return taskSubMapper.getCount(createDay,taskType.getCode(),subTaskState.getState());
+    }
+
+    /**
+     * 获取昨天的历史数据
+     * @param taskType
+     * @param subTaskState
+     * @return
+     */
+    @Override
+    public int getSubTaskAndDelete(SubTaskType taskType, SubTaskState subTaskState) {
+        int createDay = Integer.parseInt(DateTime.now().minusDays(1).toString("yyyyMMdd"));
+        return taskSubMapper.deleteGetCount(createDay,taskType.getCode(),subTaskState.getState());
+    }
+
+    @Override
+    public void deleteOldUnUseData() {
+        taskSubMapper.deleteUnUserData();
+    }
+
+
+    /**
+     * 生成新增subTask
      *
      * @param task
      * @param deviceInfos
      * @param taskNum
      */
     private void buildTaskSubs(Task task, long perTime,
-                               List<DeviceInfo> deviceInfos, int taskNum) {
+                               List<DeviceInfo> deviceInfos, int taskNum,int createDay) {
 
 
         List<TaskSub> taskSubs = Lists.newArrayList();
@@ -221,8 +260,10 @@ public class TaskSubServiceImpl implements TaskSubService {
             taskSub.setTaskId(task.getId());
             taskSub.setPerTime(perTime);
             taskSub.setDeviceInfoId(LotteryUtil.lottery(deviceInfos).getId());
-            taskSub.setRunTime(task.getRunTime());
-            taskSub.setCreateDay(Integer.parseInt(DateTime.now().toString("yyyyMMdd")));
+            taskSub.setRunTime(task.getRunTime()*60-task.getRunUpDown()+ new Random().nextInt(2*task.getRunUpDown()));//设置运行时间
+            taskSub.setCreateDay(createDay);
+            taskSub.setTaskType(SubTaskType.ACTIVE.getCode());//新增任务
+            taskSub.setState(SubTaskState.INIT.getState());//状态初始化
             setCardInfo(taskSub);
             setNetInfo(taskSub);
             taskSub.setVersionIncremental(RandomUtil.generateMixString(13));

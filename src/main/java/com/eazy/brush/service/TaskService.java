@@ -14,7 +14,7 @@ public interface TaskService {
 
     Task getById(int id);
 
-    Task getByState(int state);
+    List<Task> getByState(int state);
 
     List<Task> getList(int offset, int size);
 

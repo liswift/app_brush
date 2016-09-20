@@ -2,7 +2,6 @@ package com.eazy.brush.controller.view.service.impl;
 
 import com.eazy.brush.controller.view.service.TaskVoService;
 import com.eazy.brush.controller.view.vo.TaskVo;
-import com.eazy.brush.core.enums.ConfKey;
 import com.eazy.brush.core.enums.TaskState;
 import com.eazy.brush.dao.entity.Task;
 import com.eazy.brush.service.ConfService;
@@ -44,10 +43,9 @@ public class TaskVoServiceImpl implements TaskVoService {
             taskVo.setCreateTime(new DateTime(task.getCreateTime()).toString("yyyy-MM-dd HH:mm:ss"));
             taskVo.setIncrDay(task.getIncrDay());
 
-            int k = confService.getNumberValueByKey(ConfKey.task_cost_point.name()).intValue();
-            taskVo.setAmount(task.getIncrDay() * k);
-            taskVo.setTodayNum(taskSubService.count(task.getId(), todayDay) * k);
-            taskVo.setYestodayNum(taskSubService.count(task.getId(), yestoday) * k);
+            taskVo.setAmount(task.getIncrDay());
+            taskVo.setTodayNum(taskSubService.getTodayCount(task.getId()));
+            taskVo.setYestodayNum(taskSubService.getYestdayCount(task.getId()));
             taskVo.setIntState(task.getState());
             TaskState taskState = TaskState.valueOf(task.getState());
             if (null != taskState) {

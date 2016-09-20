@@ -1184,17 +1184,21 @@ CREATE TABLE `task_history` (
   `app_name` varchar(64) NOT NULL COMMENT '应用名称',
   `remark_name` varchar(64) NOT NULL COMMENT '备注名称',
   `incr_day` int(11) NOT NULL DEFAULT '0' COMMENT '当天新增用户数',
+  `incr_fail` int(11) NOT NULL DEFAULT '0' COMMENT '当前新增失败数',
+  `incr_unfinish` int(11) NOT NULL DEFAULT '0' COMMENT '当前阻塞的数',
   `retain_day` int(11) NOT NULL DEFAULT '0' COMMENT '当天留存用户数',
-  `retain_percent` int(11) DEFAULT NULL COMMENT '当天的留存率',
-  `create_date` date NOT NULL DEFAULT CURRENT_DATE,
+  `retain_fail` int(11) NOT NULL DEFAULT '0' COMMENT '当前留存失败数',
+  `retain_unfinish` int(11) NOT NULL DEFAULT '0' COMMENT '当天阻塞数目',
+  `retain_percent` int(11) DEFAULT NULL COMMENT '当天的留存率,需要根据这个生成下一天的留存数据',
+  `retain_stayday` int(11) DEFAULT NULL COMMENT '当天的剩余的留存天数',
+  `create_date` int(11)  NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of task history
 -- ----------------------------
-INSERT INTO `task_history` VALUES ('1', '9','11', 'Mainac', '', '100', '100', '10', '2016-09-11');
-
+-- INSERT INTO `task_history` VALUES ('1', '9','11', 'Mainac', '', '100','0','0', '100','0','0', '10','10', '20160911');
 
 
 -- ----------------------------
@@ -1207,8 +1211,9 @@ CREATE TABLE `task_sub` (
   `per_time` bigint(20) DEFAULT '0' COMMENT '所在粒度',
   `device_info_id` int(11) NOT NULL COMMENT '设备信息',
   `run_time` int(11) NOT NULL COMMENT '任务执行时间',
-  `create_day` int(11) DEFAULT NULL,
-  `callback_time` bigint(20) NOT NULL DEFAULT '0' COMMENT '任务执行完回调时间',
+  `create_day` int(11) DEFAULT NULL COMMENT '此任务运行日期',
+  `state` int(2) NOT NULL DEFAULT '0' COMMENT '任务状态 init0,fail 1, sucess2',
+  `task_type` int(2) NOT NULL DEFAULT '0' COMMENT '任务类型 0 留存 1 新增',
   `tel_android_id` varchar(32) DEFAULT NULL COMMENT 'android_id 唯一',
   `subscriber_id` varchar(32) DEFAULT NULL COMMENT '跟operator有关系，前5位时operator',
   `operator` varchar(32) DEFAULT NULL COMMENT '运营商标志码',
@@ -1226,6 +1231,17 @@ CREATE TABLE `task_sub` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `task_sub` VALUES ('1', '11','', '1', '80', '20160919','0','0', '10898980990','234234340','00', '中国联通','15510191902', '20160911','1','17','88:88:88:88:88','0','34234','234324','','');
+INSERT INTO `task_sub` VALUES ('2', '11','', '1', '80', '20160919','1','0', '10898980990','234234340','00', '中国联通','15510191902', '20160911','1','17','88:88:88:88:88','0','34234','234324','','');
+INSERT INTO `task_sub` VALUES ('3', '11','', '1', '80', '20160919','2','0', '10898980990','234234340','00', '中国联通','15510191902', '20160911','1','17','88:88:88:88:88','0','34234','234324','','');
+INSERT INTO `task_sub` VALUES ('4', '11','', '1', '80', '20160919','0','1', '10898980990','234234340','00', '中国联通','15510191902', '20160911','1','17','88:88:88:88:88','0','34234','234324','','');
+INSERT INTO `task_sub` VALUES ('5', '11','', '1', '80', '20160919','1','1', '10898980990','234234340','00', '中国联通','15510191902', '20160911','1','17','88:88:88:88:88','0','34234','234324','','');
+INSERT INTO `task_sub` VALUES ('6', '11','', '1', '80', '20160919','2','1', '10898980990','234234340','00', '中国联通','15510191902', '20160911','1','17','88:88:88:88:88','0','34234','234324','','');
+INSERT INTO `task_sub` VALUES ('7', '11','', '1', '80', '20160919','2','1', '10898980990','234234340','00', '中国联通','15510191902', '20160911','1','17','88:88:88:88:88','0','34234','234324','','');
+INSERT INTO `task_sub` VALUES ('8', '11','', '1', '80', '20160919','2','1', '10898980990','234234340','00', '中国联通','15510191902', '20160911','1','17','88:88:88:88:88','0','34234','234324','','');
+INSERT INTO `task_sub` VALUES ('9', '11','', '1', '80', '20160919','2','1', '10898980990','234234340','00', '中国联通','15510191902', '20160911','1','17','88:88:88:88:88','0','34234','234324','','');
+INSERT INTO `task_sub` VALUES ('10', '11','', '1', '80', '20160919','2','1', '10898980990','234234340','00', '中国联通','15510191902', '20160911','1','17','88:88:88:88:88','0','34234','234324','','');
+INSERT INTO `task_sub` VALUES ('11', '11','', '1', '80', '20160919','2','1', '10898980990','234234340','00', '中国联通','15510191902', '20160911','1','17','88:88:88:88:88','0','34234','234324','','');
 -- ----------------------------
 -- Records of task_sub
 -- ----------------------------
