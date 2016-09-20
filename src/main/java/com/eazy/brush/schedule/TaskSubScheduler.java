@@ -68,6 +68,7 @@ public class TaskSubScheduler {
         int historyDay = Integer.parseInt(DateTime.now().minusDays(1).toString("yyyyMMdd"));
         //这里进行上一天的历史数据计算
         List<TaskHistory> historys = taskSubService.getHistoryByCreateDay(historyDay);
+        log.info("### end get historys ###" + historys);
         for (TaskHistory history : historys) {
             Task task = taskService.getById(history.getTaskId());
             history.setAppName(task.getAppName());
@@ -76,6 +77,7 @@ public class TaskSubScheduler {
             history.setRetainStayday(task.getRetainDay());//这里不要写错!
             history.setRetainPercent(task.getRetainPercent());
         }
+        log.info("### begin insert historys ###" + historys);
         taskHistoryService.insert(historys);
         log.info("### end insert history,cost {} s ###", stopwatch.elapsed(TimeUnit.SECONDS));
         taskSubService.deleteOldUnUseData();
