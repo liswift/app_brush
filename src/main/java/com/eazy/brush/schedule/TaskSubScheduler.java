@@ -93,6 +93,7 @@ public class TaskSubScheduler {
 
         //这里是获取还有留存的历史TaskHistory,根据留存率进行判断
         List<TaskHistory> activeTask = taskHistoryService.getActiveTask();
+        log.info("### end getActivt history Task,cost {} s ###", stopwatch.elapsed(TimeUnit.SECONDS));
         for (TaskHistory taskHistory : activeTask) {
             taskSubService.makeRetainDayTaskSub(taskHistory);
             taskHistoryService.changeRetainPercent(taskHistory);

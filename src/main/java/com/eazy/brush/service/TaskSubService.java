@@ -39,7 +39,7 @@ public interface TaskSubService {
     void makeIncrDayTaskSub(Task task);
 
     /**
-     * 生成每日留存TaskSub,删除过期子任务
+     * 生成每日留存TaskSub
      *
      * @param taskHistory
      */

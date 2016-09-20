@@ -24,7 +24,7 @@ public interface TaskHistoryMapper {
 
 
     @Select("select " + FEILDS + " from task_history where retain_percent >= #{retainPercent} and retain_stayday>0")
-    List<TaskHistory> getListByMinRetainPercent(int retainPercent);
+    List<TaskHistory> getListByMinRetainPercent(@Param("retainPercent")int retainPercent);
 
     @Insert("insert into task_history(" + INSERT_FEILDS + ") values (" + INSERT_VALUES + ")")
     void insert(TaskHistory task);

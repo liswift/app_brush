@@ -36,6 +36,7 @@ import java.util.UUID;
 @Slf4j
 @Service
 public class TaskSubServiceImpl implements TaskSubService {
+    private static final int MAXINSERTNUMBER=100;
 
     @Autowired
     private TaskSubMapper taskSubMapper;
@@ -144,10 +145,27 @@ public class TaskSubServiceImpl implements TaskSubService {
         if(retainDay==0||percent==0){//留存天数为0,或者剩余留存率为0,直接return
             return;
         }
+
         int number = task.getIncrDay()*task.getRetainPercent()/100;//获取留存数目
 
-        List<TaskSub> listByCreateDay = taskSubMapper.getListByCreateDay(task.getTaskId(),task.getCreateDay(), number);
-        int times = 24*60/Constants.TASK_SUB_PER_MINITE;//平均分配24小时运行
+        if(number>MAXINSERTNUMBER){
+            int newnumber = MAXINSERTNUMBER;
+            int tasktimes = number/MAXINSERTNUMBER+1;//增加一次
+            int mintaskNumber=task.getIncrDay()/tasktimes;//把总任务进行分割
+            while (tasktimes-->0){
+                if(tasktimes==1){
+                    newnumber = number%MAXINSERTNUMBER;//取到最后剩余的余数
+                }
+                insertSub(task,createDay,(tasktimes-1)*mintaskNumber,newnumber);//通过offset进行总数量分割拿取
+            }
+        }else{
+            insertSub(task, createDay,0,number);
+        }
+    }
+
+    private void insertSub(TaskHistory task, int createDay,int offset, int number) {
+        List<TaskSub> listByCreateDay = taskSubMapper.getListByCreateDay(task.getTaskId(),task.getCreateDay(),offset,number);
+        int times = 24*60/ Constants.TASK_SUB_PER_MINITE;//平均分配24小时运行
         int perNum = number/times+1;
 
         DateTime startTime = DateTime.now().withHourOfDay(0).withMinuteOfHour(0); //设定开始时间
@@ -250,7 +268,7 @@ public class TaskSubServiceImpl implements TaskSubService {
      */
     private void buildTaskSubs(Task task, long perTime,
                                List<DeviceInfo> deviceInfos, int taskNum,int createDay) {
-        int number=100;
+        int number=MAXINSERTNUMBER;
         int time=1;
         if(taskNum >number){
             time = taskNum/number+1;
