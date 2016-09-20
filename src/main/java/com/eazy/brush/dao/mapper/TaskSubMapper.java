@@ -67,10 +67,10 @@ public interface TaskSubMapper {
     @Select("Select count(*) from task_sub where state=0 and per_time<=#{perTime}")
     int getRandomCount(@Param("perTime")long perTime);
 
-    @Select("Select "+FEILDS+" from task_sub where task_id=#{taskId},create_day=#{createDay} and state=2 and task_type=1 limit  #{offset},#{number}")
+    @Select("Select "+FEILDS+" from task_sub where task_id=#{taskId} and create_day=#{createDay} and state=2 and task_type=1 limit  #{offset},#{number}")
     List<TaskSub> getListByCreateDay(@Param("taskId")int taskId,@Param("createDay") int createDay,@Param("offset")int offset,@Param("number")int number);
 
-    @Select("Select count(*) from task_sub where task_id=#{taskId},create_day=#{createDay} and state=#{state} and task_type<=#{taskType}")
+    @Select("Select count(*) from task_sub where task_id=#{taskId} and create_day=#{createDay} and state=#{state} and task_type<=#{taskType}")
     int getCountByTaskId(@Param("taskId")int taskId,@Param("createDay") int createDay,@Param("state")int state,@Param("taskType")int taskType);
 
     @Select("Select count(*) from task_sub where create_day=#{createDay} and state=#{state} and task_type<=#{taskType}")
