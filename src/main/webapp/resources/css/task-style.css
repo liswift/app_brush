@@ -133,3 +133,14 @@
 .unit-action-box .btn:hover .unit-action-del{
     display: inline-block;
 }
+.action-params-items-box{
+    margin-left:-5px;
+}
+.action-params-item{
+    height: 31px;
+    margin-bottom:15px;
+}
+.edit-action-dlg.modal{
+    width: 530px;
+    overflow: hidden;
+}

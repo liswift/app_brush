@@ -250,8 +250,8 @@ $(document).ready(function () {
     }
 
     function createActionGroup(data) {
-        var html = '<div group_id="0" class="group-action-item"><div class="group-action-name"><span>动作组一</span><i>ed</i></div>' +
-            '<i class="group-action-del">del</i><div class="group-actions">';
+        var html = '<div group_id="0" class="group-action-item"><div class="group-action-name"><span>动作组一</span><i></i></div>' +
+            '<i class="group-action-del"></i><div class="group-actions">';
 
         html += createActionsHtml(actionsObj);
         html += '</div></div>';
