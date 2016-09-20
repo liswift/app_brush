@@ -61,7 +61,7 @@ public class TaskSubScheduler {
      * 1.如果当日新增留存失败率过高,以后的留存也会同步减少
      * 2.留存不受新增时间的时间段限制。新增我保证投递时间,别人安装上了,我如何保证他什么时候打开?
      */
-    @Scheduled(cron = "0 0 0 * * * ?")
+    @Scheduled(cron = "0 */5 0 * * * ?")
     public void invokeAllSubTask() {
         Stopwatch stopwatch = Stopwatch.createStarted();
         log.info("### start invokeMakeTaskSub ###");
