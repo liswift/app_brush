@@ -23,10 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * 元任务相关服务
@@ -177,8 +174,9 @@ public class TaskSubServiceImpl implements TaskSubService {
                     perNum = listByCreateDay.size();
                 }
                 List<TaskSub> taskSubs = listByCreateDay.subList(0, perNum);
-                listByCreateDay.removeAll(taskSubs);
-                reUseTaskSub(taskSubs,perTime,createDay);
+                List<TaskSub> newList=new ArrayList<>(taskSubs);
+                taskSubs.clear();//子视图删除以后,原来的父类也会删除这些元素
+                reUseTaskSub(newList,perTime,createDay);
             }
             startTime = startTime.plusMinutes(Constants.TASK_SUB_PER_MINITE);
         }
