@@ -153,7 +153,7 @@ public class TaskSubServiceImpl implements TaskSubService {
                 if(tasktimes==0){
                     newnumber = number%MAXINSERTNUMBER;//取到最后剩余的余数
                 }
-                insertSub(task,createDay,(tasktimes-1)*mintaskNumber,newnumber);//通过offset进行总数量分割拿取
+                insertSub(task,createDay,tasktimes*mintaskNumber,newnumber);//通过offset进行总数量分割拿取
             }
         }else{
             insertSub(task, createDay,0,number);
