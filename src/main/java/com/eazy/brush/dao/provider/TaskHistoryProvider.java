@@ -45,7 +45,6 @@ public class TaskHistoryProvider {
                 sb.append(",");
             }
         }
-        log.info(">>>>>>>>"+sb.toString());
         return sb.toString();
     }
 }

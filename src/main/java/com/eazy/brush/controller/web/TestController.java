@@ -1,5 +1,6 @@
-package com.eazy.brush.schedule;
+package com.eazy.brush.controller.web;
 
+import com.eazy.brush.controller.common.BaseController;
 import com.eazy.brush.core.enums.TaskState;
 import com.eazy.brush.dao.entity.Task;
 import com.eazy.brush.dao.entity.TaskHistory;
@@ -10,20 +11,20 @@ import com.google.common.base.Stopwatch;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * author :sunpengshuai
- * create time:2016/8/31 23:47
+ * Created by yuekuapp on 16-9-20.
  */
-@Component
+@Controller
+@RequestMapping("/test")
 @Slf4j
-public class TaskSubScheduler {
-
+public class TestController extends BaseController {
     @Autowired
     TaskService taskService;
 
@@ -34,15 +35,6 @@ public class TaskSubScheduler {
     TaskHistoryService taskHistoryService;
 
 
-//    /**
-//     * 把所有的任务状态都搞成 通过 why?
-//     */
-//    @Scheduled(cron = "0 0 0  * * ? ")
-//    public void resetTaskState() {
-//        log.info("### start resetTaskState ###");
-//        taskService.changeAllState(TaskState.confirm_passed.getCode());
-//        log.info("### end invokeMakeTaskSub ###");
-//    }
 
     /**
      * 每日凌晨进行旧任务的统计以及新任务的重新生成评估,需要做以下事情
@@ -61,7 +53,7 @@ public class TaskSubScheduler {
      * 1.如果当日新增留存失败率过高,以后的留存也会同步减少
      * 2.留存不受新增时间的时间段限制。新增我保证投递时间,别人安装上了,我如何保证他什么时候打开?
      */
-    @Scheduled(cron = "0 0 0 * * ?")
+    @RequestMapping(value = "task", method = RequestMethod.GET)
     public void invokeAllSubTask() {
         Stopwatch stopwatch = Stopwatch.createStarted();
         log.info("### start invokeMakeTaskSub ###");
@@ -93,7 +85,6 @@ public class TaskSubScheduler {
 
         //这里是获取还有留存的历史TaskHistory,根据留存率进行判断
         List<TaskHistory> activeTask = taskHistoryService.getActiveTask();
-        log.info("### end getActivt history Task,cost {} s ###", stopwatch.elapsed(TimeUnit.SECONDS));
         for (TaskHistory taskHistory : activeTask) {
             taskSubService.makeRetainDayTaskSub(taskHistory);
             taskHistoryService.changeRetainPercent(taskHistory);
@@ -103,6 +94,5 @@ public class TaskSubScheduler {
         log.info("### end invokeMakeTaskSub,cost {} s ###", stopwatch.elapsed(TimeUnit.SECONDS));
         stopwatch.stop();
     }
-
 
 }
