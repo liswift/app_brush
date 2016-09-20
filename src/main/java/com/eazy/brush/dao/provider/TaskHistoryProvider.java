@@ -24,7 +24,7 @@ public class TaskHistoryProvider {
      */
     public String insertTaskHistoryBatch(Map map) {
 
-        List<TaskHistory>  taskHistories= (List<TaskHistory>) map.get("histories");
+        List<TaskHistory>  histories= (List<TaskHistory>) map.get("histories");
 
         StringBuilder sb = new StringBuilder();
         sb.append("INSERT INTO task_history ");
@@ -33,15 +33,15 @@ public class TaskHistoryProvider {
 
         MessageFormat mf = new MessageFormat("" +
                 "(" +
-                "#'{'taskHistories[{0}].userId'}',#'{'taskHistories[{0}].taskId'}',#'{'taskHistories[{0}].appName'}'," +
-                "#'{'taskHistories[{0}].remarkName'}'," +
-                "#'{'taskHistories[{0}].incrDay'}',#'{'taskHistories[{0}].incrFail'}',#'{'taskHistories[{0}].incrUnfinish'}',#'{'taskHistories[{0}].retainDay'}'," +
-                "#'{'taskHistories[{0}].retainFail'}',#'{'taskHistories[{0}].retainUnfinish'}'," +
-                "#'{'taskHistories[{0}].retainPercent'}',#'{'taskHistories[{0}].retainStayday'}',#'{'taskHistories[{0}].createDay'}'" +
+                "#'{'histories[{0}].userId'}',#'{'histories[{0}].taskId'}',#'{'histories[{0}].appName'}'," +
+                "#'{'histories[{0}].remarkName'}'," +
+                "#'{'histories[{0}].incrDay'}',#'{'histories[{0}].incrFail'}',#'{'histories[{0}].incrUnfinish'}',#'{'histories[{0}].retainDay'}'," +
+                "#'{'histories[{0}].retainFail'}',#'{'histories[{0}].retainUnfinish'}'," +
+                "#'{'histories[{0}].retainPercent'}',#'{'histories[{0}].retainStayday'}',#'{'histories[{0}].createDay'}'" +
                 ")");
-        for (int i = 0; i < taskHistories.size(); i++) {
+        for (int i = 0; i < histories.size(); i++) {
             sb.append(mf.format(new Object[]{i}));
-            if (i < taskHistories.size() - 1) {
+            if (i < histories.size() - 1) {
                 sb.append(",");
             }
         }

@@ -250,29 +250,39 @@ public class TaskSubServiceImpl implements TaskSubService {
      */
     private void buildTaskSubs(Task task, long perTime,
                                List<DeviceInfo> deviceInfos, int taskNum,int createDay) {
-
-
-        List<TaskSub> taskSubs = Lists.newArrayList();
-        for (int num = 0; num < taskNum; num++) {
-
-            TaskSub taskSub = new TaskSub();
-            taskSub.setId(UUID.randomUUID().toString());
-            taskSub.setTaskId(task.getId());
-            taskSub.setPerTime(perTime);
-            taskSub.setDeviceInfoId(LotteryUtil.lottery(deviceInfos).getId());
-            taskSub.setRunTime(task.getRunTime()*60-task.getRunUpDown()+ new Random().nextInt(2*task.getRunUpDown()));//设置运行时间
-            taskSub.setCreateDay(createDay);
-            taskSub.setTaskType(SubTaskType.ACTIVE.getCode());//新增任务
-            taskSub.setState(SubTaskState.INIT.getState());//状态初始化
-            setCardInfo(taskSub);
-            setNetInfo(taskSub);
-            taskSub.setVersionIncremental(RandomUtil.generateMixString(13));
-            taskSub.setBuildId(RandomUtil.generateMixString(7));
-            taskSub.setSecureId(UUID.randomUUID().toString());
-            taskSub.setSerial(RandomUtil.generateMixString(16));
-            taskSubs.add(taskSub);
+        int number=100;
+        int time=1;
+        if(taskNum >number){
+            time = taskNum/number+1;
         }
-        insertTaskBatch(taskSubs);
+        while(time-->0){
+            if(time==1){
+                number=taskNum%number;
+            }
+
+            List<TaskSub> taskSubs = Lists.newArrayList();
+            for (int num = 0; num < number; num++) {
+
+                TaskSub taskSub = new TaskSub();
+                taskSub.setId(UUID.randomUUID().toString());
+                taskSub.setTaskId(task.getId());
+                taskSub.setPerTime(perTime);
+                taskSub.setDeviceInfoId(LotteryUtil.lottery(deviceInfos).getId());
+                taskSub.setRunTime(task.getRunTime()*60-task.getRunUpDown()+ new Random().nextInt(2*task.getRunUpDown()));//设置运行时间
+                taskSub.setCreateDay(createDay);
+                taskSub.setTaskType(SubTaskType.ACTIVE.getCode());//新增任务
+                taskSub.setState(SubTaskState.INIT.getState());//状态初始化
+                setCardInfo(taskSub);
+                setNetInfo(taskSub);
+                taskSub.setVersionIncremental(RandomUtil.generateMixString(13));
+                taskSub.setBuildId(RandomUtil.generateMixString(7));
+                taskSub.setSecureId(UUID.randomUUID().toString());
+                taskSub.setSerial(RandomUtil.generateMixString(16));
+                taskSubs.add(taskSub);
+            }
+            insertTaskBatch(taskSubs);
+        }
+
     }
 
     private void setCardInfo(TaskSub taskSub) {

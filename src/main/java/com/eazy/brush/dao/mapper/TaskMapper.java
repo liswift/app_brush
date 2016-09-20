@@ -25,7 +25,7 @@ public interface TaskMapper {
     @Select("select " + FEILDS + " from task where id=#{id}")
     Task getById(@Param("id") int id);
 
-    @Select("select " + FEILDS + " from task where state=#{state} order")
+    @Select("select " + FEILDS + " from task where state=#{state}")
     List<Task> getByState(@Param("state") int state);
 
     @Delete("delete from task where id=#{id}")
