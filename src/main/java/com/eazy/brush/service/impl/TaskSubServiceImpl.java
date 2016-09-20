@@ -112,7 +112,7 @@ public class TaskSubServiceImpl implements TaskSubService {
             times = (task.getRunEndTime() - task.getRunStartTime()) * 60 / Constants.TASK_SUB_PER_MINITE;
             perNum = number / times + 1;                             //不能整除，所以多运行一个
         }
-        log.info("### times:{},perNum:{} ###", times, perNum);
+        log.info("### times:{},perNum:{} maxnumber:{} ###", times, perNum,number);
         DateTime startTime = DateTime.now().withHourOfDay(task.getRunStartTime()).withMinuteOfHour(0); //设定开始时间
         while (times-- > 0) {
             long perTime = Long.parseLong(startTime.toString("yyyyMMddHHmm"));
@@ -150,7 +150,7 @@ public class TaskSubServiceImpl implements TaskSubService {
             int tasktimes = number/MAXINSERTNUMBER+1;//增加一次
             int mintaskNumber=task.getIncrDay()/tasktimes;//把总任务进行分割
             while (tasktimes-->0){
-                if(tasktimes==1){
+                if(tasktimes==0){
                     newnumber = number%MAXINSERTNUMBER;//取到最后剩余的余数
                 }
                 insertSub(task,createDay,(tasktimes-1)*mintaskNumber,newnumber);//通过offset进行总数量分割拿取
@@ -273,7 +273,7 @@ public class TaskSubServiceImpl implements TaskSubService {
             time = taskNum/number+1;
         }
         while(time-->0){
-            if(time==1){
+            if(time == 0){//此时最后运行完,已经等于0了
                 number=taskNum%number;
             }
             log.info("##### insert number:" + number+" time:"+time);
