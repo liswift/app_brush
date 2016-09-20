@@ -98,7 +98,7 @@ public class TaskSubServiceImpl implements TaskSubService {
         List<DeviceInfo> deviceInfos = deviceInfoService.getList(0, Integer.MAX_VALUE);
         int createDay = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));
 
-        int newnumber=task.getRetainDay();
+        int newnumber=task.getIncrDay();
         int newupdown=task.getIncrUpDown();
         int number = newnumber-newupdown + new Random().nextInt(2*newupdown);//计算当天的新增数量总数
 
@@ -112,7 +112,7 @@ public class TaskSubServiceImpl implements TaskSubService {
             times = (task.getRunEndTime() - task.getRunStartTime()) * 60 / Constants.TASK_SUB_PER_MINITE;
             perNum = number / times + 1;                             //不能整除，所以多运行一个
         }
-
+        log.info("### times:{},perNum:{} ###", times, perNum);
         DateTime startTime = DateTime.now().withHourOfDay(task.getRunStartTime()).withMinuteOfHour(0); //设定开始时间
         while (times-- > 0) {
             long perTime = Long.parseLong(startTime.toString("yyyyMMddHHmm"));
@@ -266,6 +266,7 @@ public class TaskSubServiceImpl implements TaskSubService {
      */
     private void buildTaskSubs(Task task, long perTime,
                                List<DeviceInfo> deviceInfos, int taskNum,int createDay) {
+        log.info("##### begin buildTaskSubs perTime:"+perTime+" taskNum:"+taskNum+" createDay:"+createDay);
         int number=MAXINSERTNUMBER;
         int time=1;
         if(taskNum >number){
@@ -275,7 +276,7 @@ public class TaskSubServiceImpl implements TaskSubService {
             if(time==1){
                 number=taskNum%number;
             }
-
+            log.info("##### insert number:" + number+" time:"+time);
             List<TaskSub> taskSubs = Lists.newArrayList();
             for (int num = 0; num < number; num++) {
 
