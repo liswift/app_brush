@@ -35,7 +35,7 @@ public class TaskHistoryProvider {
                 "(" +
                 "#'{'taskHistories[{0}].userId'}',#'{'taskHistories[{0}].taskId'}',#'{'taskHistories[{0}].appName'}'," +
                 "#'{'taskHistories[{0}].remarkName'}'," +
-                "#'{'taskHistories[{0}].incrDay'}'#'{'taskHistories[{0}].incrFail'}',,#'{'taskHistories[{0}].incrUnfinish'}',#'{'taskHistories[{0}].retainDay'}'," +
+                "#'{'taskHistories[{0}].incrDay'}',#'{'taskHistories[{0}].incrFail'}',#'{'taskHistories[{0}].incrUnfinish'}',#'{'taskHistories[{0}].retainDay'}'," +
                 "#'{'taskHistories[{0}].retainFail'}',#'{'taskHistories[{0}].retainUnfinish'}'," +
                 "#'{'taskHistories[{0}].retainPercent'}',#'{'taskHistories[{0}].retainStayday'}',#'{'taskHistories[{0}].createDay'}'" +
                 ")");
