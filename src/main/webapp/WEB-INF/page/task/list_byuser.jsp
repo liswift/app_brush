@@ -81,7 +81,7 @@
                         <c:if test="${t.intState==1||t.intState==2}"><!--已停止状态,以及审核通过状态可以启动-->
                             <a href="javascript:;" onclick="funReflocak(${t.id},'start');">启动</a>
                         </c:if>
-                        <a href="javascript:;" onclick="funReflocak(${t.id},'delete');">>删除</a>
+                        <a href="javascript:;" onclick="funReflocak(${t.id},'delete');">删除</a>
                         <a href="javascript:;"
                            onclick="fullOpen('修改任务','${ctx}/task/toEdit?id=${t.id}&ac=editor')">修改</a>
                         <a href="javascript:;"

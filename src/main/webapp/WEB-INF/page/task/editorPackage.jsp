@@ -186,6 +186,7 @@
 
             $("#select-file").on('change', 'input', function (e, b) {
                 $("#select-file a").text(this.files[0].name);
+                uploader.upload();
             });
 
         });
