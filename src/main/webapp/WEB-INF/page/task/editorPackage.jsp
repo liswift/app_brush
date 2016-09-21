@@ -33,8 +33,8 @@
     <form id="form1" action="${ctx}/task/apk/upload" enctype="multipart/form-data" method="post">
         <div class="add-task-item">
             <span><span class="required-dot">*</span>应用apk文件：</span>
-            <span class="btn-upload" style="margin-left:10px">
-                <input class="btn btn-default" type="button"  id="select-file" value="上传应用<">
+            <span class="btn-upload" style="margin-left:10px" id="select-file">
+            <a href="javascript:void(0);" class="btn btn-primary radius">上传应用</a>
             </span>
             <div class="progress task-progress">
                 <div class="progress-bar">
@@ -123,8 +123,10 @@
             var uploader = WebUploader.create({
                 // swf文件路径
                 swf: '${ctx}/resources/lib/webuploader/0.1.5/Uploader.swf',
+
                 // 文件接收服务端。
                 server: '/task/apk/upload',
+
                 // 选择文件的按钮。可选。
                 // 内部根据当前运行是创建，可能是input元素，也可能是flash.
                 pick: '#select-file',
@@ -183,9 +185,9 @@
                 }
             });
 
-//            $("#select-file").on('change', 'input', function (e, b) {
-//                $("#select-file a").text(this.files[0].name);
-//            });
+            $("#select-file").on('change', 'input', function (e, b) {
+                $("#select-file a").text(this.files[0].name);
+            });
 
         });
 
