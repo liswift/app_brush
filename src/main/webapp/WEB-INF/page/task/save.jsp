@@ -149,7 +149,6 @@
     </div>
     <div class="row cl">
         <div class="col-xs-10 col-sm-10 col-xs-offset-4 col-sm-offset-5">
-            <input type="hidden" task_name="id" value="${task.id}">
             <input id="task-add-btn" class="btn btn-primary radius" type="submit" style="width: 90px" value="提交">
         </div>
     </div>
@@ -157,12 +156,12 @@
 
 
 <div aria-hidden="true">
+    <input type="hidden" task_name="id" class="input-text" hidden value="${task.id}"
+           autocomplete="off" readonly="readonly">
     <input type="hidden" task_name="apkUrl" class="input-text" hidden value="${task.apkUrl}" id="apkUrl"
            autocomplete="off" readonly="readonly">
     <input type="hidden" task_name="versionCode" class="input-text" hidden value="${task.versionCode}" id="versionCode"
            autocomplete="off" readonly="readonly">
-    <input type="hidden" task_name="id" class="input-text" hidden value="${task.id}"
-           autocomplete="off" readonly="readonly"><!--minSdkVersion-->
     <input type="hidden" task_name="minSdkVersion" class="input-text" hidden value="${task.minSdkVersion}" id="minSdkVersion"
            autocomplete="off" readonly="readonly"><!--minSdkVersion-->
 </div>
