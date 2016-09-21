@@ -78,7 +78,7 @@
                         <c:if test="${t.intState==3}">
                             <a href="javascript:;" onclick="funReflocak(${t.id},'stop');">停止</a><!--运行中状态可以停止-->
                         </c:if>
-                        <c:if test="${t.inState==1||t.inState==2}"><!--已停止状态,以及审核通过状态可以启动-->
+                        <c:if test="${t.intState==1||t.intState==2}"><!--已停止状态,以及审核通过状态可以启动-->
                             <a href="javascript:;" onclick="funReflocak(${t.id},'start');">启动</a>
                         </c:if>
                         <a href="javascript:;" onclick="funReflocak(${t.id},'delete');">>删除</a>
