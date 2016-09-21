@@ -71,7 +71,7 @@ public class TaskSubScheduler {
         log.info("### end get historys ###" + historys);
         for (TaskHistory history : historys) {
             Task task = taskService.getById(history.getTaskId());
-            history.setAppName(task.getAppName());
+            history.setAppName(task.getRemarkName());
             history.setRemarkName(task.getRemarkName());
             history.setUserId(task.getUserId());
             history.setRetainStayday(task.getRetainDay());//这里不要写错!

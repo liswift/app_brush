@@ -14,7 +14,8 @@ public class Task {
     private int id;
     private int userId;
     private int auditUserId;
-    private String appName;         //应用名称
+    private int minSdkVersion;
+//    private String appName;         //应用名称
     private String packageName;     //应用程序包名
     private int versionCode;        //versionCode
     private String appVersion;      //应用版本

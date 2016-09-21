@@ -78,7 +78,6 @@ public class TaskController extends BaseController {
     public void uploadApk(@RequestParam(value = "file") MultipartFile file) {
         String now = DateTime.now().toString("yyyyMMddHHmmssSSS");
         String fileName = now + "_" + file.getOriginalFilename();
-
         ApkInfo apkInfo = null;
         try {
             ftpTool.connect();
@@ -89,7 +88,9 @@ public class TaskController extends BaseController {
             FileUtils.copyInputStreamToFile(file.getInputStream(), tempFile);
             apkInfo = ApkUtil.getApkInfo(tempFile);
             FileUtils.forceDelete(tempFile);
-            apkInfo.setApkUrl(getRequest().getContextPath()+"/apk/download?file="+fileName);
+            StringBuffer url = request.getRequestURL();
+            String tempContextUrl = url.delete(url.length() - request.getRequestURI().length(), url.length()).append("/").toString();
+            apkInfo.setApkUrl(tempContextUrl+"apk/download?file="+fileName);
             renderJson200(apkInfo);
         } catch (IOException e) {
             log.error("upload apk file error {}", e);
@@ -104,8 +105,6 @@ public class TaskController extends BaseController {
             task.setUserId(getCurrentUser().getId());
             task.setState(TaskState.confirm_ing.getCode());
             task.setDayLimit(Constants.TASK_DAY_LIMIT);
-            task.setAppName("");
-            task.setAppVersion("");
             taskService.add(task);
         } else {
             taskService.update(task);

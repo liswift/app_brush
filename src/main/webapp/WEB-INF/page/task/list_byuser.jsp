@@ -61,7 +61,7 @@
             <c:forEach items="${ tasks }" var="t">
                 <tr class="text-c">
                     <td>${t.id}</td>
-                    <td>${t.appName}</td>
+                    <td>${t.remarkName}</td>
                     <td>${t.createTime}</td>
                     <td>${t.incrDay}</td>
                     <td>${t.todayNum}</td>

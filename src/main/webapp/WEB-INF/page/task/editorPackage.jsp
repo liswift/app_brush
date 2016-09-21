@@ -43,9 +43,9 @@
     </div>
     <div class="row cl">
         <div class="formControls col-xs-6 col-sm-6">
-            <label class="form-label col-xs-4 col-sm-4">应用名称：</label>
+            <label class="form-label col-xs-4 col-sm-4">应用包名：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" task_name="appName" value="${task.appName}" class="input-text" id="appName"
+                <input type="text" task_name="packageName" value="${task.packageName}" class="input-text" id="packageName"
                        autocomplete="off" readonly="readonly">
             </div>
         </div>
@@ -60,8 +60,16 @@
         </div>
     </div>
     <div class="row cl">
+        <div class="formControls col-xs-6 col-sm-6">
+            <label class="form-label col-xs-4 col-sm-4">备注名称：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" task_name="remarkName" value="${task.remarkName}" class="input-text" id="remarkName"
+                       autocomplete="off" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="row cl">
         <div class="col-xs-10 col-sm-10 col-xs-offset-4 col-sm-offset-5">
-            <input type="hidden" name="id" value="${task.id}">
             <input id="task-add-btn" class="btn btn-primary radius" type="submit" style="width: 90px"
                    value="提交">
         </div>
@@ -72,10 +80,10 @@
                autocomplete="off" readonly="readonly">
         <input type="hidden" task_name="versionCode" class="input-text" hidden value="${task.versionCode}" id="versionCode"
                autocomplete="off" readonly="readonly">
-        <input type="hidden" task_name="packageName" class="input-text" hidden value="${task.packageName}" id="packageName"
-               autocomplete="off" readonly="readonly">
         <input type="hidden" task_name="id" class="input-text" hidden value="${task.id}" id="taskId"
-               autocomplete="off" readonly="readonly">
+               autocomplete="off" readonly="readonly"><!--minSdkVersion-->
+        <input type="hidden" task_name="minSdkVersion" class="input-text" hidden value="${task.minSdkVersion}" id="minSdkVersion"
+               autocomplete="off" readonly="readonly"><!--minSdkVersion-->
     </div>
 
 </div>
@@ -126,11 +134,11 @@
             resize: false
         });
 
-        var $appName = $("#appName");
         var $appVersion = $("#appVersion");
         var $apkUrl=$("#apkUrl");
         var $versionCode=$("#versionCode");
         var $packageName=$("#packageName");
+        var $minSdkVersion=$("#minSdkVersion");
         // 文件上传过程中创建进度条实时显示。
         var $progressBar = $("#progress-bar");
         var $progressText = $('.task-progress-tint', $progressBar);
@@ -155,11 +163,11 @@
         });
         uploader.on('uploadSuccess', function (file, response) {
             if (response.code == 200) {
-                $appName.val(response.data.apkName);
                 $appVersion.val(response.data.versionName);
                 $versionCode.val(response.data.versionCode);
                 $packageName.val(response.data.apkPackage);
                 $apkUrl.val(response.data.apkUrl);
+                $minSdkVersion.val(response.data.minSdkVersion);
                 $progressText.text('上传成功!');
             } else {
                 $progressText.text('上传失败!');

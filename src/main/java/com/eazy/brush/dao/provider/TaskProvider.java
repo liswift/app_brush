@@ -31,8 +31,8 @@ public class TaskProvider {
         if(task.getAuditUserId()>0){
             SET("audit_user_id=#{auditUserId}");
         }
-        if (StringUtils.isNotEmpty(task.getAppName())) {
-            SET("app_name=#{appName}");
+        if(task.getMinSdkVersion()>0){
+            SET("min_sdk_version=#{minSdkVersion}");
         }
         if (StringUtils.isNotEmpty(task.getPackageName())) {
             SET("package_name=#{packageName}");

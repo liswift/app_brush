@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 public class TaskSubApiVo {
     private String id;
-    private String appName;
+    private String remarkName;
     private String packageName;
     private int versionCode;
     private int runTime;

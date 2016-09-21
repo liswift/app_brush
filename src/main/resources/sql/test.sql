@@ -1142,7 +1142,7 @@ CREATE TABLE `task` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL DEFAULT '0',
   `audit_user_id` int(11) NOT NULL DEFAULT '0',
-  `app_name` varchar(64) NOT NULL COMMENT '应用名称',
+  `min_sdk_version` int(2) NOT NULL DEFAULT '8',
   `package_name` varchar(64) DEFAULT NULL COMMENT '应用程序包名',
   `version_code` int(11) NOT NULL DEFAULT '0',
   `app_version` varchar(32) NOT NULL COMMENT '应用版本',
@@ -1168,9 +1168,9 @@ CREATE TABLE `task` (
 -- ----------------------------
 -- Records of task
 -- ----------------------------
-INSERT INTO `task` VALUES ('11', '9','13', 'Mainac', 'com.yuekuba.maintest', '1', '15.0', 'http://www.yuekuba.com/task/apk/download?file=maintest-debug.apk', '网易新闻', '10000', '100000', '10', '60', '1', '0', '23', '1', '7', '50', '2', '2016-09-11 03:38:59','','0');
+INSERT INTO `task` VALUES ('11', '9','13','8', 'com.yuekuba.maintest', '1', '15.0', 'http://www.yuekuba.com/task/apk/download?file=maintest-debug.apk', '网易新闻', '10000', '100000', '10', '60', '1', '0', '23', '1', '7', '50', '2', '2016-09-11 03:38:59','','0');
 
-INSERT INTO `task` VALUES ('12', '9','0', 'Mainac', 'com.yuekuba.maintest', '1', '15.0', 'http://www.yuekuba.com/task/apk/download?file=maintest-debug.apk', '网易新闻', '10000', '100000', '10', '60', '1', '0', '23', '1', '7', '50', '-1', '2016-09-11 03:38:59','','0');
+INSERT INTO `task` VALUES ('12', '9','0','8', 'com.yuekuba.maintest', '1', '15.0', 'http://www.yuekuba.com/task/apk/download?file=maintest-debug.apk', '网易新闻', '10000', '100000', '10', '60', '1', '0', '23', '1', '7', '50', '-1', '2016-09-11 03:38:59','','0');
 
 
 -- ----------------------------

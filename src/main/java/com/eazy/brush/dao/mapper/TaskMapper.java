@@ -12,11 +12,11 @@ import java.util.List;
  */
 public interface TaskMapper {
 
-    String INSERT_FEILDS = "user_id,audit_user_id,app_name,package_name,version_code,app_version,apk_url,remark_name,incr_day,day_limit," +
+    String INSERT_FEILDS = "user_id,audit_user_id,min_sdk_version,package_name,version_code,app_version,apk_url,remark_name,incr_day,day_limit," +
             "incr_up_down,run_time,run_up_down,run_start_time," +
             "run_end_time,run_speed,retain_day,retain_percent,state,create_time,msg,deleted";
 
-    String INSERT_VALUES = "#{userId},#{auditUserId},#{appName},#{packageName},#{versionCode},#{appVersion},#{apkUrl}," +
+    String INSERT_VALUES = "#{userId},#{auditUserId},#{minSdkVersion},#{packageName},#{versionCode},#{appVersion},#{apkUrl}," +
             "#{remarkName},#{incrDay},#{dayLimit},#{incrUpDown},#{runTime},#{runUpDown},#{runStartTime}," +
             "#{runEndTime},#{runSpeed},#{retainDay},#{retainPercent},#{state},#{createTime},#{msg},#{deleted}";
 

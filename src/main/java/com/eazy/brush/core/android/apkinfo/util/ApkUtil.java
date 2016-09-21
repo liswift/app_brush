@@ -33,6 +33,7 @@ public class ApkUtil {
         apkInfo.setApkPackage(root.getAttribute("package").getValue());
         Element elemUseSdk = root.getChild("uses-sdk");//子节点-->uses-sdk
         apkInfo.setMinSdkVersion(elemUseSdk.getAttributeValue("minSdkVersion", NS));
+
         return apkInfo;
     }
 
@@ -60,7 +61,6 @@ public class ApkUtil {
     public static void main(String[] args) {
         File file = new File("F:\\netease_newsreader_android.apk");
         ApkInfo apkInfo = ApkUtil.getApkInfo(file);
-        System.out.println(apkInfo.getApkName());
         System.out.println(apkInfo.getApkPackage());
         System.out.println(apkInfo.getVersionCode());
         System.out.println(apkInfo.getVersionName());
