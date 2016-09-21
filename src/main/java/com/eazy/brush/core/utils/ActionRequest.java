@@ -72,7 +72,6 @@ public class ActionRequest {
 
     public static void renderWEP(String fileName, String columnName, List<String[]> list1, int importWEP, HttpServletResponse response) {
         try {
-            response.reset();
             response.setHeader("Content-Disposition", "attachment;filename=" + fileName);// 指定下载的文件名
             response.setContentType("application/msexcel;charset=UTF-8");
             ServletOutputStream outputStream = response.getOutputStream();
