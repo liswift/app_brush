@@ -37,9 +37,9 @@
                <a href="javascript:void(0);" class="btn btn-primary radius">上传应用</a>
             </span>
             <div class="progress task-progress">
-                <div class="progress-bar">
-                    <span class="task-progress-tint">25%</span>
-                    <span class="sr-only" style="width:25%"></span>
+                <div class="progress-bar" id="progress-bar">
+                    <span class="task-progress-tint">0%</span>
+                    <span class="sr-only" style="width:0%"></span>
                 </div>
             </div>
         </div>
@@ -139,8 +139,9 @@
             var $progressText = $('.task-progress-tint', $progressBar);
             var $progressPer = $('.sr-only', $progressBar);
             uploader.on('uploadProgress', function (file, percentage) {
-                $progressText.text(percentage + '%');
-                $progressPer.css('width', percentage + '%');
+                var percentInt=parseInt(percentage*100);
+                $progressText.text(percentInt + '%');
+                $progressPer.css('width', percentInt + '%');
                 console.log(percentage)
             });
 
@@ -157,12 +158,13 @@
             });
             uploader.on('uploadSuccess', function (file) {
                 $progressBar.hide();
+                $progressText.text('上传成功!');
                 console.log('uploadSuccess')
             });
 
             uploader.on('uploadError', function (file) {
                 $progressBar.hide();
-                console.log('uploadError')
+                layer.msg("上传失败");
             });
 
             uploader.on('uploadComplete', function (file) {
