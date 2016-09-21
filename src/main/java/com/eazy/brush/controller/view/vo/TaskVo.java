@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class TaskVo {
     private int id;
-    private String appName;
+    private String remarkName;
     private String packageName;
     private int versionCode;
     private String createTime;

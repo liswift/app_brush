@@ -32,14 +32,13 @@ public class TaskVoServiceImpl implements TaskVoService {
 
     public List<TaskVo> getTaskVos(List<Task> tasks) {
         List<TaskVo> taskVos = Lists.newArrayList();
-        int todayDay = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));
-        int yestoday = Integer.parseInt(DateTime.now().minusDays(1).toString("yyyyMMdd"));
+
 
         for (Task task : tasks) {
             TaskVo taskVo = new TaskVo();
             taskVo.setId(task.getId());
             taskVo.setMsg(task.getMsg());
-            taskVo.setAppName(task.getRemarkName());
+            taskVo.setRemarkName(task.getRemarkName());
             taskVo.setCreateTime(new DateTime(task.getCreateTime()).toString("yyyy-MM-dd HH:mm:ss"));
             taskVo.setIncrDay(task.getIncrDay());
 
