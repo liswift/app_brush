@@ -28,7 +28,7 @@ public class TaskProvider {
         if(task.getUserId()>0){
             SET("user_id=#{userId}");
         }
-        if(task.getAuditUserId()>-1){
+        if(task.getAuditUserId()>0){
             SET("audit_user_id=#{auditUserId}");
         }
         if (StringUtils.isNotEmpty(task.getAppName())) {

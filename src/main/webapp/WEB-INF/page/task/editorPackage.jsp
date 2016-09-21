@@ -103,6 +103,8 @@
             });
             ajaxPost('/task/save', params, function (d) {
                 layer.msg('更新成功!');
+                parent.location.reload();
+                layer_close();
             }, function (d) {
                 layer.msg('更新失败!')
             });

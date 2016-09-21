@@ -110,7 +110,7 @@ public class TaskController extends BaseController {
         } else {
             taskService.update(task);
         }
-        renderJsonResponse();
+        renderJson200();
     }
 
     @RequestMapping(value = "delete", method = {RequestMethod.POST, RequestMethod.GET})
