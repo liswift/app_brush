@@ -2,11 +2,14 @@ package com.eazy.brush.controller.view.service.impl;
 
 import com.eazy.brush.controller.view.service.ActionPageVoService;
 import com.eazy.brush.controller.view.service.TaskSubVoService;
-import com.eazy.brush.controller.view.vo.ActionPageVo;
-import com.eazy.brush.controller.view.vo.TaskSubVo;
+import com.eazy.brush.controller.view.vo.ActionPageApiVo;
+import com.eazy.brush.controller.view.vo.TaskSubApiVo;
 import com.eazy.brush.dao.entity.*;
 import com.eazy.brush.model.ProxyModel;
-import com.eazy.brush.service.*;
+import com.eazy.brush.service.ActionPageService;
+import com.eazy.brush.service.DeviceInfoService;
+import com.eazy.brush.service.ProxyIpService;
+import com.eazy.brush.service.TaskService;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,22 +43,22 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
     ProxyIpService proxyIpService;
 
     @Override
-    public List<TaskSubVo> buildVo(List<TaskSub> list) {
-        List<TaskSubVo> voList = Lists.newArrayList();
+    public List<TaskSubApiVo> buildVo(List<TaskSub> list) {
+        List<TaskSubApiVo> voList = Lists.newArrayList();
         for (TaskSub taskSub : list) {
 
             Task task = taskService.getById(taskSub.getTaskId());
             DeviceInfo deviceInfo = buildDeviceInfo(taskSub);
-            List<ActionPageVo> actionPageVos = actionPageVoService.getByTaskId(task.getId());
+            List<ActionPageApiVo> actionPageVos = actionPageVoService.getApiByTaskId(task.getId());
 
-            TaskSubVo taskSubVo = new TaskSubVo();
+            TaskSubApiVo taskSubVo = new TaskSubApiVo();
             taskSubVo.setId(taskSub.getId());
             taskSubVo.setRunTime(taskSub.getRunTime());
             taskSubVo.setAppName(task.getAppName());
             taskSubVo.setPackageName(task.getPackageName());
             taskSubVo.setVersionCode(task.getVersionCode());
-            taskSubVo.setActionPageVo(actionPageVos);
             taskSubVo.setApkUrl(task.getApkUrl());
+            taskSubVo.setPageActions(actionPageVos);
             taskSubVo.setDeviceInfo(deviceInfo);
 
             taskSubVo.setCardInfo(buildCardInfo(taskSub));

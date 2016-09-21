@@ -1,10 +1,12 @@
 package com.eazy.brush.controller.view.service.impl;
 
 import com.eazy.brush.controller.view.service.ActionGroupVoService;
+import com.eazy.brush.controller.view.vo.ActionGroupApiVo;
 import com.eazy.brush.controller.view.vo.ActionGroupVo;
 import com.eazy.brush.dao.entity.ActionGroup;
 import com.eazy.brush.service.ActionGroupService;
 import com.eazy.brush.service.ActionItemService;
+import com.eazy.brush.service.ActionItemVoService;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ import java.util.List;
  */
 @Service
 public class ActionGroupVoServiceImpl implements ActionGroupVoService {
+
+    @Autowired
+    ActionItemVoService actionItemVoService;
 
     @Autowired
     ActionItemService actionItemService;
@@ -37,15 +42,31 @@ public class ActionGroupVoServiceImpl implements ActionGroupVoService {
     }
 
     @Override
+    public List<ActionGroupApiVo> getApiByPageId(int pageId) {
+        return transforActionGroupApi(actionGroupService.getByPageActionId(pageId));
+    }
+
+    @Override
     public void update(int pageId, List<ActionGroup> actionGroups) {
         actionGroupService.deleteByPageId(pageId);
         actionGroupService.insert(actionGroups);
-//        actionGroupService
     }
 
     @Override
     public void deleteByPageId(int pageId) {
         actionGroupService.deleteByPageId(pageId);
+    }
+
+
+    private List<ActionGroupApiVo> transforActionGroupApi(List<ActionGroup> actionGroups){
+        List<ActionGroupApiVo> actionGroupApiVos=Lists.newArrayList();
+        for(ActionGroup actionGroup:actionGroups){
+            if(actionGroup.getEnable()==1&&StringUtils.isNotEmpty(actionGroup.getActionItemIds())){
+                ActionGroupApiVo actionGroupApiVo=new ActionGroupApiVo();
+                actionGroupApiVo.setActions(actionItemVoService.getApiByIds(actionGroup.getActionItemIds()));
+            }
+        }
+        return actionGroupApiVos;
     }
 
     private List<ActionGroupVo> transforActionGroup(List<ActionGroup> actionGroups){

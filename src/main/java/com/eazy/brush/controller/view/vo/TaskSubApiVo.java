@@ -13,7 +13,7 @@ import java.util.List;
  * create time:2016/8/28 10:44
  */
 @Data
-public class TaskSubVo {
+public class TaskSubApiVo {
     private String id;
     private String appName;
     private String packageName;
@@ -21,7 +21,7 @@ public class TaskSubVo {
     private int runTime;
     private String apkUrl;
 
-    private List<ActionPageVo> actionPageVo;
+    private List<ActionPageApiVo> pageActions;
     private DeviceInfo deviceInfo;
     private CardInfo cardInfo;
     private NetInfo netInfo;

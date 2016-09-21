@@ -1,5 +1,6 @@
 package com.eazy.brush.controller.view.service;
 
+import com.eazy.brush.controller.view.vo.ActionPageApiVo;
 import com.eazy.brush.controller.view.vo.ActionPageVo;
 import com.eazy.brush.dao.entity.ActionPage;
 
@@ -11,7 +12,8 @@ import java.util.List;
  */
 public interface ActionPageVoService {
 
-    List<ActionPageVo> getByTaskId(int id);
+
+    List<ActionPageApiVo> getApiByTaskId(int id);
 
     List<ActionPageVo> getByTaskIdNum(int id);
 

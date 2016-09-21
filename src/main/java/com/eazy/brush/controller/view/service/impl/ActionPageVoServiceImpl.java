@@ -2,6 +2,7 @@ package com.eazy.brush.controller.view.service.impl;
 
 import com.eazy.brush.controller.view.service.ActionGroupVoService;
 import com.eazy.brush.controller.view.service.ActionPageVoService;
+import com.eazy.brush.controller.view.vo.ActionPageApiVo;
 import com.eazy.brush.controller.view.vo.ActionPageVo;
 import com.eazy.brush.dao.entity.ActionPage;
 import com.eazy.brush.service.ActionItemService;
@@ -32,12 +33,18 @@ public class ActionPageVoServiceImpl implements ActionPageVoService {
 
 
     @Override
-    public List<ActionPageVo> getByTaskId(int id) {
-
-        return new ArrayList<>();
+    public List<ActionPageApiVo> getApiByTaskId(int id) {
+        List<ActionPage> actionPages = actionPageService.getByTaskId(id);
+        List<ActionPageApiVo> result=new ArrayList<>();
+        for(ActionPage actionPage:actionPages){
+            if(actionPage.getEnable()==1){
+                ActionPageApiVo actionPageApiVo=new ActionPageApiVo();
+                actionPageApiVo.setPageName(actionPage.getPageName());
+                actionPageApiVo.setGroupActions(actionGroupVoService.getApiByPageId(actionPage.getId()));
+            }
+        }
+        return result;
     }
-
-
 
 
     @Override

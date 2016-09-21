@@ -2,7 +2,7 @@ package com.eazy.brush.controller.api;
 
 import com.eazy.brush.controller.common.BaseController;
 import com.eazy.brush.controller.view.service.TaskSubVoService;
-import com.eazy.brush.controller.view.vo.TaskSubVo;
+import com.eazy.brush.controller.view.vo.TaskSubApiVo;
 import com.eazy.brush.core.enums.SubTaskState;
 import com.eazy.brush.dao.entity.TaskSub;
 import com.eazy.brush.service.TaskSubService;
@@ -32,9 +32,9 @@ public class TaskSubController extends BaseController {
 
     @RequestMapping("/consume")
     public void get() {
-        String size = getPara("size", "1");
-        List<TaskSub> taskSubs = taskSubService.getUnConsumeList(Integer.parseInt(size));
-        List<TaskSubVo> taskSubList = taskSubVoService.buildVo(taskSubs);
+        int size=getParaInt("size",1);
+        List<TaskSub> taskSubs = taskSubService.getUnConsumeList(size);
+        List<TaskSubApiVo> taskSubList = taskSubVoService.buildVo(taskSubs);
         taskSubService.changeTaskSubState(taskSubVoService.buildVoIds(taskSubs), SubTaskState.RUNNING);//任务已取走，未回调
         renderJson200(wrapField("tasks", taskSubList));
     }

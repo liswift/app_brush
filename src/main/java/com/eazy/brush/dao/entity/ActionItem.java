@@ -1,10 +1,14 @@
 package com.eazy.brush.dao.entity;
 
+import com.eazy.brush.controller.view.vo.ActionItemApiArgument;
+import com.eazy.brush.controller.view.vo.ActionItemApiVo;
 import com.eazy.brush.controller.view.vo.ActionItemVo;
+import com.google.common.collect.Lists;
 import lombok.Data;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +28,31 @@ public class ActionItem {
     private String actionParams;//动作参数,type:value;type:value
     private int stayTime;//停留时间,秒
     private int upDown;//波动范围,秒
+
+    public ActionItemApiVo transform2ApiVo(){
+        ActionItemApiVo actionItemApiVo = new ActionItemApiVo();
+        actionItemApiVo.setClassName(getViewName());
+        actionItemApiVo.setDelayTime(getStayTime());
+        actionItemApiVo.setRealAction(getAction());
+        actionItemApiVo.setText(getViewContent());
+        actionItemApiVo.setViewId(getViewId());
+        actionItemApiVo.setUpdownTime(getUpDown());
+        List<ActionItemApiArgument> actionItemApiArgumentList= Lists.newArrayList();
+        if(StringUtils.isNotEmpty(actionParams)){
+            String[] param=actionParams.split(";");
+            for(String item:param){
+                if(StringUtils.isNotEmpty(item)){
+                    String[] keyvalue=item.split(":");
+                    if(keyvalue.length>=2&&StringUtils.isNotEmpty(keyvalue[0])&&StringUtils.isNotEmpty(keyvalue[1])){
+                        actionItemApiArgumentList.add(new ActionItemApiArgument(keyvalue[0],keyvalue[1]));
+                    }
+                }
+            }
+        }
+        actionItemApiVo.setArguments(actionItemApiArgumentList);
+        return actionItemApiVo;
+    }
+
 
     public ActionItemVo transform2Vo(){
         ActionItemVo actionItemVo=new ActionItemVo();
