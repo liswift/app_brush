@@ -90,7 +90,7 @@ public class TaskController extends BaseController {
             FileUtils.forceDelete(tempFile);
             StringBuffer url = request.getRequestURL();
             String tempContextUrl = url.delete(url.length() - request.getRequestURI().length(), url.length()).append("/").toString();
-            apkInfo.setApkUrl(tempContextUrl+"apk/download?file="+fileName);
+            apkInfo.setApkUrl(tempContextUrl+"task/apk/download?file="+fileName);
             renderJson200(apkInfo);
         } catch (IOException e) {
             log.error("upload apk file error {}", e);
@@ -135,7 +135,6 @@ public class TaskController extends BaseController {
         String ac = getPara("ac");
         ModelAndView modelAndView = new ModelAndView("task/save");
         modelAndView.addObject("task", taskService.getById(id));
-        modelAndView.addObject("ac", ac);
         return modelAndView;
     }
 

@@ -64,7 +64,7 @@
             <label class="form-label col-xs-4 col-sm-4">备注名称：</label>
             <div class="formControls col-xs-8 col-sm-8">
                 <input type="text" task_name="remarkName" value="${task.remarkName}" class="input-text" id="remarkName"
-                       autocomplete="off" readonly="readonly">
+                       autocomplete="off">
             </div>
         </div>
     </div>
