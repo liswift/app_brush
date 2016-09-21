@@ -102,12 +102,18 @@
 <script type="text/javascript" src="${ctx }/resources/js/task/task_list.js"></script>
 <script>
 
+    var lock=false;
     function funReflocak(taskId, action) {
+        if(lock){
+            return;
+        }
+        lock=true;
         var param = {};
         param.id = taskId;
         ajaxPost('${ctx}/task/' + action, param, function (d) {
             window.location.reload();
         }, function (res) {
+            lock=false;
             layer.msg("操作失败")
         });
     }

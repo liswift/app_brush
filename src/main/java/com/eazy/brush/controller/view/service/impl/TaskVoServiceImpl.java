@@ -87,6 +87,7 @@ public class TaskVoServiceImpl implements TaskVoService {
     public int start(int userId, int task_id) {
         Task task=taskService.getById(task_id);
         taskSubService.makeIncrDayTaskSub(task);
+        taskService.changeState(task_id,TaskState.running.getCode(),"");
         return 0;
     }
 
