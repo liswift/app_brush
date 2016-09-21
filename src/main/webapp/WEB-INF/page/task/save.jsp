@@ -45,7 +45,7 @@
             <div class="formControls col-xs-6 col-sm-6">
                 <label class="form-label col-xs-4 col-sm-4">应用包名：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" task_name="packageName" value="${task.packageName}" class="input-text"
+                    <input type="text" task_name="packageName" value="${task.packageName}" class="input-text" id="packageName"
                            autocomplete="off" readonly="readonly">
                 </div>
             </div>
@@ -54,7 +54,7 @@
             <div class="formControls col-xs-6 col-sm-6">
                 <label class="form-label col-xs-4 col-sm-4">应用版本：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" task_name="appVersion" value="${task.appVersion}" class="input-text"
+                    <input type="text" task_name="appVersion" value="${task.appVersion}" class="input-text" id="appVersion"
                            autocomplete="off" readonly="readonly">
                 </div>
             </div>
@@ -270,7 +270,6 @@
         });
 
         uploader.on('uploadComplete', function (file) {
-            $progressBar.hide();
             console.log('uploadComplete')
         });
 

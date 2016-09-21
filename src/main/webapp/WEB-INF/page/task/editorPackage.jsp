@@ -182,7 +182,6 @@
         });
 
         uploader.on('uploadComplete', function (file) {
-            $progressBar.hide();
             console.log('uploadComplete')
         });
 
