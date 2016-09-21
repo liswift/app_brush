@@ -93,6 +93,6 @@ public interface TaskSubService {
      * 新增失败,新增未做
      * 以及所有留存数据
      */
-    void deleteOldUnUseData();
+    void deleteOldUnUseData(int createDay);
 }
 

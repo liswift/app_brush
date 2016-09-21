@@ -82,8 +82,10 @@ public class TaskSubServiceImpl implements TaskSubService {
      */
     @Override
     public List<TaskSub> getUnConsumeList(int size) {
-        long perTime = Long.parseLong(DateTime.now().toString("yyyyMMddHHmm"));
-        return taskSubMapper.getRandomList(perTime,taskSubMapper.getRandomCount(perTime),size);
+        DateTime now=DateTime.now();
+        int createDay = Integer.parseInt(now.toString("yyyyMMdd"));
+        long perTime = Long.parseLong(now.toString("yyyyMMddHHmm"));
+        return taskSubMapper.getRandomList(createDay,perTime,taskSubMapper.getRandomCount(createDay,perTime),size);
     }
 
     /**
@@ -161,6 +163,7 @@ public class TaskSubServiceImpl implements TaskSubService {
     }
 
     private void insertSub(TaskHistory task, int createDay,int offset, int number) {
+        log.info("#### insert retain sub: createDay:"+createDay+" offset:"+offset+ " number:"+number);
         List<TaskSub> listByCreateDay = taskSubMapper.getListByCreateDay(task.getTaskId(),task.getCreateDay(),offset,number);
         int times = 24*60/ Constants.TASK_SUB_PER_MINITE;//平均分配24小时运行
         int perNum = number/times+1;
@@ -252,8 +255,8 @@ public class TaskSubServiceImpl implements TaskSubService {
     }
 
     @Override
-    public void deleteOldUnUseData() {
-        taskSubMapper.deleteUnUserData();
+    public void deleteOldUnUseData(int createDay) {
+        taskSubMapper.deleteUnUserData(createDay);
     }
 
 

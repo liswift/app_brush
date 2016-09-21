@@ -1246,6 +1246,12 @@ INSERT INTO `task_sub` VALUES ('11', '11','', '1', '80', '20160919','2','1', '10
 -- ----------------------------
 
 -- ----------------------------
+-- Table sub_task create index
+-- ---------------------------
+alter table task_sub add index create_day_index(create_day);
+
+
+-- ----------------------------
 -- Table structure for `user`
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
