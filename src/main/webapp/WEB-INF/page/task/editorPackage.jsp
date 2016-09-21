@@ -86,7 +86,7 @@
             <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
         </div>
     </div>
-
+</div>
     <script type="text/javascript" src="${ctx}/resources/lib/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="${ctx}/resources/lib/laydate/laydate.js"></script>
     <script type="text/javascript" src="${ctx}/resources/lib/bootstrap-modal/2.2.4/bootstrap-modalmanager.js"></script>
