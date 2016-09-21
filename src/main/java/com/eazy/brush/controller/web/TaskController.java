@@ -17,6 +17,7 @@ import org.apache.commons.io.FileUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,6 +65,14 @@ public class TaskController extends BaseController {
     public ModelAndView toAdd() {
         return new ModelAndView("task/save");
     }
+
+    @RequestMapping(value = "toEditorPackage", method = RequestMethod.GET)
+    public ModelAndView toEditorPackage(ModelMap map){
+        Task task=taskService.getById(getParaInt("id",0));
+        map.put("task",task);
+        return new ModelAndView("task/editorPackage",map);
+    }
+
 
     @RequestMapping(value = "apk/upload", method = {RequestMethod.GET, RequestMethod.POST})
     public String uploadApk(@RequestParam(value = "file") MultipartFile file,
