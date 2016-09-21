@@ -14,6 +14,7 @@ import com.eazy.brush.model.User;
 import com.eazy.brush.service.TaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.apache.http.util.TextUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -107,12 +108,17 @@ public class TaskController extends BaseController {
 
     @RequestMapping(value = "save", method = {RequestMethod.POST, RequestMethod.GET})
     public void save(Task task) {
-        if (task.getId() <= 0) {
+        if (task.getId() <= 0) {//新增
             task.setUserId(getCurrentUser().getId());
             task.setState(TaskState.confirm_ing.getCode());
             task.setDayLimit(Constants.TASK_DAY_LIMIT);
             taskService.add(task);
-        } else {
+        } else {//编辑
+            if(TextUtils.isEmpty(task.getApkUrl())){//url为空说明是更新策略.更新策略需要停止任务
+                taskVoService.stop(getCurrentUser().getId(),task.getId());
+            }else{//说明是更新包,,需要更改状态为审核中
+                taskService.changeState(task.getId(),TaskState.confirm_ing.getCode(),"更新包");
+            }
             taskService.update(task);
         }
         renderJson200();

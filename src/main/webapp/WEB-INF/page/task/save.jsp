@@ -158,12 +158,14 @@
 <div aria-hidden="true">
     <input type="hidden" task_name="id" class="input-text" hidden value="${task.id}"
            autocomplete="off" readonly="readonly">
-    <input type="hidden" task_name="apkUrl" class="input-text" hidden value="${task.apkUrl}" id="apkUrl"
-           autocomplete="off" readonly="readonly">
-    <input type="hidden" task_name="versionCode" class="input-text" hidden value="${task.versionCode}" id="versionCode"
-           autocomplete="off" readonly="readonly">
-    <input type="hidden" task_name="minSdkVersion" class="input-text" hidden value="${task.minSdkVersion}" id="minSdkVersion"
-           autocomplete="off" readonly="readonly"><!--minSdkVersion-->
+    <c:if test="${task ==null}"><!--task 等于空说明是新增,新增得时候显示,修改不显示包相关信息-->
+        <input type="hidden" task_name="apkUrl" class="input-text" hidden value="${task.apkUrl}" id="apkUrl"
+               autocomplete="off" readonly="readonly">
+        <input type="hidden" task_name="versionCode" class="input-text" hidden value="${task.versionCode}" id="versionCode"
+               autocomplete="off" readonly="readonly">
+        <input type="hidden" task_name="minSdkVersion" class="input-text" hidden value="${task.minSdkVersion}" id="minSdkVersion"
+               autocomplete="off" readonly="readonly"><!--minSdkVersion-->
+    </c:if>
 </div>
 
 <script type="text/javascript" src="${ctx}/resources/lib/jquery/1.9.1/jquery.min.js"></script>
