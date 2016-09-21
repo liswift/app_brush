@@ -81,7 +81,7 @@ public class TaskSubScheduler {
         log.info("### begin insert historys ###" + historys);
         taskHistoryService.insert(historys);
         log.info("### end insert history,cost {} s ###", stopwatch.elapsed(TimeUnit.SECONDS));
-        taskSubService.deleteOldUnUseData();
+        taskSubService.deleteOldUnUseData(historyDay);
         log.info("### end delete unused subtask,cost {} s ###", stopwatch.elapsed(TimeUnit.SECONDS));
 
         //获取所有运行中的任务,进行新的sub生成

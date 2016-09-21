@@ -69,4 +69,32 @@ public class TaskVoServiceImpl implements TaskVoService {
         List<Task> tasks = taskService.getList(offset, size);
         return getTaskVos(tasks);
     }
+
+    @Override
+    public List<TaskVo> getList(int userId) {
+        List<Task> tasks=taskService.getList(userId);
+        return getTaskVos(tasks);
+    }
+
+    @Override
+    public int stop(int userId, int task_id) {
+        int size=taskSubService.deleteByUserIdTaskId(userId,task_id);
+        taskService.changeState(task_id,TaskState.stoped.getCode(),"用户手动停止");
+        return size;
+    }
+
+    @Override
+    public int start(int userId, int task_id) {
+        Task task=taskService.getById(task_id);
+        taskSubService.makeIncrDayTaskSub(task);
+        return 0;
+    }
+
+    @Override
+    public int delete(int userId, int task_id) {
+        //先把所有的子任务删除,如果有的话,然后直接把任务删除
+        taskSubService.deleteByUserIdTaskId(userId,task_id);
+        taskService.delete(task_id);
+        return taskService.delete(task_id);
+    }
 }

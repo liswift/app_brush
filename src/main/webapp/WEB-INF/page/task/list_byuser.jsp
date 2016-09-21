@@ -68,14 +68,20 @@
                     <td>${t.yestodayNum}</td>
                     <c:choose>
                     <c:when test="${t.intState==0}">
-                        <td><a href="javascript:;" onclick="javascript:showMsg('${t.msg}')">${t.state}</a></td>
+                        <td>${t.state}(<a href="javascript:;" onclick="javascript:showMsg('${t.msg}')">查看详情</a>)</td>
                     </c:when>
                     <c:otherwise>
                         <td>${t.state}</td>
                     </c:otherwise>
                     </c:choose>
                     <td>
-                        <a href="${ctx}/task/delete?id=${t.id}">删除</a>
+                        <c:if test="${t.intState==3}">
+                            <a href="javascript:;" onclick="funReflocak(${t.id},'stop');">停止</a><!--运行中状态可以停止-->
+                        </c:if>
+                        <c:if test="${t.inState==1||t.inState==2}"><!--已停止状态,以及审核通过状态可以启动-->
+                            <a href="javascript:;" onclick="funReflocak(${t.id},'start');">启动</a>
+                        </c:if>
+                        <a href="javascript:;" onclick="funReflocak(${t.id},'delete');">>删除</a>
                         <a href="javascript:;"
                            onclick="fullOpen('修改任务','${ctx}/task/toEdit?id=${t.id}&ac=editor')">修改</a>
                         <a href="javascript:;"
@@ -95,6 +101,17 @@
 <script type="text/javascript" src="${ctx }/resources/js/common.js"></script>
 <script type="text/javascript" src="${ctx }/resources/js/task/task_list.js"></script>
 <script>
+
+    function funReflocak(taskId, action) {
+        var param = {};
+        param.id = taskId;
+        ajaxPost('${ctx}/task/' + action, param, function (d) {
+            window.location.reload();
+        }, function (res) {
+            layer.msg("操作失败")
+        });
+    }
+
     function showMsg(msg) {
         layer.open({
             type: 1,

@@ -70,15 +70,18 @@ public interface TaskSubMapper {
     @Select("Select "+FEILDS+" from task_sub where task_id=#{taskId} and create_day=#{createDay} and state=2 and task_type=1 limit  #{offset},#{number}")
     List<TaskSub> getListByCreateDay(@Param("taskId")int taskId,@Param("createDay") int createDay,@Param("offset")int offset,@Param("number")int number);
 
-    @Select("Select count(*) from task_sub where create_day=#{createDay} and task_id=#{taskId} and state=#{state} and task_type<=#{taskType}")
+    @Select("Select count(*) from task_sub where create_day=#{createDay} and task_id=#{taskId} and state=#{state} and task_type=#{taskType}")
     int getCountByTaskId(@Param("taskId")int taskId,@Param("createDay") int createDay,@Param("state")int state,@Param("taskType")int taskType);
 
-    @Select("Select count(*) from task_sub where create_day=#{createDay} and state=#{state} and task_type<=#{taskType}")
+    @Select("Select count(*) from task_sub where create_day=#{createDay} and state=#{state} and task_type=#{taskType}")
     int getCount(@Param("createDay") int createDay,@Param("state")int state,@Param("taskType")int taskType);
 
-    @Delete("delete from task_sub where create_day=#{createDay} and state=#{state} and task_type<=#{taskType}")
+    @Delete("delete from task_sub where create_day=#{createDay} and state=#{state} and task_type=#{taskType}")
     int deleteGetCount(@Param("createDay") int createDay,@Param("state")int state,@Param("taskType")int taskType);
 
+
+    @Delete("delete from task_sub where create_day=#{createDay} and task_type=#{taskType} and state=#{state} and task_id=${taskId}")
+    int deleteByTaskId(@Param("createDay") int createDay,@Param("taskType")int taskType,@Param("state")int state,@Param("taskId")int taskId);
     /**
      * 删除所有留存数据,以及删除所有新增失败的数据
      * 此条只能每日凌晨进行运算,其余时间不能跑!

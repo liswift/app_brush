@@ -35,6 +35,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public List<Task> getList(int userId) {
+        return taskMapper.getByUserId(userId);
+    }
+
+    @Override
     public List<Task> getList(int offset, int size) {
         return taskMapper.getList(offset, size);
     }
@@ -65,10 +70,6 @@ public class TaskServiceImpl implements TaskService {
         return 1;
     }
 
-    @Override
-    public void changeAllState(int state) {
-        taskMapper.changeAllState(state);
-    }
 
     @Override
     public List<Task> getByAuditUserId(int auditUserId) {
@@ -118,9 +119,13 @@ public class TaskServiceImpl implements TaskService {
         return taskMapper.getEnableList(state, offset, size);
     }
 
+    /**
+     * @param id
+     * @return
+     */
     @Override
-    public void delete(int id) {
-        taskMapper.delete(id);
+    public int delete(int id) {
+        return taskMapper.delete(id);
     }
 
     @Override

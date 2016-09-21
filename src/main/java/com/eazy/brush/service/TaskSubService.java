@@ -94,5 +94,13 @@ public interface TaskSubService {
      * 以及所有留存数据
      */
     void deleteOldUnUseData(int createDay);
+
+    /**
+     * 停止的时候调用,删除当前添加进入队列的数据
+     * @param UserId
+     * @param taskId
+     * @return
+     */
+    int deleteByUserIdTaskId(int UserId,int taskId);
 }
 

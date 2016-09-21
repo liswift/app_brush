@@ -16,6 +16,8 @@ public interface TaskService {
 
     List<Task> getByState(int state);
 
+    List<Task> getList(int userId);
+
     List<Task> getList(int offset, int size);
 
     List<Task> getList(int userId, int offset, int size);
@@ -28,7 +30,6 @@ public interface TaskService {
 
     int changeState(int id, int state, String msg);
 
-    void changeAllState(int state);
 
     /**
      * 获取当前审核人员的所有Task
@@ -124,7 +125,7 @@ public interface TaskService {
     /**
      * @param id
      */
-    void delete(int id);
+    int delete(int id);
 
     /**
      * 更新应用信息

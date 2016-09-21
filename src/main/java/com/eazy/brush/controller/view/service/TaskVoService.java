@@ -15,4 +15,12 @@ public interface TaskVoService {
     List<TaskVo> getList(int userId,int offset,int size);
 
     List<TaskVo> getList(int offset,int size);
+
+    List<TaskVo> getList(int userId);
+
+    int stop(int userId,int task_id);
+
+    int start(int userId,int task_id);
+
+    int delete(int userId,int task_id);
 }

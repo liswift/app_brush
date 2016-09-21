@@ -1161,6 +1161,7 @@ CREATE TABLE `task` (
   `state` int(11) NOT NULL DEFAULT '0' COMMENT '任务被执行，回调时间',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `msg` varchar(512) DEFAULT '' COMMENT '备注内容',
+  `deleted` int(2) DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 

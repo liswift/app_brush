@@ -112,9 +112,21 @@ public class TaskController extends BaseController {
     }
 
     @RequestMapping(value = "delete", method = {RequestMethod.POST, RequestMethod.GET})
-    public String delete(@RequestParam(value = "id") int id) {
-        taskService.delete(id);
-        return "redirect:/task/listByUser";
+    public void delete(@RequestParam(value = "id") int id) {
+        int result = taskVoService.delete(getCurrentUser().getId(),id);
+        renderResult(result>0);
+    }
+
+    @RequestMapping(value = "start", method = {RequestMethod.POST, RequestMethod.GET})
+    public void start(@RequestParam(value = "id") int id) {
+        taskVoService.start(getCurrentUser().getId(),id);
+        renderJson200();
+    }
+
+    @RequestMapping(value = "stop", method = {RequestMethod.POST, RequestMethod.GET})
+    public void stop(@RequestParam(value = "id") int id) {
+        taskVoService.stop(getCurrentUser().getId(),id);
+        renderJson200();
     }
 
     @RequestMapping(value = "toEdit", method = {RequestMethod.GET})

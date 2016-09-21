@@ -104,6 +104,19 @@ public class TaskSubServiceImpl implements TaskSubService {
         int newupdown=task.getIncrUpDown();
         int number = newnumber-newupdown + new Random().nextInt(2*newupdown);//计算当天的新增数量总数
 
+        //由于新增数据的时间点,有可能是用户手动触发的启动,这个时候会按照当前的时间比例,进行比例投放,防止后面阻塞太多的任务
+        if(task.getRunEndTime()<DateTime.now().getHourOfDay()){//运行时间已经过了,number=0
+            number=0;
+        }else{
+            float precent=(task.getRunEndTime()-DateTime.now().getHourOfDay())*1f/(task.getRunEndTime()*1f-task.getRunStartTime()*1f);
+            if(precent<1){//同步减少数据量,下面的任务开始时间可以不必处理,因为总体number少了,下面的任务分配也会更加分散,可以忽略
+                number=(int)(number*precent);
+            }
+        }
+
+
+
+
         int times = 0;
         int perNum=0;
 
@@ -257,6 +270,18 @@ public class TaskSubServiceImpl implements TaskSubService {
     @Override
     public void deleteOldUnUseData(int createDay) {
         taskSubMapper.deleteUnUserData(createDay);
+    }
+
+    /**
+     * 删除用户当天的新增任务
+     * @param UserId
+     * @param taskId
+     * @return
+     */
+    @Override
+    public int deleteByUserIdTaskId(int UserId, int taskId) {
+        int createDay = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));
+        return taskSubMapper.deleteByTaskId(createDay,SubTaskType.ACTIVE.getCode(),SubTaskState.INIT.getState(),taskId);
     }
 
 

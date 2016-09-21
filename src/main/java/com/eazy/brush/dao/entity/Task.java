@@ -33,4 +33,5 @@ public class Task {
     private int state;              //任务被执行回调时间
     private Date createTime;        //创建时间
     private String msg;             //备注内容,例如审核失败的内容
+    private int deleted;           //默认是0 ,删除是1
 }

@@ -14,47 +14,45 @@ public interface TaskMapper {
 
     String INSERT_FEILDS = "user_id,audit_user_id,app_name,package_name,version_code,app_version,apk_url,remark_name,incr_day,day_limit," +
             "incr_up_down,run_time,run_up_down,run_start_time," +
-            "run_end_time,run_speed,retain_day,retain_percent,state,create_time,msg";
+            "run_end_time,run_speed,retain_day,retain_percent,state,create_time,msg,deleted";
 
     String INSERT_VALUES = "#{userId},#{auditUserId},#{appName},#{packageName},#{versionCode},#{appVersion},#{apkUrl}," +
             "#{remarkName},#{incrDay},#{dayLimit},#{incrUpDown},#{runTime},#{runUpDown},#{runStartTime}," +
-            "#{runEndTime},#{runSpeed},#{retainDay},#{retainPercent},#{state},#{createTime},#{msg}";
+            "#{runEndTime},#{runSpeed},#{retainDay},#{retainPercent},#{state},#{createTime},#{msg},#{deleted}";
 
     String FEILDS = "id," + INSERT_FEILDS;
 
     @Select("select " + FEILDS + " from task where id=#{id}")
     Task getById(@Param("id") int id);
 
-    @Select("select " + FEILDS + " from task where state=#{state}")
+    @Select("select " + FEILDS + " from task where state=#{state} and deleted=0")
     List<Task> getByState(@Param("state") int state);
 
-    @Delete("delete from task where id=#{id}")
-    void delete(@Param("id") int id);
+    @Update("update task set deleted=1 where id=#{id}")
+    int delete(@Param("id") int id);
 
-    @Select("select " + FEILDS + " from task order by id asc limit #{offset},#{size}")
+    @Select("select " + FEILDS + " from task where deleted=0 order by id asc limit #{offset},#{size}")
     List<Task> getList(@Param("offset") int offset, @Param("size") int size);
 
-    @Select("select " + FEILDS + " from task where user_id=#{userId} order by id asc limit #{offset},#{size}")
+    @Select("select " + FEILDS + " from task where user_id=#{userId} and deleted=0 order by id asc limit #{offset},#{size}")
     List<Task> getListByUserId(@Param("userId") int userId, @Param("offset") int offset, @Param("size") int size);
 
     @Insert("insert into task(" + INSERT_FEILDS + ") values (" + INSERT_VALUES + ")")
     void insert(Task task);
 
-    @Update("update task set state=#{state},msg=#{msg} where id=#{id} and audit_user_id=#{auditUserId}")
+    @Update("update task set state=#{state},msg=#{msg} where id=#{id} and deleted=0 and audit_user_id=#{auditUserId}")
     int changeStateWithMsg(@Param("id") int id,@Param("auditUserId")int auditUserId ,@Param("state") int state,@Param("msg")String msg);
 
     @Update("update task set state=#{state},msg=#{msg} where id=#{id}")
     void changeState(@Param("id") int id, @Param("state")int state,@Param("msg")String msg);
 
-    @Update("update task set state=#{state}")
-    void changeAllState(@Param("state") int state);
 
     /**
      * 根据当前用户的Id获取,当前普通人员所有任务
      * @param userId
      * @return
      */
-    @Select("select " + FEILDS + " from task where user_id=#{userId}")
+    @Select("select " + FEILDS + " from task where user_id=#{userId} and deleted=0")
     List<Task> getByUserId(@Param("userId") int userId);
 
     /**
@@ -62,14 +60,14 @@ public interface TaskMapper {
      * @param auditUserId
      * @return
      */
-    @Select("select "+ FEILDS + " from task where audit_user_id=#{auditUserId}")
+    @Select("select "+ FEILDS + " from task where audit_user_id=#{auditUserId} and deleted=0")
     List<Task> getByAuditUserId(@Param("auditUserId")int auditUserId);
 
     /**
      * 随机获取一条数据Task,进行审核该条task
      * @return
      */
-    @Select("select "+ FEILDS+" from task where audit_user_id=0 limit 1")
+    @Select("select "+ FEILDS+" from task where audit_user_id=0 and deleted=0 limit 1")
     Task getSingleTask();
 
     /**
@@ -78,7 +76,7 @@ public interface TaskMapper {
      * @param state
      * @return
      */
-    @Select("select "+FEILDS+" from task where audit_user_id=#{auditUserId} and state =#{state} limit 1")
+    @Select("select "+FEILDS+" from task where audit_user_id=#{auditUserId} and state =#{state} and deleted=0 limit 1")
     Task getAuditSingleTask(@Param("auditUserId")int auditUserId,@Param("state")int state);
     /**
      * 分配当前任务于当前用户名下
@@ -95,10 +93,10 @@ public interface TaskMapper {
     @Update("update task set audit_user_id=#{auditUserId} where audit_user_id=#{id}")
     void changeAuditUserId(@Param("auditUserId") int currentUserId,@Param("id")int outUserid);
 
-    @Select("select " + FEILDS + " from task where state=#{state} limit #{offset},#{size}")
+    @Select("select " + FEILDS + " from task where state=#{state} and deleted=0 limit #{offset},#{size}")
     List<Task> getListByState(@Param("state") int state, @Param("offset") int offset, @Param("size") int size);
 
-    @Select("select " + FEILDS + " from task where state>#{state} limit #{offset},#{size}")
+    @Select("select " + FEILDS + " from task where state>#{state} and deleted=0  limit #{offset},#{size}")
     List<Task> getEnableList(@Param("state") int state, @Param("offset") int offset, @Param("size") int size);
 
     @UpdateProvider(type = TaskProvider.class, method = "update")
