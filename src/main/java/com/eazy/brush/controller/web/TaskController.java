@@ -75,8 +75,7 @@ public class TaskController extends BaseController {
 
 
     @RequestMapping(value = "apk/upload", method = {RequestMethod.GET, RequestMethod.POST})
-    public String uploadApk(@RequestParam(value = "file") MultipartFile file,
-                            @RequestParam(value = "id") int id) {
+    public void uploadApk(@RequestParam(value = "file") MultipartFile file) {
         String now = DateTime.now().toString("yyyyMMddHHmmssSSS");
         String fileName = now + "_" + file.getOriginalFilename();
 
@@ -90,14 +89,13 @@ public class TaskController extends BaseController {
             FileUtils.copyInputStreamToFile(file.getInputStream(), tempFile);
             apkInfo = ApkUtil.getApkInfo(tempFile);
             FileUtils.forceDelete(tempFile);
-
+            apkInfo.setApkUrl(getRequest().getContextPath()+"/apk/download?file="+fileName);
+            renderJson200(apkInfo);
         } catch (IOException e) {
             log.error("upload apk file error {}", e);
             e.printStackTrace();
             renderJson500();
         }
-        taskService.updateApkInfo(id, apkInfo, fileName);
-        return "redirect:/task/toEdit?id="+id+"&ac=upPg";
     }
 
     @RequestMapping(value = "save", method = {RequestMethod.POST, RequestMethod.GET})

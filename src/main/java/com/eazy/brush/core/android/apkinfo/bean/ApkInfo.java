@@ -8,6 +8,7 @@ public class ApkInfo {
     private String apkPackage;
     private String minSdkVersion;
     private String apkName;
+    private String apkUrl;
 
     public ApkInfo() {
         versionCode = null;
@@ -15,6 +16,14 @@ public class ApkInfo {
         apkPackage = null;
         minSdkVersion = null;
         apkName = null;
+    }
+
+    public String getApkUrl() {
+        return apkUrl;
+    }
+
+    public void setApkUrl(String apkUrl) {
+        this.apkUrl = apkUrl;
     }
 
     public String getVersionCode() {
