@@ -19,6 +19,7 @@
     <link href="${ctx}/resources/lib/icheck/icheck.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/resources/lib/Hui-iconfont/1.0.6/iconfont.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/resources/css/task-style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/resources/lib/webuploader/0.1.5/webuploader.css">
     <!--[if IE 6]>
     <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
@@ -27,16 +28,14 @@
 </head>
 <body>
 <div class="add-task-form form-horizontal">
-
     <c:if test="${task == null}">
         <div class="add-task-item">
             <span><span class="required-dot">*</span>应用apk文件：</span>
             <span class="btn-upload" style="margin-left:10px" id="select-file">
                <a href="javascript:void(0);" class="btn btn-primary radius">上传应用</a>
         </span>
-        </span>
             <div class="progress task-progress">
-                <div class="progress-bar">
+                <div class="progress-bar" id="progress-bar">
                     <span class="task-progress-tint">0%</span>
                     <span class="sr-only" style="width:0%"></span>
                 </div>

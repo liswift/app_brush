@@ -73,6 +73,12 @@ public class TaskController extends BaseController {
         return new ModelAndView("task/editorPackage",map);
     }
 
+    @RequestMapping(value = "toEdit", method = {RequestMethod.GET})
+    public ModelAndView toEdit(int id) {
+        ModelAndView modelAndView = new ModelAndView("task/save");
+        modelAndView.addObject("task", taskService.getById(id));
+        return modelAndView;
+    }
 
     @RequestMapping(value = "apk/upload", method = {RequestMethod.GET, RequestMethod.POST})
     public void uploadApk(@RequestParam(value = "file") MultipartFile file) {
@@ -130,13 +136,7 @@ public class TaskController extends BaseController {
         renderJson200();
     }
 
-    @RequestMapping(value = "toEdit", method = {RequestMethod.GET})
-    public ModelAndView toEdit(int id) {
-        String ac = getPara("ac");
-        ModelAndView modelAndView = new ModelAndView("task/save");
-        modelAndView.addObject("task", taskService.getById(id));
-        return modelAndView;
-    }
+
 
     @RequestMapping(value = "apk/download", method = RequestMethod.GET)
     public void downloadApk(@RequestParam(value = "file") String file) {
