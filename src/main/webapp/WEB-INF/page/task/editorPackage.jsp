@@ -34,7 +34,7 @@
         <div class="add-task-item">
             <span><span class="required-dot">*</span>应用apk文件：</span>
             <span class="btn-upload" style="margin-left:10px" id="select-file">
-            <a href="javascript:void(0);" class="btn btn-primary radius">上传应用</a>
+               <a href="javascript:void(0);" class="btn btn-primary radius">上传应用</a>
             </span>
             <div class="progress task-progress">
                 <div class="progress-bar">
@@ -130,7 +130,7 @@
                 // 选择文件的按钮。可选。
                 // 内部根据当前运行是创建，可能是input元素，也可能是flash.
                 pick: '#select-file',
-                auto: true,
+                auto:true,
                 // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
                 resize: false
             });
