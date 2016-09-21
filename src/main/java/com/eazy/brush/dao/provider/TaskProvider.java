@@ -8,21 +8,31 @@ import static org.apache.ibatis.jdbc.SqlBuilder.*;
 /**
  * Desc
  *
+ * user_id,audit_user_id,app_name,package_name,version_code,app_version,apk_url,remark_name,incr_day,day_limit," +
+ "incr_up_down,run_time,run_up_down,run_start_time," +
+ "run_end_time,run_speed,retain_day,retain_percent,state,create_time,msg,deleted"
+ *
  * @author feng.liu
  * @date 2016/9/14 15:27
  */
 public class TaskProvider {
 
+    /**
+     *
+     */
     private static final String tableName = "task";
 
     public String update(final Task task) {
         BEGIN();
         UPDATE(tableName);
-        if (StringUtils.isNotEmpty(task.getAppName())) {
-            SET("app_name=#{appName}");
+        if(task.getUserId()>0){
+            SET("user_id=#{userId}");
         }
         if(task.getAuditUserId()>-1){
             SET("audit_user_id=#{auditUserId}");
+        }
+        if (StringUtils.isNotEmpty(task.getAppName())) {
+            SET("app_name=#{appName}");
         }
         if (StringUtils.isNotEmpty(task.getPackageName())) {
             SET("package_name=#{packageName}");
@@ -46,13 +56,13 @@ public class TaskProvider {
             SET("day_limit=#{dayLimit}");
         }
         if (task.getIncrUpDown() > 0) {
-            SET("day_limit=#{dayLimit}");
+            SET("incr_up_down=#{incrUpDown}");
         }
         if (task.getRunTime() > 0) {
             SET("run_time=#{runTime}");
         }
         if (task.getRunUpDown() > 0) {
-            SET("incr_up_down=#{runUpDown}");
+            SET("run_up_down=#{runUpDown}");
         }
         if (task.getRunStartTime() > 0) {
             SET("run_start_time=#{runStartTime}");

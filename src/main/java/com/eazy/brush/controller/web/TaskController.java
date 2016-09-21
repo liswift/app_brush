@@ -3,7 +3,6 @@ package com.eazy.brush.controller.web;
 import com.eazy.brush.component.ftp.FtpTool;
 import com.eazy.brush.controller.common.BaseController;
 import com.eazy.brush.controller.view.service.TaskVoService;
-import com.eazy.brush.controller.view.service.UserAccountVoService;
 import com.eazy.brush.controller.view.vo.TaskVo;
 import com.eazy.brush.core.android.apkinfo.bean.ApkInfo;
 import com.eazy.brush.core.android.apkinfo.util.ApkUtil;
@@ -48,9 +47,6 @@ public class TaskController extends BaseController {
     @Autowired
     private TaskVoService taskVoService;
 
-    @Autowired
-    private UserAccountVoService userAccountVoService;
-
     @RequestMapping(value = "listByUser", method = RequestMethod.GET)
     public ModelAndView listByUser() {
         int curPage = getParaInt("curPage", 1);
@@ -58,7 +54,6 @@ public class TaskController extends BaseController {
 
         User user = getCurrentUser();
         ModelAndView model = new ModelAndView("task/list_byuser");
-//        UserAccountVo userAccountVo = userAccountVoService.getByUserId(user.getId());
         List<TaskVo> taskVoses = taskVoService.getList(user.getId(), (curPage - 1) * size, size);
         model.addObject("user", user);
         model.addObject("tasks", taskVoses);
