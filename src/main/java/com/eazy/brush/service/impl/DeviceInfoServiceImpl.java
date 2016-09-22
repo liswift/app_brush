@@ -19,6 +19,7 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
     @Autowired
     DeviceInfoMapper deviceInfoMapper;
 
+
     @Override
     public DeviceInfo getById(int id) {
         return deviceInfoMapper.getById(id);
@@ -27,5 +28,10 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
     @Override
     public List<DeviceInfo> getList(int offset, int size) {
         return deviceInfoMapper.getList(offset, size);
+    }
+
+    @Override
+    public List<DeviceInfo> getListByMinSdk(int minSdk) {
+        return deviceInfoMapper.getListByMinSdk(minSdk);
     }
 }

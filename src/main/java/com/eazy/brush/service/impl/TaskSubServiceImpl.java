@@ -97,7 +97,7 @@ public class TaskSubServiceImpl implements TaskSubService {
         /**
          * 获取所有的deviceId
          */
-        List<DeviceInfo> deviceInfos = deviceInfoService.getList(0, Integer.MAX_VALUE);
+        List<DeviceInfo> deviceInfos = deviceInfoService.getListByMinSdk(task.getMinSdkVersion());
         int createDay = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));
 
         int newnumber=task.getIncrDay();
