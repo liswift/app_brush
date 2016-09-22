@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -115,9 +116,10 @@ public class TaskController extends BaseController {
             taskService.add(task);
         } else {//编辑
             if(TextUtils.isEmpty(task.getApkUrl())){//url为空说明是更新策略.更新策略需要停止任务
-                taskVoService.stop(getCurrentUser().getId(),task.getId());
+                taskVoService.changeStrategy(getCurrentUser().getId(),task.getId());
             }else{//说明是更新包,,需要更改状态为审核中
                 taskService.changeState(task.getId(),TaskState.confirm_ing.getCode(),"更新包");
+                task.setCreateTime(new Date());//更新包需要更新上传时间
             }
             taskService.update(task);
         }

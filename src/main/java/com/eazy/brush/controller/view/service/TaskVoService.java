@@ -23,4 +23,11 @@ public interface TaskVoService {
     int start(int userId,int task_id);
 
     int delete(int userId,int task_id);
+
+    /**
+     * 更新任务策略
+     * @param userId
+     * @param task_id
+     */
+    void changeStrategy(int userId,int task_id);
 }

@@ -97,4 +97,13 @@ public class TaskVoServiceImpl implements TaskVoService {
         taskService.delete(task_id);
         return taskService.delete(task_id);
     }
+
+    @Override
+    public void changeStrategy(int userId, int task_id) {
+       taskSubService.deleteByUserIdTaskId(userId,task_id);//删除老策略任务
+       Task task=taskService.getById(task_id);
+        if(task.getState()==TaskState.running.getCode()){
+            taskService.changeState(task_id,TaskState.stoped.getCode(),"更新策略,自动停止,需要重新启动");
+        }
+    }
 }
