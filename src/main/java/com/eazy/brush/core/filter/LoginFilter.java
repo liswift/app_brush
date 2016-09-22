@@ -51,9 +51,14 @@ public class LoginFilter implements Filter {
                 if (filterURL.get(url) == null) {
                     if (UserUtil.getCurrentUser() == null) {
                         res.sendRedirect("/index.jsp");
+                        return;
                     }
                 }
             }
+        }
+        if(!url.contains("api")&&UserUtil.getCurrentUser()==null){
+            res.sendRedirect("/sys/logout");
+            return ;
         }
         chain.doFilter(req, res);
     }
