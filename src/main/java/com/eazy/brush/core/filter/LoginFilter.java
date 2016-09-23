@@ -50,15 +50,11 @@ public class LoginFilter implements Filter {
             if (!url.equals("/") && !url.contains("api") && !url.contains("apk")) {
                 if (filterURL.get(url) == null) {
                     if (UserUtil.getCurrentUser() == null) {
-                        res.sendRedirect("/index.jsp");
+                        res.sendRedirect("/sys/error");
                         return;
                     }
                 }
             }
-        }
-        if(!url.contains("api")&&UserUtil.getCurrentUser()==null&&filterURL.get(url)==null){
-            res.sendRedirect("/sys/error");
-            return ;
         }
         chain.doFilter(req, res);
     }
