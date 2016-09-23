@@ -56,8 +56,8 @@ public class LoginFilter implements Filter {
                 }
             }
         }
-        if(!url.contains("api")&&UserUtil.getCurrentUser()==null){
-            res.sendRedirect("/sys/logout");
+        if(!url.contains("api")&&UserUtil.getCurrentUser()==null&&filterURL.get(url)==null){
+            res.sendRedirect("/sys/error");
             return ;
         }
         chain.doFilter(req, res);
