@@ -102,7 +102,11 @@ public class TaskSubServiceImpl implements TaskSubService {
 
         int newnumber=task.getIncrDay();
         int newupdown=task.getIncrUpDown();
-        int number = newnumber-newupdown + new Random().nextInt(2*newupdown);//计算当天的新增数量总数
+        int number=newnumber;
+        if(newupdown>0){
+            number = newnumber-newupdown + new Random().nextInt(2*newupdown);//计算当天的新增数量总数
+        }
+
 
         //由于新增数据的时间点,有可能是用户手动触发的启动,这个时候会按照当前的时间比例,进行比例投放,防止后面阻塞太多的任务
         if(task.getRunEndTime()<DateTime.now().getHourOfDay()){//运行时间已经过了,number=0
@@ -314,7 +318,11 @@ public class TaskSubServiceImpl implements TaskSubService {
                 taskSub.setTaskId(task.getId());
                 taskSub.setPerTime(perTime);
                 taskSub.setDeviceInfoId(LotteryUtil.lottery(deviceInfos).getId());
-                taskSub.setRunTime(task.getRunTime()*60-task.getRunUpDown()+ new Random().nextInt(2*task.getRunUpDown()));//设置运行时间
+                if(task.getRunUpDown()>0){
+                    taskSub.setRunTime(task.getRunTime()*60-task.getRunUpDown()+ new Random().nextInt(2*task.getRunUpDown()));//设置运行时间
+                }else{
+                    taskSub.setRunTime(taskNum*60);
+                }
                 taskSub.setCreateDay(createDay);
                 taskSub.setTaskType(SubTaskType.ACTIVE.getCode());//新增任务
                 taskSub.setState(SubTaskState.INIT.getState());//状态初始化
