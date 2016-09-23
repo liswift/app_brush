@@ -47,7 +47,7 @@
             <c:forEach items="${ taskhistories }" var="t">
                 <tr class="text-c">
                     <td>${t.id}</td>
-                    <td>${t.appName}</td>
+                    <td>${t.remarkName}</td>
                     <td>${t.createDay}</td>
                     <td>${t.incrDay}</td>
                     <td>${t.retainDay}</td>

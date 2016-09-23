@@ -49,7 +49,7 @@
 
                 <tr class="text-c">
                     <td>${t.id}</td>
-                    <td>${t.appName}</td>
+                    <td>${t.remarkName}</td>
                     <td>${t.appVersion}</td>
                     <td>${t.createTime}</td>
                     <c:choose>

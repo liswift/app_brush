@@ -33,7 +33,7 @@
         <div class="formControls col-xs-6 col-sm-6">
             <label class="form-label col-xs-4 col-sm-4">应用名称：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <label>${task.appName}</label>
+                <label>${task.remarkName}</label>
             </div>
         </div>
     </div>
