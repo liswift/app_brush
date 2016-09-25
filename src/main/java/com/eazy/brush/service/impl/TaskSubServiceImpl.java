@@ -124,7 +124,7 @@ public class TaskSubServiceImpl implements TaskSubService {
         int times = 0;
         int perNum=0;
 
-        if (TaskSpeedType.make_immediate.getCode() == task.getRunSpeed()) {     //立即投放,一次性全部生成,去任务的时候,会自动进行随机获取
+        if (TaskSpeedType.make_immediate.getCode() == task.getRunSpeed()) {     //立即投放,一次性全部生成,取任务的时候,会自动进行随机获取
             times = 1;            //需要分多少批次执行
             perNum = number;
         } else {                                                                //函数投放,暂时是均匀函数投放
@@ -364,8 +364,8 @@ public class TaskSubServiceImpl implements TaskSubService {
         netInfo.setMac(RandomMacAddress.getMacAddrWithFormat(":"));
 
         List<NetType<Integer>> netInfoTypes = Lists.newArrayList();
-        netInfoTypes.add(new NetType<>(0, 56937));
-        netInfoTypes.add(new NetType<>(1, 10000));
+        netInfoTypes.add(new NetType<>(0, 10000));//手机网络
+        netInfoTypes.add(new NetType<>(1, 56937));//wifi
         netInfo.setType(LotteryUtil.lottery(netInfoTypes).getNetType());
         taskSub.setMac(netInfo.getMac());                //mac地址 唯一
         taskSub.setType(netInfo.getType());                  //网络类型 0 手机网络 1 wifi

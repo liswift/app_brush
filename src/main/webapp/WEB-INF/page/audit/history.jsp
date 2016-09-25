@@ -30,7 +30,7 @@
 <div class="pd-20" style="padding-top:20px;">
 
     <div class="mt-20">
-        <table class="table table-border table-bordered table-bg table-sort" id=task-list-table>
+        <table class="table table-border table-bordered table-bg table-sort" id="task-list-table">
             <thead>
             <tr>
                 <th colspan="5" scope="col">任务记录</th>

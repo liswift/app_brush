@@ -109,7 +109,7 @@
     </table>
 </div>
 
-<div class="col-xs-10 col-sm-10 col-xs-offset-1 col-sm-offset-1">
+<div class="col-xs-10 col-sm-10 col-xs-offset-1 col-sm-offset-1 pd-20">
     <input id="action-confirm-btn" class="btn btn-primary radius" type="submit" style="width: 90px;margin-left:-5px" value="通过"><!--通过传递/audit/changeState id,state 2-->
     <input id="action-cancel-btn" class="btn btn-default radius" type="submit" style="width: 90px;margin-left:150px" value="拒绝"><!--通过传递/audit/changeState id,state 0,msg:应用非法-->
 </div>
