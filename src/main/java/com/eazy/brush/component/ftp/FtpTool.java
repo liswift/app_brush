@@ -160,7 +160,12 @@ public class FtpTool implements IFtpClient{
      */
    private  boolean CreateDirecroty(String remote) throws IOException {
         boolean success = true;
-        String directory = remote.substring(0, remote.lastIndexOf("/") + 1);
+       String directory="";
+        if(remote.contains("/")){
+            directory = remote.substring(0, remote.lastIndexOf("/") + 1);
+        }else {
+            directory=remote;
+        }
         // 如果远程目录不存在，则递归创建远程服务器目录
         if (!directory.equalsIgnoreCase("/")&& !changeWorkingDirectory(new String(directory))) {
             int start = 0;

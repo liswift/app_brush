@@ -143,7 +143,6 @@ public class TaskController extends BaseController {
     }
 
 
-
     @RequestMapping(value = "apk/download", method = RequestMethod.GET)
     public void downloadApk(@RequestParam(value = "file") String file) {
         try {
