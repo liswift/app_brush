@@ -20,6 +20,7 @@ public class ProxyIpScheduler {
 
     /**
      * 生成每日task_sub
+     * 秒 分 时 日 月
      */
     @Scheduled(cron = "0 0/5 *  * * ? ")
     public void store() {

@@ -49,7 +49,8 @@ public class FtpTool {
             if (!FTPReply.isPositiveCompletion(reply)) {
                 ftp.disconnect();
             }
-            ftp.changeWorkingDirectory(path);
+            ftp.makeDirectory("apk");
+            ftp.changeWorkingDirectory("apk");
         } catch (IOException e) {
             e.printStackTrace();
             log.error("collect ftp error {}", e);
