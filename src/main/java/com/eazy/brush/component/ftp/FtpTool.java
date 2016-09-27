@@ -1,5 +1,6 @@
 package com.eazy.brush.component.ftp;
 
+import com.eazy.brush.controller.common.IFtpClient;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.net.ftp.FTPClient;
@@ -17,7 +18,7 @@ import java.io.*;
  */
 @Slf4j
 @Component
-public class FtpTool {
+public class FtpTool implements IFtpClient{
 
     @Value("${ftp.addr}")
     private String addr;
@@ -49,8 +50,7 @@ public class FtpTool {
             if (!FTPReply.isPositiveCompletion(reply)) {
                 ftp.disconnect();
             }
-            ftp.makeDirectory("apk");
-            ftp.changeWorkingDirectory("apk");
+            ftp.changeWorkingDirectory(path);
         } catch (IOException e) {
             e.printStackTrace();
             log.error("collect ftp error {}", e);
@@ -111,5 +111,113 @@ public class FtpTool {
             e.printStackTrace();
             log.error("down ftp file error {}", e);
         }
+    }
+
+    /**
+     * 在服务器上创建一个文件夹
+     *
+     * @param dir 文件夹名称，不能含有特殊字符，如 \ 、/ 、: 、* 、?、 "、 <、>...
+     */
+    private boolean makeDirectory(String dir) {
+        boolean flag = true;
+        try {
+            flag = ftp.makeDirectory(dir);
+            if (flag) {
+                log.info("创建文件夹"+ dir + " 成功！");
+            } else {
+                log.info("创建文件夹"+ dir + " 失败！");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+    /**
+     * 进入到服务器的某个目录下
+     *
+     * @param directory
+     */
+    private boolean changeWorkingDirectory(String directory) {
+        boolean flag = true;
+        try {
+            flag = ftp.changeWorkingDirectory(directory);
+            if (flag) {
+                log.info("进入文件夹"+ directory + " 成功！");
+            } else {
+                log.info("进入文件夹"+ directory + " 失败！");
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return flag;
+    }
+
+    /**
+     * 递归创建远程目录,并切换到当前目录
+     * @param remote
+     * @return
+     * @throws IOException
+     */
+   private  boolean CreateDirecroty(String remote) throws IOException {
+        boolean success = true;
+        String directory = remote.substring(0, remote.lastIndexOf("/") + 1);
+        // 如果远程目录不存在，则递归创建远程服务器目录
+        if (!directory.equalsIgnoreCase("/")&& !changeWorkingDirectory(new String(directory))) {
+            int start = 0;
+            int end = 0;
+            if (directory.startsWith("/")) {
+                start = 1;
+            } else {
+                start = 0;
+            }
+            end = directory.indexOf("/", start);
+            while (true) {
+                String subDirectory = new String(remote.substring(start, end).getBytes("GBK"),"iso-8859-1");
+                if (changeWorkingDirectory(subDirectory)) {
+                    if (makeDirectory(subDirectory)) {
+                        changeWorkingDirectory(subDirectory);
+                    } else {
+                        log.info("创建目录["+subDirectory+"]失败");
+                        success = false;
+                        return success;
+                    }
+                }
+                start = end + 1;
+                end = directory.indexOf("/", start);
+                // 检查所有目录是否创建完毕
+                if (end <= start) {
+                    break;
+                }
+            }
+        }
+        return success;
+    }
+
+    /**
+     *
+     * @param fileName
+     * @param path xx/xx/xx
+     * @param outputStream
+     */
+    @Override
+    public void downLoadToOutputStream(String fileName, String path, OutputStream outputStream) throws IOException {
+        connect();
+        CreateDirecroty(path);
+        downLoadToOutputStream(fileName,outputStream);
+        disconnect();
+    }
+
+    /**
+     *
+     * @param fileName
+     * @param path xx/xx/xx
+     * @param inputStream
+     */
+    @Override
+    public void uploadToInoutStream(String fileName, String path, InputStream inputStream) throws IOException {
+        connect();
+        CreateDirecroty(path);
+        upload(inputStream,fileName);
+        disconnect();
     }
 }
