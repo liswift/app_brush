@@ -56,7 +56,7 @@ public class TaskSubController extends BaseController {
 //        renderJson200();
 //    }
 
-    @RequestMapping(value = "/download", method = RequestMethod.GET)
+    @RequestMapping(value = "/download", method = {RequestMethod.GET,RequestMethod.POST})
     public void downloadApk(@RequestParam(value = "file") String file) {
         try {
             ActionRequest.renderStream(file, response);
