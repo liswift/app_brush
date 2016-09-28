@@ -11,6 +11,8 @@ import lombok.Data;
 public class TaskSub {
 
     private String id;
+    private String fromId="";
+    private String fileName="";//文件Name
     private int taskId;              //任务id
     private long perTime;             //时间粒度
     private int deviceInfoId;        //设备信息,例如三星/索尼/...

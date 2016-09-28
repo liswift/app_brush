@@ -79,6 +79,24 @@ public class FtpTool implements IFtpClient{
     }
 
     /**
+     * 删除一个文件
+     */
+    public boolean deleteFile(String filename) {
+        boolean flag = true;
+        try {
+            flag = ftp.deleteFile(filename);
+            if (flag) {
+                log.info("删除文件"+filename+"成功！");
+            } else {
+                log.info("删除文件"+filename+"失败！");
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return flag;
+    }
+
+    /**
      * 下载ftp文件
      *
      * @param ftpFile ftp目录
@@ -223,6 +241,20 @@ public class FtpTool implements IFtpClient{
         connect();
         CreateDirecroty(path);
         upload(inputStream,fileName);
+        disconnect();
+    }
+
+    /**
+     * 删除文件
+     * @param fileName
+     * @param path
+     * @throws IOException
+     */
+    @Override
+    public void deleteFile(String fileName, String path) throws IOException {
+        connect();
+        CreateDirecroty(path);
+        deleteFile(fileName);
         disconnect();
     }
 }

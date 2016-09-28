@@ -31,6 +31,17 @@ public interface TaskSubService {
      */
     List<TaskSub> getUnConsumeList(int size);
 
+
+    /**
+     * 通过id获取TaskSub
+     * @param id
+     * @return
+     */
+    TaskSub getById(String id);
+
+
+    void updateFileName();
+
     /**
      * 生成每日新增TaskSub
      *
@@ -56,6 +67,13 @@ public interface TaskSubService {
      */
     void changeTaskSubState(String ids,SubTaskState subTaskState);
 
+    /**
+     * 修改子任务运行状态
+     *
+     * @param id
+     * @param subTaskState
+     */
+    void changeTaskSubState(String id,SubTaskState subTaskState,String fileName);
 
     /**
      * 获取任务今天执行的数目

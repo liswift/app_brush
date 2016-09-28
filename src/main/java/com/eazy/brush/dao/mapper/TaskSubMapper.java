@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * private String id;
+ * private String fromId;         //如果是留存的话,此数据为对应的新增那条数据的id。新增此字段为""
  private int taskId;              //任务id
  private long perTime;             //时间粒度
  private int deviceInfoId;        //设备信息,例如三星/索尼/...
@@ -42,11 +43,11 @@ import java.util.List;
  */
 public interface TaskSubMapper {
 
-    String INSERT_FEILDS = "task_id,per_time,device_info_id,run_time,create_day,state,task_type,tel_android_id," +
+    String INSERT_FEILDS = "from_id,file_name,task_id,per_time,device_info_id,run_time,create_day,state,task_type,tel_android_id," +
             "subscriber_id,operator,operator_name,line1_number,simSerial_number,network_type," +
             "phone_type,mac,type,version_incremental,build_id,secure_id,serial";
 
-    String INSERT_VALUES = "#{taskId},#{perTime},#{deviceInfoId},#{runTime},#{createDay},#{state},#{taskType},#{telAndroidId}," +
+    String INSERT_VALUES = "#{fromId},#{fileName},#{taskId},#{perTime},#{deviceInfoId},#{runTime},#{createDay},#{state},#{taskType},#{telAndroidId}," +
             "#{subscriberId},#{operator},#{operatorName},#{line1Number},#{simSerialNumber},#{networkType}," +
             "#{phoneType},#{mac},#{type},#{versionIncremental},#{buildId},#{secureId},#{serial}";
 
@@ -69,6 +70,9 @@ public interface TaskSubMapper {
 
     @Select("Select "+FEILDS+" from task_sub where task_id=#{taskId} and create_day=#{createDay} and state=2 and task_type=1 limit  #{offset},#{number}")
     List<TaskSub> getListByCreateDay(@Param("taskId")int taskId,@Param("createDay") int createDay,@Param("offset")int offset,@Param("number")int number);
+
+    @Select("Select "+FEILDS+" from task_sub where id=#{Id}")
+    TaskSub getById(@Param("Id")String id);
 
     @Select("Select count(*) from task_sub where create_day=#{createDay} and task_id=#{taskId} and state=#{state} and task_type=#{taskType}")
     int getCountByTaskId(@Param("taskId")int taskId,@Param("createDay") int createDay,@Param("state")int state,@Param("taskType")int taskType);
@@ -97,6 +101,8 @@ public interface TaskSubMapper {
     void changeTaskSubState(@Param("state") int state,@Param("ids") String ids);
 
 
+    @Update("update task_sub set state=#{state},file_name=#{fileName} where id =#{id}")
+    void changeTaskSubStateAndFile(@Param("state") int state,@Param("id") String id,@Param("fileName")String fileName);
     /**
      *     private int id;
            private int userId;//记录对应的用户id

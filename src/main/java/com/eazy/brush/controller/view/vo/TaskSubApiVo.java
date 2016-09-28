@@ -15,6 +15,8 @@ import java.util.List;
 @Data
 public class TaskSubApiVo {
     private String id;
+    private String fromId;
+    private String fileName;
     private String remarkName;
     private String packageName;
     private int versionCode;

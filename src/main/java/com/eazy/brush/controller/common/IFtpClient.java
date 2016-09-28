@@ -13,4 +13,5 @@ public interface IFtpClient {
 
     void uploadToInoutStream(String fileName, String path, InputStream inputStream) throws IOException;
 
+    void deleteFile(String fileName,String path) throws IOException;
 }

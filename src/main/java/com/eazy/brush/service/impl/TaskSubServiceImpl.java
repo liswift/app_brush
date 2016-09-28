@@ -88,6 +88,16 @@ public class TaskSubServiceImpl implements TaskSubService {
         return taskSubMapper.getRandomList(createDay,perTime,taskSubMapper.getRandomCount(createDay,perTime),size);
     }
 
+    @Override
+    public TaskSub getById(String id) {
+        return taskSubMapper.getById(id);
+    }
+
+    @Override
+    public void updateFileName() {
+
+    }
+
     /**
      * 生成新增数据序列
      * @param task
@@ -204,7 +214,8 @@ public class TaskSubServiceImpl implements TaskSubService {
 
     private void reUseTaskSub(List<TaskSub> taskSubs,long perTime,int createDay) {
         for(TaskSub tasksub:taskSubs){
-            tasksub.setId(UUID.randomUUID().toString());
+            tasksub.setFromId(tasksub.getId());//设置from来源id
+            tasksub.setId(UUID.randomUUID().toString());//设置新的id
             tasksub.setPerTime(perTime);
             tasksub.setTaskType(SubTaskType.RETAIN.getCode());
             tasksub.setState(SubTaskState.INIT.getState());
@@ -224,6 +235,11 @@ public class TaskSubServiceImpl implements TaskSubService {
     @Override
     public void changeTaskSubState(String ids, SubTaskState subTaskState) {
         taskSubMapper.changeTaskSubState(subTaskState.getState(),ids);
+    }
+
+    @Override
+    public void changeTaskSubState(String id, SubTaskState subTaskState, String fileName) {
+        taskSubMapper.changeTaskSubStateAndFile(subTaskState.getState(),id,fileName);
     }
 
     /**
