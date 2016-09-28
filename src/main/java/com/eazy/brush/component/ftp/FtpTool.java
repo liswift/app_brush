@@ -196,7 +196,7 @@ public class FtpTool implements IFtpClient{
             end = directory.indexOf("/", start);
             while (true) {
                 String subDirectory = new String(remote.substring(start, end).getBytes("GBK"),"iso-8859-1");
-                if (changeWorkingDirectory(subDirectory)) {
+                if (!changeWorkingDirectory(subDirectory)) {
                     if (makeDirectory(subDirectory)) {
                         changeWorkingDirectory(subDirectory);
                     } else {
