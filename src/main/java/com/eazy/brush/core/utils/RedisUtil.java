@@ -1,15 +1,15 @@
 package com.eazy.brush.core.utils;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class RedisUtil {
 
-	private static ResourceBundle redis = ResourceBundle.getBundle("redis", Locale.getDefault());
+	private static ResourceBundle redis = ResourceBundle.getBundle("properties.redis", Locale.getDefault());
 
 	// Redis服务器IP
 	private static String ADDR = redis.getString("ip");
