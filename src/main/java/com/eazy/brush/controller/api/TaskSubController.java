@@ -49,13 +49,6 @@ public class TaskSubController extends BaseController {
         renderJson200(wrapField("tasks", taskSubList));
     }
 
-//    @RequestMapping("/callback")
-//    public void callback() {
-//        Map<String, String> map = getFormPage();
-//        String ids = map.get("ids");
-//        renderJson200();
-//    }
-
     @RequestMapping(value = "/download", method = {RequestMethod.GET,RequestMethod.POST})
     public void downloadApk(@RequestParam(value = "file") String file) {
         try {
