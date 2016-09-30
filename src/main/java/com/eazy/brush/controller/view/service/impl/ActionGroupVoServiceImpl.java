@@ -64,6 +64,7 @@ public class ActionGroupVoServiceImpl implements ActionGroupVoService {
             if(actionGroup.getEnable()==1&&StringUtils.isNotEmpty(actionGroup.getActionItemIds())){
                 ActionGroupApiVo actionGroupApiVo=new ActionGroupApiVo();
                 actionGroupApiVo.setActions(actionItemVoService.getApiByIds(actionGroup.getActionItemIds()));
+                actionGroupApiVos.add(actionGroupApiVo);
             }
         }
         return actionGroupApiVos;

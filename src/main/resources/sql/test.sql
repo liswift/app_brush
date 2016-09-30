@@ -70,8 +70,7 @@ CREATE TABLE `action_item` (
 -- ----------------------------
 -- Records of action_item
 -- ----------------------------
-INSERT INTO `action_item` VALUES ('4','11', 'ACTION_SCROLL_FORWARD', 'android.support.v4.view.ViewPager', 'bd/001', '滑动', '4096', '', '5', '1');
-INSERT INTO `action_item` VALUES ('5', '11','ACTION_SCROLL_BACKWARD', 'android.support.v4.view.ViewPager', 'bd/002', '回退', '8192', ' ', '5', '1');
+
 
 -- ----------------------------
 -- Table structure for `action_page`

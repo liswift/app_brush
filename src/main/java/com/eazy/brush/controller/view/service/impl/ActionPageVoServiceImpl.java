@@ -7,6 +7,7 @@ import com.eazy.brush.controller.view.vo.ActionPageVo;
 import com.eazy.brush.dao.entity.ActionPage;
 import com.eazy.brush.service.ActionItemService;
 import com.eazy.brush.service.ActionPageService;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,12 +36,13 @@ public class ActionPageVoServiceImpl implements ActionPageVoService {
     @Override
     public List<ActionPageApiVo> getApiByTaskId(int id) {
         List<ActionPage> actionPages = actionPageService.getByTaskId(id);
-        List<ActionPageApiVo> result=new ArrayList<>();
+        List<ActionPageApiVo> result= Lists.newArrayList();
         for(ActionPage actionPage:actionPages){
             if(actionPage.getEnable()==1){
                 ActionPageApiVo actionPageApiVo=new ActionPageApiVo();
                 actionPageApiVo.setPageName(actionPage.getPageName());
                 actionPageApiVo.setGroupActions(actionGroupVoService.getApiByPageId(actionPage.getId()));
+                result.add(actionPageApiVo);
             }
         }
         return result;
