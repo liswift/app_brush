@@ -35,7 +35,12 @@ public class ProxyIpServiceImpl implements ProxyIpService {
     public void store(String proxys) {
         String[] proxyIps = StringUtils.splitByWholeSeparator(proxys, "\n");
         for (String proxyIp : proxyIps) {
-            commonRedisCache.lPush(cacheKey, proxyIp);
+            if(HttpUtil.checkAviable(proxyIp)){
+                log.info("proxy can use:>>>>>>>>>"+proxyIp);
+                commonRedisCache.lPush(cacheKey, proxyIp);
+            }else{
+                log.info("proxy can not use:>>>>>>>>>"+proxyIp);
+            }
         }
     }
 
