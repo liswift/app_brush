@@ -33,10 +33,15 @@ public class ProxyIpServiceImpl implements ProxyIpService {
 
     @Override
     public void store(String proxys) {
+        boolean first=true;
         String[] proxyIps = StringUtils.splitByWholeSeparator(proxys, "\n");
         for (String proxyIp : proxyIps) {
             if(HttpUtil.checkAviable(proxyIp)){
                 log.info("proxy can use:>>>>>>>>>"+proxyIp);
+                if(first){
+                    first=false;
+                    del();
+                }
                 commonRedisCache.lPush(cacheKey, proxyIp);
             }else{
                 log.info("proxy can not use:>>>>>>>>>"+proxyIp);

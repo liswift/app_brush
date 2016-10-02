@@ -25,7 +25,6 @@ public class ProxyIpScheduler {
     @Scheduled(cron = "0 0/5 *  * * ? ")
     public void store() {
         log.info("### start store ProxyIp ###");
-        proxyIpService.del();
         proxyIpService.store(HttpUtil.get(ProxyIpService.url));
         log.info("### end store ProxyIp ###");
     }

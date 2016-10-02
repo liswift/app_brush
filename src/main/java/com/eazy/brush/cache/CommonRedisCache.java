@@ -338,6 +338,16 @@ public class CommonRedisCache {
         });
     }
 
+    //取出第一个元素
+    public String getFirst(final String key){
+        return (String)redisTemplate.execute(new RedisCallback<String>() {
+            @Override
+            public String doInRedis(RedisConnection redisConnection) throws DataAccessException {
+                return newString(redisConnection.lPop(rawString(key)));
+            }
+        });
+    }
+
     public Long incr(final String key) {
         return (Long) redisTemplate.execute(new RedisCallback<Long>() {
             public Long doInRedis(RedisConnection connection)
