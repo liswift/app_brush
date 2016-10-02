@@ -8,7 +8,7 @@ import com.eazy.brush.model.ProxyModel;
  */
 public interface ProxyIpService {
 
-    String url = "http://dev.kuaidaili.com/api/getproxy/?orderid=967359281758741&num=999&area=%E5%A4%A7%E9%99%86&b_pcchrome=1&b_pcie=1&b_pcff=1&b_android=1&b_iphone=1&b_ipad=1&protocol=1&method=1&an_an=1&an_ha=1&sp1=1&sep=2";
+    String url = "http://dev.kuaidaili.com/api/getproxy/?orderid=967359281758741&num=100&area=%E5%A4%A7%E9%99%86&b_pcchrome=1&b_pcie=1&b_pcff=1&b_android=1&b_iphone=1&b_ipad=1&protocol=1&method=1&an_an=1&an_ha=1&sp1=1&sep=2";
 
     /**
      * 持久化

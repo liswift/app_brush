@@ -53,7 +53,7 @@ public class HttpUtil {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpHost target=new HttpHost("www.baidu.com",80,"http");
         HttpHost proxy=new HttpHost(ipp[0],Integer.valueOf(ipp[1]),"http");
-        RequestConfig config = RequestConfig.custom().setProxy(proxy).setConnectTimeout(2000).setSocketTimeout(5000).build();
+        RequestConfig config = RequestConfig.custom().setProxy(proxy).setConnectTimeout(2000).setSocketTimeout(3000).build();
         HttpGet httpGet=new HttpGet("/");
         httpGet.setConfig(config);
         try {
