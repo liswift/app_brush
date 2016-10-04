@@ -168,14 +168,12 @@ public class TaskSubServiceImpl implements TaskSubService {
         int retainStayday = taskhistory.getRetainStayday();//留存剩余天数
         int percent = taskhistory.getRetainPercent();//生存剩余比例
 
-        log.info("#### retainStayday number:"+retainStayday+ " percent number:"+percent);
         if(retainStayday==0||percent==0){//留存天数为0,或者剩余留存率为0,直接return
             return;
         }
 
         int number = taskhistory.getIncrDay()*percent/100;//获取留存数目
 
-        log.info("#### retain number:"+number+ " sum number:"+taskhistory.getIncrDay());
         if(number>MAXINSERTNUMBER){
             int itemnumber = MAXINSERTNUMBER;
             int sumTimes = number/MAXINSERTNUMBER+1;////总的份数
