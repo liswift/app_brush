@@ -49,6 +49,10 @@ public class TaskSubController extends BaseController {
         renderJson200(wrapField("tasks", taskSubList));
     }
 
+    /**
+     * 下载文件,zip文件
+     * @param file
+     */
     @RequestMapping(value = "/download", method = {RequestMethod.GET,RequestMethod.POST})
     public void downloadApk(@RequestParam(value = "file") String file) {
         try {

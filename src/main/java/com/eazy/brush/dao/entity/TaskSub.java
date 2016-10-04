@@ -12,7 +12,7 @@ public class TaskSub {
 
     private String id;
     private String fromId="";
-    private String fileName="";//文件Name
+    private String fileName="";//文件Name,新增任务的文件名字就是当前任务的id,留存任务的filaName为对应新增任务的Id
     private int taskId;              //任务id
     private long perTime;             //时间粒度
     private int deviceInfoId;        //设备信息,例如三星/索尼/...

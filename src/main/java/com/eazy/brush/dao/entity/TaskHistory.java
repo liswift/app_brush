@@ -14,7 +14,7 @@ public class TaskHistory {
     private int taskId;//当前记录对应的taskid
     private String appName;//当前记录对应的应用名称
     private String remarkName;//当前应用对应的应用备注名称
-    private int incrDay;//当前新增数字
+    private int incrDay;//当天新增数字
     private int incrFail;//当天失败的量,一般来说是客户端没有成功回调
     private int incrUnfinish;//当天未来及做的量,一般来说是阻塞量
     private int retainDay;//当前留存数字多少,注意不要跟task里面的retainDay混淆,task里面表示留存天数

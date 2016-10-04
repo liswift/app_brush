@@ -160,42 +160,56 @@ public class TaskSubServiceImpl implements TaskSubService {
 
     /**
      * 生成留存数据序列
-     * @param task
+     * @param taskhistory
      */
     @Override
-    public void makeRetainDayTaskSub(TaskHistory task) {
+    public void makeRetainDayTaskSub(TaskHistory taskhistory) {
         int createDay = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));
-        int retainDay = task.getRetainDay();
-        int percent = task.getRetainPercent();
+        int retainDay = taskhistory.getRetainDay();//留存剩余天数
+        int percent = taskhistory.getRetainPercent();//生存剩余比例
 
         if(retainDay==0||percent==0){//留存天数为0,或者剩余留存率为0,直接return
             return;
         }
 
-        int number = task.getIncrDay()*task.getRetainPercent()/100;//获取留存数目
+        int number = taskhistory.getIncrDay()*percent/100;//获取留存数目
 
         if(number>MAXINSERTNUMBER){
             int newnumber = MAXINSERTNUMBER;
-            int tasktimes = number/MAXINSERTNUMBER+1;//增加一次
-            int mintaskNumber=task.getIncrDay()/tasktimes;//把总任务进行分割
+            int sumTimes = number/MAXINSERTNUMBER+1;////总的份数
+            int tasktimes = sumTimes;//循环次数开始的基数
+            int mintaskNumber=taskhistory.getIncrDay()/tasktimes;//把总任务进行分割,每次的个数
             while (tasktimes-->0){
                 if(tasktimes==0){
                     newnumber = number%MAXINSERTNUMBER;//取到最后剩余的余数
                 }
-                insertSub(task,createDay,tasktimes*mintaskNumber,newnumber);//通过offset进行总数量分割拿取
+                insertSub(taskhistory,createDay,tasktimes*mintaskNumber,newnumber,sumTimes,tasktimes);//通过offset进行总数量分割拿取
+                number = number-newnumber;//新增完总数减少
             }
         }else{
-            insertSub(task, createDay,0,number);
+            insertSub(taskhistory, createDay,0,number,1,0);
         }
     }
 
-    private void insertSub(TaskHistory task, int createDay,int offset, int number) {
+    /**
+     *
+     * @param taskHistory
+     * @param createDay
+     * @param offset
+     * @param number 最大是100个,这次的数目
+     * @param sumTimes 总的数据拆分的份数
+     * @param currentTimes 当前第几份,从index 0开始
+     */
+    private void insertSub(TaskHistory  taskHistory, int createDay,int offset, int number,int sumTimes,int currentTimes) {
         log.info("#### insert retain sub: createDay:"+createDay+" offset:"+offset+ " number:"+number);
-        List<TaskSub> listByCreateDay = taskSubMapper.getListByCreateDay(task.getTaskId(),task.getCreateDay(),offset,number);
-        int times = 24*60/ Constants.TASK_SUB_PER_MINITE;//平均分配24小时运行
-        int perNum = number/times+1;
+        List<TaskSub> listByCreateDay = taskSubMapper.getListByCreateDay(taskHistory.getTaskId(),taskHistory.getCreateDay(),offset,number);
+        int timeRange = 24*60/sumTimes;//每段的时间范围
+        int startMinutes = timeRange*currentTimes;
 
-        DateTime startTime = DateTime.now().withHourOfDay(0).withMinuteOfHour(0); //设定开始时间
+        int times = number/10+1;//次数
+        int perNum = 10;//每次最小任务数据量
+        int pulsMinutes = timeRange/times;
+        DateTime startTime = DateTime.now().withHourOfDay(0).withMinuteOfHour(0).plusMinutes(startMinutes); //设定开始时间
 
         while(times-->0){
             long perTime = Long.parseLong(startTime.toString("yyyyMMddHHmm"));
@@ -208,7 +222,7 @@ public class TaskSubServiceImpl implements TaskSubService {
                 taskSubs.clear();//子视图删除以后,原来的父类也会删除这些元素
                 reUseTaskSub(newList,perTime,createDay);
             }
-            startTime = startTime.plusMinutes(Constants.TASK_SUB_PER_MINITE);
+            startTime = startTime.plusMinutes(pulsMinutes);
         }
     }
 

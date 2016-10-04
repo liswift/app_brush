@@ -65,7 +65,7 @@ public class TaskSubScheduler {
     public void invokeAllSubTask() {
         Stopwatch stopwatch = Stopwatch.createStarted();
         log.info("### start invokeMakeTaskSub ###");
-        int historyDay = Integer.parseInt(DateTime.now().minusDays(1).toString("yyyyMMdd"));
+        int historyDay = Integer.parseInt(DateTime.now().minusDays(1).toString("yyyyMMdd"));//上一天
         //这里进行上一天的历史数据计算
         List<TaskHistory> historys = taskSubService.getHistoryByCreateDay(historyDay);
         log.info("### end get historys ###" + historys);
@@ -81,7 +81,7 @@ public class TaskSubScheduler {
         log.info("### begin insert historys ###" + historys);
         taskHistoryService.insert(historys);
         log.info("### end insert history,cost {} s ###", stopwatch.elapsed(TimeUnit.SECONDS));
-        taskSubService.deleteOldUnUseData(historyDay);
+        taskSubService.deleteOldUnUseData(historyDay);//删除所有的留存数据,没有做完的数据
         log.info("### end delete unused subtask,cost {} s ###", stopwatch.elapsed(TimeUnit.SECONDS));
 
         //获取所有运行中的任务,进行新的sub生成
