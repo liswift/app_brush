@@ -165,10 +165,11 @@ public class TaskSubServiceImpl implements TaskSubService {
     @Override
     public void makeRetainDayTaskSub(TaskHistory taskhistory) {
         int createDay = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));
-        int retainDay = taskhistory.getRetainDay();//留存剩余天数
+        int retainStayday = taskhistory.getRetainStayday();//留存剩余天数
         int percent = taskhistory.getRetainPercent();//生存剩余比例
 
-        if(retainDay==0||percent==0){//留存天数为0,或者剩余留存率为0,直接return
+        log.info("#### retainStayday number:"+retainStayday+ " percent number:"+percent);
+        if(retainStayday==0||percent==0){//留存天数为0,或者剩余留存率为0,直接return
             return;
         }
 
