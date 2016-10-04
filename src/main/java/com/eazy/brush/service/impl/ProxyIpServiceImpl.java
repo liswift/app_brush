@@ -27,7 +27,6 @@ public class ProxyIpServiceImpl implements ProxyIpService {
 
     @PostConstruct
     public void init() {
-        del();
         store(HttpUtil.get(url));
     }
 
@@ -37,14 +36,11 @@ public class ProxyIpServiceImpl implements ProxyIpService {
         String[] proxyIps = StringUtils.splitByWholeSeparator(proxys, "\n");
         for (String proxyIp : proxyIps) {
             if(HttpUtil.checkAviable(proxyIp)){
-                log.info("proxy can use:>>>>>>>>>"+proxyIp);
                 if(first){
                     first=false;
                     del();
                 }
                 commonRedisCache.lPush(cacheKey, proxyIp);
-            }else{
-                log.info("proxy can not use:>>>>>>>>>"+proxyIp);
             }
         }
     }
