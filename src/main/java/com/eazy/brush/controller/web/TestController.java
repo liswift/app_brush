@@ -1,12 +1,15 @@
 package com.eazy.brush.controller.web;
 
 import com.eazy.brush.controller.common.BaseController;
+import com.eazy.brush.core.enums.TaskState;
+import com.eazy.brush.dao.entity.Task;
 import com.eazy.brush.dao.entity.TaskHistory;
 import com.eazy.brush.service.TaskHistoryService;
 import com.eazy.brush.service.TaskService;
 import com.eazy.brush.service.TaskSubService;
 import com.google.common.base.Stopwatch;
 import lombok.extern.slf4j.Slf4j;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,31 +57,31 @@ public class TestController extends BaseController {
     public void invokeAllSubTask() {
         Stopwatch stopwatch = Stopwatch.createStarted();
         log.info("### start invokeMakeTaskSub ###");
-//        int historyDay = Integer.parseInt(DateTime.now().minusDays(1).toString("yyyyMMdd"));
-//        //这里进行上一天的历史数据计算
-//        List<TaskHistory> historys = taskSubService.getHistoryByCreateDay(historyDay);
-//        log.info("### end get historys ###" + historys);
-//        for (TaskHistory history : historys) {
-//            Task task = taskService.getById(history.getTaskId());
-//            history.setAppName(task.getRemarkName());
-//            history.setRemarkName(task.getRemarkName());
-//            history.setUserId(task.getUserId());
-//            history.setRetainStayday(task.getRetainDay());//这里不要写错!
-//            history.setRetainPercent(task.getRetainPercent());
-//            history.setCreateDay(historyDay);
-//        }
-//        log.info("### begin insert historys ###" + historys);
-//        taskHistoryService.insert(historys);
-//        log.info("### end insert history,cost {} s ###", stopwatch.elapsed(TimeUnit.SECONDS));
-//        taskSubService.deleteOldUnUseData(historyDay);
-//        log.info("### end delete unused subtask,cost {} s ###", stopwatch.elapsed(TimeUnit.SECONDS));
-//
-//        //获取所有运行中的任务,进行新的sub生成
-//        List<Task> tasks = taskService.getByState(TaskState.running.getCode());
-//        for (Task item : tasks) {
-//            taskSubService.makeIncrDayTaskSub(item);
-//        }
-//        log.info("### end make incrday subtask,cost {} s ###", stopwatch.elapsed(TimeUnit.SECONDS));
+        int historyDay = Integer.parseInt(DateTime.now().minusDays(1).toString("yyyyMMdd"));
+        //这里进行上一天的历史数据计算
+        List<TaskHistory> historys = taskSubService.getHistoryByCreateDay(historyDay);
+        log.info("### end get historys ###" + historys);
+        for (TaskHistory history : historys) {
+            Task task = taskService.getById(history.getTaskId());
+            history.setAppName(task.getRemarkName());
+            history.setRemarkName(task.getRemarkName());
+            history.setUserId(task.getUserId());
+            history.setRetainStayday(task.getRetainDay());//这里不要写错!
+            history.setRetainPercent(task.getRetainPercent());
+            history.setCreateDay(historyDay);
+        }
+        log.info("### begin insert historys ###" + historys);
+        taskHistoryService.insert(historys);
+        log.info("### end insert history,cost {} s ###", stopwatch.elapsed(TimeUnit.SECONDS));
+        taskSubService.deleteOldUnUseData(historyDay);
+        log.info("### end delete unused subtask,cost {} s ###", stopwatch.elapsed(TimeUnit.SECONDS));
+
+        //获取所有运行中的任务,进行新的sub生成
+        List<Task> tasks = taskService.getByState(TaskState.running.getCode());
+        for (Task item : tasks) {
+            taskSubService.makeIncrDayTaskSub(item);
+        }
+        log.info("### end make incrday subtask,cost {} s ###", stopwatch.elapsed(TimeUnit.SECONDS));
 
         //这里是获取还有留存的历史TaskHistory,根据留存率进行判断
         List<TaskHistory> activeTask = taskHistoryService.getActiveTask();

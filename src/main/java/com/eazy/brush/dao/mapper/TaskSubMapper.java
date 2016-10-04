@@ -89,8 +89,9 @@ public interface TaskSubMapper {
     /**
      * 删除所有留存数据,以及删除所有新增失败的数据
      * 此条只能每日凌晨进行运算,其余时间不能跑!
+     * 删除输了新增成功的数据外,其余的都要删除
      */
-    @Delete("delete from task_sub where create_day=#{createDay} and task_type=0 or state in (0,1)")
+    @Delete("delete from task_sub where create_day=#{createDay} and task_type!=1 and state !=2")
     void deleteUnUserData(@Param("createDay")int createDay);
 
     @InsertProvider(type = TaskSubProvider.class, method = "insertTaskSubBatch")
