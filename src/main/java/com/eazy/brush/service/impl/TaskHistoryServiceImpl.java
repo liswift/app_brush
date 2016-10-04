@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class TaskHistoryServiceImpl implements TaskHistoryService {
 
-    private static final int MIN_RETAINPERCENT=1;//暂时定义>=1的任务记录,可以做留存,小于这个数字留存直接不跑了
+    private static final int MIN_RETAINPERCENT=0;//暂时定义>=1的任务记录,可以做留存,小于这个数字留存直接不跑了
 
     @Autowired
     TaskHistoryMapper taskHistoryMapper;

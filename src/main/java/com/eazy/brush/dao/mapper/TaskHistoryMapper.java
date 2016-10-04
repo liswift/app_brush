@@ -23,7 +23,7 @@ public interface TaskHistoryMapper {
     List<TaskHistory> getListByUserId(@Param("userId") int userId);
 
 
-    @Select("select " + FEILDS + " from task_history where retain_percent >= #{retainPercent} and retain_stayday>0")
+    @Select("select " + FEILDS + " from task_history where retain_percent> #{retainPercent} and retain_stayday>0")
     List<TaskHistory> getListByMinRetainPercent(@Param("retainPercent")int retainPercent);
 
     @Insert("insert into task_history(" + INSERT_FEILDS + ") values (" + INSERT_VALUES + ")")

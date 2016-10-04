@@ -82,6 +82,7 @@ public class TestController extends BaseController {
 
         //这里是获取还有留存的历史TaskHistory,根据留存率进行判断
         List<TaskHistory> activeTask = taskHistoryService.getActiveTask();
+        log.info("get task history number"+activeTask.size());
         for (TaskHistory taskHistory : activeTask) {
             taskSubService.makeRetainDayTaskSub(taskHistory);
             taskHistoryService.changeRetainPercent(taskHistory);

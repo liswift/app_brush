@@ -174,17 +174,18 @@ public class TaskSubServiceImpl implements TaskSubService {
 
         int number = taskhistory.getIncrDay()*percent/100;//获取留存数目
 
+        log.info("#### retain number:"+number+ " sum number:"+taskhistory.getIncrDay());
         if(number>MAXINSERTNUMBER){
-            int newnumber = MAXINSERTNUMBER;
+            int itemnumber = MAXINSERTNUMBER;
             int sumTimes = number/MAXINSERTNUMBER+1;////总的份数
             int tasktimes = sumTimes;//循环次数开始的基数
             int mintaskNumber=taskhistory.getIncrDay()/tasktimes;//把总任务进行分割,每次的个数
             while (tasktimes-->0){
                 if(tasktimes==0){
-                    newnumber = number%MAXINSERTNUMBER;//取到最后剩余的余数
+                    itemnumber = number%MAXINSERTNUMBER;//取到最后剩余的余数
                 }
-                insertSub(taskhistory,createDay,tasktimes*mintaskNumber,newnumber,sumTimes,tasktimes);//通过offset进行总数量分割拿取
-                number = number-newnumber;//新增完总数减少
+                insertSub(taskhistory,createDay,tasktimes*mintaskNumber,itemnumber,sumTimes,tasktimes);//通过offset进行总数量分割拿取
+                number = number-itemnumber;//新增完总数减少
             }
         }else{
             insertSub(taskhistory, createDay,0,number,1,0);
