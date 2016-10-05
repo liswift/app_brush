@@ -5,6 +5,7 @@ import com.eazy.brush.core.enums.SubTaskState;
 import com.eazy.brush.core.enums.SubTaskType;
 import com.eazy.brush.dao.entity.Task;
 import com.eazy.brush.dao.entity.TaskHistory;
+import com.eazy.brush.dao.entity.TaskSetup;
 import com.eazy.brush.dao.entity.TaskSub;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 public interface TaskSubService {
 
 
+    int getCountByTaskId(int createDay,SubTaskType taskType,int taskId);
     /**
      * 这个数据返回的是当前的运行的历史数据
      * 每天凌晨进行历史数据计算,并返回历史数据
@@ -65,10 +67,10 @@ public interface TaskSubService {
 
     /**
      * 生成启动数据,增加每个用户的启动次数
-     * @param taskId
-     * @param percent
+     * @param taskSetup
      */
-    void makeSetupTaskSub(int taskId,int percent);
+    void makeSetupTaskSub(TaskSetup taskSetup);
+
 
     void insertTaskBatch(List<TaskSub> taskSubList);
 

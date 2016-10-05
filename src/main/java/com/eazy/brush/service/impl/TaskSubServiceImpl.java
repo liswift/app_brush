@@ -62,6 +62,11 @@ public class TaskSubServiceImpl implements TaskSubService {
     }
 
     @Override
+    public int getCountByTaskId(int createDay, SubTaskType taskType, int taskId) {
+        return taskSubMapper.getCountByTaskId(taskId,createDay,taskType.getCode());
+    }
+
+    @Override
     public List<TaskHistory> getHistoryByCreateDay(int createDay) {
         return taskSubMapper.getHistoryCount(createDay);//计算前天的数据;
     }
@@ -188,7 +193,11 @@ public class TaskSubServiceImpl implements TaskSubService {
     }
 
     @Override
-    public void makeSetupTaskSub(int taskId, int percent) {
+    public void makeSetupTaskSub(TaskSetup taskSetup) {
+//        int count=taskSubService.getCountByTaskId(today, SubTaskType.SETUP,taskSetup.getTaskId());
+//        if(count<taskSetup.getMaxNum()){
+//            taskSubService.makeSetupTaskSub();
+//        }
 
     }
 

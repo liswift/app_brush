@@ -78,6 +78,9 @@ public interface TaskSubMapper {
     @Select("Select count(*) from task_sub where create_day=#{createDay} and task_id=#{taskId} and state=#{state} and task_type=#{taskType}")
     int getCountByTaskId(@Param("taskId")int taskId,@Param("createDay") int createDay,@Param("state")int state,@Param("taskType")int taskType);
 
+    @Select("Select count(*) from task_sub where create_day=#{createDay} and task_id=#{taskId} and task_type=#{taskType}")
+    int getCountByTaskId(@Param("taskId")int taskId,@Param("createDay") int createDay,@Param("taskType")int taskType);
+
     @Select("Select count(*) from task_sub where create_day=#{createDay} and state=#{state} and task_type=#{taskType}")
     int getCount(@Param("createDay") int createDay,@Param("state")int state,@Param("taskType")int taskType);
 
