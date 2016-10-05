@@ -15,21 +15,6 @@ Date: 2016-09-13 16:46:47
 
 SET FOREIGN_KEY_CHECKS=0;
 
--- ----------------------------
--- Table structure for `action`
--- ----------------------------
-DROP TABLE IF EXISTS `action`;
-
--- ----------------------------
--- Table structure for `action_sub`
--- ----------------------------
-DROP TABLE IF EXISTS `action_sub`;
-
--- ----------------------------
--- Table structure for `task_action`
--- ----------------------------
-DROP TABLE IF EXISTS `task_action`;
-
 
 -- ----------------------------
 -- Table structure for `action_group`
@@ -1026,6 +1011,7 @@ INSERT INTO `permission` VALUES ('128', null, '账户管理', null, null, '', nu
 INSERT INTO `permission` VALUES ('129', '128', '费用记录', null, null, '', null, '&#xe6bf;', null, '费用记录');
 INSERT INTO `permission` VALUES ('130', '128', '账户充值', null, null, '', null, '&#xe628;', null, '账户充值');
 INSERT INTO `permission` VALUES ('131', '127', '推广记录', null, null, '/taskhistory/list', null, '&#xe627;', null, '推广记录');
+INSERT INTO `permission` VALUES ('132', '124', '我的任务', null, null, '', null, '&#xe61c;', null, '我的任务');
 INSERT INTO `permission` VALUES ('133', null, '资源管理', null, null, '', null, '&#xe61a;', null, '资源管理');
 INSERT INTO `permission` VALUES ('134', '133', '主机列表', null, null, '', null, '&#xe64f;', null, '主机列表');
 INSERT INTO `permission` VALUES ('135', null, '任务记录', null, null, '', null, '&#xe637;', null, '任务记录');
@@ -1072,6 +1058,7 @@ CREATE TABLE `role_permission` (
 -- ----------------------------
 INSERT INTO `role_permission` VALUES ('1461', '13', '124');
 INSERT INTO `role_permission` VALUES ('1462', '13', '125');
+INSERT INTO `role_permission` VALUES ('1503', '13', '126');
 INSERT INTO `role_permission` VALUES ('1463', '13', '132');
 INSERT INTO `role_permission` VALUES ('1464', '13', '127');
 INSERT INTO `role_permission` VALUES ('1465', '13', '131');
@@ -1115,7 +1102,6 @@ INSERT INTO `role_permission` VALUES ('1504', '13', '110');
 INSERT INTO `role_permission` VALUES ('1531', '1', '135');
 INSERT INTO `role_permission` VALUES ('1532', '1', '136');
 INSERT INTO `role_permission` VALUES ('1533', '5', '124');
-INSERT INTO `role_permission` VALUES ('1534', '5', '125');
 INSERT INTO `role_permission` VALUES ('1535', '5', '132');
 INSERT INTO `role_permission` VALUES ('1536', '5', '127');
 INSERT INTO `role_permission` VALUES ('1537', '5', '131');
