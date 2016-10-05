@@ -1111,7 +1111,6 @@ INSERT INTO `role_permission` VALUES ('1540', '5', '130');
 INSERT INTO `role_permission` VALUES ('1541', '14', '124');
 INSERT INTO `role_permission` VALUES ('1542', '14', '125');
 INSERT INTO `role_permission` VALUES ('1543', '14', '126');
-INSERT INTO `role_permission` VALUES ('1544', '14', '132');
 INSERT INTO `role_permission` VALUES ('1545', '14', '133');
 INSERT INTO `role_permission` VALUES ('1546', '14', '134');
 INSERT INTO `role_permission` VALUES ('1547', '14', '1');
