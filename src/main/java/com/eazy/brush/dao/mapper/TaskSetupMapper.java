@@ -34,6 +34,6 @@ public interface TaskSetupMapper {
     @Select("select " + FEILDS + " from task_setup where task_id=#{taskId}")
     TaskSetup getByTaskId(@Param("taskId")int taskId);
 
-    @Update("update task_setup set max_num=#{maxNum} where id=#{id}")
-    int update(@Param("maxNum")int maxNum,@Param("id") int id);
+    @Update("update task_setup set max_num=#{maxNum},operator_id=#{operatorId} where id=#{id}")
+    int update(@Param("maxNum")int maxNum,@Param("operatorId")int operatorId,@Param("id") int id);
 }

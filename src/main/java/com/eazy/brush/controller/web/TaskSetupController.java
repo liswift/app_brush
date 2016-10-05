@@ -42,5 +42,12 @@ public class TaskSetupController extends BaseController{
     @RequestMapping(value = "addoup", method = RequestMethod.POST)
     public void addOrUP(TaskSetup taskSetup) {
         log.info("tasksetup:"+taskSetup.toString());
+        taskSetup.setOperatorId(getCurrentUser().getId());
+        if(StringUtils.isEmpty(taskSetup.getId())){
+            taskSetupService.insert(taskSetup);
+        }else{
+            taskSetupService.update(taskSetup);
+        }
+        renderJson200();
     }
 }

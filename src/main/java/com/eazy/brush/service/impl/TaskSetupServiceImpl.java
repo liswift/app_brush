@@ -4,12 +4,14 @@ import com.eazy.brush.dao.entity.TaskSetup;
 import com.eazy.brush.dao.mapper.TaskSetupMapper;
 import com.eazy.brush.service.TaskSetupService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by yuekuapp on 16-10-5.
  */
+@Service
 public class TaskSetupServiceImpl implements TaskSetupService{
     @Autowired
     TaskSetupMapper taskSetupMapper;
@@ -26,7 +28,7 @@ public class TaskSetupServiceImpl implements TaskSetupService{
 
     @Override
     public void update(TaskSetup taskSetup) {
-        taskSetupMapper.update(taskSetup.getMaxNum(),taskSetup.getId());
+        taskSetupMapper.update(taskSetup.getMaxNum(),taskSetup.getOperatorId(),taskSetup.getId());
     }
 
     @Override
