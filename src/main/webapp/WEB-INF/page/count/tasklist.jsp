@@ -38,6 +38,7 @@
             <tr class="text-c">
                 <th>用户名</th>
                 <th>应用名称</th>
+                <th>运行总时长</th>
                 <th>预设新增</th>
                 <th>预设激活</th>
                 <th>预设唤醒</th>
@@ -49,10 +50,11 @@
                 <tr class="text-c">
                     <td>${t.userName}</td>
                     <td>${t.taskName}</td>
+                    <td>${t.sumTime}</td>
                     <td>${t.todayIncr}</td>
                     <td>${t.todayRetain}</td>
                     <td>${t.todaySetup}</td>
-                    <td>操作</td>
+                    <td><a href="javascript:;" onclick="setSetup('设置唤醒','/tasksetup/edit?taskId=${t.taskId}','700','300')">设置唤醒</a></td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -78,10 +80,14 @@
             "bStateSave": true,//状态保存
             "aoColumnDefs": [
                 //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-                {"orderable": false, "aTargets": [0,1,5]}// 制定列不参与排序
+                {"orderable": false, "aTargets": [0,1,6]}// 制定列不参与排序
             ]
         });
     });
+
+    function setSetup(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
 </script>
 </body>
 </html>

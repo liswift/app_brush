@@ -139,10 +139,10 @@ public interface TaskSubMapper {
      */
 
 
-    @Select("select task_id," +
+    @Select("select task_id," +"count(temp_sum) as sum_time,"+
             "MAX(CASE WHEN task_type=0 then ocount else 0 end) as today_incr," +//留存数字
             "MAX(CASE WHEN task_type=1 then ocount else 0 end) as today_retain," +//新增数字
             "MAX(CASE WHEN task_type=2 then ocount else 0 end) as today_setup" +//新增启动数字
-            " from (select create_day,task_id,task_type,count(*) as ocount from task_sub where create_day=#{createDay} group by task_id,task_type) as newtable group by task_id")
+            " from (select create_day,task_id,task_type,count(*) as ocount,sum(run_time) as temp_sum from task_sub where create_day=#{createDay} group by task_id,task_type) as newtable group by task_id")
     List<SubTaskAdminVo> getTaskCount(@Param("createDay")int createDay);
 }

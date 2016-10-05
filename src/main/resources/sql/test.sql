@@ -1201,6 +1201,23 @@ CREATE TABLE `task_history` (
 -- ----------------------------
 -- INSERT INTO `task_history` VALUES ('1', '9','11', 'Mainac', '', '100','0','0', '100','0','0', '10','10', '20160911');
 
+-- ----------------------------
+-- Table structure for `task_setup`
+-- ----------------------------
+DROP TABLE IF EXISTS `task_setup`;
+CREATE TABLE `task_setup` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `task_id` int(11) NOT NULL DEFAULT '0',
+  `operator_id` int(11) NOT NULL DEFAULT '0' COMMENT '操作人员ID',
+  `max_num` int NOT NULL DEFAULT '0' COMMENT '每日唤醒任务量',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of task setup
+-- ----------------------------
+-- INSERT INTO `task_setup` VALUES ('1', '9','11', '1000');
+
 
 -- ----------------------------
 -- Table structure for `task_sub`
