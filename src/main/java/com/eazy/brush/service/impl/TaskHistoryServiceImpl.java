@@ -31,6 +31,11 @@ public class TaskHistoryServiceImpl implements TaskHistoryService {
     }
 
     @Override
+    public List<TaskHistory> getAllTask() {
+        return taskHistoryMapper.getCountList();
+    }
+
+    @Override
     public void insert(TaskHistory taskHistory) {
         taskHistoryMapper.insert(taskHistory);
     }

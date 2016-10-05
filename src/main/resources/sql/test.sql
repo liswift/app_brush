@@ -1005,7 +1005,7 @@ INSERT INTO `permission` VALUES ('113', '37', '恢复', null, null, null, 'sys:q
 INSERT INTO `permission` VALUES ('121', '106', '百度统计', null, null, '/baidu/list', null, null, null, '');
 INSERT INTO `permission` VALUES ('124', null, '任务管理', null, null, '', null, '&#xe61a;', null, '任务管理');
 INSERT INTO `permission` VALUES ('125', '124', '今日任务', null, null, '/admin/todayTask', null, '&#xe61c;', null, '今日任务');
-INSERT INTO `permission` VALUES ('126', '124', '历史任务', null, null, '', null, '&#xe61c;', null, '历史任务');
+INSERT INTO `permission` VALUES ('126', '124', '历史任务', null, null, '/admin/taskhistory', null, '&#xe61c;', null, '历史任务');
 INSERT INTO `permission` VALUES ('127', null, '历史数据', null, null, '', null, '&#xe61a;', null, '历史数据');
 INSERT INTO `permission` VALUES ('128', null, '账户管理', null, null, '', null, '&#xe63a;', null, '账户管理');
 INSERT INTO `permission` VALUES ('129', '128', '费用记录', null, null, '', null, '&#xe6bf;', null, '费用记录');

@@ -16,6 +16,8 @@ public interface TaskHistoryService {
      */
     List<TaskHistory> getActiveTask();
 
+    List<TaskHistory> getAllTask();
+
     void insert(TaskHistory taskHistory);
 
     void insert(List<TaskHistory> histories);
