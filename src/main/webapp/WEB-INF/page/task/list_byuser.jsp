@@ -25,7 +25,9 @@
 </head>
 <body>
 <div class="pd-20" style="padding-top:20px;">
-    <p class="f-20 text-success">欢迎您, <span class="f-14">${user.name}</span></p>
+    <c:if test="${user!=null}">
+        <p class="f-20 text-success">欢迎您, <span class="f-14">${user.name}</span></p>
+    </c:if>
     <!--
         <p>帐户余额：${userAccountVo.pointCount},
         今日所需点数：${userAccountVo.todayPointNeed}点，明日所需点数：${userAccountVo.tomorrowPointNeed}点

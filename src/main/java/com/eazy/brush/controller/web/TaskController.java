@@ -63,6 +63,15 @@ public class TaskController extends BaseController {
         return model;
     }
 
+    @RequestMapping(value = "mytask", method = RequestMethod.GET)
+    public ModelAndView mytask() {
+        User user = getCurrentUser();
+        ModelAndView model = new ModelAndView("task/list_byuser");
+        List<TaskVo> taskVoses = taskVoService.getList(user.getId(),0,Integer.MAX_VALUE);
+        model.addObject("tasks", taskVoses);
+        return model;
+    }
+
     @RequestMapping(value = "toAdd", method = RequestMethod.GET)
     public ModelAndView toAdd() {
         return new ModelAndView("task/save");

@@ -1011,7 +1011,7 @@ INSERT INTO `permission` VALUES ('128', null, '账户管理', null, null, '', nu
 INSERT INTO `permission` VALUES ('129', '128', '费用记录', null, null, '', null, '&#xe6bf;', null, '费用记录');
 INSERT INTO `permission` VALUES ('130', '128', '账户充值', null, null, '', null, '&#xe628;', null, '账户充值');
 INSERT INTO `permission` VALUES ('131', '127', '推广记录', null, null, '/taskhistory/list', null, '&#xe627;', null, '推广记录');
-INSERT INTO `permission` VALUES ('132', '124', '我的任务', null, null, '', null, '&#xe61c;', null, '我的任务');
+INSERT INTO `permission` VALUES ('132', '124', '我的任务', null, null, '/task/mytask', null, '&#xe61c;', null, '我的任务');
 INSERT INTO `permission` VALUES ('133', null, '资源管理', null, null, '', null, '&#xe61a;', null, '资源管理');
 INSERT INTO `permission` VALUES ('134', '133', '主机列表', null, null, '', null, '&#xe64f;', null, '主机列表');
 INSERT INTO `permission` VALUES ('135', null, '任务记录', null, null, '', null, '&#xe637;', null, '任务记录');
