@@ -29,8 +29,12 @@
    	<div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>唤醒量：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" value="${taskSetup.maxNum}" placeholder="" name="name" datatype="n" nullmsg="不能为空" errormsg="请输入数字">
+        <input type="text" class="input-text" value="${taskSetup.maxNum}" placeholder="" name="maxNum" datatype="n" nullmsg="不能为空" errormsg="请输入数字">
       </div>
+        <div hidden>
+            <input disabled hidden type="text" value="${taskSetup.id}" name="id">
+            <input disabled hidden type="text" value="${taskSetup.taskId}" name="taskId">
+        </div>
       <div class="col-4"> </div>
     </div>
     <p>注意:这里设置的是今日的最大唤醒量,真实唤醒量不会实时彼岸花。唤醒是每30分钟进行一次,老数据的50%唤醒,一直达到最大值。</p>
@@ -38,10 +42,6 @@
       <div class="col-9 col-offset-3">
         <input class="btn btn-primary radius" id="save" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
       </div>
-    </div>
-    <div hidden>
-      <input disabled hidden type="text" value="${taskSetup.id}" name="id">
-      <input disabled hidden type="text" value="${taskSetup.taskId}" name="taskId">
     </div>
   </form>
 </div>
