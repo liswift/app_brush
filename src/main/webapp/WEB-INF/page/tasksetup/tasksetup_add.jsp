@@ -32,8 +32,8 @@
         <input type="text" class="input-text" value="${taskSetup.maxNum}" placeholder="" name="maxNum" datatype="n" nullmsg="不能为空" errormsg="请输入数字">
       </div>
         <div hidden>
-            <input disabled hidden type="text" value="${taskSetup.id}" name="id">
-            <input disabled hidden type="text" value="${taskSetup.taskId}" name="taskId">
+            <input  type="text" value="${taskSetup.id}" name="id">
+            <input  type="text" value="${taskSetup.taskId}" name="taskId">
         </div>
       <div class="col-4"> </div>
     </div>
