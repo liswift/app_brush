@@ -12,9 +12,9 @@ import java.util.List;
 public interface TaskHistoryMapper {
 
 
-    String INSERT_FEILDS = "user_id,task_id,app_name,remark_name,incr_day,incr_fail,incr_unfinish,retain_day,retain_fail,retain_unfinish,retain_percent,retain_stayday,create_day";
+    String INSERT_FEILDS = "user_id,task_id,app_name,remark_name,incr_day,incr_fail,incr_unfinish,retain_day,retain_fail,retain_unfinish,retain_percent,retain_stayday,create_day,sum_time";
 
-    String INSERT_VALUES = "#{userId},#{taskId},#{appName},#{remarkName},#{incrDay},#{incrFail},#{incrUnfinish},#{retainDay},#{retainFail},#{retainUnfinish},#{retainPercent},#{retainStayday},#{createDay}";
+    String INSERT_VALUES = "#{userId},#{taskId},#{appName},#{remarkName},#{incrDay},#{incrFail},#{incrUnfinish},#{retainDay},#{retainFail},#{retainUnfinish},#{retainPercent},#{retainStayday},#{createDay},#{sumTime}";
 
     String FEILDS = "id," + INSERT_FEILDS;
 

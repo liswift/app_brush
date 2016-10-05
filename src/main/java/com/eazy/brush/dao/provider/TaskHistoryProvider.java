@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * author : liufeng
+ * author : sunpengshuai
  * create time:2016/8/28 17:37
  */
 @Slf4j
@@ -17,7 +17,7 @@ public class TaskHistoryProvider {
 
     /**
      *
-     * #{userId},#{taskId},#{appName},#{remarkName},#{incrDay},#{incrFail},#{incrUnfinish},#{retainDay},#{retainFail},#{retainUnfinish},#{retainPercent},#{retainStayday},#{createDay}
+     * #{userId},#{taskId},#{appName},#{remarkName},#{incrDay},#{incrFail},#{incrUnfinish},#{retainDay},#{retainFail},#{retainUnfinish},#{retainPercent},#{retainStayday},#{createDay},#{sumTime}
      *
      * @param map
      * @return
@@ -37,7 +37,7 @@ public class TaskHistoryProvider {
                 "#'{'histories[{0}].remarkName'}'," +
                 "#'{'histories[{0}].incrDay'}',#'{'histories[{0}].incrFail'}',#'{'histories[{0}].incrUnfinish'}',#'{'histories[{0}].retainDay'}'," +
                 "#'{'histories[{0}].retainFail'}',#'{'histories[{0}].retainUnfinish'}'," +
-                "#'{'histories[{0}].retainPercent'}',#'{'histories[{0}].retainStayday'}',#'{'histories[{0}].createDay'}'" +
+                "#'{'histories[{0}].retainPercent'}',#'{'histories[{0}].retainStayday'}',#'{'histories[{0}].createDay',#'{'histories[{0}].sumTime'}'" +
                 ")");
         for (int i = 0; i < histories.size(); i++) {
             sb.append(mf.format(new Object[]{i}));

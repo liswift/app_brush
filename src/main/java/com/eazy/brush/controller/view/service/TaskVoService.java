@@ -30,4 +30,7 @@ public interface TaskVoService {
      * @param task_id
      */
     void changeStrategy(int userId,int task_id);
+
+
+
 }

@@ -70,7 +70,7 @@ public class TaskSubController extends BaseController {
             if(file!=null){//如果文件没有传上来,直接更新完成状态不需要存储file
                 ftpTool.uploadToInoutStream(fileName,PathUtil.getPathByCreateDayAndUuid(fileName),file.getInputStream());//只需要更新原始新增的数据文件
             }
-            taskSubService.changeTaskSubState(id,SubTaskState.FINISHED,id);//新增任务完成需要更新文件名字
+            taskSubService.changeTaskSubState(id,SubTaskState.FINISHED,fileName);//新增任务完成需要更新文件名字
 
             renderJson200();
         } catch (IOException e) {

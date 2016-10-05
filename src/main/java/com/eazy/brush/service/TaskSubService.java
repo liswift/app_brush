@@ -1,5 +1,6 @@
 package com.eazy.brush.service;
 
+import com.eazy.brush.controller.view.vo.SubTaskAdminVo;
 import com.eazy.brush.core.enums.SubTaskState;
 import com.eazy.brush.core.enums.SubTaskType;
 import com.eazy.brush.dao.entity.Task;
@@ -23,6 +24,12 @@ public interface TaskSubService {
      */
     List<TaskHistory> getHistoryByCreateDay(int createDay);
 
+    /**
+     * 获取当天所有任务的,数量情况
+     * @param createDay
+     * @return
+     */
+    List<SubTaskAdminVo> getTodayTaskCountByCreateDay(int createDay);
     /**
      * 获取未消费的任务集合
      *
@@ -56,6 +63,12 @@ public interface TaskSubService {
      */
     void makeRetainDayTaskSub(TaskHistory taskHistory);
 
+    /**
+     * 生成启动数据,增加每个用户的启动次数
+     * @param taskId
+     * @param percent
+     */
+    void makeSetupTaskSub(int taskId,int percent);
 
     void insertTaskBatch(List<TaskSub> taskSubList);
 

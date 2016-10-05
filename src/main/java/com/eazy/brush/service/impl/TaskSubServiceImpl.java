@@ -2,6 +2,7 @@ package com.eazy.brush.service.impl;
 
 import com.eazy.brush.controller.view.service.Operator;
 import com.eazy.brush.controller.view.service.RandomMacAddress;
+import com.eazy.brush.controller.view.vo.SubTaskAdminVo;
 import com.eazy.brush.core.enums.SubTaskState;
 import com.eazy.brush.core.enums.SubTaskType;
 import com.eazy.brush.core.enums.TaskSpeedType;
@@ -12,10 +13,7 @@ import com.eazy.brush.core.utils.RandomUtil;
 import com.eazy.brush.dao.entity.*;
 import com.eazy.brush.dao.mapper.TaskSubMapper;
 import com.eazy.brush.service.DeviceInfoService;
-import com.eazy.brush.service.ProxyIpService;
-import com.eazy.brush.service.TaskService;
 import com.eazy.brush.service.TaskSubService;
-import com.eazy.brush.service.rank.HcountService;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
@@ -41,14 +39,7 @@ public class TaskSubServiceImpl implements TaskSubService {
     @Autowired
     private DeviceInfoService deviceInfoService;
 
-    @Autowired
-    private HcountService hcountService;
 
-    @Autowired
-    private TaskService taskService;
-
-    @Autowired
-    private ProxyIpService proxyIpService;
 
     class NetType<T> implements Award {
 
@@ -73,6 +64,11 @@ public class TaskSubServiceImpl implements TaskSubService {
     @Override
     public List<TaskHistory> getHistoryByCreateDay(int createDay) {
         return taskSubMapper.getHistoryCount(createDay);//计算前天的数据;
+    }
+
+    @Override
+    public List<SubTaskAdminVo> getTodayTaskCountByCreateDay(int createDay) {
+        return taskSubMapper.getTaskCount(createDay);
     }
 
     /**
@@ -191,6 +187,11 @@ public class TaskSubServiceImpl implements TaskSubService {
         }
     }
 
+    @Override
+    public void makeSetupTaskSub(int taskId, int percent) {
+
+    }
+
     /**
      *
      * @param taskHistory
@@ -237,6 +238,9 @@ public class TaskSubServiceImpl implements TaskSubService {
         }
         insertTaskBatch(taskSubs);
     }
+
+
+
 
 
     @Override

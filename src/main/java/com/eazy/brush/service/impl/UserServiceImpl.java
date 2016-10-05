@@ -1,15 +1,14 @@
 package com.eazy.brush.service.impl;
   
-import java.util.List;  
-import java.util.Map;  
-  
-import org.springframework.beans.factory.annotation.Autowired;  
-import org.springframework.stereotype.Service;
-
-import com.eazy.brush.service.common.CommonServiceImpl;
 import com.eazy.brush.dao.UserDao;
 import com.eazy.brush.model.User;
 import com.eazy.brush.service.UserService;
+import com.eazy.brush.service.common.CommonServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
   
   
 @Service  
@@ -21,6 +20,11 @@ public class UserServiceImpl extends CommonServiceImpl implements UserService {
     public List<Map<String, Object>> selectUser() {  
         return userDao.selectUser();  
     }
+
+	@Override
+	public User getById(int userId) {
+		return userDao.getUserById(userId);
+	}
 
 	@Override
 	public User login(User user) {

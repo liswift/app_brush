@@ -13,7 +13,6 @@
     <description>Shiro安全配置</description>
 
     <context:component-scan base-package="com.eazy.brush.component.shiro"/>
-    <context:component-scan base-package="com.eazy.brush.quartz"/>
     <context:component-scan base-package="com.eazy.brush.core.email"/>
     <context:component-scan base-package="com.eazy.brush.core.filter"/>
 
