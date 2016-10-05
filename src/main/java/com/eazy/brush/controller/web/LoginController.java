@@ -60,9 +60,13 @@ public class LoginController extends BaseController {
         } else {
             // 需要的时候再去拿session
             HttpSession sessionCode = request.getSession();
-            String code = sessionCode.getAttribute("code").toString();
+            String code=null;
+            if(sessionCode!=null){
+                code = sessionCode.getAttribute("code").toString();
+            }
 
-            if (!code.equalsIgnoreCase(map.get("code"))) {
+
+            if (code==null||!code.equalsIgnoreCase(map.get("code"))) {
                 redirectAttributes.addFlashAttribute("msg", "验证码输入错误");
             } else {
                 try {
