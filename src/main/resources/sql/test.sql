@@ -1110,15 +1110,16 @@ INSERT INTO `role_permission` VALUES ('1539', '5', '129');
 INSERT INTO `role_permission` VALUES ('1540', '5', '130');
 INSERT INTO `role_permission` VALUES ('1541', '14', '124');
 INSERT INTO `role_permission` VALUES ('1542', '14', '125');
-INSERT INTO `role_permission` VALUES ('1543', '14', '132');
-INSERT INTO `role_permission` VALUES ('1544', '14', '133');
-INSERT INTO `role_permission` VALUES ('1545', '14', '134');
-INSERT INTO `role_permission` VALUES ('1546', '14', '1');
-INSERT INTO `role_permission` VALUES ('1547', '14', '3');
-INSERT INTO `role_permission` VALUES ('1548', '14', '7');
-INSERT INTO `role_permission` VALUES ('1549', '14', '97');
-INSERT INTO `role_permission` VALUES ('1550', '14', '98');
-INSERT INTO `role_permission` VALUES ('1551', '1', '137');
+INSERT INTO `role_permission` VALUES ('1543', '14', '126');
+INSERT INTO `role_permission` VALUES ('1544', '14', '132');
+INSERT INTO `role_permission` VALUES ('1545', '14', '133');
+INSERT INTO `role_permission` VALUES ('1546', '14', '134');
+INSERT INTO `role_permission` VALUES ('1547', '14', '1');
+INSERT INTO `role_permission` VALUES ('1548', '14', '3');
+INSERT INTO `role_permission` VALUES ('1549', '14', '7');
+INSERT INTO `role_permission` VALUES ('1550', '14', '97');
+INSERT INTO `role_permission` VALUES ('1551', '14', '98');
+INSERT INTO `role_permission` VALUES ('1552', '1', '137');
 
 -- ----------------------------
 -- Table structure for `task`
