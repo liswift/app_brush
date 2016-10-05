@@ -33,7 +33,7 @@
         <table class="table table-border table-bordered table-bg table-sort" id=task-list-table>
             <thead>
             <tr>
-                <th colspan="6" scope="col">今日任务</th>
+                <th colspan="7" scope="col">今日任务</th>
             </tr>
             <tr class="text-c">
                 <th>用户名</th>
