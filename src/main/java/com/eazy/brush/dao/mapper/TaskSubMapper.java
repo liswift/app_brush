@@ -76,7 +76,7 @@ public interface TaskSubMapper {
     TaskSub getById(@Param("Id")String id);
 
     @Select("Select count(*) from task_sub where create_day=#{createDay} and task_id=#{taskId} and state=#{state} and task_type=#{taskType}")
-    int getCountByTaskId(@Param("taskId")int taskId,@Param("createDay") int createDay,@Param("state")int state,@Param("taskType")int taskType);
+    int getCountByTaskId3(@Param("taskId")int taskId, @Param("createDay") int createDay, @Param("state")int state, @Param("taskType")int taskType);
 
     @Select("Select "+FEILDS+" from task_sub where create_day=#{createDay} and task_id=#{taskId} and state=#{state} limit  #{offset},#{number}")
     List<TaskSub> getByTaskIdState(@Param("taskId")int taskId,@Param("createDay") int createDay,@Param("state")int state,@Param("offset")int offset,@Param("number")int number);
@@ -92,7 +92,7 @@ public interface TaskSubMapper {
     int getCountByTaskIdState(@Param("taskId")int taskId,@Param("createDay") int createDay,@Param("state")int state);
 
     @Select("Select count(*) from task_sub where create_day=#{createDay} and task_id=#{taskId} and task_type=#{taskType}")
-    int getCountByTaskId(@Param("taskId")int taskId,@Param("createDay") int createDay,@Param("taskType")int taskType);
+    int getCountByTaskId(@Param("taskId")int taskId, @Param("createDay") int createDay, @Param("taskType")int taskType);
 
     @Select("Select count(*) from task_sub where create_day=#{createDay} and state=#{state} and task_type=#{taskType}")
     int getCount(@Param("createDay") int createDay,@Param("state")int state,@Param("taskType")int taskType);

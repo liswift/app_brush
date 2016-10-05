@@ -319,7 +319,7 @@ public class TaskSubServiceImpl implements TaskSubService {
     @Override
     public int getTodayCount(int taskId) {
         int createDay = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));
-        return  taskSubMapper.getCountByTaskId(taskId,createDay,SubTaskState.FINISHED.getState(),SubTaskType.ACTIVE.getCode());
+        return  taskSubMapper.getCountByTaskId3(taskId,createDay,SubTaskState.FINISHED.getState(),SubTaskType.ACTIVE.getCode());
     }
 
     /**
@@ -330,7 +330,7 @@ public class TaskSubServiceImpl implements TaskSubService {
     @Override
     public int getYestdayCount(int taskId) {
         int createDay = Integer.parseInt(DateTime.now().minusDays(1).toString("yyyyMMdd"));
-        return  taskSubMapper.getCountByTaskId(taskId,createDay,SubTaskState.FINISHED.getState(),SubTaskType.ACTIVE.getCode());
+        return  taskSubMapper.getCountByTaskId3(taskId,createDay,SubTaskState.FINISHED.getState(),SubTaskType.ACTIVE.getCode());
     }
 
     /**
