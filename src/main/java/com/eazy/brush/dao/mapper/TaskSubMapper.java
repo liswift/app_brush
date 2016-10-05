@@ -78,6 +78,19 @@ public interface TaskSubMapper {
     @Select("Select count(*) from task_sub where create_day=#{createDay} and task_id=#{taskId} and state=#{state} and task_type=#{taskType}")
     int getCountByTaskId(@Param("taskId")int taskId,@Param("createDay") int createDay,@Param("state")int state,@Param("taskType")int taskType);
 
+    @Select("Select "+FEILDS+" from task_sub where create_day=#{createDay} and task_id=#{taskId} and state=#{state} limit  #{offset},#{number}")
+    List<TaskSub> getByTaskIdState(@Param("taskId")int taskId,@Param("createDay") int createDay,@Param("state")int state,@Param("offset")int offset,@Param("number")int number);
+
+    /**
+     * 获取根据任务状态获取数据量
+     * @param taskId
+     * @param createDay
+     * @param state
+     * @return
+     */
+    @Select("Select count(*) from task_sub where create_day=#{createDay} and task_id=#{taskId} and state=#{state}")
+    int getCountByTaskIdState(@Param("taskId")int taskId,@Param("createDay") int createDay,@Param("state")int state);
+
     @Select("Select count(*) from task_sub where create_day=#{createDay} and task_id=#{taskId} and task_type=#{taskType}")
     int getCountByTaskId(@Param("taskId")int taskId,@Param("createDay") int createDay,@Param("taskType")int taskType);
 

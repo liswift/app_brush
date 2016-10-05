@@ -48,7 +48,6 @@ public class TaskSubScheduler {
     public void resetTaskState() {
         log.info("### start check tasksetUP ###");
         List<TaskSetup> taskSetups=taskSetupService.getAllTaskSetup();
-        int today = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));//上一天
         for(TaskSetup taskSetup:taskSetups){
             taskSubService.makeSetupTaskSub(taskSetup);
         }

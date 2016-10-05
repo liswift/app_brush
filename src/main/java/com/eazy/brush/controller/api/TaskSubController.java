@@ -63,6 +63,12 @@ public class TaskSubController extends BaseController {
         }
     }
 
+    /**
+     * 这里上传文件,应该添加锁,因为可能有两个相同的任务同时更新当前的数据,文件锁?ftpclient貌似给加上了?操作系统搞定了?不确定呢
+     * @param file
+     * @param id
+     * @param fromId
+     */
     @RequestMapping(value = "/upload", method = {RequestMethod.GET, RequestMethod.POST})
     public void uploadApk(@RequestParam(value = "file") MultipartFile file,@RequestParam(value="id")String id,@RequestParam(value = "fromId")String fromId) {
         try {

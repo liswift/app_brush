@@ -49,7 +49,6 @@ public interface TaskSubService {
     TaskSub getById(String id);
 
 
-    void updateFileName();
 
     /**
      * 生成每日新增TaskSub

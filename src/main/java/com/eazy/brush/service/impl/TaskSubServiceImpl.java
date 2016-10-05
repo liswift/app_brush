@@ -32,6 +32,7 @@ import java.util.*;
 @Service
 public class TaskSubServiceImpl implements TaskSubService {
     private static final int MAXINSERTNUMBER=100;
+    private static final int PERCENT=50;//每次唤醒的比例
 
     @Autowired
     private TaskSubMapper taskSubMapper;
@@ -94,10 +95,6 @@ public class TaskSubServiceImpl implements TaskSubService {
         return taskSubMapper.getById(id);
     }
 
-    @Override
-    public void updateFileName() {
-
-    }
 
     /**
      * 生成新增数据序列
@@ -192,13 +189,58 @@ public class TaskSubServiceImpl implements TaskSubService {
         }
     }
 
+    /**
+     * 生成唤醒数据序列
+     * 今日成功执行的任务,可以被唤醒再次运行
+     * @param taskSetup
+     */
     @Override
     public void makeSetupTaskSub(TaskSetup taskSetup) {
-//        int count=taskSubService.getCountByTaskId(today, SubTaskType.SETUP,taskSetup.getTaskId());
-//        if(count<taskSetup.getMaxNum()){
-//            taskSubService.makeSetupTaskSub();
-//        }
+        int today = Integer.parseInt(DateTime.now().toString("yyyyMMdd"));//今天
+        int count=taskSubMapper.getCountByTaskId(taskSetup.getTaskId(),today,SubTaskType.SETUP.getCode());//获取今天唤醒的数据量
+        int remain=taskSetup.getMaxNum()-count;//剩余量
+        if(remain<=0){//今日的所有量已经跑完了,直接返回
+            return;
+        }
+        int finishCount = taskSubMapper.getCountByTaskIdState(taskSetup.getTaskId(),today,SubTaskState.FINISHED.getState());//今天已经完成的数据量
+        int number = finishCount*50/100;//本次唤醒的数据量
+        if(number>remain){
+            number=remain;
+        }
+        if(number>MAXINSERTNUMBER){
+            int itemnumber = MAXINSERTNUMBER;
+            int sumTimes = number/MAXINSERTNUMBER+1;////总的份数
+            int tasktimes = sumTimes;//循环次数开始的基数
+            int mintaskNumber=finishCount/tasktimes;//把总任务进行分割,每次的个数
+            while (tasktimes-->0){
+                if(tasktimes==0){
+                    itemnumber = number%MAXINSERTNUMBER;//取到最后剩余的余数
+                }
+                insertSub(taskSetup,today,tasktimes*mintaskNumber,itemnumber);//通过offset进行总数量分割拿取
+                number = number-itemnumber;//新增完总数减少
+            }
+        }else{
+            insertSub(taskSetup, today,0,number);
+        }
 
+    }
+
+    /**
+     * 插入唤醒任务
+     * @param taskSetup
+     * @param createDay
+     * @param offset
+     * @param number
+     */
+    private void insertSub(TaskSetup  taskSetup, int createDay,int offset, int number) {
+        log.info("#### insert retain sub: createDay:"+createDay+" offset:"+offset+ " number:"+number);
+        List<TaskSub> listByCreateDay = taskSubMapper.getByTaskIdState(taskSetup.getTaskId(),createDay,SubTaskState.FINISHED.getState(),offset,number);
+        for(TaskSub taskSub:listByCreateDay){
+            taskSub.setId(UUID.randomUUID().toString());
+            taskSub.setTaskType(SubTaskType.SETUP.getCode());
+            taskSub.setState(SubTaskState.INIT.getState());
+        }
+        insertTaskBatch(listByCreateDay);
     }
 
     /**
