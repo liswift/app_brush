@@ -3,8 +3,10 @@ package com.eazy.brush.schedule;
 import com.eazy.brush.core.enums.TaskState;
 import com.eazy.brush.dao.entity.Task;
 import com.eazy.brush.dao.entity.TaskHistory;
+import com.eazy.brush.dao.entity.TaskSetup;
 import com.eazy.brush.service.TaskHistoryService;
 import com.eazy.brush.service.TaskService;
+import com.eazy.brush.service.TaskSetupService;
 import com.eazy.brush.service.TaskSubService;
 import com.google.common.base.Stopwatch;
 import lombok.extern.slf4j.Slf4j;
@@ -33,16 +35,22 @@ public class TaskSubScheduler {
     @Autowired
     TaskHistoryService taskHistoryService;
 
+    @Autowired
+    TaskSetupService taskSetupService;
+
 
     /**
      * 秒 分 时 日 月
-     * 30分钟跑一次检查,每天检查48次
+     * 30分钟跑一次检查,每天检查48次。
+     * 进行唤醒任务生成
      */
     @Scheduled(cron = "0 0/30 *  * * ? ")
     public void resetTaskState() {
         log.info("### start check tasksetUP ###");
+        List<TaskSetup> taskSetups=taskSetupService.getAllTaskSetup();
+        for(TaskSetup taskSetup:taskSetups){
 
-
+        }
         log.info("### end check tasksetup ###");
     }
 
