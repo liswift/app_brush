@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,7 +26,7 @@ public class TaskSetupController extends BaseController{
     public ModelAndView listByUser(ModelMap map) {
         int taskId=getParaInt("taskId",0);
         TaskSetup taskSetup = taskSetupService.getByTaskId(taskId);
-        if(taskSetup==null|| StringUtils.isEmpty(taskSetup.getId())){
+        if(taskSetup==null|| taskSetup.getId()==0){
             taskSetup=new TaskSetup();
             taskSetup.setTaskId(taskId);
         }
@@ -41,9 +40,8 @@ public class TaskSetupController extends BaseController{
      */
     @RequestMapping(value = "addoup", method = RequestMethod.POST)
     public void addOrUP(TaskSetup taskSetup) {
-        log.info("tasksetup:"+taskSetup.toString());
         taskSetup.setOperatorId(getCurrentUser().getId());
-        if(StringUtils.isEmpty(taskSetup.getId())){
+        if(taskSetup.getId()==0){
             taskSetupService.insert(taskSetup);
         }else{
             taskSetupService.update(taskSetup);
