@@ -41,7 +41,7 @@ public class SubTaskAdminControl extends BaseController{
     @RequestMapping(value = "taskhistory", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView openTime(ModelMap modelMap){
         List<TaskHistory> taskHistories=taskHistoryService.getAllTask();
-        if(taskHistories.size()==1&&taskHistories.get(0).getCreateDay()==0){
+        if(taskHistories.size()==1&&taskHistories.get(0)==null){
             taskHistories.remove(0);
         }
         modelMap.put("taskHistories",taskHistories);
