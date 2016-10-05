@@ -124,7 +124,7 @@ public interface TaskSubMapper {
            private Date createDate;//任务对应的日期
      注意:留存率这里就不做聚合了,如果此用户当前更改了留存率,则当天计算留存率的时候,就按照最后设置的留存率,进行凌晨计算次日留存
      */
-    @Select("select task_id," +"count(temp_sum) as sum_time,"+
+    @Select("select task_id," +"sum(temp_sum) as sum_time,"+
             "MAX(CASE WHEN task_type=1 and state=2 then ocount else 0 end) as incr_day," +//新增数字
             "MAX(CASE WHEN task_type=1 and state=1 then ocount else 0 end) as incr_fail,"+//新增失败
             "MAX(CASE WHEN task_type=1 and state=0 then ocount else 0 end) as incr_unfinish," +//新增未做任务
@@ -139,7 +139,7 @@ public interface TaskSubMapper {
      */
 
 
-    @Select("select task_id," +"count(temp_sum) as sum_time,"+
+    @Select("select task_id," +"sum(temp_sum) as sum_time,"+
             "MAX(CASE WHEN task_type=0 then ocount else 0 end) as today_incr," +//留存数字
             "MAX(CASE WHEN task_type=1 then ocount else 0 end) as today_retain," +//新增数字
             "MAX(CASE WHEN task_type=2 then ocount else 0 end) as today_setup" +//新增启动数字

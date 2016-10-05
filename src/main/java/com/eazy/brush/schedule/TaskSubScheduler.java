@@ -34,15 +34,17 @@ public class TaskSubScheduler {
     TaskHistoryService taskHistoryService;
 
 
-//    /**
-//     * 把所有的任务状态都搞成 通过 why?
-//     */
-//    @Scheduled(cron = "0 0 0  * * ? ")
-//    public void resetTaskState() {
-//        log.info("### start resetTaskState ###");
-//        taskService.changeAllState(TaskState.confirm_passed.getCode());
-//        log.info("### end invokeMakeTaskSub ###");
-//    }
+    /**
+     * 秒 分 时 日 月
+     * 30分钟跑一次检查,每天检查48次
+     */
+    @Scheduled(cron = "0 0/30 *  * * ? ")
+    public void resetTaskState() {
+        log.info("### start check tasksetUP ###");
+
+
+        log.info("### end check tasksetup ###");
+    }
 
     /**
      * 每日凌晨进行旧任务的统计以及新任务的重新生成评估,需要做以下事情
