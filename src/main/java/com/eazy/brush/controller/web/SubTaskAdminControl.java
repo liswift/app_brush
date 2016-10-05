@@ -41,6 +41,7 @@ public class SubTaskAdminControl extends BaseController{
     @RequestMapping(value = "taskhistory", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView openTime(ModelMap modelMap){
         List<TaskHistory> taskHistories=taskHistoryService.getAllTask();
+        log.info(" taskhistory size:"+taskHistories.size());
         modelMap.put("taskHistories",taskHistories);
         return new ModelAndView("count/taskhistory",modelMap);
     }
