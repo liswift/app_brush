@@ -55,16 +55,16 @@
 <script type="text/javascript" src="${ctx }/resources/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/js/H-ui.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        setInterval(getnums, 1000);
-    });
-    getnums();
-    function getnums() {
-        $.get("${ctx}/sessioncount/index", function (data) {
-                    $("#count").text(data.count);
-                }
-        );
-    }
+    <%--$(document).ready(function () {--%>
+        <%--setInterval(getnums, 1000);--%>
+    <%--});--%>
+    <%--getnums();--%>
+    <%--function getnums() {--%>
+        <%--$.get("${ctx}/sessioncount/index", function (data) {--%>
+                    <%--$("#count").text(data.count);--%>
+                <%--}--%>
+        <%--);--%>
+    <%--}--%>
 </script>
 </body>
 </html>
