@@ -35,7 +35,7 @@ public class SubTaskAdminControl extends BaseController{
 
 
 
-    @RequestMapping(value = "addNumber", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "taskhistory", method = {RequestMethod.GET, RequestMethod.POST})
     public void openTime(@RequestParam(value = "taskId")String taskId, @RequestParam(value = "percent")int percent){
 
 

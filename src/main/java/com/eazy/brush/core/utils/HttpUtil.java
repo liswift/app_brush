@@ -62,7 +62,6 @@ public class HttpUtil {
                 return true;
             }
         } catch (IOException e) {
-            log.info("check proxy error:"+e.getMessage());
         }finally {
             try {
                 httpGet.releaseConnection();
