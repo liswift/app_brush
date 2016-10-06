@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -51,10 +52,10 @@
                     <td>${t.createDay}</td>
                     <td>${t.sumTime}</td>
                     <td>${t.incrDay}</td>
+                    <td>未回调:${t.incrFail}+阻塞:${t.incrUnfinish}</td>
                     <td>${t.retainDay}</td>
-                    <td>失败:${t.incrFail}+阻塞:${t.incrUnfinish}</td>
-                    <td>失败:${t.retainFail}+阻塞:${t.retainUnfinish}</td>
-                    <td>${(t.incrDay+t.retainDay)*100/(t.incrFail+t.incrUnfinish+t.retainFail+t.retainUnfinish)}%</td>
+                    <td>未回调:${t.retainFail}+阻塞:${t.retainUnfinish}</td>
+                    <td><fmt:formatNumber type="number" value="${(t.incrDay+t.retainDay)*100/(t.incrFail+t.incrUnfinish+t.retainFail+t.retainUnfinish)}" maxFractionDigits="0"/>%</td>
                 </tr>
             </c:forEach>
             </tbody>
