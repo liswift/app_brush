@@ -7,7 +7,7 @@ import lombok.Data;
  */
 @Data
 public class TaskHistory {
-    //#{userId},#{taskId},#{appName},#{remarkName},#{incrDay},#{incrFail},#{incrUnfinish},#{retainDay},#{retainFail},#{retainUnfinish},#{retainPercent},#{retainStayday},#{createDay}
+    //#{userId},#{taskId},#{appName},#{remarkName},#{incrDay},#{incrFail},#{incrUnfinish},#{retainDay},#{retainFail},#{retainUnfinish},#{retainPercent},#{retainStayday},#{createDay},#{sumTime}
 
     private int id;
     private int userId;//记录对应的用户id

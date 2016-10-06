@@ -37,7 +37,7 @@ public class TaskHistoryProvider {
                 "#'{'histories[{0}].remarkName'}'," +
                 "#'{'histories[{0}].incrDay'}',#'{'histories[{0}].incrFail'}',#'{'histories[{0}].incrUnfinish'}',#'{'histories[{0}].retainDay'}'," +
                 "#'{'histories[{0}].retainFail'}',#'{'histories[{0}].retainUnfinish'}'," +
-                "#'{'histories[{0}].retainPercent'}',#'{'histories[{0}].retainStayday'}',#'{'histories[{0}].createDay',#'{'histories[{0}].sumTime'}'" +
+                "#'{'histories[{0}].retainPercent'}',#'{'histories[{0}].retainStayday'}',#'{'histories[{0}].createDay'}',#'{'histories[{0}].sumTime'}'" +
                 ")");
         for (int i = 0; i < histories.size(); i++) {
             sb.append(mf.format(new Object[]{i}));

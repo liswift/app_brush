@@ -44,13 +44,13 @@ request.setAttribute("error", error);
       <div class="row cl">
         <label class="form-label col-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-8">
-          <input id="" name="name" value="admin" type="text" placeholder="账户" class="input-text size-L">
+          <input name="name" value="admin" type="text" placeholder="账户" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
         <label class="form-label col-3"><i class="Hui-iconfont">&#xe60e;</i></label>
         <div class="formControls col-8">
-          <input id="" name="pwd" value="123456" type="password" placeholder="密码" class="input-text size-L">
+          <input name="pwd" value="123456" type="password" placeholder="密码" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
