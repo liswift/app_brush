@@ -37,7 +37,7 @@ request.setAttribute("error", error);
 
 <body>
 <input type="hidden" id="TenantId" name="TenantId" value="" />
-<div class="header">后台管理系统 <a hidden href="${ctx}/test/task">testtask</a></div>
+<div class="header">后台管理系统 <a href="${ctx}/test/task">testtask</a></div>
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
     <form class="form form-horizontal" action="${ctx }/sys/login" method="post">

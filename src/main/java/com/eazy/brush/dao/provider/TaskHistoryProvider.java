@@ -17,7 +17,7 @@ public class TaskHistoryProvider {
 
     /**
      *
-     * #{userId},#{taskId},#{appName},#{remarkName},#{incrDay},#{incrFail},#{incrUnfinish},#{retainDay},#{retainFail},#{retainUnfinish},#{retainPercent},#{retainStayday},#{createDay},#{sumTime}
+     *user_id,task_id,app_name,remark_name,incr_day,incr_fail,incr_unfinish,retain_day,retain_fail,retain_unfinish,retain_percent,retain_stayday,create_day,sum_time
      *
      * @param map
      * @return
@@ -45,6 +45,7 @@ public class TaskHistoryProvider {
                 sb.append(",");
             }
         }
+        log.info(sb.toString());
         return sb.toString();
     }
 }
