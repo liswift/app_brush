@@ -52,6 +52,10 @@ public interface TaskSubMapper {
             "#{subscriberId},#{operator},#{operatorName},#{line1Number},#{simSerialNumber},#{networkType}," +
             "#{phoneType},#{mac},#{type},#{versionIncremental},#{buildId},#{secureId},#{serial}";
 
+    String DISTINCT="from_id,file_name,task_id,per_time,device_info_id,run_time,create_day,tel_android_id," +
+            "subscriber_id,operator,operator_name,line1_number,simSerial_number,network_type," +
+            "phone_type,mac,type,version_incremental,build_id,secure_id,serial";
+
     String FEILDS = "id,"+INSERT_FEILDS;
 
     /**
@@ -78,18 +82,19 @@ public interface TaskSubMapper {
     @Select("Select count(*) from task_sub where create_day=#{createDay} and task_id=#{taskId} and state=#{state} and task_type=#{taskType}")
     int getCountByTaskId3(@Param("taskId")int taskId, @Param("createDay") int createDay, @Param("state")int state, @Param("taskType")int taskType);
 
-    @Select("Select "+FEILDS+" from task_sub where create_day=#{createDay} and task_id=#{taskId} and state=#{state} limit  #{offset},#{number}")
-    List<TaskSub> getByTaskIdState(@Param("taskId")int taskId,@Param("createDay") int createDay,@Param("state")int state,@Param("offset")int offset,@Param("number")int number);
+    @Select("Select DISTINCT "+DISTINCT+" from task_sub where create_day=#{createDay} and task_id=#{taskId} and state=#{state} limit  #{offset},#{number}")
+    List<TaskSub> getDistinctByTaskIdState(@Param("taskId")int taskId, @Param("createDay") int createDay, @Param("state")int state, @Param("offset")int offset, @Param("number")int number);
 
     /**
      * 获取根据任务状态获取数据量
+     * 注意:不能有重复,设备重复
      * @param taskId
      * @param createDay
      * @param state
      * @return
      */
-    @Select("Select count(*) from task_sub where create_day=#{createDay} and task_id=#{taskId} and state=#{state}")
-    int getCountByTaskIdState(@Param("taskId")int taskId,@Param("createDay") int createDay,@Param("state")int state);
+    @Select("Select count(DISTINCT "+DISTINCT+") from task_sub where create_day=#{createDay} and task_id=#{taskId} and state=#{state}")
+    int getDistinctCountByTaskIdState(@Param("taskId")int taskId, @Param("createDay") int createDay, @Param("state")int state);
 
     @Select("Select count(*) from task_sub where create_day=#{createDay} and task_id=#{taskId} and task_type=#{taskType}")
     int getCountByTaskId(@Param("taskId")int taskId, @Param("createDay") int createDay, @Param("taskType")int taskType);

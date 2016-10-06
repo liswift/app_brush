@@ -202,7 +202,7 @@ public class TaskSubServiceImpl implements TaskSubService {
         if(remain<=0){//今日的所有量已经跑完了,直接返回
             return;
         }
-        int finishCount = taskSubMapper.getCountByTaskIdState(taskSetup.getTaskId(),today,SubTaskState.FINISHED.getState());//今天已经完成的数据量
+        int finishCount = taskSubMapper.getDistinctCountByTaskIdState(taskSetup.getTaskId(),today,SubTaskState.FINISHED.getState());//今天所有跑完的任务量(新增/留存/唤醒)
         int number = finishCount*50/100;//本次唤醒的数据量
         if(number>remain){
             number=remain;
@@ -234,7 +234,7 @@ public class TaskSubServiceImpl implements TaskSubService {
      */
     private void insertSub(TaskSetup  taskSetup, int createDay,int offset, int number) {
         log.info("#### insert retain sub: createDay:"+createDay+" offset:"+offset+ " number:"+number);
-        List<TaskSub> listByCreateDay = taskSubMapper.getByTaskIdState(taskSetup.getTaskId(),createDay,SubTaskState.FINISHED.getState(),offset,number);
+        List<TaskSub> listByCreateDay = taskSubMapper.getDistinctByTaskIdState(taskSetup.getTaskId(),createDay,SubTaskState.FINISHED.getState(),offset,number);
         for(TaskSub taskSub:listByCreateDay){
             taskSub.setId(UUID.randomUUID().toString());
             taskSub.setTaskType(SubTaskType.SETUP.getCode());
