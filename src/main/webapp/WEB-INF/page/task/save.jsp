@@ -94,7 +94,7 @@
                 <input type="text" task_name="runTime" value="${task.runTime}" class="input-text"
                        autocomplete="off">
             </div>
-            <label class="form-label col-xs-3 col-sm-3">分，</label>
+            <label class="form-label col-xs-3 col-sm-3">秒，</label>
         </div>
         <div class="formControls col-xs-4 col-sm-4">
             <label class="form-label col-xs-6 col-sm-6">上下波动范围：</label>

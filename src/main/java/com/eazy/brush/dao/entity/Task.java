@@ -24,7 +24,7 @@ public class Task {
     private int incrDay;            //每日新增用户数
     private int dayLimit;           //每日任务上限
     private int incrUpDown;         //上下波动范围
-    private int runTime;            //应用运行时长
+    private int runTime;            //应用运行时长:秒
     private int runUpDown;          //运行市场上下波动范围
     private int runStartTime;       //投放开始时间
     private int runEndTime;         //投放结束时间

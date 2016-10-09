@@ -404,9 +404,9 @@ public class TaskSubServiceImpl implements TaskSubService {
                 taskSub.setPerTime(perTime);
                 taskSub.setDeviceInfoId(LotteryUtil.lottery(deviceInfos).getId());
                 if(task.getRunUpDown()>0){
-                    taskSub.setRunTime(task.getRunTime()*60-task.getRunUpDown()+ new Random().nextInt(2*task.getRunUpDown()));//设置运行时间
+                    taskSub.setRunTime(task.getRunTime()-task.getRunUpDown()+ new Random().nextInt(2*task.getRunUpDown()));//设置运行时间
                 }else{
-                    taskSub.setRunTime(taskNum*60);
+                    taskSub.setRunTime(taskNum);
                 }
                 taskSub.setCreateDay(createDay);
                 taskSub.setTaskType(SubTaskType.ACTIVE.getCode());//新增任务

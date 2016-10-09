@@ -13,5 +13,5 @@ public class SubTaskAdminVo {
     private int todayIncr;
     private int todayRetain;
     private int todaySetup;
-    private int sumTime;
+    private int sumTime;//秒
 }

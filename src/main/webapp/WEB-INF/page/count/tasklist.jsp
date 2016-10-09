@@ -50,7 +50,7 @@
                 <tr class="text-c">
                     <td>${t.userName}</td>
                     <td>${t.taskName}</td>
-                    <td>${t.sumTime}</td>
+                    <td><fmt:formatNumber type="number" value="${t.sumTime/60}" maxFractionDigits="0"/>分</td>
                     <td>${t.todayIncr}</td>
                     <td>${t.todayRetain}</td>
                     <td>${t.todaySetup}</td>

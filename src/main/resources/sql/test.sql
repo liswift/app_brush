@@ -1135,7 +1135,7 @@ CREATE TABLE `task` (
   `apk_url` varchar(255) DEFAULT NULL,
   `remark_name` varchar(64) NOT NULL COMMENT '备注名称',
   `incr_day` int(11) NOT NULL DEFAULT '0' COMMENT '每日新增用户数',
-  `day_limit` int(11) DEFAULT '100000',
+  `day_limit` int(11) DEFAULT '0',
   `incr_up_down` int(11) NOT NULL DEFAULT '0' COMMENT '上下波动范围',
   `run_time` int(11) NOT NULL DEFAULT '0' COMMENT '应用运行时长',
   `run_up_down` int(11) NOT NULL DEFAULT '0' COMMENT '运行市场上下波动范围',
