@@ -3,6 +3,7 @@ package com.eazy.brush.controller.view.service;
 import com.eazy.brush.core.lottery.Award;
 import com.eazy.brush.core.lottery.LotteryUtil;
 import com.eazy.brush.core.utils.RandomUtil;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -22,7 +23,7 @@ public class SSIDMaker {
 
     public static String getSSID() {
         String prefix = prefix();
-        String result=prefix() + postfix(!prefix.equals(""));
+        String result=prefix + postfix(StringUtils.isNotEmpty(prefix));
         if(result.length()>32){
             result=result.substring(0,31);
         }
@@ -56,8 +57,8 @@ public class SSIDMaker {
             this.proportion = pr;
         }
 
-        String name;
-        double proportion;
+        private String name;
+        private double proportion;
 
         String value() {
             return name;
