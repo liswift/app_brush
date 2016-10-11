@@ -2,6 +2,7 @@ package com.eazy.brush.service.impl;
 
 import com.eazy.brush.controller.view.service.Operator;
 import com.eazy.brush.controller.view.service.RandomMacAddress;
+import com.eazy.brush.controller.view.service.SSIDMaker;
 import com.eazy.brush.controller.view.vo.SubTaskAdminVo;
 import com.eazy.brush.core.enums.SubTaskState;
 import com.eazy.brush.core.enums.SubTaskType;
@@ -454,5 +455,7 @@ public class TaskSubServiceImpl implements TaskSubService {
         netInfo.setType(LotteryUtil.lottery(netInfoTypes).getNetType());
         taskSub.setMac(netInfo.getMac());                //mac地址 唯一
         taskSub.setType(netInfo.getType());                  //网络类型 0 手机网络 1 wifi
+        taskSub.setSsid(SSIDMaker.getSSID());
+        taskSub.setBssid(RandomMacAddress.getMacAddrWithFormat(":"));
     }
 }

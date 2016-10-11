@@ -39,7 +39,8 @@ public class TaskSubProvider {
                 "#'{'taskSubs[{0}].line1Number'}',#'{'taskSubs[{0}].simSerialNumber'}',#'{'taskSubs[{0}].networkType'}'," +
                 "#'{'taskSubs[{0}].phoneType'}',#'{'taskSubs[{0}].mac'}'," +
                 "#'{'taskSubs[{0}].type'}',#'{'taskSubs[{0}].versionIncremental'}',#'{'taskSubs[{0}].buildId'}',#'{'taskSubs[{0}].secureId'}'," +
-                "#'{'taskSubs[{0}].serial'}'" +
+                "#'{'taskSubs[{0}].serial'}'," +
+                "#'{'taskSubs[{0}].ssid'}',#'{'taskSubs[{0}].bssid'}'" +
                 ")");
 
         for (int i = 0; i < taskSubs.size(); i++) {

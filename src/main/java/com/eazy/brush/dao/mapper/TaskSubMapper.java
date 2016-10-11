@@ -46,15 +46,15 @@ public interface TaskSubMapper {
 
     String INSERT_FEILDS = "from_id,file_name,task_id,per_time,device_info_id,run_time,create_day,state,task_type,tel_android_id," +
             "subscriber_id,operator,operator_name,line1_number,simSerial_number,network_type," +
-            "phone_type,mac,type,version_incremental,build_id,secure_id,serial";
+            "phone_type,mac,type,version_incremental,build_id,secure_id,serial,ssid,bssid";
 
     String INSERT_VALUES = "#{fromId},#{fileName},#{taskId},#{perTime},#{deviceInfoId},#{runTime},#{createDay},#{state},#{taskType},#{telAndroidId}," +
             "#{subscriberId},#{operator},#{operatorName},#{line1Number},#{simSerialNumber},#{networkType}," +
-            "#{phoneType},#{mac},#{type},#{versionIncremental},#{buildId},#{secureId},#{serial}";
+            "#{phoneType},#{mac},#{type},#{versionIncremental},#{buildId},#{secureId},#{serial},#{ssid},#{bssid}";
 
     String DISTINCT="from_id,file_name,task_id,per_time,device_info_id,run_time,create_day,tel_android_id," +
             "subscriber_id,operator,operator_name,line1_number,simSerial_number,network_type," +
-            "phone_type,mac,type,version_incremental,build_id,secure_id,serial";
+            "phone_type,mac,type,version_incremental,build_id,secure_id,serial,ssid,bssid";
 
     String FEILDS = "id,"+INSERT_FEILDS;
 

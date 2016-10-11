@@ -101,6 +101,8 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
         netInfo.setPort(proxyModel.getPort());                  // 端口
         netInfo.setMac(taskSub.getMac());               //mac地址 唯一
         netInfo.setType(taskSub.getType());                  //网络类型 0 手机网络 1 wifi
+        netInfo.setBssid(taskSub.getBssid());
+        netInfo.setSsid(taskSub.getSsid());
         return netInfo;
     }
 

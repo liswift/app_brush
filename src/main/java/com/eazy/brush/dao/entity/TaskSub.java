@@ -40,5 +40,7 @@ public class TaskSub {
     private String buildId;
     private String secureId;
     private String serial;              //16位
+    private String ssid;//32位
+    private String bssid;//路由mac
 
 }
