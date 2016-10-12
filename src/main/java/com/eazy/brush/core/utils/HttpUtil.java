@@ -1,6 +1,7 @@
 package com.eazy.brush.core.utils;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.math.NumberUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.ParseException;
@@ -50,6 +51,9 @@ public class HttpUtil {
 
     public static boolean checkAviable(String ipPort){
         String[] ipp = ipPort.split(":");
+        if(ipp.length != 2|| !NumberUtils.isDigits(ipp[1])){
+            return false;
+        }
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpHost target=new HttpHost("www.baidu.com",80,"http");
         HttpHost proxy=new HttpHost(ipp[0],Integer.valueOf(ipp[1]),"http");
