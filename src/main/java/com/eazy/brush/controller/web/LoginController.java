@@ -62,7 +62,10 @@ public class LoginController extends BaseController {
             HttpSession sessionCode = request.getSession();
             String code=null;
             if(sessionCode!=null){
-                code = sessionCode.getAttribute("code").toString();
+               Object obj=sessionCode.getAttribute("code");
+                if(obj!=null){
+                    code = obj.toString();
+                }
             }
 
 
