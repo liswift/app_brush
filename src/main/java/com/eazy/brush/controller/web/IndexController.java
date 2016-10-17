@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by yuekuapp on 16-10-17.
  */
 @Controller
-public class IndexControl extends BaseController {
+public class IndexController extends BaseController {
 
     @RequestMapping(value ="/")
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
