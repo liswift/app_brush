@@ -1,13 +1,16 @@
 package com.easy.brush.service.impl;
 
-import com.eazy.brush.service.TaskService;
-import com.eazy.brush.service.TaskSubService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.map.HashedMap;
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * author : liufeng
@@ -18,13 +21,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration("classpath:spring/applicationContext.xml")
 public class TaskSubServiceImplTest {
 
-    @Autowired
-    TaskSubService taskSubService;
-
-    @Autowired
-    TaskService taskService;
+//    @Autowired
+//    TaskSubService taskSubService;
+//
+//    @Autowired
+//    TaskService taskService;
 
     public void invokeMakeIncrDayTaskSub() {
+
+
+
 //
 //        StopWatch stopWatch = new StopWatch();
 //        stopWatch.start();
@@ -63,6 +69,44 @@ public class TaskSubServiceImplTest {
 //
 //        log.info("### end makeRetainDayTaskSub,cost {} s ###", stopWatch.getTotalTimeSeconds());
 //        stopWatch.stop();
+    }
+
+    @Test
+    public void test(){
+        replaceAll();
+        Map map=new HashedMap();
+        StringUtils.join(map.keySet(),"");
+    }
+
+    private static final String CONTENT="aababaaaab";
+    /**
+     * 替换字符串
+     */
+    private void replaceAll()
+    {
+        String input = "(\\b|\\B)(m+|g+)e(\\b|\\B)";
+
+        Pattern p = Pattern.compile(input);
+        Matcher m = p.matcher(CONTENT);
+
+        String mCONTENT= m.replaceAll("_TEST_CONTENT_");
+
+        log.info("---replaceAll()后的内容---", "replaceAll() = "+ mCONTENT);
+    }
+
+    /**
+     * 只替换首次匹配到的字符串
+     */
+    private void replaceFirst()
+    {
+        String input = "(\\b|\\B)(m+|g+)e(\\b|\\B)";
+
+        Pattern p = Pattern.compile(input);
+        Matcher m = p.matcher(CONTENT);
+
+        String mCONTENT= m.replaceFirst("_TEST_CONTENT_");
+
+        log.info("---replaceFirst()后的内容---", "replaceAll() = "+ mCONTENT);
     }
 
 }

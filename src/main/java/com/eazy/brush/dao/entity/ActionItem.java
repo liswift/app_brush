@@ -1,8 +1,11 @@
 package com.eazy.brush.dao.entity;
 
+import com.eazy.brush.controller.api.service.ActionItemNetService;
+import com.eazy.brush.controller.api.vo.DynamicArgument;
 import com.eazy.brush.controller.view.vo.ActionItemApiArgument;
 import com.eazy.brush.controller.view.vo.ActionItemApiVo;
 import com.eazy.brush.controller.view.vo.ActionItemVo;
+import com.eazy.brush.service.PhoneNumberService;
 import com.google.common.collect.Lists;
 import lombok.Data;
 import org.apache.commons.lang.StringUtils;
@@ -29,7 +32,7 @@ public class ActionItem {
     private int stayTime;//停留时间,秒
     private int upDown;//波动范围,秒
 
-    public ActionItemApiVo transform2ApiVo(){
+    public ActionItemApiVo transform2ApiVo(ActionItemNetService service, PhoneNumberService phoneNumberService){
         ActionItemApiVo actionItemApiVo = new ActionItemApiVo();
         actionItemApiVo.setClassName(getViewName());
         actionItemApiVo.setDelayTime(getStayTime());
@@ -44,7 +47,11 @@ public class ActionItem {
                 if(StringUtils.isNotEmpty(item)){
                     String[] keyvalue=item.split(":");
                     if(keyvalue.length>=2&&StringUtils.isNotEmpty(keyvalue[0])&&StringUtils.isNotEmpty(keyvalue[1])){
-                        actionItemApiArgumentList.add(new ActionItemApiArgument(keyvalue[0],keyvalue[1]));
+                        String value=keyvalue[1];
+                        if(keyvalue[1].startsWith("net|")){
+                            value = service.getByMethod(DynamicArgument.trans2Dynamic(keyvalue[1].replaceAll("net|","")),phoneNumberService);
+                        }
+                        actionItemApiArgumentList.add(new ActionItemApiArgument(keyvalue[0],value));
                     }
                 }
             }

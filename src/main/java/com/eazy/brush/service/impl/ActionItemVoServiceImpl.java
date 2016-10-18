@@ -1,9 +1,11 @@
 package com.eazy.brush.service.impl;
 
+import com.eazy.brush.controller.api.service.ActionItemNetService;
 import com.eazy.brush.controller.view.vo.ActionItemApiVo;
 import com.eazy.brush.dao.entity.ActionItem;
 import com.eazy.brush.service.ActionItemService;
 import com.eazy.brush.service.ActionItemVoService;
+import com.eazy.brush.service.PhoneNumberService;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +21,15 @@ public class ActionItemVoServiceImpl implements ActionItemVoService {
     @Autowired
     ActionItemService actionItemService;
 
+    @Autowired
+    PhoneNumberService phoneNumberService;
+
     @Override
-    public List<ActionItemApiVo> getApiByIds(String ids) {
+    public List<ActionItemApiVo> getApiByIds(String ids,ActionItemNetService service) {
         List<ActionItem> byIds = actionItemService.getByIds(ids);
         List<ActionItemApiVo> actionItemApiVos = Lists.newArrayList();
         for (ActionItem actionItem : byIds) {
-           actionItemApiVos.add(actionItem.transform2ApiVo());
+           actionItemApiVos.add(actionItem.transform2ApiVo(service,phoneNumberService));
         }
         return actionItemApiVos;
     }

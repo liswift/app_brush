@@ -22,6 +22,7 @@ import java.io.IOException;
 public class HttpUtil {
 
     public static String get(String url) {
+        log.info("url:"+url);
         String content = null;
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {

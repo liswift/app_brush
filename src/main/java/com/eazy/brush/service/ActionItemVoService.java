@@ -1,5 +1,6 @@
 package com.eazy.brush.service;
 
+import com.eazy.brush.controller.api.service.ActionItemNetService;
 import com.eazy.brush.controller.view.vo.ActionItemApiVo;
 
 import java.util.List;
@@ -8,5 +9,5 @@ import java.util.List;
  * Created by yuekuapp on 16-9-21.
  */
 public interface ActionItemVoService {
-    public List<ActionItemApiVo> getApiByIds(String ids);
+    public List<ActionItemApiVo> getApiByIds(String ids,ActionItemNetService service);
 }

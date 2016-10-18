@@ -1,8 +1,11 @@
 package com.eazy.brush.controller.view.service.impl;
 
+import com.eazy.brush.controller.api.service.ActionItemNetService;
 import com.eazy.brush.controller.view.service.ActionGroupVoService;
 import com.eazy.brush.controller.view.vo.ActionGroupApiVo;
 import com.eazy.brush.controller.view.vo.ActionGroupVo;
+import com.eazy.brush.controller.view.vo.ActionItemApiArgument;
+import com.eazy.brush.controller.view.vo.ActionItemApiVo;
 import com.eazy.brush.dao.entity.ActionGroup;
 import com.eazy.brush.service.ActionGroupService;
 import com.eazy.brush.service.ActionItemService;
@@ -59,14 +62,29 @@ public class ActionGroupVoServiceImpl implements ActionGroupVoService {
 
 
     private List<ActionGroupApiVo> transforActionGroupApi(List<ActionGroup> actionGroups){
+
+        ActionItemNetService service = new ActionItemNetService();
+
         List<ActionGroupApiVo> actionGroupApiVos=Lists.newArrayList();
         for(ActionGroup actionGroup:actionGroups){
             if(actionGroup.getEnable()==1&&StringUtils.isNotEmpty(actionGroup.getActionItemIds())){
                 ActionGroupApiVo actionGroupApiVo=new ActionGroupApiVo();
-                actionGroupApiVo.setActions(actionItemVoService.getApiByIds(actionGroup.getActionItemIds()));
+                actionGroupApiVo.setActions(actionItemVoService.getApiByIds(actionGroup.getActionItemIds(),service));
                 actionGroupApiVos.add(actionGroupApiVo);
             }
         }
+
+        //重新循环过滤,设置新的值。将所有动态参数,替换成静态参数值
+        for(ActionGroupApiVo actionGroupApiVo:actionGroupApiVos){
+            List<ActionItemApiVo> actions = actionGroupApiVo.getActions();
+            for(ActionItemApiVo actionItemApiVo:actions){
+                List<ActionItemApiArgument> arguments = actionItemApiVo.getArguments();
+                for(ActionItemApiArgument argument:arguments){
+                    argument.setArgmentValue(service.transforValue(argument.getArgmentValue()));
+                }
+            }
+        }
+
         return actionGroupApiVos;
     }
 
