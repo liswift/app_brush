@@ -51,7 +51,7 @@ public class ActionItemNetService {
         if(StringUtils.isEmpty(template)){
             return template;
         }
-
+        log.info("temple:"+template+" collection:"+collectArgument);
         //生成匹配模式的正则表达式
         String patternString = "\\{(" + StringUtils.join(collectArgument.keySet(), "|") + ")\\}";
 
