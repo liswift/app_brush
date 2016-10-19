@@ -2,6 +2,7 @@ package com.eazy.brush.controller.api.service;
 
 import com.eazy.brush.controller.api.vo.DynamicArgument;
 import com.eazy.brush.service.PhoneNumberService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang.StringUtils;
 
@@ -13,17 +14,19 @@ import java.util.regex.Pattern;
  * Created by yuekuapp on 16-10-18.
  * 防止同一个接口多次请求,缓存请求结果
  */
+@Slf4j
 public class ActionItemNetService {
 
     private Map<String,String> collectApi = new HashedMap();
     private Map<String,String> collectArgument = new HashedMap();
 
     public String getByMethod(DynamicArgument method,PhoneNumberService phoneNumberService){
+        log.info("getByMethod:" + method);
         String result = collectApi.get(method.getType());
         if(StringUtils.isNotEmpty(result)){
             return result;
         }
-
+        log.info("getByMethod: type:" + method.getType());
         if("getMobilenum".equals(method.getType())){
             String size=method.getValue("size");
             int sizei=1;
@@ -45,6 +48,9 @@ public class ActionItemNetService {
      * @return
      */
     public String transforValue(String template){
+        if(StringUtils.isEmpty(template)){
+            return template;
+        }
 
         //生成匹配模式的正则表达式
         String patternString = "\\{(" + StringUtils.join(collectArgument.keySet(), "|") + ")\\}";
