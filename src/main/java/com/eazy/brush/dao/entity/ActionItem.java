@@ -54,7 +54,9 @@ public class ActionItem {
                         String value=keyvalue[1];
                         log.info(" actionItem trans value:"+value);
                         if(value.startsWith("net|")){
-                            value = service.getByMethod(DynamicArgument.trans2Dynamic(value.replaceAll("net|","")),phoneNumberService);
+                            String temp=value.replaceAll("net\\|","");
+                            log.info(" actionItem trans temp :"+ temp);
+                            value = service.getByMethod(DynamicArgument.trans2Dynamic(temp),phoneNumberService);
                         }
                         log.info(" actionItem after value:"+value);
                         actionItemApiArgumentList.add(new ActionItemApiArgument(keyvalue[0],value));
