@@ -51,8 +51,8 @@ public class ActionItem {
                     if(keyvalue.length>=2&&StringUtils.isNotEmpty(keyvalue[0])&&StringUtils.isNotEmpty(keyvalue[1])){
                         String value=keyvalue[1];
                         log.info(" actionItem trans value:"+value);
-                        if(value.startsWith("net|")){
-                            value = service.getByMethod(DynamicArgument.trans2Dynamic(value.replaceAll("net|","")),phoneNumberService);
+                        if(value.startsWith("net\\|")){
+                            value = service.getByMethod(DynamicArgument.trans2Dynamic(value.replaceAll("net\\|","")),phoneNumberService);
                         }
                         log.info(" actionItem after value:"+value);
                         actionItemApiArgumentList.add(new ActionItemApiArgument(keyvalue[0],value));
