@@ -76,7 +76,7 @@ public class ActionItem {
         actionItemVo.setStayTime(stayTime);
         actionItemVo.setUpDown(upDown);
         actionItemVo.setViewContent(viewContent);
-        actionItemVo.setViewId(viewId);
+        actionItemVo.setViewId(StringEscapeUtils.escapeJava(StringEscapeUtils.escapeHtml4(viewId)));
         actionItemVo.setViewName(viewName);
         Map<String,String> map=new HashMap<>();
         if(StringUtils.isNotEmpty(actionParams)){
