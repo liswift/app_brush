@@ -11,6 +11,7 @@ import com.eazy.brush.service.ActionGroupService;
 import com.eazy.brush.service.ActionItemService;
 import com.eazy.brush.service.ActionItemVoService;
 import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import java.util.List;
  * author : liufeng
  * create time:2016/9/10 22:41
  */
+@Slf4j
 @Service
 public class ActionGroupVoServiceImpl implements ActionGroupVoService {
 
@@ -80,6 +82,7 @@ public class ActionGroupVoServiceImpl implements ActionGroupVoService {
             for(ActionItemApiVo actionItemApiVo:actions){
                 List<ActionItemApiArgument> arguments = actionItemApiVo.getArguments();
                 for(ActionItemApiArgument argument:arguments){
+                    log.info("change argument:"+argument);
                     argument.setArgmentValue(service.transforValue(argument.getArgmentValue()));
                 }
             }

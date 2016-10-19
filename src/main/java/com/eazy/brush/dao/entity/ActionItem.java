@@ -8,6 +8,7 @@ import com.eazy.brush.controller.view.vo.ActionItemVo;
 import com.eazy.brush.service.PhoneNumberService;
 import com.google.common.collect.Lists;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import java.util.Map;
  * create time:2016/9/10 20:21
  */
 @Data
+@Slf4j
 public class ActionItem {
     private int id;
     private int actionPageId;//页动作id
@@ -48,6 +50,7 @@ public class ActionItem {
                     String[] keyvalue=item.split(":");
                     if(keyvalue.length>=2&&StringUtils.isNotEmpty(keyvalue[0])&&StringUtils.isNotEmpty(keyvalue[1])){
                         String value=keyvalue[1];
+                        log.info(" actionItem trans value:"+value);
                         if(keyvalue[1].startsWith("net|")){
                             value = service.getByMethod(DynamicArgument.trans2Dynamic(keyvalue[1].replaceAll("net|","")),phoneNumberService);
                         }

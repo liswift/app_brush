@@ -20,6 +20,11 @@ public class DynamicArgument {
         this.arguments = defaultKeyValues;
     }
 
+    /**
+     * getMobilenum_key=value&key=value
+     * @param argument
+     * @return
+     */
     public static DynamicArgument trans2Dynamic(String argument) {
         String[] result = argument.split("_");
         String type = result[0];
