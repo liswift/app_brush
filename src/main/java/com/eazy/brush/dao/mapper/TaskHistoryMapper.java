@@ -23,7 +23,7 @@ public interface TaskHistoryMapper {
     List<TaskHistory> getListByUserId(@Param("userId") int userId);
 
     @Select("select create_day,sum(incr_day) as incr_day,sum(incr_fail) as incr_fail,sum(incr_unfinish) as incr_unfinish,sum(retain_day)" +
-            " as retain_day,sum(retain_fail) as retain_fail,sum(retain_unfinish) as retain_unfinish,sum(sum_time) as sum_time from task_history")
+            " as retain_day,sum(retain_fail) as retain_fail,sum(retain_unfinish) as retain_unfinish,sum(sum_time) as sum_time from task_history GROUP BY create_day")
     List<TaskHistory> getCountList();
 
     @Select("select " + FEILDS + " from task_history where retain_percent> #{retainPercent} and retain_stayday>0")
