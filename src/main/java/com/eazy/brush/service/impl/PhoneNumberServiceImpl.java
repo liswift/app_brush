@@ -42,6 +42,7 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
     @Override
     public String getMobileNum(String pid, int size) {
         loginIn();
+        releaseMobileNum("");//获取新的号码之前,首先清空旧的号码
         String result="";
         while(!result.contains(token)){
             result=HttpUtil.get(NiuMaUtil.getMobileNum(pid,username,token));
