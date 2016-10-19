@@ -49,7 +49,7 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
             result=HttpUtil.get(NiuMaUtil.getMobileNum(pid,username,token));
             log.info("niuma getmobile num :"+result);
         }
-        return result.split("|")[0];
+        return result.split("\\|")[0];
     }
 
     @Override
