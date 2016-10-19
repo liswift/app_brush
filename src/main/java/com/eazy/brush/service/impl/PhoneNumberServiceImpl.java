@@ -31,8 +31,9 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
         if(StringUtils.isEmpty(token)){
             log.info("begin login niuma!");
             String result = HttpUtil.get(NiuMaUtil.getLogin(username,password));
+            log.info("login result:"+result);
             if(result.contains(username)){
-                token=result.split("|")[1];
+                token=result.split("\\|")[1];
             }else{
                 log.info("niu ma login error!"+result);
             }
