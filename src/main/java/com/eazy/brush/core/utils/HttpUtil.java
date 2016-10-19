@@ -25,10 +25,10 @@ public class HttpUtil {
         log.info("url:"+url);
         String content = null;
         CloseableHttpClient httpclient = HttpClients.createDefault();
-//        httpclient.getParams().setParameter(ClientPNames.ALLOW_CIRCULAR_REDIRECTS, true);
+        RequestConfig requestConfig=RequestConfig.custom().setCircularRedirectsAllowed(true).build();
         try {
             HttpGet httpget = new HttpGet(url);
-            httpget.getParams().setParameter("http.protocol.allow-circular-redirects", true);
+            httpget.setConfig(requestConfig);
             CloseableHttpResponse response = httpclient.execute(httpget);
             try {
                 HttpEntity entity = response.getEntity();
