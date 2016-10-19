@@ -10,6 +10,7 @@ import com.google.common.collect.Lists;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +45,8 @@ public class ActionItem {
         actionItemApiVo.setUpdownTime(getUpDown());
         List<ActionItemApiArgument> actionItemApiArgumentList= Lists.newArrayList();
         if(StringUtils.isNotEmpty(actionParams)){
-            String[] param=actionParams.split(";");
+            String actionP=StringEscapeUtils.unescapeJava(StringEscapeUtils.unescapeHtml4(actionParams));
+            String[] param= actionP.split(";");
             for(String item:param){
                 if(StringUtils.isNotEmpty(item)){
                     String[] keyvalue=item.split(":");
