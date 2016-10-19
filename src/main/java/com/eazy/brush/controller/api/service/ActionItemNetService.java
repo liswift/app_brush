@@ -36,8 +36,8 @@ public class ActionItemNetService {
             }
             result=phoneNumberService.getMobileNum(method.getValue("pid"),sizei);
             collectArgument.put("mobile",result);//添加新参数
-            collectArgument.putAll(method.getArguments());//添加所有静态参数
         }
+        collectArgument.putAll(method.getArguments());//添加所有静态参数
         return result;
     }
 
