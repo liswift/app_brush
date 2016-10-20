@@ -4,6 +4,7 @@ import com.eazy.brush.core.utils.HttpUtil;
 import com.eazy.brush.core.utils.NiuMaUtil;
 import com.eazy.brush.service.PhoneNumberService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -31,7 +32,7 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
         log.info("begin login niuma!");
         String result = HttpUtil.get(NiuMaUtil.getLogin(username, password));
         log.info("login result:" + result);
-        if (result.contains(username)) {
+        if (StringUtils.isNotEmpty(result)&&result.contains(username)) {
             token = result.split("\\|")[1];
         } else {
             log.info("niu ma login error!" + result);
