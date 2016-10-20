@@ -14,7 +14,12 @@ public enum ArgumentType {
     ACTION_ARGUMENT_SELECTION_END_INT(4, "ACTION_ARGUMENT_SELECTION_END_INT"),
     ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE(5, "ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE"),
     ACTION_ARGUMENT_ROW_INT(6, "android.view.accessibility.action.ARGUMENT_ROW_INT"),
-    ACTION_ARGUMENT_COLUMN_INT(7, "android.view.accessibility.action.ARGUMENT_COLUMN_INT");
+    ACTION_ARGUMENT_COLUMN_INT(7, "android.view.accessibility.action.ARGUMENT_COLUMN_INT"),
+
+    /**
+     * 调用键盘输入参数
+     */
+    ACTION_ARGUMENT_KEYBOARD_INPUT(8, "android.view.accessibility.action.ARGUMENT_KEYBOARD_INPUT");
 
     private int value;
     private String key;
