@@ -25,7 +25,7 @@ public class NiuMaUtil {
      * @return
      */
     public static String getMobileNum(String pid,String uid,String token){
-        return HOST+"getMobilenum&pid="+pid+"&uid="+uid+"&token="+token+"&author_uid="+uid;
+        return HOST+"getMobilenum&size=1&id="+pid+"&uid="+uid+"&token="+token+"&author_uid="+uid;
     }
 
     /**
