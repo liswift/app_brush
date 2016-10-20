@@ -13,7 +13,7 @@
 
 <script type="text/javascript" src="${ctx }/resources/lib/html5.js"></script>
 <script type="text/javascript" src="${ctx }/resources/lib/respond.min.js"></script>
-<script type="text/javascript" src="${ctx }/resources/lib/PIE_IE678.js"></script>
+<script type="text/javascript" src="${ctx }/resources/lib/PIE-2.0beta1/PIE_IE678.js"></script>
 
 <link href="${ctx }/resources/css/H-ui.min.css" rel="stylesheet" type="text/css" />
 <link href="${ctx }/resources/css/H-ui.admin.css" rel="stylesheet" type="text/css" />

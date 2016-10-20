@@ -2,10 +2,6 @@ package com.eazy.brush.controller.web;
 
 import com.eazy.brush.component.redis.Redis;
 import com.eazy.brush.controller.common.BaseController;
-import com.eazy.brush.controller.view.service.TaskVoService;
-import com.eazy.brush.controller.view.service.UserAccountVoService;
-import com.eazy.brush.controller.view.vo.TaskVo;
-import com.eazy.brush.controller.view.vo.UserAccountVo;
 import com.eazy.brush.core.enums.Role;
 import com.eazy.brush.core.utils.MD5;
 import com.eazy.brush.core.utils.StrKit;
@@ -46,11 +42,6 @@ public class LoginController extends BaseController {
     @Autowired
     private PermissionService permissionService;
     @Autowired
-    private UserAccountVoService userAccountVoService;
-    @Autowired
-    private TaskVoService taskVoService;
-
-    @Autowired
     private LogService logService;
 
     /**
@@ -69,9 +60,16 @@ public class LoginController extends BaseController {
         } else {
             // 需要的时候再去拿session
             HttpSession sessionCode = request.getSession();
-            String code = sessionCode.getAttribute("code").toString();
+            String code=null;
+            if(sessionCode!=null){
+               Object obj=sessionCode.getAttribute("code");
+                if(obj!=null){
+                    code = obj.toString();
+                }
+            }
 
-            if (!code.equalsIgnoreCase(map.get("code"))) {
+
+            if (code==null||!code.equalsIgnoreCase(map.get("code"))) {
                 redirectAttributes.addFlashAttribute("msg", "验证码输入错误");
             } else {
                 try {
@@ -122,30 +120,46 @@ public class LoginController extends BaseController {
      * 跳转到欢迎页
      */
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
-    public ModelAndView welcome() {
+    public String welcome() {
 
         Subject currentUser = SecurityUtils.getSubject();
-        if (currentUser.hasRole(Role.guest.name())) {
-            return getUserModelAndView();
+        if (currentUser.hasRole(Role.customer.name())) {
+            return "redirect:/task/listByUser";
+        }else if(currentUser.hasRole(Role.audit.name())){
+            return "redirect:/audit/index";
+        } else {
+            return "redirect:/sys/welcomeAdmin";
         }
-        return getAdminModelAndView();
     }
 
     /**
-     * 普通用户欢迎页
-     *
-     * @return
+     * 跳转到欢迎页
      */
-    public ModelAndView getUserModelAndView() {
-        int curPage = getParaInt("curPage", 1);
-        int size = getParaInt("size", 20);
+    @RequestMapping(value = "/welcomeAdmin", method = RequestMethod.GET)
+    public ModelAndView welcomeAdmin() {
 
-        User user = getCurrentUser();
-        ModelAndView model = new ModelAndView("index/welcome_user");
-        UserAccountVo userAccountVo = userAccountVoService.getByUserId(user.getId());
-        List<TaskVo> taskVoses = taskVoService.getList(user.getId(), (curPage - 1) * size, size);
-        model.addObject("userAccountVo", userAccountVo);
-        model.addObject("tasks", taskVoses);
+        List<Map<String, Object>> data = null;
+
+        if (Redis.exists("welcome")) {
+            String load = Redis.get("welcome");
+            data = toGson(load);
+        } else {
+            data = logService.selectLog();
+            String load = toJson(data);
+            Redis.put("welcome", load);
+        }
+        ModelAndView model = new ModelAndView("index/welcome");
+        model.addObject("data", data);
+        model.addObject("count", data.size());
+
+        model.addObject("ip", "");
+        model.addObject("last_time", "");
+        // 获取当前时间第一个登录用户
+        if (data != null) {
+            model.addObject("ip", data.get(0).get("IP"));
+            model.addObject("last_time", data.get(0).get("tim"));
+        }
+
         return model;
     }
 
@@ -164,7 +178,7 @@ public class LoginController extends BaseController {
     /**
      * 跳转到登录失败页面
      */
-    @RequestMapping(value = "/error", method = RequestMethod.GET)
+    @RequestMapping(value = "/error", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView error(ModelMap model) {
         return new ModelAndView("login/login", model);
     }
@@ -178,32 +192,5 @@ public class LoginController extends BaseController {
         ModelAndView modelAndView = new ModelAndView("admin/admin_pwd");
         modelAndView.addObject("user", getCurrentUser());
         return modelAndView;
-    }
-
-    private ModelAndView getAdminModelAndView() {
-
-        List<Map<String, Object>> data = null;
-
-        if (Redis.exists("welcome")) {
-            String load = Redis.get("welcome");
-            data = toGson(load);
-        } else {
-            data = logService.selectLog();
-            String load = toJson(data);
-            Redis.put("welcome", load);
-        }
-        ModelAndView model = new ModelAndView("index/welcome_admin");
-        model.addObject("data", data);
-        model.addObject("count", data.size());
-
-        model.addObject("ip", "");
-        model.addObject("last_time", "");
-        // 获取当前时间第一个登录用户
-        if (data != null) {
-            model.addObject("ip", data.get(0).get("IP"));
-            model.addObject("last_time", data.get(0).get("tim"));
-        }
-
-        return model;
     }
 }

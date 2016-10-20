@@ -11,13 +11,15 @@ import lombok.Data;
 public class TaskSub {
 
     private String id;
+    private String fromId="";
+    private String fileName="";//文件Name,新增任务的文件名字就是当前任务的id,留存任务的filaName为对应新增任务的Id
     private int taskId;              //任务id
     private long perTime;             //时间粒度
-    private int actionId;            //动作组id
-    private int deviceInfoId;        //设备信息
-    private int runTime;             //任务执行时间
-    private int callbackTime;        //任务执行完回调时间 0 未取走 1已取走未回调 time 回调
-    private int createDay;          //任务创建日期
+    private int deviceInfoId;        //设备信息,例如三星/索尼/...
+    private int runTime;             //任务运行时间 秒单位
+    private int createDay;           //任务执行运行日期
+    private int state;              //三种状态 0 init,1 running,2 finish
+    private int taskType;           //有两种类型,一种是留存任务0,一种是激活任务1
 
     //cardInfo 信息
     private String telAndroidId;       //android_id 唯一
@@ -30,8 +32,15 @@ public class TaskSub {
     private String phoneType;             //手机通话类型
 
     //netInfo 信息
-    private String host;               //代理主机地址
-    private int port;                  // 端口
     private String mac;                //mac地址 唯一
     private int type;                  //网络类型 0 手机网络 1 wifi
+
+    //deviceinfo 信息
+    private String versionIncremental;
+    private String buildId;
+    private String secureId;
+    private String serial;              //16位
+    private String ssid;//32位
+    private String bssid;//路由mac
+
 }

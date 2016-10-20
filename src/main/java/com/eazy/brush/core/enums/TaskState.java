@@ -9,8 +9,17 @@ public enum TaskState {
     confirm_failed("审核失败", 0),
     stoped("已停止", 1),
     confirm_passed("审核通过", 2),
-    running("运行中", 3),
-    run_end("运行完成", 4);
+    running("运行中", 3);
+
+    public static boolean isEnable(int state){
+        TaskState[] values = TaskState.values();
+        for(TaskState value:values){
+            if(value.code==state){
+                return  true;
+            }
+        }
+        return false;
+    }
 
     private String name;
     private int code;

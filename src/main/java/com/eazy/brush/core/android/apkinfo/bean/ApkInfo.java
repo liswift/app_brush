@@ -7,14 +7,22 @@ public class ApkInfo {
     private String versionName;
     private String apkPackage;
     private String minSdkVersion;
-    private String apkName;
+//    private String apkName;暂时不添加
+    private String apkUrl;
 
     public ApkInfo() {
         versionCode = null;
         versionName = null;
         apkPackage = null;
         minSdkVersion = null;
-        apkName = null;
+    }
+
+    public String getApkUrl() {
+        return apkUrl;
+    }
+
+    public void setApkUrl(String apkUrl) {
+        this.apkUrl = apkUrl;
     }
 
     public String getVersionCode() {
@@ -47,14 +55,6 @@ public class ApkInfo {
 
     public void setMinSdkVersion(String minSdkVersion) {
         this.minSdkVersion = minSdkVersion;
-    }
-
-    public String getApkName() {
-        return apkName;
-    }
-
-    public void setApkName(String apkName) {
-        this.apkName = apkName;
     }
 
     public String toString() {

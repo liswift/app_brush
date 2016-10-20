@@ -1,12 +1,14 @@
 package com.eazy.brush.controller.view.service.impl;
 
+import com.eazy.brush.controller.view.service.ActionPageVoService;
 import com.eazy.brush.controller.view.service.TaskSubVoService;
-import com.eazy.brush.controller.view.vo.ActionVo;
-import com.eazy.brush.controller.view.vo.TaskSubVo;
+import com.eazy.brush.controller.view.vo.ActionPageApiVo;
+import com.eazy.brush.controller.view.vo.TaskSubApiVo;
 import com.eazy.brush.dao.entity.*;
-import com.eazy.brush.service.ActionService;
-import com.eazy.brush.service.ActionSubService;
+import com.eazy.brush.model.ProxyModel;
+import com.eazy.brush.service.ActionPageService;
 import com.eazy.brush.service.DeviceInfoService;
+import com.eazy.brush.service.ProxyIpService;
 import com.eazy.brush.service.TaskService;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
@@ -28,36 +30,37 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
     TaskService taskService;
 
     @Autowired
-    ActionService actionService;
+    ActionPageService actionPageService;
 
-    @Autowired
-    ActionSubService actionSubService;
 
     @Autowired
     DeviceInfoService deviceInfoService;
 
+    @Autowired
+    ActionPageVoService actionPageVoService;
+
+    @Autowired
+    ProxyIpService proxyIpService;
+
     @Override
-    public List<TaskSubVo> buildVo(List<TaskSub> list) {
-        List<TaskSubVo> voList = Lists.newArrayList();
+    public List<TaskSubApiVo> buildVo(List<TaskSub> list) {
+        List<TaskSubApiVo> voList = Lists.newArrayList();
         for (TaskSub taskSub : list) {
 
             Task task = taskService.getById(taskSub.getTaskId());
-            Action action = actionService.getById(taskSub.getActionId());
-            DeviceInfo deviceInfo = deviceInfoService.getById(taskSub.getDeviceInfoId());
+            DeviceInfo deviceInfo = buildDeviceInfo(taskSub);
+            List<ActionPageApiVo> actionPageVos = actionPageVoService.getApiByTaskId(taskSub.getTaskId());
 
-            ActionVo actionVo = new ActionVo();
-            actionVo.setId(taskSub.getActionId());
-            actionVo.setName(action.getName());
-            actionVo.setActionSubs(actionSubService.getByActionIds(action.getActions()));
-
-            TaskSubVo taskSubVo = new TaskSubVo();
+            TaskSubApiVo taskSubVo = new TaskSubApiVo();
             taskSubVo.setId(taskSub.getId());
+            taskSubVo.setFromId(taskSub.getFromId());
+            taskSubVo.setFileName(taskSub.getFileName());
             taskSubVo.setRunTime(taskSub.getRunTime());
-            taskSubVo.setAppName(task.getAppName());
+            taskSubVo.setRemarkName(task.getRemarkName());
             taskSubVo.setPackageName(task.getPackageName());
             taskSubVo.setVersionCode(task.getVersionCode());
             taskSubVo.setApkUrl(task.getApkUrl());
-            taskSubVo.setActionVo(actionVo);
+            taskSubVo.setPageActions(actionPageVos);
             taskSubVo.setDeviceInfo(deviceInfo);
 
             taskSubVo.setCardInfo(buildCardInfo(taskSub));
@@ -66,6 +69,15 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
             voList.add(taskSubVo);
         }
         return voList;
+    }
+
+    private DeviceInfo buildDeviceInfo(TaskSub taskSub) {
+        DeviceInfo deviceInfo = deviceInfoService.getById(taskSub.getDeviceInfoId());
+        deviceInfo.setVersionIncremental(taskSub.getVersionIncremental());
+        deviceInfo.setBuildId(taskSub.getBuildId());
+        deviceInfo.setSecureId(taskSub.getSecureId());
+        deviceInfo.setSerial(taskSub.getSerial());
+        return deviceInfo;
     }
 
     private CardInfo buildCardInfo(TaskSub taskSub) {
@@ -83,10 +95,14 @@ public class TaskSubVoServiceImpl implements TaskSubVoService {
 
     private NetInfo buildNetInfo(TaskSub taskSub) {
         NetInfo netInfo = new NetInfo();
-        netInfo.setHost(taskSub.getHost());              //代理主机地址
-        netInfo.setPort(taskSub.getPort());                  // 端口
+
+        ProxyModel proxyModel = proxyIpService.getRandom();
+        netInfo.setHost(proxyModel.getIp());              //代理主机地址
+        netInfo.setPort(proxyModel.getPort());                  // 端口
         netInfo.setMac(taskSub.getMac());               //mac地址 唯一
         netInfo.setType(taskSub.getType());                  //网络类型 0 手机网络 1 wifi
+        netInfo.setBssid(taskSub.getBssid());
+        netInfo.setSsid(taskSub.getSsid());
         return netInfo;
     }
 

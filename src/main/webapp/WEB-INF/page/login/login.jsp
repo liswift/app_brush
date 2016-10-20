@@ -17,7 +17,7 @@ request.setAttribute("error", error);
 <!--[if lt IE 9]>
 <script type="text/javascript" src="lib/html5.js"></script>
 <script type="text/javascript" src="lib/respond.min.js"></script>
-<script type="text/javascript" src="lib/PIE_IE678.js"></script>
+<script type="text/javascript" src="lib/PIE-2.0beta1/PIE_IE678.js"></script>
 <![endif]-->
 <%@ include file="/WEB-INF/page/base/css.jsp"%>
 <!--[if IE 6]>
@@ -37,20 +37,22 @@ request.setAttribute("error", error);
 
 <body>
 <input type="hidden" id="TenantId" name="TenantId" value="" />
-<div class="header">后台管理系统</div>
+<div class="header">后台管理系统
+  <%--<a href="${ctx}/test/task">testtask</a>--%>
+</div>
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
     <form class="form form-horizontal" action="${ctx }/sys/login" method="post">
       <div class="row cl">
         <label class="form-label col-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-8">
-          <input id="" name="name" value="admin" type="text" placeholder="账户" class="input-text size-L">
+          <input name="name" value="admin" type="text" placeholder="账户" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
         <label class="form-label col-3"><i class="Hui-iconfont">&#xe60e;</i></label>
         <div class="formControls col-8">
-          <input id="" name="pwd" value="123456" type="password" placeholder="密码" class="input-text size-L">
+          <input name="pwd" value="123456" type="password" placeholder="密码" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">

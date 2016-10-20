@@ -1,18 +1,16 @@
 package com.easy.brush.service.impl;
 
-import com.eazy.brush.core.enums.TaskState;
-import com.eazy.brush.dao.entity.Task;
-import com.eazy.brush.service.TaskService;
-import com.eazy.brush.service.TaskSubService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.map.HashedMap;
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.util.StopWatch;
 
-import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * author : liufeng
@@ -20,32 +18,35 @@ import java.util.List;
  */
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:applicationContext.xml")
+@ContextConfiguration("classpath:spring/applicationContext.xml")
 public class TaskSubServiceImplTest {
 
-    @Autowired
-    TaskSubService taskSubService;
-
-    @Autowired
-    TaskService taskService;
+//    @Autowired
+//    TaskSubService taskSubService;
+//
+//    @Autowired
+//    TaskService taskService;
 
     public void invokeMakeIncrDayTaskSub() {
 
-        StopWatch stopWatch = new StopWatch();
-        stopWatch.start();
-        log.info("### start invokeMakeTaskSub ###");
 
-        Task task = taskService.getByState(TaskState.confirm_passed.getCode());
 
-        if (null != task) {
-            taskService.changeState(task.getId(), TaskState.running.getCode());
-            taskSubService.makeIncrDayTaskSub(task);
-            taskService.changeState(task.getId(), TaskState.run_end.getCode());
-            log.info("### make tasksubs success！,task_id {} ###", task.getId());
-        }
-
-        log.info("### end invokeMakeTaskSub,cost {} s ###", stopWatch.getTotalTimeSeconds());
-        stopWatch.stop();
+//
+//        StopWatch stopWatch = new StopWatch();
+//        stopWatch.start();
+//        log.info("### start invokeMakeTaskSub ###");
+//
+//        Task task = taskService.getByState(TaskState.confirm_passed.getCode());
+//
+//        if (null != task) {
+//            taskService.changeState(task.getId(), TaskState.running.getCode(),"");
+//            taskSubService.makeIncrDayTaskSub(task);
+//            taskService.changeState(task.getId(), TaskState.run_end.getCode(),"");
+//            log.info("### make tasksubs success！,task_id {} ###", task.getId());
+//        }
+//
+//        log.info("### end invokeMakeTaskSub,cost {} s ###", stopWatch.getTotalTimeSeconds());
+//        stopWatch.stop();
     }
 
     @Test
@@ -55,19 +56,57 @@ public class TaskSubServiceImplTest {
 
     @Test
     public void testMakeRetainDayTaskSub() {
-        StopWatch stopWatch = new StopWatch();
-        stopWatch.start();
-        log.info("### start makeRetainDayTaskSub ###");
+//        StopWatch stopWatch = new StopWatch();
+//        stopWatch.start();
+//        log.info("### start makeRetainDayTaskSub ###");
+//
+//        List<Task> list = taskService.getEnableList(TaskState.stoped.getCode(), 0, Integer.MAX_VALUE);
+//        for (Task task : list) {
+//            log.info("### start makeRetainDayTaskSub ###");
+//            taskSubService.makeRetainDayTaskSub(task);
+//            log.info("### end makeRetainDayTaskSub,cost {} s ###", stopWatch.getTotalTimeSeconds());
+//        }
+//
+//        log.info("### end makeRetainDayTaskSub,cost {} s ###", stopWatch.getTotalTimeSeconds());
+//        stopWatch.stop();
+    }
 
-        List<Task> list = taskService.getEnableList(TaskState.stoped.getCode(), 0, Integer.MAX_VALUE);
-        for (Task task : list) {
-            log.info("### start makeRetainDayTaskSub ###");
-            taskSubService.makeRetainDayTaskSub(task);
-            log.info("### end makeRetainDayTaskSub,cost {} s ###", stopWatch.getTotalTimeSeconds());
-        }
+    @Test
+    public void test(){
+        replaceAll();
+        Map map=new HashedMap();
+        StringUtils.join(map.keySet(),"");
+    }
 
-        log.info("### end makeRetainDayTaskSub,cost {} s ###", stopWatch.getTotalTimeSeconds());
-        stopWatch.stop();
+    private static final String CONTENT="aababaaaab";
+    /**
+     * 替换字符串
+     */
+    private void replaceAll()
+    {
+        String input = "(\\b|\\B)(m+|g+)e(\\b|\\B)";
+
+        Pattern p = Pattern.compile(input);
+        Matcher m = p.matcher(CONTENT);
+
+        String mCONTENT= m.replaceAll("_TEST_CONTENT_");
+
+        log.info("---replaceAll()后的内容---", "replaceAll() = "+ mCONTENT);
+    }
+
+    /**
+     * 只替换首次匹配到的字符串
+     */
+    private void replaceFirst()
+    {
+        String input = "(\\b|\\B)(m+|g+)e(\\b|\\B)";
+
+        Pattern p = Pattern.compile(input);
+        Matcher m = p.matcher(CONTENT);
+
+        String mCONTENT= m.replaceFirst("_TEST_CONTENT_");
+
+        log.info("---replaceFirst()后的内容---", "replaceAll() = "+ mCONTENT);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.eazy.brush.service;
 
+import com.eazy.brush.core.android.apkinfo.bean.ApkInfo;
 import com.eazy.brush.dao.entity.Task;
 import org.joda.time.DateTime;
 
@@ -13,13 +14,62 @@ public interface TaskService {
 
     Task getById(int id);
 
-    Task getByState(int state);
+    List<Task> getByState(int state);
+
+    List<Task> getList(int userId);
+
+    List<Task> getList(int offset, int size);
 
     List<Task> getList(int userId, int offset, int size);
 
-    void changeState(int id, int state);
+    void add(Task task);
 
-    void changeAllState(int state);
+    void update(Task task);
+
+    int changeState(int id, int auditUserId, int state, String msg);
+
+    int changeState(int id, int state, String msg);
+
+
+    /**
+     * 获取当前审核人员的所有Task
+     *
+     * @param auditUserId
+     * @return
+     */
+    List<Task> getByAuditUserId(int auditUserId);
+
+    /**
+     * 随机获取一个未被审核的Task
+     *
+     * @return
+     */
+    Task getRandomTask(int auditUserId);
+
+    /**
+     * 根据状态获取当前用户的task
+     *
+     * @param auditUserId
+     * @param state
+     * @return
+     */
+    Task getAuditSingleTask(int auditUserId, int state);
+
+    /**
+     * 审核人员离职,调用此方法,切换负责人
+     *
+     * @param currentUserId
+     * @param outUserid
+     */
+    void changeAuditUserId(int currentUserId, int outUserid);
+
+    /**
+     * 放回操作
+     *
+     * @param auditUserId
+     * @param taskId
+     */
+    void assignAuditUserId(int auditUserId, int taskId);
 
     /**
      * 计算 给定时间的子任务数
@@ -71,4 +121,18 @@ public interface TaskService {
      * @return
      */
     List<Task> getEnableList(int state, int offset, int size);
+
+    /**
+     * @param id
+     */
+    int delete(int id);
+
+    /**
+     * 更新应用信息
+     *
+     * @param id
+     * @param apkInfo
+     * @param fileName
+     */
+    void updateApkInfo(int id, ApkInfo apkInfo, String fileName);
 }

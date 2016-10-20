@@ -14,4 +14,6 @@ public interface DeviceInfoService {
     DeviceInfo getById(int id);
 
     List<DeviceInfo> getList(int offset, int size);
+
+    List<DeviceInfo> getListByMinSdk(int minSdk);
 }

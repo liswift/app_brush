@@ -21,7 +21,7 @@ import java.io.IOException;
  */
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:applicationContext.xml")
+@ContextConfiguration("classpath:spring/applicationContext.xml")
 public class DeviceInfoMapperTest {
 
     @Autowired
@@ -30,7 +30,7 @@ public class DeviceInfoMapperTest {
     @Test
     public void testInsert() throws IOException {
         String json = FileUtils.readFileToString(
-                new File("F:\\javawp\\app_brush\\src\\test\\resources\\data\\device_info.json"));
+                new File("F:\\workplace\\app_brush\\json\\device_info.json"));
         JSONArray jsonArray = JSONObject.parseArray(json);
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -44,10 +44,8 @@ public class DeviceInfoMapperTest {
             deviceInfo.setVersionRelease(jsonObject.getString("4.2.2"));
             deviceInfo.setApi(jsonObject.getInteger("sdkVer"));
 
+            deviceInfo.setVersionRelease(jsonObject.getString("releaseVer"));
             deviceInfo.setSerial("");
-            deviceInfo.setVersionRelease("");
-            deviceInfo.setVersionIncremental("");
-            deviceInfo.setBuildId("");
             deviceInfo.setSecureId("");
             deviceInfoMapper.insert(deviceInfo);
         }

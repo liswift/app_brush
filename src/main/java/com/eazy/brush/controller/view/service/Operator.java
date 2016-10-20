@@ -4,7 +4,6 @@ import com.eazy.brush.core.lottery.Award;
 import com.eazy.brush.dao.entity.CardInfo;
 
 import java.util.Random;
-import java.util.UUID;
 
 public class Operator implements Award {
 
@@ -36,8 +35,8 @@ public class Operator implements Award {
      * 联通／移动／电信
      */
     private static final int[][][] NETWORKTPYPES = new int[][][]{{
-            {1, 16}, {2, 16}, {4}},//2g:联通／移动／电信
-            {{3, 8, 9, 10, 15}, {17}, {5, 6, 12}},//3g:联通／移动／电信
+            {1,7}, {2}, {4,11}},//2g:联通／移动／电信
+            {{3, 8, 9, 10, 15}, {14}, {5, 6, 12}},//3g:联通／移动／电信
             {{13}, {13}, {13}}};//4g:联通／移动／电信
 
     /**
@@ -106,7 +105,7 @@ public class Operator implements Award {
         }
 
         String getAndroidId() {
-            return UUID.randomUUID().toString().substring(0, 16);
+            return ImeiMaker.getIMEI();
         }
 
         //15位

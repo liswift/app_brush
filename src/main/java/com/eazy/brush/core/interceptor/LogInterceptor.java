@@ -1,22 +1,20 @@
 package com.eazy.brush.core.interceptor;
 
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.eazy.brush.core.utils.DateUtils;
+import com.eazy.brush.core.utils.IPUtil;
+import com.eazy.brush.core.utils.JsonMapper;
+import com.eazy.brush.core.utils.UserUtil;
+import com.eazy.brush.model.Log;
+import com.eazy.brush.service.LogService;
+import eu.bitwalker.useragentutils.UserAgent;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.eazy.brush.model.Log;
-import com.eazy.brush.service.LogService;
-import com.eazy.brush.core.utils.DateUtils;
-import com.eazy.brush.core.utils.IPUtil;
-import com.eazy.brush.core.utils.JsonMapper;
-import com.eazy.brush.core.utils.UserUtil;
-
-import eu.bitwalker.useragentutils.UserAgent;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 
@@ -73,7 +71,9 @@ public class LogInterceptor implements HandlerInterceptor {
 		log.setIp(IPUtil.getIpAddress(request));
 		log.setOperationCode(operationCode);
 		log.setExecuteTime(Integer.valueOf(executeTime.toString()));
-		log.setCreater(UserUtil.getCurrentUser().getName());
+		if(null != UserUtil.getCurrentUser()){
+			log.setCreater(UserUtil.getCurrentUser().getName());
+		}
 		log.setCreateDate(DateUtils.getSysTimestamp());
 		//log.setDescription(LogCodeUtil.matchingOperationCode(operationCode));
 		log.setRequestParam(requestParam);

@@ -2,19 +2,33 @@ package com.eazy.brush.controller.web;
 
 import com.eazy.brush.component.ftp.FtpTool;
 import com.eazy.brush.controller.common.BaseController;
+import com.eazy.brush.controller.view.service.TaskVoService;
+import com.eazy.brush.controller.view.vo.TaskVo;
+import com.eazy.brush.core.android.apkinfo.bean.ApkInfo;
+import com.eazy.brush.core.android.apkinfo.util.ApkUtil;
+import com.eazy.brush.core.enums.TaskState;
+import com.eazy.brush.core.utils.ActionRequest;
+import com.eazy.brush.core.utils.Constants;
+import com.eazy.brush.dao.entity.Task;
+import com.eazy.brush.model.User;
+import com.eazy.brush.service.TaskService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
+import org.apache.http.util.TextUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 任务管理Controller
@@ -30,29 +44,122 @@ public class TaskController extends BaseController {
     @Autowired
     private FtpTool ftpTool;
 
-    @RequestMapping(value = "toAdd", method = RequestMethod.GET)
-    public ModelAndView toAddUser(HttpServletRequest request) {
-        return new ModelAndView("task/task_add");
+    @Autowired
+    private TaskService taskService;
+
+    @Autowired
+    private TaskVoService taskVoService;
+
+    @RequestMapping(value = "listByUser", method = RequestMethod.GET)
+    public ModelAndView listByUser() {
+        int curPage = getParaInt("curPage", 1);
+        int size = getParaInt("size", 20);
+
+        User user = getCurrentUser();
+        ModelAndView model = new ModelAndView("task/list_byuser");
+        List<TaskVo> taskVoses = taskVoService.getList(user.getId(), (curPage - 1) * size, size);
+        model.addObject("user", user);
+        model.addObject("tasks", taskVoses);
+        return model;
     }
 
-    @RequestMapping(value = "apk/upload", method = RequestMethod.GET)
-    public void uploadApk(@RequestParam(value = "file", required = false) MultipartFile file) {
+    @RequestMapping(value = "mytask", method = RequestMethod.GET)
+    public ModelAndView mytask() {
+        User user = getCurrentUser();
+        ModelAndView model = new ModelAndView("task/list_byuser");
+        List<TaskVo> taskVoses = taskVoService.getList(user.getId(),0,Integer.MAX_VALUE);
+        model.addObject("tasks", taskVoses);
+        return model;
+    }
+
+    @RequestMapping(value = "toAdd", method = RequestMethod.GET)
+    public ModelAndView toAdd() {
+        return new ModelAndView("task/save");
+    }
+
+    @RequestMapping(value = "toEditorPackage", method = RequestMethod.GET)
+    public ModelAndView toEditorPackage(ModelMap map){
+        Task task=taskService.getById(getParaInt("id",0));
+        map.put("task",task);
+        return new ModelAndView("task/editorPackage",map);
+    }
+
+    @RequestMapping(value = "toEdit", method = {RequestMethod.GET})
+    public ModelAndView toEdit(int id) {
+        ModelAndView modelAndView = new ModelAndView("task/save");
+        modelAndView.addObject("task", taskService.getById(id));
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "apk/upload", method = {RequestMethod.GET, RequestMethod.POST})
+    public void uploadApk(@RequestParam(value = "file") MultipartFile file) {
         String now = DateTime.now().toString("yyyyMMddHHmmssSSS");
         String fileName = now + "_" + file.getOriginalFilename();
+        ApkInfo apkInfo = null;
         try {
-            ftpTool.upload(file.getInputStream(), fileName);
+            ftpTool.uploadToInoutStream(fileName,"apk",file.getInputStream());
+
+            File tempFile = new File(fileName);
+            FileUtils.copyInputStreamToFile(file.getInputStream(), tempFile);
+            apkInfo = ApkUtil.getApkInfo(tempFile);
+            FileUtils.forceDelete(tempFile);
+            StringBuffer url = request.getRequestURL();
+            String tempContextUrl = url.delete(url.length() - request.getRequestURI().length(), url.length()).append("/").toString();
+            apkInfo.setApkUrl(tempContextUrl+"task/apk/download?file="+fileName);
+            renderJson200(apkInfo);
         } catch (IOException e) {
             log.error("upload apk file error {}", e);
             e.printStackTrace();
             renderJson500();
         }
-        renderJson(fileName);
     }
+
+    @RequestMapping(value = "save", method = {RequestMethod.POST, RequestMethod.GET})
+    public void save(Task task) {
+        if (task.getId() <= 0) {//新增
+            task.setUserId(getCurrentUser().getId());
+            task.setState(TaskState.confirm_ing.getCode());
+            task.setDayLimit(Constants.TASK_DAY_LIMIT);
+            taskService.add(task);
+        } else {//编辑
+            if(TextUtils.isEmpty(task.getApkUrl())){//url为空说明是更新策略.更新策略需要停止任务
+                taskVoService.changeStrategy(getCurrentUser().getId(),task.getId());
+            }else{//说明是更新包,,需要更改状态为审核中
+                taskService.changeState(task.getId(),TaskState.confirm_ing.getCode(),"更新包");
+                task.setCreateTime(new Date());//更新包需要更新上传时间
+            }
+            taskService.update(task);
+        }
+        renderJson200();
+    }
+
+    @RequestMapping(value = "delete", method = {RequestMethod.POST, RequestMethod.GET})
+    public void delete(@RequestParam(value = "id") int id) {
+        int result = taskVoService.delete(getCurrentUser().getId(),id);
+        renderResult(result>0);
+    }
+
+    @RequestMapping(value = "start", method = {RequestMethod.POST, RequestMethod.GET})
+    public void start(@RequestParam(value = "id") int id) {
+        taskVoService.start(getCurrentUser().getId(),id);
+        renderJson200();
+    }
+
+    @RequestMapping(value = "stop", method = {RequestMethod.POST, RequestMethod.GET})
+    public void stop(@RequestParam(value = "id") int id) {
+        taskVoService.stop(getCurrentUser().getId(),id);
+        renderJson200();
+    }
+
 
     @RequestMapping(value = "apk/download", method = RequestMethod.GET)
     public void downloadApk(@RequestParam(value = "file") String file) {
-        response.setContentType("application/octet-stream");
-//        OutputStream out = response.getOutputStream();
-//        out.close();
+        try {
+            ActionRequest.renderStream(file, response);
+            ftpTool.downLoadToOutputStream(file,"apk",response.getOutputStream());
+        } catch (IOException e) {
+            log.error("down file error,{}", e);
+        }
     }
+
 }

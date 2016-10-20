@@ -1,13 +1,13 @@
 package com.eazy.brush.component.ftp;
 
+import com.eazy.brush.controller.common.IFtpClient;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.io.*;
 
 /**
@@ -18,20 +18,29 @@ import java.io.*;
  */
 @Slf4j
 @Component
-public class FtpTool {
+public class FtpTool implements IFtpClient{
 
-    private FTPClient ftp;
+    @Value("${ftp.addr}")
+    private String addr;
 
-    /**
-     * @param path     上传到ftp服务器哪个路径下
-     * @param addr     地址
-     * @param port     端口号
-     * @param username 用户名
-     * @param password 密码
-     */
-    @PostConstruct
-    public void connect(String path, String addr, int port, String username, String password) {
-        ftp = new FTPClient();
+    @Value("${ftp.port}")
+    private int port;
+
+    @Value("${ftp.username}")
+    private String username;
+
+    @Value("${ftp.password}")
+    private String password;
+
+    @Value("${ftp.path}")
+    private String path;
+
+    private FTPClient ftp = new FTPClient();
+
+    public FtpTool() {
+    }
+
+    public void connect() {
         int reply;
         try {
             ftp.connect(addr, port);
@@ -48,16 +57,43 @@ public class FtpTool {
         }
     }
 
+    public void disconnect() {
+        try {
+            ftp.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.error("discollect ftp error {}", e);
+        }
+    }
+
     /**
      * @param inputStream 上传的流
      * @param ftpName     上传的文件
      */
     public void upload(InputStream inputStream, String ftpName) {
         try {
-            ftp.storeFile(ftpName, inputStream);
+            ftp.storeFile(new String(ftpName.getBytes("UTF-8"), "iso-8859-1"), inputStream);
         } catch (IOException e) {
             log.error("upload ftp error {}", e);
         }
+    }
+
+    /**
+     * 删除一个文件
+     */
+    public boolean deleteFile(String filename) {
+        boolean flag = true;
+        try {
+            flag = ftp.deleteFile(filename);
+            if (flag) {
+                log.info("删除文件"+filename+"成功！");
+            } else {
+                log.info("删除文件"+filename+"失败！");
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return flag;
     }
 
     /**
@@ -86,23 +122,139 @@ public class FtpTool {
      *
      * @param ftpFile ftp目录
      */
-    public OutputStream downLoad(String ftpFile) {
-        OutputStream os = new ByteArrayOutputStream();
+    public void downLoadToOutputStream(String ftpFile, OutputStream outputStream) {
         try {
-            ftp.retrieveFile(ftpFile, os);
+            ftp.retrieveFile(ftpFile, outputStream);
         } catch (Exception e) {
             e.printStackTrace();
             log.error("down ftp file error {}", e);
         }
-        return os;
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
-        FtpTool t = new FtpTool();
+    /**
+     * 在服务器上创建一个文件夹
+     *
+     * @param dir 文件夹名称，不能含有特殊字符，如 \ 、/ 、: 、* 、?、 "、 <、>...
+     */
+    private boolean makeDirectory(String dir) {
+        boolean flag = true;
+        try {
+            flag = ftp.makeDirectory(dir);
+            if (flag) {
+                log.info("创建文件夹"+ dir + " 成功！");
+            } else {
+                log.info("创建文件夹"+ dir + " 失败！");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+    /**
+     * 进入到服务器的某个目录下
+     *
+     * @param directory
+     */
+    private boolean changeWorkingDirectory(String directory) {
+        boolean flag = true;
+        try {
+            flag = ftp.changeWorkingDirectory(directory);
+            if (flag) {
+                log.info("进入文件夹"+ directory + " 成功！");
+            } else {
+                log.info("进入文件夹"+ directory + " 失败！");
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return flag;
+    }
 
-        t.connect("", "115.28.7.101", 21, "lf", "liufeng65");
-        File file = new File("F:\\a.log");
-        t.upload(new FileInputStream(file), "a.log");
-        t.downLoad("test.log", "F:\\test.log");
+    /**
+     * 递归创建远程目录,并切换到当前目录
+     * @param remote
+     * @return
+     * @throws IOException
+     */
+   private  boolean CreateDirecroty(String remote) throws IOException {
+        boolean success = true;
+       String directory="";
+        if(remote.contains("/")){
+            directory = remote.substring(0, remote.lastIndexOf("/") + 1);
+        }else {
+            directory=remote;
+        }
+        // 如果远程目录不存在，则递归创建远程服务器目录
+        if (!directory.equalsIgnoreCase("/")&& !changeWorkingDirectory(new String(directory))) {
+            int start = 0;
+            int end = 0;
+            if (directory.startsWith("/")) {
+                start = 1;
+            } else {
+                start = 0;
+            }
+            end = directory.indexOf("/", start);
+            while (true) {
+                String subDirectory = new String(remote.substring(start, end).getBytes("GBK"),"iso-8859-1");
+                if (!changeWorkingDirectory(subDirectory)) {
+                    if (makeDirectory(subDirectory)) {
+                        changeWorkingDirectory(subDirectory);
+                    } else {
+                        log.info("创建目录["+subDirectory+"]失败");
+                        success = false;
+                        return success;
+                    }
+                }
+                start = end + 1;
+                end = directory.indexOf("/", start);
+                // 检查所有目录是否创建完毕
+                if (end <= start) {
+                    break;
+                }
+            }
+        }
+        return success;
+    }
+
+    /**
+     *
+     * @param fileName
+     * @param path xx/xx/xx
+     * @param outputStream
+     */
+    @Override
+    public void downLoadToOutputStream(String fileName, String path, OutputStream outputStream) throws IOException {
+        connect();
+        CreateDirecroty(path);
+        downLoadToOutputStream(fileName,outputStream);
+        disconnect();
+    }
+
+    /**
+     *
+     * @param fileName
+     * @param path xx/xx/xx
+     * @param inputStream
+     */
+    @Override
+    public void uploadToInoutStream(String fileName, String path, InputStream inputStream) throws IOException {
+        connect();
+        CreateDirecroty(path);
+        upload(inputStream,fileName);
+        disconnect();
+    }
+
+    /**
+     * 删除文件
+     * @param fileName
+     * @param path
+     * @throws IOException
+     */
+    @Override
+    public void deleteFile(String fileName, String path) throws IOException {
+        connect();
+        CreateDirecroty(path);
+        deleteFile(fileName);
+        disconnect();
     }
 }

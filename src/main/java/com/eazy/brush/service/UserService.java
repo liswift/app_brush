@@ -1,15 +1,17 @@
 package com.eazy.brush.service;
 
-import java.util.List;
-import java.util.Map;
-
 import com.eazy.brush.dao.common.CommonDao;
 import com.eazy.brush.model.User;
+
+import java.util.List;
+import java.util.Map;
 
 
 public interface UserService extends CommonDao {
 
     List<Map<String, Object>> selectUser();
+
+    User getById(int userId);
 
     Map<String, Object> getUserByName(String name);
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+    	http://www.springframework.org/schema/context/spring-context.xsd">
+    <description>数据源连接管理</description>
+
+    <context:component-scan base-package="com.eazy.brush"/>
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:properties/email.properties</value>
+                <value>classpath:properties/db.properties</value>
+                <value>classpath:properties/ftp.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <import resource="spring-mybatis.xml"/>
+    <import resource="spring-redis.xml"/>
+    <import resource="spring-shiro.xml"/>
+    <import resource="spring-email.xml"/>
+    <import resource="spring-scheduler.xml"/>
+
+</beans>

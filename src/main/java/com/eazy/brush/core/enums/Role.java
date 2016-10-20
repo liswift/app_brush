@@ -5,5 +5,5 @@ package com.eazy.brush.core.enums;
  * create time:2016/9/4 18:53
  */
 public enum Role {
-    admin, guest, superadmin
+    customer, audit, admin, superadmin
 }

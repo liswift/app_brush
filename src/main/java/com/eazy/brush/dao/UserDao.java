@@ -1,16 +1,15 @@
 package com.eazy.brush.dao;
 
-import java.util.List;
-import java.util.Map;
-
+import com.eazy.brush.core.utils.MD5;
+import com.eazy.brush.dao.common.BaseDao;
+import com.eazy.brush.dao.common.ZQ;
+import com.eazy.brush.model.User;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.eazy.brush.dao.common.BaseDao;
-import com.eazy.brush.dao.common.ZQ;
-import com.eazy.brush.model.User;
-import com.eazy.brush.core.utils.MD5;
+import java.util.List;
+import java.util.Map;
 
 @Repository
 public class UserDao extends BaseDao {
@@ -20,6 +19,12 @@ public class UserDao extends BaseDao {
 	 */
 	public Map<String,Object> getUserByName(String name) {
 		return queryForMap("select * from user where NAME=?", name);
+	}
+
+	public User getUserById(int userId){
+		String sql = "select * from user where id=?";
+		RowMapper<User> rm=BeanPropertyRowMapper.newInstance(User.class);
+		return dao.queryForObject(sql,rm,new Object[]{userId});
 	}
 
 	/**

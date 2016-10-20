@@ -105,19 +105,19 @@ public abstract class BaseController {
     }
 
     public void renderJson200() {
-        renderJson("{\"code\":200}");
+        renderJsonResponse(null, 200, "");
+    }
+
+    public void renderJson200(Object data, String msg) {
+        renderJsonResponse(data, 200, msg);
+    }
+
+    public void renderJson200(Object data) {
+        renderJsonResponse(data, 200, "");
     }
 
     public void renderJson500() {
-        renderJson("{\"code\":500}");
-    }
-
-    public void renderJsonError(String msg) {
-        renderJson("{\"msg\":\" " + msg + " \"}");
-    }
-
-    public void renderJson(String data) {
-        ActionRequest.renderJson(data, getResponse());
+        renderJsonResponse(null, 500, "");
     }
 
     protected ErrorModel buildErrorModel(ErrorType errorType, Object... args) {
@@ -126,24 +126,30 @@ public abstract class BaseController {
         return model;
     }
 
+    public void renderJsonResponse() {
+        renderJsonResponse(null, 0, "操作成功!");
+    }
+
+    public void renderJsonResponse(int code, String msg) {
+        renderJsonResponse(null, code, msg);
+    }
+
+    public void renderJsonResponse(Object data, int code, String msg) {
+        Map<String, Object> dataMap = Maps.newHashMap();
+        dataMap.put("code", code);
+        dataMap.put("msg", msg);
+        dataMap.put("data", data);
+        ActionRequest.renderJson(JsonKsy.converMapToJson(dataMap), getResponse());
+    }
+
     public void renderJson(Object data) {
-        if (data instanceof List
-                || data.getClass().isArray()) {
-            Map<String, Object> dataMap = Maps.newHashMap();
-            dataMap.put("data", data);
-            ActionRequest.renderJson(JsonKsy.converMapToJson(dataMap), getResponse());
-        } else {
-            ActionRequest.renderJson(JsonKsy.converMapToJson(data), getResponse());
-        }
+        ActionRequest.renderJson(JsonKsy.converMapToJson(data), getResponse());
     }
 
     public void renderWord(String fileName, String columnName, List<String[]> list1) {
         renderWEP(fileName, columnName, list1, 1);
     }
 
-    public void renderStream(){
-
-    }
 
     public void renderExcel(String fileName, String columnName, List<String[]> list1) {
         renderWEP(fileName, columnName, list1, 2);
@@ -166,6 +172,12 @@ public abstract class BaseController {
     public String toJson(Object src) {
         Gson gson = new Gson();
         return gson.toJson(src);
+    }
+
+    public Map<String, Object> wrapField(String key, Object value) {
+        Map<String, Object> map = Maps.newHashMap();
+        map.put(key, value);
+        return map;
     }
 
     /**

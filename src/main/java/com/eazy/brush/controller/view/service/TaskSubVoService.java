@@ -1,6 +1,6 @@
 package com.eazy.brush.controller.view.service;
 
-import com.eazy.brush.controller.view.vo.TaskSubVo;
+import com.eazy.brush.controller.view.vo.TaskSubApiVo;
 import com.eazy.brush.dao.entity.TaskSub;
 
 import java.util.List;
@@ -13,7 +13,10 @@ import java.util.List;
  */
 public interface TaskSubVoService {
 
-    List<TaskSubVo> buildVo(List<TaskSub> list);
+    List<TaskSubApiVo> buildVo(List<TaskSub> list);
 
     String buildVoIds(List<TaskSub> taskSubs);
+
+
+
 }

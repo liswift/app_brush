@@ -1,6 +1,8 @@
 package com.eazy.brush.service.impl;
 
+import com.eazy.brush.core.android.apkinfo.bean.ApkInfo;
 import com.eazy.brush.core.enums.TaskSpeedType;
+import com.eazy.brush.core.utils.Constants;
 import com.eazy.brush.core.utils.DateTimeUitl;
 import com.eazy.brush.dao.entity.Task;
 import com.eazy.brush.dao.mapper.TaskMapper;
@@ -28,24 +30,78 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task getByState(int state) {
+    public List<Task> getByState(int state) {
         return taskMapper.getByState(state);
     }
 
     @Override
+    public List<Task> getList(int userId) {
+        return taskMapper.getByUserId(userId);
+    }
+
+    @Override
+    public List<Task> getList(int offset, int size) {
+        return taskMapper.getList(offset, size);
+    }
+
+    @Override
     public List<Task> getList(int userId, int offset, int size) {
-        return taskMapper.getList(userId, offset, size);
+        return taskMapper.getListByUserId(userId, offset, size);
     }
 
     @Override
-    public void changeState(int id, int state) {
-        taskMapper.changeState(id, state);
+    public void add(Task task) {
+        taskMapper.insert(task);
     }
 
     @Override
-    public void changeAllState(int state) {
-        taskMapper.changeAllState(state);
+    public void update(Task task) {
+        taskMapper.update(task);
     }
+
+    @Override
+    public int changeState(int id, int auditUserId, int state, String msg) {
+        return taskMapper.changeStateWithMsg(id, auditUserId, state, msg);
+    }
+
+    @Override
+    public int changeState(int id, int state, String msg) {
+        taskMapper.changeState(id, state, msg);
+        return 1;
+    }
+
+
+    @Override
+    public List<Task> getByAuditUserId(int auditUserId) {
+        return taskMapper.getByAuditUserId(auditUserId);
+    }
+
+    @Override
+    public Task getRandomTask(int auditUserId) {
+        Task task = taskMapper.getSingleTask();
+        if (task != null) {
+            taskMapper.assignAuditUserId(auditUserId, task.getId());
+            task.setAuditUserId(auditUserId);
+        }
+        return task;
+    }
+
+    @Override
+    public Task getAuditSingleTask(int auditUserId, int state) {
+        return taskMapper.getAuditSingleTask(auditUserId, state);
+    }
+
+
+    @Override
+    public void changeAuditUserId(int currentUserId, int outUserid) {
+        taskMapper.changeAuditUserId(currentUserId, outUserid);
+    }
+
+    @Override
+    public void assignAuditUserId(int auditUserId, int taskId) {
+        taskMapper.assignAuditUserId(auditUserId, taskId);
+    }
+
 
     @Override
     public double calcRetainPercent(Task task) {
@@ -61,6 +117,26 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<Task> getEnableList(int state, int offset, int size) {
         return taskMapper.getEnableList(state, offset, size);
+    }
+
+    /**
+     * @param id
+     * @return
+     */
+    @Override
+    public int delete(int id) {
+        return taskMapper.delete(id);
+    }
+
+    @Override
+    public void updateApkInfo(int id, ApkInfo apkInfo, String fileName) {
+        Task task = new Task();
+        task.setId(id);
+        task.setVersionCode(Integer.parseInt(apkInfo.getVersionCode()));
+        task.setAppVersion(apkInfo.getVersionName());
+        task.setPackageName(apkInfo.getApkPackage());
+        task.setApkUrl(Constants.APK_URL_PRE + fileName);
+        taskMapper.update(task);
     }
 
     @Override

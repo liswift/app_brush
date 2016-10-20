@@ -13,4 +13,24 @@ import java.util.List;
 public interface TaskVoService {
 
     List<TaskVo> getList(int userId,int offset,int size);
+
+    List<TaskVo> getList(int offset,int size);
+
+    List<TaskVo> getList(int userId);
+
+    int stop(int userId,int task_id);
+
+    int start(int userId,int task_id);
+
+    int delete(int userId,int task_id);
+
+    /**
+     * 更新任务策略
+     * @param userId
+     * @param task_id
+     */
+    void changeStrategy(int userId,int task_id);
+
+
+
 }

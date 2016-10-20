@@ -338,6 +338,16 @@ public class CommonRedisCache {
         });
     }
 
+    //取出第一个元素
+    public String getFirst(final String key){
+        return (String)redisTemplate.execute(new RedisCallback<String>() {
+            @Override
+            public String doInRedis(RedisConnection redisConnection) throws DataAccessException {
+                return newString(redisConnection.lPop(rawString(key)));
+            }
+        });
+    }
+
     public Long incr(final String key) {
         return (Long) redisTemplate.execute(new RedisCallback<Long>() {
             public Long doInRedis(RedisConnection connection)
@@ -820,6 +830,20 @@ public class CommonRedisCache {
         });
     }
 
+    // lIndex
+    public String lIndex(final String key, final long index) {
+        return (String) this.redisTemplate.execute(new RedisCallback<String>() {
+            @Override
+            public String doInRedis(RedisConnection connection) throws DataAccessException {
+                try {
+                    return new String(connection.lIndex(rawString(key), index));
+                } catch (Exception e) {
+                    logger.error(e.getMessage(), e);
+                    return null;
+                }
+            }
+        });
+    }
 
     // bRPop
     public List<String> bRPop(final int popWait, final String key) {

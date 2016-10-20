@@ -14,4 +14,6 @@ public class NetInfo {
     private String mac;                //mac地址 唯一
     private int type;                  //网络类型 0 手机网络 1 wifi
 
+    private String ssid;//路由Ap
+    private String bssid;//路由mac
 }
