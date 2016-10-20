@@ -7,10 +7,10 @@ import com.eazy.brush.controller.view.vo.ActionItemApiVo;
 import com.eazy.brush.controller.view.vo.ActionItemVo;
 import com.eazy.brush.service.PhoneNumberService;
 import com.google.common.collect.Lists;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.slf4j.Logger;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +21,6 @@ import java.util.Map;
  * author : liufeng
  * create time:2016/9/10 20:21
  */
-@Data
 @Slf4j
 public class ActionItem {
     private int id;
@@ -68,6 +67,89 @@ public class ActionItem {
         return actionItemApiVo;
     }
 
+    public static Logger getLog() {
+        return log;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getActionPageId() {
+        return actionPageId;
+    }
+
+    public void setActionPageId(int actionPageId) {
+        this.actionPageId = actionPageId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getViewName() {
+        return viewName;
+    }
+
+    public void setViewName(String viewName) {
+        this.viewName = viewName;
+    }
+
+    public String getViewId() {
+        return StringEscapeUtils.unescapeJava(viewId);
+    }
+
+    public void setViewId(String viewId) {
+        this.viewId = viewId;
+    }
+
+    public String getViewContent() {
+        return viewContent;
+    }
+
+    public void setViewContent(String viewContent) {
+        this.viewContent = viewContent;
+    }
+
+    public int getAction() {
+        return action;
+    }
+
+    public void setAction(int action) {
+        this.action = action;
+    }
+
+    public String getActionParams() {
+        return actionParams;
+    }
+
+    public void setActionParams(String actionParams) {
+        this.actionParams = actionParams;
+    }
+
+    public int getStayTime() {
+        return stayTime;
+    }
+
+    public void setStayTime(int stayTime) {
+        this.stayTime = stayTime;
+    }
+
+    public int getUpDown() {
+        return upDown;
+    }
+
+    public void setUpDown(int upDown) {
+        this.upDown = upDown;
+    }
 
     public ActionItemVo transform2Vo(){
         ActionItemVo actionItemVo=new ActionItemVo();
