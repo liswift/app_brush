@@ -23,7 +23,7 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
     //    @Value("${niuma.pwd}")
     private String password = "xuguang";
 
-    private String token;
+    private String token="";
 
 
     @PostConstruct
@@ -39,9 +39,15 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
         }
     }
 
+    private void loginend(){
+        while(StringUtils.isEmpty(token)){
+            loginIn();
+        }
+    }
+
     @Override
     public String getMobileNum(String pid, int size) {
-        loginIn();
+        loginend();
         String result = "";
         while (!result.contains(token)) {
             result = HttpUtil.get(NiuMaUtil.getMobileNum(pid, username, token));
@@ -57,7 +63,7 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
 
     @Override
     public String getMobileCodeAndRelease(String pid, String mobile) {
-        loginIn();
+        loginend();
         String result = HttpUtil.get(NiuMaUtil.getVcodeAndReleaseMobile(username, token, pid, mobile));
         if (result.contains(mobile)) {
             return result.split("|")[1];
@@ -68,7 +74,7 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
 
     @Override
     public void addIgnoreList(String mobiles, String pid) {
-        loginIn();
+        loginend();
         HttpUtil.get(NiuMaUtil.addIgnoreList(username, token, mobiles, pid));
     }
 
